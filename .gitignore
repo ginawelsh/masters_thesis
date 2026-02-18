@@ -1,0 +1,22 @@
+# LaTeX build files
+*.aux
+*.log
+*.toc
+*.out
+*.bcf
+*.run.xml
+*.synctex.gz
+*.fls
+*.fdb_latexmk
+*.blg
+*.bbl
+*.pdf
+
+# BibTeX
+*.bbl
+*.blg
+
+# Misc
+*.gz
+thumbs.db
+.DS_Store

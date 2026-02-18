@@ -1,0 +1,104 @@
+\documentclass[thesis]{cluu}
+
+\usepackage[style=cluu]{biblatex}
+\addbibresource{main.bib}
+
+\begin{document}
+\title{LLM-Generated Text in Swedish:  Linguistic Features and  Detection Methods}
+\author{Gina Welsh}
+% \date{...}
+\supervisor{Birger Moëll, Uppsala University}
+% Use \supervisor (without s at end) if you have only one
+
+\maketitle
+
+\begin{abstract}
+    This thesis investigates investigate systematic differences between text generated
+by large language models (LLMs) and human-written text in the Swedish language. In addition, the
+thesis analyses significant differences in the ability to detect LLM-generated
+Swedish text between humans and AI-detection tools. The study will include both a formal and informal text
+component, that is, linguistic analyses and AI-detection experiments will be performed on two sources
+of data from formal and informal domains.
+\end{abstract}
+
+\tableofcontents
+
+\addchap{Preface}
+I would like to thank the following people...
+% with \addchap instead of \chapter it isn't numbered.
+
+\chapter{Introduction}
+The intended purpose for this study is to investigate systematic differences (if any) between text generated
+by large language models (LLMs) and text written by humans in the Swedish language. In addition, the
+study will investigate whether there are any significant differences in the ability to detect LLM-generated
+Swedish text between humans and LLM tools. The study will include both a formal and informal text
+component, that is, linguistic analyses and AI-detection experiments will be performed on two sources
+of data from formal and informal domains.
+\section{Research questions}
+
+\begin{enumerate}
+\item Are there systematic differences between LLM-generated and human-written formal text in
+Swedish?
+\item Are there systematic differences between LLM-generated and human-written informal text in
+Swedish?
+\item Are there differences between humans and AI-based detection tools in their ability to detect LLM-
+generated Swedish text?
+\end{enumerate}
+
+
+\chapter{Background}
+
+This chapter will provide an overview of previous studies related to 1) LLM text generation abilities, 2) human-written and AI-generated comparison studies, and 3) the LLMs of focus in this thesis.
+
+\section{Large Language Models and text generation}
+
+\subsection{Transformer architectural development}
+
+The underlying architecture of LLMs, that is, the Transformer architecture, was first described in Vaswani et al. (2017). In this study, the authors connected an encoder and decoder component of a sequence transduction model to create a simpler network architecture that demonstrates superior performance and less training time on a multimodal range of tasks, notably the task of text generation. Since then, several LLMs have been built upon the Transformer architectural model
+\paragraph{}
+Specifically look at LLM architecture and text generation itself, its relationship with training on data.
+
+\subsection{LLMs for the English language}
+
+\subsection{LLMs for the Swedish language}
+
+\subsection{The LLMs of focus for this thesis}
+
+\begin{enumerate}
+\item OpenAI GPT-5
+\item Google Gemini 3 Flash
+\item GPT-SW3
+\end{enumerate}
+
+
+\section{LLM-detection in generated text}
+\subsection{LLM-detection for English text}
+Previous work has also shown evidence of a distinction between the reasoning patterns of LLM tools when compared to those of humans. (CITE) evaluated the medical reasoning capabilities of DeepSeek R1, computing its outputs to the reasoning patterns of medical domain human experts. The study performed qualitative and quantitative analyses of AI- and human-medical reasoning for 100 clinical cases from the MedQA dataset. The study found a 93\% diagnostic accuracy for DeepSeek R1's performance. Many of the LLM's errors were attributed to over-focus on the details of a medical problem, rather than a more holistic and intuitive (?) understanding by humans, as well as an insufficient understanding of medical protocols when compared to human experts. The study also found a strong correlation between the length of output and the error rate of LLMs; that is, results from LLMs that were longer were more likely to contain incorrect diagnoses or medical details. 
+
+\subsection{LLM-detection for Swedish text}
+A recent study investigated LLM reasoning in Swedish. Moell and Boye (2025) studied the performance of LLMs on language complexity measurement tasks (LIX readability metric and Average Dependency Distance). The results of the study found that all models demonstrated at least come capacity for each of these tasks, but that LLMs remain prone to errors in explicit calculations and syntactic analysis. 
+\paragraph{}
+Holmstrom et al. (2023) initiated an investigation of the extent to which pre-training GPT-3 LLMs on Swedish only is advantageous over leveraging pre-trained knowledge (from English). It also examined whether English-based pre-trained models demonstrated unwanted transfer of Anglophone cultural aspects over to the Swedish context.  The findings of Holmstrom et al. (2023) demonstrated that LLMs exposed to limited Swedish during training can be highly capable and transfer competencies from English "off-the-shelf", including mathematical reasoning and Swedish cultural adaptation. In addition, the study showed that GPT-3 models did not appear to exhibit unwanted over-generalisation of cultural aspects to Swedish. 
+
+\section{Background summary}
+
+\chapter{Methodology}
+text here
+
+\chapter{Results}
+text here
+
+
+\chapter{Discussion}
+text here
+
+
+\chapter{Conclusion}
+text here
+
+\nocite{*}
+
+\printbibliography
+% at start yields errors because there are no citations and the bibliography file is empty
+
+\end{document}
