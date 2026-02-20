@@ -5,6 +5,8 @@ import json
 
 
 # ENSURE URLS GATHER PRE-2017 DATA
+
+reddit_base_url = "https://reddit.com"
 posts_url = f"https://arctic-shift.photon-reddit.com/api/posts/search?subreddit=sweden&before=2017-01-01"
 comments_url = "https://arctic-shift.photon-reddit.com/api/comments/search?subreddit=sweden&before=2017-01-01" 
 
