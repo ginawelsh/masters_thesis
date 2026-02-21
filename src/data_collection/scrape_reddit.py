@@ -4,6 +4,11 @@ import csv
 import json
 import requests
 
+try:
+    import langdetect
+except ImportError:
+    langdetect = None  # pip install langdetect for Swedish filter
+
 
 # ENSURE URLS GATHER PRE-2017 DATA
 
@@ -29,6 +34,18 @@ def send_request(url):
     except Exception as e:
         print(f"Error getting posts/comments: {e}")
         return None
+
+
+def _is_swedish_question(text):
+    """True if text contains a question mark and is detected as Swedish."""
+    if not text or "?" not in text:
+        return False
+    if langdetect is None:
+        return True  # no langdetect: only filter by "?"
+    try:
+        return langdetect.detect(text) == "sv"
+    except Exception:
+        return False  # e.g. LangDetectException for very short text
 
 
 def _posts_list(response):
@@ -76,7 +93,9 @@ def main():
         if after is None:
             break
     post_ids = post_ids[:MAX_POSTS]
-    print(f"Using {len(post_ids)} posts (max {MAX_POSTS})")
+    # Keep only posts that have a question mark and are in Swedish
+    post_ids = [pid for pid in post_ids if _is_swedish_question(posts_by_id.get(pid, ""))]
+    print(f"Using {len(post_ids)} posts (question mark + Swedish, max {MAX_POSTS})")
 
     for i in post_ids:
         query = f"{comments_url}&link_id={i}"
@@ -121,16 +140,7 @@ def main():
     print(f"Wrote {len(comment_rows)} comments to {comments_csv_path}")
 
     print(json.dumps(results_dict, indent=4))
-    #print(gather_posts)['id']
-    #gather_comments = send_request(comments_url)
-    #for i in gather_posts.items():
-        #print(i[0])
-    #print(gather_posts)
-    # put in more readable format
-    #prettify_posts = json.dumps(gather_posts, indent=2)
-    #print(prettify_posts)
-    #prettify_comments = json.dumps(gather_comments, indent=4)
-    #print(prettify_comments)
+
 
 if __name__ == "__main__":
     main()
