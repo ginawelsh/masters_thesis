@@ -64,7 +64,30 @@ Specifically look at LLM architecture and text generation itself, its relationsh
 
 \section{Linguistic characteristics of LLM-generated text}
 
+Several studies have already done that analyse the linguistic characteristics of LLM-generated text in English. Munoz-Ortiz et al. (2024) compared the linguistic components of human and LLM-generated news articles and compared their patterns among six generative LLMs. For their prompting strategy, they asked the models to generate a news paragraph based on the news article headline its first words. For their linguistic analysis, they compared the human-written and LLM-generated text groups through differences in their linguistic structures, including vocabulary distribution, part-of-speech tag distributions, dependency arc lengths, constituent lengths,, cosine similarity, and emotional category tagging. The results of this analysis showed significant differences between the human-written and LLM-generated text on all textual analysis metrics. At the lexical level, 5 of the 6 LLM models outputted text with a more restricted vocabulary than the human-written text. For semantics, the models were found to have less of an inclination to display aggressive negative emotions (such as fear or anger) than humans. 
+
+A Munoz-Ortiz et al. Contrasting Linguistic Patterns in Human and LLM-Generated News Text (2024)
+
+Text domain: News articles
+
+Linguistic analysis: Human texts exhibit more scattered sentence length distributions, more variety of vocabulary, distinct use of dependency and constituent types, shorter constituents, more optimised dependency distances
+
+Sentiment analysis: Humans tend to exhibit stronger negative emotions (fear and disgust), less joy compared to LLM text
+
+Six generative LLMs: Mistral, Falcon, LLaMa models
+
+Human-generated news, ask the models to generate a news paragraph based on the headline and first words of the news.
+
+Linguistic analysis: Differences in distribution of vocabulary, sentence length, POS tags, syntactic structures, psychometric features (tone and emotions)
+
+Linguistic tools - Stanza for segmentation, tokenization, POS tagging, dependency and constituent parsing (good for English)
+
+Analyse if disparities between human and AI change across models of different sizes and families
+
+
 \subsection{methods of textual analysis}
+
+
 \subsection{by genre}
 
 
