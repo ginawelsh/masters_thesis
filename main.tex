@@ -62,6 +62,8 @@ Specifically look at LLM architecture and text generation itself, its relationsh
 
 \subsection{LLMs for the Swedish language}
 
+Holmstrom et al. (2023) initiated an investigation of the extent to which pre-training GPT-3 LLMs on Swedish only is advantageous over leveraging pre-trained knowledge (from English). It also examined whether English-based pre-trained models demonstrated unwanted transfer of Anglophone cultural aspects over to the Swedish context.  The findings of Holmstrom et al. (2023) demonstrated that LLMs exposed to limited Swedish during training can be highly capable and transfer competencies from English "off-the-shelf", including mathematical reasoning and Swedish cultural adaptation. In addition, the study showed that GPT-3 models did not appear to exhibit unwanted over-generalisation of cultural aspects to Swedish. 
+
 \section{Linguistic characteristics of LLM-generated text}
 
 Several studies have already done that analyse the linguistic characteristics of LLM-generated text in English. 
@@ -97,6 +99,13 @@ Analyse if disparities between human and AI change across models of different si
 \subsection{by genre}
 
 
+\section{LLM-detection in generated text}
+\subsection{LLM-detection for English text}
+Previous work has also shown evidence of a distinction between the reasoning patterns of LLM tools when compared to those of humans. (CITE) evaluated the medical reasoning capabilities of DeepSeek R1, computing its outputs to the reasoning patterns of medical domain human experts. The study performed qualitative and quantitative analyses of AI- and human-medical reasoning for 100 clinical cases from the MedQA dataset. The study found a 93\% diagnostic accuracy for DeepSeek R1's performance. Many of the LLM's errors were attributed to over-focus on the details of a medical problem, rather than a more holistic and intuitive (?) understanding by humans, as well as an insufficient understanding of medical protocols when compared to human experts. The study also found a strong correlation between the length of output and the error rate of LLMs; that is, results from LLMs that were longer were more likely to contain incorrect diagnoses or medical details.
+
+\subsection{LLM-detection for Swedish text}
+A recent study investigated LLM reasoning in Swedish. Moell and Boye (2025) studied the performance of LLMs on language complexity measurement tasks (LIX readability metric and Average Dependency Distance). The results of the study found that all models demonstrated at least come capacity for each of these tasks, but that LLMs remain prone to errors in explicit calculations and syntactic analysis. 
+
 
 - discuss differences in text stylistic 
 
@@ -107,16 +116,6 @@ Analyse if disparities between human and AI change across models of different si
 \item Google Gemini 3 Flash
 \item GPT-SW3
 \end{enumerate}
-
-
-\section{LLM-detection in generated text}
-\subsection{LLM-detection for English text}
-Previous work has also shown evidence of a distinction between the reasoning patterns of LLM tools when compared to those of humans. (CITE) evaluated the medical reasoning capabilities of DeepSeek R1, computing its outputs to the reasoning patterns of medical domain human experts. The study performed qualitative and quantitative analyses of AI- and human-medical reasoning for 100 clinical cases from the MedQA dataset. The study found a 93\% diagnostic accuracy for DeepSeek R1's performance. Many of the LLM's errors were attributed to over-focus on the details of a medical problem, rather than a more holistic and intuitive (?) understanding by humans, as well as an insufficient understanding of medical protocols when compared to human experts. The study also found a strong correlation between the length of output and the error rate of LLMs; that is, results from LLMs that were longer were more likely to contain incorrect diagnoses or medical details.
-
-\subsection{LLM-detection for Swedish text}
-A recent study investigated LLM reasoning in Swedish. Moell and Boye (2025) studied the performance of LLMs on language complexity measurement tasks (LIX readability metric and Average Dependency Distance). The results of the study found that all models demonstrated at least come capacity for each of these tasks, but that LLMs remain prone to errors in explicit calculations and syntactic analysis. 
-\paragraph{}
-Holmstrom et al. (2023) initiated an investigation of the extent to which pre-training GPT-3 LLMs on Swedish only is advantageous over leveraging pre-trained knowledge (from English). It also examined whether English-based pre-trained models demonstrated unwanted transfer of Anglophone cultural aspects over to the Swedish context.  The findings of Holmstrom et al. (2023) demonstrated that LLMs exposed to limited Swedish during training can be highly capable and transfer competencies from English "off-the-shelf", including mathematical reasoning and Swedish cultural adaptation. In addition, the study showed that GPT-3 models did not appear to exhibit unwanted over-generalisation of cultural aspects to Swedish. 
 
 \section{Background summary}
 
