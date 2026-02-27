@@ -1,5 +1,6 @@
 import os
 from google import genai
+import pandas as pd
 
 # load .env from project root
 try:
@@ -20,6 +21,11 @@ if not _api_key:
     )
 
 client = genai.Client(api_key=_api_key)
+
+# load abstracts data
+abstract_data_path = os.path.join("src", "data_collection", "sv_data_collection.xlsx")
+data = pd.read_excel(abstract_data_path)
+abstracts = list(data["Abstract"])
 
 response = client.models.generate_content(
     model="gemini-3-flash-preview",
