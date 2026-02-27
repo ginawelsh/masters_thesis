@@ -61,13 +61,15 @@ generated Swedish text?
 
 \chapter{Background}
 
-This chapter will provide an overview of previous studies related to 1) LLM text generation abilities, 2) human-written and AI-generated comparison studies, and 3) the LLMs of focus in this thesis.
-
+This chapter will provide an overview of previous studies related to this topic. First, it will outline the development of large language models and their text generation abilities for English and Swedish. Second, it will describe previous research comparing AI-generated text with human-written text. The chapter will then outline tools and human participant studies related to AI-generated text detection. 
 \section{Large Language Models and text generation}
 
-\subsection{Transformer architectural development}
+\subsection{Large Language Model architectural development}
 
-The underlying architecture of LLMs, that is, the Transformer architecture, was first described in Vaswani et al. (2017). In this study, the authors connected an encoder and decoder component of a sequence transduction model to create a simpler network architecture that demonstrates superior performance and less training time on a multimodal range of tasks, notably the task of text generation. Since then, several LLMs have been built upon the Transformer architectural model
+
+\paragraph{}
+
+The underlying architecture of LLMs, that is, the Transformer architecture, was first described in \textcite{vaswani2017attention}. In this study, the authors designed an encoder-decoder sequence transduction model to create a network architecture that demonstrated superior performance and decreased training time in comparison to its recurrent neural network predecessors. 
 \paragraph{}
 Specifically look at LLM architecture and text generation itself, its relationship with training on data.
 
@@ -81,7 +83,7 @@ Talk about compositions of English-dominant LLMs - data type
 
 Ohman et al. (2023) curated a 1.2 terabyte dataset of text in all Scandinavian languages in addition to high-quality English data, called the Nordic Pile dataset. Holmstrom et al. (2023) initiated an investigation of the extent to which pre-training GPT-3 LLMs on Swedish only is advantageous over leveraging pre-trained knowledge (from English). It also examined whether English-based pre-trained models demonstrated unwanted transfer of Anglophone cultural aspects over to the Swedish context.  The findings of Holmstrom et al. (2023) demonstrated that LLMs exposed to limited Swedish during training can be highly capable and transfer competencies from English "off-the-shelf", including mathematical reasoning and Swedish cultural adaptation. In addition, the study showed that GPT-3 models did not appear to exhibit unwanted over-generalisation of cultural aspects to Swedish. 
 
-\section{Textual analysis of LLM-generated text}
+\section{Textual comparison of LLM-generated and human-written text}
 
 Several studies have already done that analyse the linguistic characteristics of LLM-generated text in English. 
 
@@ -102,14 +104,12 @@ Previous work has also shown evidence of a distinction between the reasoning pat
 - discuss differences in text stylistic 
 
 
-\section{AI-detection for LLM-generated texts}
-\subsection{LLM-detection for English text}
+\section{AI-generated text detection studies}
+\subsection{AI-detection tool development}
 
 
-\subsection{LLM-detection for Swedish text}
+\subsection{Human participant AI-detection studies}
 Landberg (2024) investigated the effectiveness of AI chatbots to detect texts created by AI in Swedish and English. The main component of the study  A recent study investigated LLM reasoning in Swedish. Moell and Boye (2025) studied the performance of LLMs on language complexity measurement tasks (LIX readability metric and Average Dependency Distance). The results of the study found that all models demonstrated at least come capacity for each of these tasks, but that LLMs remain prone to errors in explicit calculations and syntactic analysis. 
-
-
 
 \section{Background summary}
 
@@ -129,7 +129,7 @@ text here
 
 %\nocite{*}
 
-%\printbibliography
+\printbibliography
 % at start yields errors because there are no citations and the bibliography file is empty
 
 \end{document}
