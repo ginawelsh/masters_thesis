@@ -20,3 +20,6 @@
 *.gz
 thumbs.db
 .DS_Store
+
+# secrets
+.env
