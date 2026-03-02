@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.2.13)  27 FEB 2026 16:46
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.2.13)  27 FEB 2026 17:07
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1697,39 +1697,57 @@ chapter 6.
 ]
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TOsF/m/it' will be
 (Font)              scaled to size 10.95pt on input line 132.
+LaTeX Font Info:    Trying to load font information for T1+fvm on input line 13
+2.
+ (C:\Users\GinaWelsh\AppData\Local\Programs\MiKTeX\tex/latex/bera\t1fvm.fd
+File: t1fvm.fd 2004/09/07 scalable font definitions for T1/fvm.
+)
+LaTeX Font Info:    Font shape `T1/fvm/m/n' will be
+(Font)              scaled to size 8.8038pt on input line 132.
+Package microtype Info: Loading generic protrusion settings for font family
+(microtype)             `fvm' (encoding: T1).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TOsF/m/sc' will be
 (Font)              scaled to size 10.95pt on input line 132.
- [13
+[13
 
 {C:/Users/GinaWelsh/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/libertine/lbt
 n_oie7e6.enc}{C:/Users/GinaWelsh/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/
-libertine/lbtn_pjxd67.enc}] (main.aux)
+base/8r.enc}{C:/Users/GinaWelsh/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/l
+ibertine/lbtn_pjxd67.enc}] (main.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2020/03/25>
  ***********
+
+
+Package biblatex Warning: Please rerun LaTeX.
+(biblatex)                Page breaks have changed.
+
 Package logreq Info: Writing requests to 'main.run.xml'.
 \openout1 = `main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 28804 strings out of 467871
- 528371 string characters out of 5416440
- 1495349 words of memory out of 5000000
- 57089 multiletter control sequences out of 15000+600000
- 741518 words of font info for 205 fonts, out of 8000000 for 9000
+ 28858 strings out of 467871
+ 529509 string characters out of 5416440
+ 1494412 words of memory out of 5000000
+ 57120 multiletter control sequences out of 15000+600000
+ 743745 words of font info for 218 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 122i,8n,121p,11210b,1712s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 122i,8n,121p,11210b,1714s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/GinaWelsh/AppData/Local/Programs/MiKTeX/fonts/type1/public/libertin
 e/LinBiolinumT.pfb><C:/Users/GinaWelsh/AppData/Local/Programs/MiKTeX/fonts/type
 1/public/libertine/LinBiolinumTB.pfb><C:/Users/GinaWelsh/AppData/Local/Programs
 /MiKTeX/fonts/type1/public/libertine/LinLibertineT.pfb><C:/Users/GinaWelsh/AppD
 ata/Local/Programs/MiKTeX/fonts/type1/public/libertine/LinLibertineTI.pfb><C:/U
 sers/GinaWelsh/AppData/Local/Programs/MiKTeX/fonts/type1/public/libertine/LinLi
-bertineTZ.pfb>
-Output written on main.pdf (13 pages, 426158 bytes).
+bertineTZ.pfb><C:/Users/GinaWelsh/AppData/Local/Programs/MiKTeX/fonts/type1/ber
+a/fvmr8a.pfb>
+Output written on main.pdf (13 pages, 437396 bytes).
 PDF statistics:
- 241 PDF objects out of 1000 (max. 8388607)
- 49 named destinations out of 1000 (max. 500000)
- 65715 words of extra memory for PDF output out of 74296 (max. 10000000)
+ 252 PDF objects out of 1000 (max. 8388607)
+ 50 named destinations out of 1000 (max. 500000)
+ 66227 words of extra memory for PDF output out of 74296 (max. 10000000)
 

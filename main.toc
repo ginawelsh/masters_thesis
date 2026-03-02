@@ -8,7 +8,7 @@
 \contentsline {subsection}{\numberline {2.1.1}Large Language Model architectural development}{6}{subsection.2.1.1}%
 \contentsline {subsection}{\numberline {2.1.2}LLMs for the English language}{6}{subsection.2.1.2}%
 \contentsline {subsection}{\numberline {2.1.3}LLMs for the Swedish language}{6}{subsection.2.1.3}%
-\contentsline {section}{\numberline {2.2}Textual comparison of LLM-generated and human-written text}{6}{section.2.2}%
+\contentsline {section}{\numberline {2.2}Textual comparison of LLM-generated and human-written text}{7}{section.2.2}%
 \contentsline {subsection}{\numberline {2.2.1}Linguistic properties of LLM-generated text}{7}{subsection.2.2.1}%
 \contentsline {subsection}{\numberline {2.2.2}Other properties of LLM-generated text}{7}{subsection.2.2.2}%
 \contentsline {section}{\numberline {2.3}AI-generated text detection studies}{8}{section.2.3}%
