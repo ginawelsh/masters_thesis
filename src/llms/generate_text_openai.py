@@ -27,7 +27,8 @@ _data_dir = os.path.join("src", "data_collection")
 abstract_data_path = os.path.join(_data_dir, "sv_data_collection.xlsx")
 data = pd.read_excel(abstract_data_path)
 abstracts = list(data["Abstract"])
-csv_path = os.path.join(_root, "src", "data_collection", "sv_data_collection_csv.csv")
+csv_path = os.path.join(_root, "src", "data_collection", "sv_abstracts_generated.csv")
+out_csv_path = os.path.join(_root, "src", "data_collection", "sv_abstracts_openai.csv")
 
 # LLM-generated abstract creation
 def generate_abstract(abstract):
@@ -43,14 +44,14 @@ if __name__ == "__main__":
     n_test = len(abstracts_csv) if abstracts_csv else 0
 
     # add new column (empty for rows we don't process)
-    data_csv["Generated_Abstract"] = pd.NA
+    data_csv["Generated_OpenAI_Abstract"] = pd.NA
 
     if n_test == 0:
         test_abstract = "Detta är ett kort testabstrakt."
         print("Processing 1/1...", flush=True)
         result = generate_abstract(test_abstract)
         print("Generated abstract:", result)
-        data_csv.loc[0, "Generated_Abstract"] = result
+        data_csv.loc[0, "Generated_OpenAI_Abstract"] = result
     else:
         for i in range(n_test):
             print(f"Processing {i + 1}/{n_test}...", end=" ", flush=True)
@@ -58,10 +59,10 @@ if __name__ == "__main__":
             print("done.")
             print("Generated:", result[:80] + "..." if len(result) > 80 else result)
             print("-" * 40)
-            data_csv.loc[i, "Generated_Abstract"] = result
+            data_csv.loc[i, "Generated_OpenAI_Abstract"] = result
 
-    data_csv.to_csv(csv_path, index=False, encoding="utf-8")
-    print("finished. Added column Generated_Abstract to", csv_path)
+    data_csv.to_csv(out_csv_path, index=False, encoding="utf-8")
+    print("finished. Added column Generated_OpenAI_Abstract to", out_csv_path)
 
 
 # create a response
