@@ -1,7 +1,10 @@
 # base url: https://arctic-shift.photon-reddit.com/
+# Output: at least 20 Swedish questions, max 5 parent (top-level) Swedish comments per question.
+# CSV aligns each comment to the question it replies to.
 
 import csv
 import json
+import os
 import requests
 
 try:
@@ -9,47 +12,45 @@ try:
 except ImportError:
     langdetect = None  # pip install langdetect for Swedish filter
 
-
-# ENSURE URLS GATHER PRE-2017 DATA
+MIN_QUESTIONS = 20
+MAX_COMMENTS_PER_QUESTION = 5
 
 reddit_base_url = "https://reddit.com"
 posts_base = "https://arctic-shift.photon-reddit.com/api/posts/search?subreddit=sweden&before=2017-01-01&limit=100"
 comments_url = "https://arctic-shift.photon-reddit.com/api/comments/search?subreddit=sweden&before=2017-01-01"
-MAX_POSTS = 200 
+MAX_POSTS_FETCH = 500  # upper bound when collecting posts to find enough questions
 
-# gather posts or comments from subreddit
+
 def send_request(url):
     try:
-        # send read request
         response = requests.get(url)
-        # check if request is successful
         if response.status_code == 200:
-            # return in json format
-            posts = response.json()
-            return posts
-        else:
-        # otherwise raise exception
-            raise Exception(f"Failed to get posts: {response.status_code}")
-            return None
+            return response.json()
+        raise Exception(f"Failed to get data: {response.status_code}")
     except Exception as e:
-        print(f"Error getting posts/comments: {e}")
+        print(f"Error: {e}")
         return None
+
+
+def _is_swedish(text):
+    if not text or not text.strip():
+        return False
+    if langdetect is None:
+        return True
+    try:
+        return langdetect.detect(text) == "sv"
+    except Exception:
+        return False
 
 
 def _is_swedish_question(text):
     """True if text contains a question mark and is detected as Swedish."""
     if not text or "?" not in text:
         return False
-    if langdetect is None:
-        return True  # no langdetect: only filter by "?"
-    try:
-        return langdetect.detect(text) == "sv"
-    except Exception:
-        return False  # e.g. LangDetectException for very short text
+    return _is_swedish(text)
 
 
 def _posts_list(response):
-    """Return list of post objects from API response (list or dict)."""
     if response is None:
         return []
     if isinstance(response, list):
@@ -58,20 +59,41 @@ def _posts_list(response):
         return (
             response.get("data")
             or response.get("posts")
-            or list(response.values())[0]
-            if response
-            else []
+            or (list(response.values())[0] if response else [])
         )
     return []
 
 
+def _comments_list(comments_response):
+    if comments_response is None:
+        return []
+    if isinstance(comments_response, list):
+        return comments_response
+    if isinstance(comments_response, dict):
+        return (
+            comments_response.get("data")
+            or comments_response.get("comments")
+            or (list(comments_response.values())[0] if comments_response else [])
+        )
+    return []
+
+
+def _is_parent_comment(comment, post_link_id):
+    """True if comment is a direct reply to the post (not to another comment)."""
+    data = comment.get("data", comment)
+    parent_id = (data.get("parent_id") or comment.get("parent_id") or "").strip()
+    link_id = (data.get("link_id") or comment.get("link_id") or "").strip()
+    # Post fullname is t3_<id>; top-level comments have parent_id == link_id (post)
+    post_fullname = f"t3_{post_link_id}" if not str(post_link_id).startswith("t3_") else post_link_id
+    return parent_id == post_fullname or parent_id == post_link_id or link_id == post_fullname
+
+
 def main():
-    results_dict = {}
     post_ids = []
-    posts_by_id = {}  # post_id -> question text (title + selftext)
-    # Fetch posts until we have enough (API limit is 100 per request)
+    posts_by_id = {}
+
     after = None
-    while len(post_ids) < MAX_POSTS:
+    while len(post_ids) < MAX_POSTS_FETCH:
         posts_url = f"{posts_base}&sort=asc"
         if after is not None:
             posts_url += f"&after={after}"
@@ -83,63 +105,67 @@ def main():
             if not isinstance(p, dict) or "id" not in p:
                 continue
             pid = p["id"]
-            post_ids.append(pid)
+            if pid in posts_by_id:
+                continue
             title = p.get("title") or ""
             selftext = p.get("selftext") or ""
-            posts_by_id[pid] = f"{title}\n{selftext}".strip() or ""
-        # Paginate: after = last post's created_utc
+            full_text = f"{title}\n{selftext}".strip()
+            if not _is_swedish_question(full_text):
+                continue
+            post_ids.append(pid)
+            posts_by_id[pid] = full_text
+            if len(posts_by_id) >= MIN_QUESTIONS:
+                break
+        if len(posts_by_id) >= MIN_QUESTIONS:
+            break
         last = posts_list[-1] if posts_list else {}
         after = last.get("created_utc")
         if after is None:
             break
-    post_ids = post_ids[:MAX_POSTS]
-    # Keep only posts that have a question mark and are in Swedish
-    post_ids = [pid for pid in post_ids if _is_swedish_question(posts_by_id.get(pid, ""))]
-    print(f"Using {len(post_ids)} posts (question mark + Swedish, max {MAX_POSTS})")
 
-    for i in post_ids:
-        query = f"{comments_url}&link_id={i}"
-        gather_comments = send_request(query)
-        results_dict[i] = gather_comments
+    # Use exactly the first MIN_QUESTIONS questions (or all we have)
+    question_ids = list(posts_by_id.keys())[:MIN_QUESTIONS]
+    print(f"Using {len(question_ids)} questions (Swedish, with '?', target ≥ {MIN_QUESTIONS})")
 
-    # Extract comment bodies and write to CSV
+    if len(question_ids) < MIN_QUESTIONS:
+        print(f"Warning: only found {len(question_ids)} Swedish questions (target {MIN_QUESTIONS})")
+
     comment_rows = []
-    for link_id, comments_response in results_dict.items():
-        if comments_response is None:
-            continue
-        # API may return a list of comments or a dict containing a list
-        comments_list = comments_response
-        if isinstance(comments_response, dict):
-            comments_list = (
-                comments_response.get("data")
-                or comments_response.get("comments")
-                or list(comments_response.values())[0]
-                if comments_response
-                else []
-            )
-        if not isinstance(comments_list, list):
-            continue
-        for comment in comments_list:
-            if not isinstance(comment, dict):
+    for link_id in question_ids:
+        question_text = posts_by_id.get(link_id, "")
+        query = f"{comments_url}&link_id={link_id}"
+        gather_comments = send_request(query)
+        comments_list = _comments_list(gather_comments)
+
+        parent_swedish = []
+        for c in comments_list:
+            if not isinstance(c, dict):
                 continue
-            body = comment.get("body", "")
-            subreddit = comment.get("subreddit", "sweden")
-            question = posts_by_id.get(link_id, "")
+            if not _is_parent_comment(c, link_id):
+                continue
+            data = c.get("data", c)
+            body = (data.get("body") or c.get("body") or "").strip()
+            if not body:
+                continue
+            if not _is_swedish(body):
+                continue
+            parent_swedish.append(body)
+
+        for body in parent_swedish[:MAX_COMMENTS_PER_QUESTION]:
             comment_rows.append({
                 "link_id": link_id,
-                "subreddit": subreddit,
-                "question": question,
-                "body": body,
+                "question": question_text,
+                "comment": body,
             })
 
-    comments_csv_path = "comments_bodies.csv"
-    with open(comments_csv_path, "w", newline="", encoding="utf-8") as f:
-        writer = csv.DictWriter(f, fieldnames=["link_id", "subreddit", "question", "body"])
+    out_path = os.path.join(os.path.dirname(__file__), "reddit_comments.csv")
+    with open(out_path, "w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=["link_id", "question", "comment"])
         writer.writeheader()
         writer.writerows(comment_rows)
-    print(f"Wrote {len(comment_rows)} comments to {comments_csv_path}")
 
-    print(json.dumps(results_dict, indent=4))
+    print(f"Wrote {len(comment_rows)} comments (max {MAX_COMMENTS_PER_QUESTION} per question) to {out_path}")
+    print(f"Questions covered: {len(question_ids)}. Each row aligns one comment to its question.")
 
 
 if __name__ == "__main__":
