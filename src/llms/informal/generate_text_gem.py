@@ -21,7 +21,9 @@ if not _api_key:
     )
 
 client = genai.Client(api_key=_api_key)
-csv_path = os.path.join(_root, "src", "data_collection", "reddit_comments.csv")
+_data_dir = os.path.join(_root, "src", "data_collection")
+csv_path = os.path.join(_data_dir, "reddit_comments.csv")
+out_csv_path = os.path.join(_data_dir, "reddit_comments_gemini.csv")
 
 COMMENT_PROMPT = (
     "Svara på följande fråga med en kort, avslappnad svensk kommentar (som på ett forum). "
@@ -31,7 +33,7 @@ COMMENT_PROMPT = (
 
 def generate_comment(question):
     response = client.models.generate_content(
-        model="gemini-2.0-flash-exp",
+        model="gemini-1.5-flash",
         contents=COMMENT_PROMPT.format(question=question),
     )
     return (response.text or "").strip()
@@ -55,5 +57,5 @@ if __name__ == "__main__":
         except Exception as e:
             print(f"Error: {e}")
 
-    data.to_csv(csv_path, index=False, encoding="utf-8")
-    print("Finished. Added column Generated_Gemini_Comment to", csv_path)
+    data.to_csv(out_csv_path, index=False, encoding="utf-8")
+    print("Finished. Wrote", out_csv_path)

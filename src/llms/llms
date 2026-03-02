@@ -29,7 +29,7 @@ out_csv_path = os.path.join(_root, "src", "data_collection", "sv_abstracts_gemin
 # LLM-generated abstract creation (same prompt as OpenAI)
 def generate_abstract(abstract):
     response = client.models.generate_content(
-        model="gemini-2.0-flash-exp",
+        model="gemini-1.5-flash",
         contents=f"Titta på det här abstraktet och generera ett nytt med egna ord, av samma längd: {abstract}",
     )
     return response.text

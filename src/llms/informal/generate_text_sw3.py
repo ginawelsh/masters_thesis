@@ -14,7 +14,9 @@ try:
 except ImportError:
     pass
 
-csv_path = os.path.join(_root, "src", "data_collection", "reddit_comments.csv")
+_data_dir = os.path.join(_root, "src", "data_collection")
+csv_path = os.path.join(_data_dir, "reddit_comments.csv")
+out_csv_path = os.path.join(_data_dir, "reddit_comments_sw3.csv")
 
 MODEL_ID = "AI-Sweden-Models/gpt-sw3-356m"
 MAX_INPUT_TOKENS = 1536
@@ -81,5 +83,5 @@ if __name__ == "__main__":
         except Exception as e:
             print(f"Error: {e}")
 
-    data.to_csv(csv_path, index=False, encoding="utf-8")
-    print("Finished. Added column Generated_SW3_Comment to", csv_path)
+    data.to_csv(out_csv_path, index=False, encoding="utf-8")
+    print("Finished. Wrote", out_csv_path)
