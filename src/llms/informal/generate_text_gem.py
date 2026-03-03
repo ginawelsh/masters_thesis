@@ -33,7 +33,7 @@ COMMENT_PROMPT = (
 
 def generate_comment(question):
     response = client.models.generate_content(
-        model="gemini-1.5-flash",
+        model="gemini-3-flash-preview",
         contents=COMMENT_PROMPT.format(question=question),
     )
     return (response.text or "").strip()

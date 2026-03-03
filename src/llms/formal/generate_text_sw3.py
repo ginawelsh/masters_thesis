@@ -27,8 +27,8 @@ def _get_model_and_tokenizer():
 
 
 # LLM-generated abstract creation (same prompt as OpenAI/Gemini)
-def generate_abstract(abstract, tokenizer, model):
-    prompt = f"Titta på det här abstraktet och generera ett nytt med egna ord, av samma längd: {abstract}"
+def generate_abstract(title, keywords, tokenizer, model):
+    prompt = f"Titta på titeln och nyckelorden och skapa en sammanfattning i kandidatuppsatsstil med dina egna ord: {title, keywords}"
     inputs = tokenizer(
         prompt,
         return_tensors="pt",
