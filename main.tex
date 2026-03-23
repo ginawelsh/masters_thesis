@@ -117,9 +117,20 @@ Landberg (2024) investigated the effectiveness of AI chatbots to detect texts cr
 
 This chapter details the methodology of this thesis, of which there are several components. The  methodology is comprised of two main parts: 1) a comparison of textual elements between human-written Swedish and LLM-generated Swedish, and 2) a comparison between the detection rates and strategies of LLM-generated Swedish. For both main parts, this chapter details the input data, tools and evaluation methods in their experimental set-ups.
 
+\section{Data collection of human-written and LLM-generated Swedish}
+
+\subsection{Formal data}
+
+\subsubsection{Human-written data}
+
+The formal dataset comprised of ~50 samples of Bachelor's level thesis abstracts and keywords (could be 200+ if you wanted to) sourced from the Digitala Vetenskapliga Arkivet (DiVA) portal. All Swedish abstracts and keywords were written in Swedish. Where the abstract was Swedish but the keywords were in English, the English keywords were translated into their Swedish equivalents. The date range of these abstracts was 2007-2017 in order to mitigate the chance of any transformer-based generative models influencing the creation of these abstracts. The topics of the thesis abstracts spanned across several topics (Humanities, Physical Sciences, Medical Studies, Agriculture etc.). 
+
+\subsection{Informal data}
+
 \section{Textual analysis}
 The aim of the textual analysis experiments is to investigate meaningful differences between LLM-generated and human-written Swedish. This method is based on the hypothesis that there are indeed meaningful differences in the writing style between the two textual sources in Swedish. The method aims to cover both surface-level analyses of the text, that is, investigating structural differences between the word forms and surface-level composition between the two modes; as well as content-level analysis, that is, sentiment analysis, entities, and themes of the texts. 
 \subsection{Surface-level analysis}
+For the surface-level analysis, the spaCy package was used (\texttt{sv\_core\_news\_sm}) to collect distributions of: vocabulary distribution, part-of-speech distribution,
 \subsection{Content-level analysis}
 \subsection{Textual analysis experimental set-up}
 

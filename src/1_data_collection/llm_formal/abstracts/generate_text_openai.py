@@ -1,5 +1,6 @@
 import os
 import pandas as pd
+import openai
 from openai import OpenAI
 
 # load .env from project root (script is in src/llms/formal/)
