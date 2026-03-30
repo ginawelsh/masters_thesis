@@ -119,15 +119,26 @@ This chapter details the methodology of this thesis, of which there are several 
 
 \section{Data collection}
 
-\subsection{Human-written data}
+\subsection{Human-written formal data}
 
-\subsubsection{FOrmal  data}
+The formal human-written dataset comprises of (n=insert) samples of Bachelor's level thesis abstracts and keywords (could be 200+ if you wanted to) sourced from the Digitala Vetenskapliga Arkivet (DiVA) portal. All Swedish abstracts and keywords were written in Swedish. Where the abstract was Swedish but the keywords were in English, the English keywords were translated into their Swedish equivalents. The date range of these abstracts was 2007-2017 in order to mitigate the chance of any transformer-based generative models influencing the creation of these abstracts. The topics of the thesis abstracts spanned across several topics (Humanities, Physical Sciences, Medical Studies, Agriculture etc.). 
 
-The formal dataset comprised of ~50 samples of Bachelor's level thesis abstracts and keywords (could be 200+ if you wanted to) sourced from the Digitala Vetenskapliga Arkivet (DiVA) portal. All Swedish abstracts and keywords were written in Swedish. Where the abstract was Swedish but the keywords were in English, the English keywords were translated into their Swedish equivalents. The date range of these abstracts was 2007-2017 in order to mitigate the chance of any transformer-based generative models influencing the creation of these abstracts. The topics of the thesis abstracts spanned across several topics (Humanities, Physical Sciences, Medical Studies, Agriculture etc.). 
+\subsection{Human-written informal data}
 
-\subsection{Informal data}
+The informal human-written dataset comprises of (n=insert) Swedish-language Reddit questions, with (n=insert) replies to each question, all scraped from r/Sweden using the PushShift and Arctic Shift APIs. To mitigate the possibility of transformer-based generative AI  tools being involved in the creation of the subreddit's questions and replies, only questions and comments with a timestamp before January 2017 (2017-01-01) were scraped. To ensure that the post's titles were in question form and in Swedish, the scraper script checked for the presence of a question mark ("?") and used the <langdetect> Python library to identify the post as being written in Swedish ("sv"). 
 
-The informal dataset comprised of (~200+?) Swedish-language Reddit questions and comments from (insert subreddits) and (insert number) comment threads. The question set was taken from before 2017 (using ArcticShift API) 
+\subsection{LLM-generated formal data}
+
+The formal human-written dataset comprises of an LLM-generated version of each human-written sample of the DiVA Bachelor's-level thesis abstracts. The model used was OpenAI's GPT 5.2 model (<gpt-5.2>). The prompt used as input to generate the comments was:
+\paragraph{}
+"Titta på titeln och nyckelorden och skapa en sammanfattning i kandidatuppsatsstil med dina egna ord: <title, keywords>."
+\paragraph{}
+English translation: Look at the title and keywords and create a summary of the thesis abstract in your own words: <title, keywords>
+
+
+
+\subsection{LLM-generated informal data}
+
 
 \section{Experiment 1: textual analysis}
 

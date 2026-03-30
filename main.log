@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.2.13)  23 MAR 2026 13:03
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.2.13)  27 MAR 2026 12:20
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1690,26 +1690,26 @@ LaTeX Warning: Citation 'islam2023' on page 6 undefined on input line 72.
 
 ] [7] [8]
 chapter 3.
-LaTeX Font Info:    Trying to load font information for T1+fvm on input line 13
-6.
-(C:\Users\GinaWelsh\AppData\Local\Programs\MiKTeX\tex/latex/bera\t1fvm.fd
+[9
+
+]
+LaTeX Font Info:    Trying to load font information for T1+fvm on input line 14
+7.
+ (C:\Users\GinaWelsh\AppData\Local\Programs\MiKTeX\tex/latex/bera\t1fvm.fd
 File: t1fvm.fd 2004/09/07 scalable font definitions for T1/fvm.
 )
 LaTeX Font Info:    Font shape `T1/fvm/m/n' will be
-(Font)              scaled to size 8.8038pt on input line 136.
+(Font)              scaled to size 8.8038pt on input line 147.
 Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `fvm' (encoding: T1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 
-[9
 
-{C:/Users/GinaWelsh/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc}]
+LaTeX Warning: Citation 'li2023' on page 10 undefined on input line 168.
 
-
-LaTeX Warning: Citation 'li2023' on page 10 undefined on input line 157.
-
-[10]
+[10{C:/Users/GinaWelsh/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.en
+c}]
 chapter 4.
 [11
 
@@ -1720,7 +1720,7 @@ chapter 5.
 ]
 chapter 6.
 
-LaTeX Warning: Empty bibliography on input line 177.
+LaTeX Warning: Empty bibliography on input line 188.
 
 [13
 
@@ -1744,25 +1744,21 @@ Package logreq Info: Writing requests to 'main.run.xml'.
  ) 
 Here is how much of TeX's memory you used:
  28839 strings out of 467871
- 528838 string characters out of 5416440
+ 528595 string characters out of 5416440
  1498315 words of memory out of 5000000
- 57099 multiletter control sequences out of 15000+600000
- 740364 words of font info for 217 fonts, out of 8000000 for 9000
+ 57091 multiletter control sequences out of 15000+600000
+ 740910 words of font info for 221 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  122i,8n,121p,11210b,1573s stack positions out of 10000i,1000n,20000p,200000b,200000s
-
-pdfTeX warning (dest): name{subsection.3.2.3} has been referenced but does not 
-exist, replaced by a fixed one
-
-<C:/Users/GinaWelsh/AppData/Local/Programs/MiKTeX/fonts/type1/public/libertine/
-LinBiolinumT.pfb><C:/Users/GinaWelsh/AppData/Local/Programs/MiKTeX/fonts/type1/
-public/libertine/LinBiolinumTB.pfb><C:/Users/GinaWelsh/AppData/Local/Programs/M
-iKTeX/fonts/type1/public/libertine/LinLibertineT.pfb><C:/Users/GinaWelsh/AppDat
-a/Local/Programs/MiKTeX/fonts/type1/public/libertine/LinLibertineTZ.pfb><C:/Use
-rs/GinaWelsh/AppData/Local/Programs/MiKTeX/fonts/type1/bera/fvmr8a.pfb>
-Output written on main.pdf (13 pages, 404380 bytes).
+<C:/Users/GinaWelsh/AppData/Local/Programs/MiKTeX/fonts/type1/public/libertin
+e/LinBiolinumT.pfb><C:/Users/GinaWelsh/AppData/Local/Programs/MiKTeX/fonts/type
+1/public/libertine/LinBiolinumTB.pfb><C:/Users/GinaWelsh/AppData/Local/Programs
+/MiKTeX/fonts/type1/public/libertine/LinLibertineT.pfb><C:/Users/GinaWelsh/AppD
+ata/Local/Programs/MiKTeX/fonts/type1/public/libertine/LinLibertineTZ.pfb><C:/U
+sers/GinaWelsh/AppData/Local/Programs/MiKTeX/fonts/type1/bera/fvmr8a.pfb>
+Output written on main.pdf (13 pages, 407622 bytes).
 PDF statistics:
- 286 PDF objects out of 1000 (max. 8388607)
- 59 named destinations out of 1000 (max. 500000)
- 62211 words of extra memory for PDF output out of 74296 (max. 10000000)
+ 296 PDF objects out of 1000 (max. 8388607)
+ 61 named destinations out of 1000 (max. 500000)
+ 62227 words of extra memory for PDF output out of 74296 (max. 10000000)
 
