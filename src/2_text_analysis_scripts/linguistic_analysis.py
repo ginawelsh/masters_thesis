@@ -3,6 +3,7 @@ Linguistic analysis (spaCy) on Abstract and Generated Abstract from formal CSV.
 Install: pip install -r requirements.txt
 Swedish: python -m spacy download sv_core_news_sm
 """
+import argparse
 import os
 from collections import Counter
 
@@ -16,15 +17,56 @@ MODEL = "sv_core_news_sm"
 # Some older paths in this script referenced `src/data_collection/...`.
 _root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 HUMAN_FORMAL_DIR = os.path.join(_root, "1_data_collection", "human_formal")
-CSV_PATH = os.path.join(HUMAN_FORMAL_DIR, "sv_human_collection_with_kws.csv")
-OUT_CSV_PATH = os.path.join(HUMAN_FORMAL_DIR, "linguistic_analysis_tokens.csv")
-OUT_POS_CSV_PATH = os.path.join(HUMAN_FORMAL_DIR, "linguistic_analysis_pos.csv")
-OUT_POS_COUNTS_CSV_PATH = os.path.join(HUMAN_FORMAL_DIR, "linguistic_analysis_pos_counts.csv")
-OUT_POS_PROPORTIONS_CSV_PATH = os.path.join(HUMAN_FORMAL_DIR, "linguistic_analysis_pos_proportions.csv")
-OUT_POS_DIFFERENCES_CSV_PATH = os.path.join(HUMAN_FORMAL_DIR, "linguistic_analysis_pos_differences.csv")
+HUMAN_INFORMAL_DIR = os.path.join(_root, "1_data_collection", "human_informal")
+LLM_INFORMAL_DIR = os.path.join(_root, "1_data_collection", "llm_informal")
 
 TOKEN_SEP = ","  # separator for tokens/POS in CSV cells
 POS_SEP = " | "  # separator for TAG:n lists in CSV cells (matches existing checked-in counts file)
+VERBOSE = False  # set True to print per-row token/POS debug output
+
+
+def parse_args():
+    parser = argparse.ArgumentParser(description="POS analysis for formal/informal paired datasets")
+    parser.add_argument(
+        "--dataset",
+        choices=["formal", "informal"],
+        default="formal",
+        help="Preset input/output config.",
+    )
+    return parser.parse_args()
+
+
+def resolve_config(dataset: str) -> dict:
+    if dataset == "informal":
+        input_csv = os.path.join(LLM_INFORMAL_DIR, "reddit_comments_openai.csv")
+        output_dir = HUMAN_INFORMAL_DIR
+        return {
+            "csv_path": input_csv,
+            "out_tokens": os.path.join(output_dir, "linguistic_analysis_tokens.csv"),
+            "out_pos": os.path.join(output_dir, "linguistic_analysis_pos.csv"),
+            "out_pos_counts": os.path.join(output_dir, "linguistic_analysis_pos_counts.csv"),
+            "out_pos_proportions": os.path.join(output_dir, "linguistic_analysis_pos_proportions.csv"),
+            "out_pos_differences": os.path.join(output_dir, "linguistic_analysis_pos_differences.csv"),
+            "human_col": "comment",
+            "generated_col_candidates": ["Generated_OpenAI_Comment"],
+            "human_label": "Comment",
+            "generated_label": "Generated Comment",
+        }
+
+    input_csv = os.path.join(HUMAN_FORMAL_DIR, "sv_human_collection_with_kws.csv")
+    output_dir = HUMAN_FORMAL_DIR
+    return {
+        "csv_path": input_csv,
+        "out_tokens": os.path.join(output_dir, "linguistic_analysis_tokens.csv"),
+        "out_pos": os.path.join(output_dir, "linguistic_analysis_pos.csv"),
+        "out_pos_counts": os.path.join(output_dir, "linguistic_analysis_pos_counts.csv"),
+        "out_pos_proportions": os.path.join(output_dir, "linguistic_analysis_pos_proportions.csv"),
+        "out_pos_differences": os.path.join(output_dir, "linguistic_analysis_pos_differences.csv"),
+        "human_col": "Abstract",
+        "generated_col_candidates": ["Generated_Abstract", "Generated Abstract"],
+        "human_label": "Abstract",
+        "generated_label": "Generated Abstract",
+    }
 
 
 def load_nlp(model_name: str = MODEL):
@@ -116,7 +158,7 @@ def parse_pos_proportions_string(s: str) -> dict:
     return props
 
 
-def write_pos_differences_csv(df_pos_props: pd.DataFrame, ndigits: int = 4) -> None:
+def write_pos_differences_csv(df_pos_props: pd.DataFrame, out_path: str, ndigits: int = 4) -> None:
     """
     Write POS proportion differences (Human - Generated) per row, one column per POS,
     plus an AVERAGE summary row across all rows.
@@ -157,15 +199,28 @@ def write_pos_differences_csv(df_pos_props: pd.DataFrame, ndigits: int = 4) -> N
             avg_row[f"POS_Diff_{tag}"] = 0.0
 
     out_rows.append(avg_row)
-    pd.DataFrame(out_rows).to_csv(OUT_POS_DIFFERENCES_CSV_PATH, index=False, encoding="utf-8")
-    print(f"Wrote {len(out_rows)} rows to {OUT_POS_DIFFERENCES_CSV_PATH}")
+    pd.DataFrame(out_rows).to_csv(out_path, index=False, encoding="utf-8")
+    print(f"Wrote {len(out_rows)} rows to {out_path}")
 
 
 def main():
+    args = parse_args()
+    cfg = resolve_config(args.dataset)
+    csv_path = cfg["csv_path"]
+    out_csv_path = cfg["out_tokens"]
+    out_pos_csv_path = cfg["out_pos"]
+    out_pos_counts_csv_path = cfg["out_pos_counts"]
+    out_pos_proportions_csv_path = cfg["out_pos_proportions"]
+    out_pos_differences_csv_path = cfg["out_pos_differences"]
+    human_col = cfg["human_col"]
+    generated_col_candidates = cfg["generated_col_candidates"]
+    human_label = cfg["human_label"]
+    generated_label = cfg["generated_label"]
+
     # Fast path: if POS counts file already exists, derive proportions + lengths directly from it.
     # This guarantees we match the checked-in counts file format and avoids rerunning spaCy.
-    if os.path.exists(OUT_POS_COUNTS_CSV_PATH):
-        df_counts = pd.read_csv(OUT_POS_COUNTS_CSV_PATH, encoding="utf-8")
+    if os.path.exists(out_pos_counts_csv_path):
+        df_counts = pd.read_csv(out_pos_counts_csv_path, encoding="utf-8")
         rows_pos_props = []
         for idx in range(len(df_counts)):
             row = df_counts.iloc[idx]
@@ -181,13 +236,13 @@ def main():
             )
 
         df_pos_props = pd.DataFrame(rows_pos_props)
-        df_pos_props.to_csv(OUT_POS_PROPORTIONS_CSV_PATH, index=False, encoding="utf-8")
-        print(f"Wrote {len(rows_pos_props)} rows to {OUT_POS_PROPORTIONS_CSV_PATH}")
+        df_pos_props.to_csv(out_pos_proportions_csv_path, index=False, encoding="utf-8")
+        print(f"Wrote {len(rows_pos_props)} rows to {out_pos_proportions_csv_path}")
 
-        write_pos_differences_csv(df_pos_props)
+        write_pos_differences_csv(df_pos_props, out_pos_differences_csv_path)
         return
 
-    df = pd.read_csv(CSV_PATH, encoding="utf-8")
+    df = pd.read_csv(csv_path, encoding="utf-8")
     nlp = load_nlp()
 
     rows_out = []
@@ -197,18 +252,24 @@ def main():
 
     for idx in range(len(df)):
         row = df.iloc[idx]
-        abs_text = row.get("Abstract")
-        gen_text = row.get("Generated_Abstract") or row.get("Generated Abstract")
+        abs_text = row.get(human_col)
+        gen_text = None
+        for c in generated_col_candidates:
+            gen_text = row.get(c)
+            if gen_text is not None and str(gen_text).strip():
+                break
 
-        print(f"\n--- Row {idx + 1} ---")
+        if VERBOSE:
+            print(f"\n--- Row {idx + 1} ---")
         doc_abs = process_text(nlp, abs_text)
         if doc_abs is not None:
             abs_tokens = TOKEN_SEP.join(t.text for t in doc_abs)
             abs_pos = TOKEN_SEP.join(f"{t.text}_{t.pos_}" for t in doc_abs)
-            print("[Abstract] Tokens:", [t.text for t in doc_abs], "...")
-            print("[Abstract] POS:", [(t.text, t.pos_) for t in doc_abs])
-            if doc_abs.ents:
-                print("[Abstract] Entities:", [(e.text, e.label_) for e in doc_abs.ents])
+            if VERBOSE:
+                print(f"[{human_label}] Tokens:", [t.text for t in doc_abs], "...")
+                print(f"[{human_label}] POS:", [(t.text, t.pos_) for t in doc_abs])
+                if doc_abs.ents:
+                    print(f"[{human_label}] Entities:", [(e.text, e.label_) for e in doc_abs.ents])
         else:
             abs_tokens = ""
             abs_pos = ""
@@ -220,10 +281,11 @@ def main():
         if doc_gen is not None:
             gen_tokens = TOKEN_SEP.join(t.text for t in doc_gen)
             gen_pos = TOKEN_SEP.join(f"{t.text}_{t.pos_}" for t in doc_gen)
-            print("[Generated Abstract] Tokens:", [t.text for t in doc_gen], "...")
-            print("[Generated Abstract] POS:", [(t.text, t.pos_) for t in doc_gen])
-            if doc_gen.ents:
-                print("[Generated Abstract] Entities:", [(e.text, e.label_) for e in doc_gen.ents])
+            if VERBOSE:
+                print(f"[{generated_label}] Tokens:", [t.text for t in doc_gen], "...")
+                print(f"[{generated_label}] POS:", [(t.text, t.pos_) for t in doc_gen])
+                if doc_gen.ents:
+                    print(f"[{generated_label}] Entities:", [(e.text, e.label_) for e in doc_gen.ents])
         else:
             gen_tokens = ""
             gen_pos = ""
@@ -252,20 +314,20 @@ def main():
             }
         )
 
-    pd.DataFrame(rows_out).to_csv(OUT_CSV_PATH, index=False, encoding="utf-8")
-    print(f"\nWrote {len(rows_out)} rows to {OUT_CSV_PATH}")
+    pd.DataFrame(rows_out).to_csv(out_csv_path, index=False, encoding="utf-8")
+    print(f"\nWrote {len(rows_out)} rows to {out_csv_path}")
 
-    pd.DataFrame(rows_pos).to_csv(OUT_POS_CSV_PATH, index=False, encoding="utf-8")
-    print(f"Wrote {len(rows_pos)} rows to {OUT_POS_CSV_PATH}")
+    pd.DataFrame(rows_pos).to_csv(out_pos_csv_path, index=False, encoding="utf-8")
+    print(f"Wrote {len(rows_pos)} rows to {out_pos_csv_path}")
 
-    pd.DataFrame(rows_pos_counts).to_csv(OUT_POS_COUNTS_CSV_PATH, index=False, encoding="utf-8")
-    print(f"Wrote {len(rows_pos_counts)} rows to {OUT_POS_COUNTS_CSV_PATH}")
+    pd.DataFrame(rows_pos_counts).to_csv(out_pos_counts_csv_path, index=False, encoding="utf-8")
+    print(f"Wrote {len(rows_pos_counts)} rows to {out_pos_counts_csv_path}")
 
     df_pos_props = pd.DataFrame(rows_pos_props)
-    df_pos_props.to_csv(OUT_POS_PROPORTIONS_CSV_PATH, index=False, encoding="utf-8")
-    print(f"Wrote {len(rows_pos_props)} rows to {OUT_POS_PROPORTIONS_CSV_PATH}")
+    df_pos_props.to_csv(out_pos_proportions_csv_path, index=False, encoding="utf-8")
+    print(f"Wrote {len(rows_pos_props)} rows to {out_pos_proportions_csv_path}")
 
-    write_pos_differences_csv(df_pos_props)
+    write_pos_differences_csv(df_pos_props, out_pos_differences_csv_path)
 
 
 if __name__ == "__main__":

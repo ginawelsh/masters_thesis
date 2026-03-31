@@ -14,15 +14,16 @@ Usage:
 """
 
 import os
+import argparse
 
 import pandas as pd
 
 POS_SEP = " | "  # matches linguistic_analysis_pos_proportions.csv cells
 
 
-def get_paths():
+def get_paths(dataset: str):
     root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    data_dir = os.path.join(root, "1_data_collection", "human_formal")
+    data_dir = os.path.join(root, "1_data_collection", f"human_{dataset}")
     csv_path = os.path.join(data_dir, "linguistic_analysis_pos_differences.csv")
     proportions_csv = os.path.join(data_dir, "linguistic_analysis_pos_proportions.csv")
     plot_dir = os.path.join(data_dir, "plots")
@@ -174,7 +175,11 @@ def plot_proportions_side_by_side(human_avg: pd.Series, gen_avg: pd.Series, out_
 
 
 def main():
-    csv_path, proportions_csv, plot_dir = get_paths()
+    parser = argparse.ArgumentParser(description="Visualize POS differences/proportions")
+    parser.add_argument("--dataset", choices=["formal", "informal"], default="formal")
+    args = parser.parse_args()
+
+    csv_path, proportions_csv, plot_dir = get_paths(args.dataset)
     if not os.path.exists(csv_path):
         raise FileNotFoundError(f"Missing input CSV: {csv_path}")
 

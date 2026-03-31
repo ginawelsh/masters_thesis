@@ -1,34 +1,34 @@
 \contentsline {chapter}{\nonumberline Preface}{4}{chapter*.2}%
 \contentsline {chapter}{\numberline {1}Introduction}{5}{chapter.1}%
 \contentsline {section}{\numberline {1.1}Research questions}{5}{section.1.1}%
-\contentsline {section}{\numberline {1.2}The LLMs of focus for this thesis}{5}{section.1.2}%
-\contentsline {section}{\numberline {1.3}The AI-detection method of focus for this thesis}{5}{section.1.3}%
-\contentsline {chapter}{\numberline {2}Background}{6}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Large Language Models and text generation}{6}{section.2.1}%
-\contentsline {subsection}{\numberline {2.1.1}Large Language Model architectural development}{6}{subsection.2.1.1}%
-\contentsline {subsection}{\numberline {2.1.2}LLMs for the English language}{6}{subsection.2.1.2}%
-\contentsline {subsection}{\numberline {2.1.3}LLMs for the Swedish language}{6}{subsection.2.1.3}%
-\contentsline {section}{\numberline {2.2}Textual comparison of LLM-generated and human-written text}{7}{section.2.2}%
-\contentsline {subsection}{\numberline {2.2.1}Linguistic properties of LLM-generated text}{7}{subsection.2.2.1}%
-\contentsline {subsection}{\numberline {2.2.2}Other properties of LLM-generated text}{7}{subsection.2.2.2}%
-\contentsline {section}{\numberline {2.3}AI-generated text detection studies}{8}{section.2.3}%
-\contentsline {subsection}{\numberline {2.3.1}AI-detection tool development}{8}{subsection.2.3.1}%
-\contentsline {subsection}{\numberline {2.3.2}Human participant AI-detection studies}{8}{subsection.2.3.2}%
-\contentsline {section}{\numberline {2.4}Background summary}{8}{section.2.4}%
-\contentsline {chapter}{\numberline {3}Methodology}{9}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Data collection}{9}{section.3.1}%
-\contentsline {subsection}{\numberline {3.1.1}Human-written formal data}{9}{subsection.3.1.1}%
-\contentsline {subsection}{\numberline {3.1.2}Human-written informal data}{9}{subsection.3.1.2}%
-\contentsline {subsection}{\numberline {3.1.3}LLM-generated formal data}{9}{subsection.3.1.3}%
-\contentsline {subsection}{\numberline {3.1.4}LLM-generated informal data}{10}{subsection.3.1.4}%
-\contentsline {section}{\numberline {3.2}Experiment 1: textual analysis}{10}{section.3.2}%
-\contentsline {subsection}{\numberline {3.2.1}Surface-level analysis}{10}{subsection.3.2.1}%
-\contentsline {subsection}{\numberline {3.2.2}Content-level analysis}{10}{subsection.3.2.2}%
-\contentsline {section}{\numberline {3.3}Experiment 2: LLM-generated text detection}{10}{section.3.3}%
-\contentsline {subsection}{\numberline {3.3.1}AI detection}{10}{subsection.3.3.1}%
-\contentsline {subsection}{\numberline {3.3.2}Human detection}{10}{subsection.3.3.2}%
-\contentsline {subsection}{\numberline {3.3.3}LLM-detection experimental set-up}{10}{subsection.3.3.3}%
-\contentsline {chapter}{\numberline {4}Results}{11}{chapter.4}%
-\contentsline {chapter}{\numberline {5}Discussion}{12}{chapter.5}%
-\contentsline {chapter}{\numberline {6}Conclusion}{13}{chapter.6}%
+\contentsline {section}{\numberline {1.2}The LLMs of focus for this thesis}{6}{section.1.2}%
+\contentsline {section}{\numberline {1.3}The AI-detection method of focus for this thesis}{6}{section.1.3}%
+\contentsline {chapter}{\numberline {2}Background}{7}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Large Language Models and text generation}{7}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Large Language Model architectural development}{7}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}LLMs for the English language}{7}{subsection.2.1.2}%
+\contentsline {subsection}{\numberline {2.1.3}LLMs for the Swedish language}{7}{subsection.2.1.3}%
+\contentsline {section}{\numberline {2.2}Textual comparison of LLM-generated and human-written text}{8}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Linguistic properties of LLM-generated text}{8}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}Other properties of LLM-generated text}{8}{subsection.2.2.2}%
+\contentsline {section}{\numberline {2.3}AI-generated text detection studies}{9}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}AI-detection tool development}{9}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}Human participant AI-detection studies}{9}{subsection.2.3.2}%
+\contentsline {section}{\numberline {2.4}Background summary}{9}{section.2.4}%
+\contentsline {chapter}{\numberline {3}Methodology}{10}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Data collection}{10}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Human-written formal data}{10}{subsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.1.2}Human-written informal data}{10}{subsection.3.1.2}%
+\contentsline {subsection}{\numberline {3.1.3}LLM-generated formal data}{10}{subsection.3.1.3}%
+\contentsline {subsection}{\numberline {3.1.4}LLM-generated informal data}{11}{subsection.3.1.4}%
+\contentsline {section}{\numberline {3.2}Experiment 1: textual analysis}{11}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Surface-level analysis}{11}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}Content-level analysis}{11}{subsection.3.2.2}%
+\contentsline {section}{\numberline {3.3}Experiment 2: LLM-generated text detection}{11}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}AI detection}{11}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Human detection}{11}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3}LLM-detection experimental set-up}{11}{subsection.3.3.3}%
+\contentsline {chapter}{\numberline {4}Results}{12}{chapter.4}%
+\contentsline {chapter}{\numberline {5}Discussion}{13}{chapter.5}%
+\contentsline {chapter}{\numberline {6}Conclusion}{14}{chapter.6}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 
