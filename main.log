@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.2.13)  31 MAR 2026 14:22
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.2.13)  31 MAR 2026 15:26
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1676,15 +1676,15 @@ LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-TOsF/m/n' will be
 ] [6]
 chapter 2.
 LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-TOsF/m/n' will be
-(Font)              scaled to size 12.0pt on input line 76.
+(Font)              scaled to size 12.0pt on input line 69.
 
 LaTeX Warning: Citation 'vaswani2017attention' on page 7 undefined on input lin
-e 81.
+e 74.
 
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TOsF/sb/n' will be
-(Font)              scaled to size 10.95pt on input line 81.
+(Font)              scaled to size 10.95pt on input line 74.
 
-LaTeX Warning: Citation 'islam2023' on page 7 undefined on input line 81.
+LaTeX Warning: Citation 'islam2023' on page 7 undefined on input line 74.
 
 [7
 
@@ -1693,19 +1693,19 @@ chapter 3.
 [10
 
 ]
-LaTeX Font Info:    Trying to load font information for T1+fvm on input line 15
-6.
+LaTeX Font Info:    Trying to load font information for T1+fvm on input line 14
+9.
  (C:\Users\GinaWelsh\AppData\Local\Programs\MiKTeX\tex/latex/bera\t1fvm.fd
 File: t1fvm.fd 2004/09/07 scalable font definitions for T1/fvm.
 )
 LaTeX Font Info:    Font shape `T1/fvm/m/n' will be
-(Font)              scaled to size 8.8038pt on input line 156.
+(Font)              scaled to size 8.8038pt on input line 149.
 Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `fvm' (encoding: T1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 
-LaTeX Warning: Citation 'li2023' on page 11 undefined on input line 177.
+LaTeX Warning: Citation 'li2023' on page 11 undefined on input line 170.
 
 [11{C:/Users/GinaWelsh/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.en
 c}]
@@ -1719,7 +1719,7 @@ chapter 5.
 ]
 chapter 6.
 
-LaTeX Warning: Empty bibliography on input line 197.
+LaTeX Warning: Empty bibliography on input line 190.
 
 [14
 
@@ -1742,11 +1742,11 @@ Package logreq Info: Writing requests to 'main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 28849 strings out of 467871
- 528830 string characters out of 5416440
+ 28847 strings out of 467871
+ 528870 string characters out of 5416440
  1498315 words of memory out of 5000000
- 57091 multiletter control sequences out of 15000+600000
- 741729 words of font info for 227 fonts, out of 8000000 for 9000
+ 57090 multiletter control sequences out of 15000+600000
+ 742002 words of font info for 229 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  122i,8n,121p,11210b,1573s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/GinaWelsh/AppData/Local/Programs/MiKTeX/fonts/type1/public/libertin
@@ -1755,9 +1755,9 @@ e/LinBiolinumT.pfb><C:/Users/GinaWelsh/AppData/Local/Programs/MiKTeX/fonts/type
 /MiKTeX/fonts/type1/public/libertine/LinLibertineT.pfb><C:/Users/GinaWelsh/AppD
 ata/Local/Programs/MiKTeX/fonts/type1/public/libertine/LinLibertineTZ.pfb><C:/U
 sers/GinaWelsh/AppData/Local/Programs/MiKTeX/fonts/type1/bera/fvmr8a.pfb>
-Output written on main.pdf (14 pages, 410282 bytes).
+Output written on main.pdf (14 pages, 409512 bytes).
 PDF statistics:
- 300 PDF objects out of 1000 (max. 8388607)
- 62 named destinations out of 1000 (max. 500000)
- 62227 words of extra memory for PDF output out of 74296 (max. 10000000)
+ 291 PDF objects out of 1000 (max. 8388607)
+ 58 named destinations out of 1000 (max. 500000)
+ 62219 words of extra memory for PDF output out of 74296 (max. 10000000)
 
