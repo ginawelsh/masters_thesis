@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI eller inte? En spel</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="app-header">
+        <div class="app-title-group">
+          <h1 class="app-title">AI eller inte?</h1>
+          <p class="app-subtitle">
+            Läs abstraktet och avgör om det är skrivet av en människa eller AI.
+          </p>
+        </div>
+        <div class="progress-container">
+          <span id="progress-text" class="progress-text">Question 1 of 1</span>
+          <div class="progress-bar-outer">
+            <div id="progress-bar-inner" class="progress-bar-inner"></div>
+          </div>
+        </div>
+      </header>
+
+      <main class="app-main">
+        <section class="question-card">
+          <header class="question-header">
+            <h2 id="question-label">Fråga 1</h2>
+            <span id="question-tag" class="question-tag">Kandidatuppsats abstrakt</span>
+          </header>
+          <div id="question-title" class="question-title" hidden></div>
+          <article id="question-text" class="question-text">
+            Laddar fråga...
+          </article>
+          <div id="comments-container" class="comments-container"></div>
+        </section>
+
+        <section class="controls">
+          <div class="choice-buttons">
+            <button id="btn-human" class="choice-button choice-human" type="button">
+              Skrivet av människa
+            </button>
+            <button id="btn-ai" class="choice-button choice-ai" type="button">
+              Skrivet av AI
+            </button>
+          </div>
+
+          <div id="feedback" class="feedback" aria-live="polite"></div>
+
+          <div class="nav-row">
+            <button id="btn-prev" class="nav-button" type="button" disabled>
+              ◀ Tidigare
+            </button>
+            <button id="btn-exit" class="nav-button danger" type="button">
+              Avsluta
+            </button>
+            <button id="btn-next" class="nav-button primary" type="button" disabled>
+              Nästa ▶
+            </button>
+          </div>
+        </section>
+      </main>
+
+      <footer class="app-footer">
+        <div id="score-summary" class="score-summary">
+          Poäng: <span id="score-correct">0</span> / <span id="score-total">0</span>
+        </div>
+      </footer>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+  </html>
+
