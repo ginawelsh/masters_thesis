@@ -8,7 +8,7 @@ import sys
 from openai import OpenAI
 
 # Project root for .env
-_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 try:
     from dotenv import load_dotenv
@@ -38,31 +38,32 @@ comments = [""]
 def generate_comment(question: str) -> str:
     response = client.chat.completions.create(
         model="gpt-4o-mini",
+        # set up prompt generation, insert question into prompt slot
         messages=[{"role": "user", "content": COMMENT_PROMPT.format(question=question)}],
     )
     return (response.choices[0].message.content or "").strip()
 
 def main():
     data_dir = os.path.dirname(os.path.abspath(__file__))
-    out_path = os.path.join(data_dir, "reddit_comments_openai_100.csv")
+    out_path = os.path.join(data_dir, "reddit_comments_openai_NEW.csv")
 
-    for question in enumerate(questions):
-        comment = generate_comment(question_text)
-        comment_rows = []
-        comment_rows.append({
-            "link_id": link_id,
-            "question": question_text,
-            "comment": comment,
-        })
-    except Exception as e:
-        print(f"  Error: {e}")
+    comment_rows = []
+    for question in questions:
+        try:
+            comment = generate_comment(question)
+            comment_rows.append({
+                "question": question,
+                "comment": comment,
+            })
+        except Exception as e:
+            print(f"  Error: {e}")
 
     with open(out_path, "w", newline="", encoding="utf-8") as f:
-        writer = csv.DictWriter(f, fieldnames=["link_id", "question", "comment"])
+        writer = csv.DictWriter(f, fieldnames=["question", "comment"])
         writer.writeheader()
         writer.writerows(comment_rows)
 
-    print(f"Wrote {len(comment_rows)} comments to {out_path} (target {TARGET_QUESTIONS})")
+    print(f"Wrote {len(comment_rows)} comments to {out_path}")
 
 
 if __name__ == "__main__":
