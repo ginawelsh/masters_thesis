@@ -10,9 +10,9 @@
 \contentsline {section}{\numberline {2.2}Textual comparison of LLM-generated and human-written text}{8}{section.2.2}%
 \contentsline {subsection}{\numberline {2.2.1}Linguistic properties of LLM-generated text}{8}{subsection.2.2.1}%
 \contentsline {subsection}{\numberline {2.2.2}Other properties of LLM-generated text}{8}{subsection.2.2.2}%
-\contentsline {section}{\numberline {2.3}AI-generated text detection studies}{9}{section.2.3}%
-\contentsline {subsection}{\numberline {2.3.1}AI-detection tool development}{9}{subsection.2.3.1}%
-\contentsline {subsection}{\numberline {2.3.2}Human participant AI-detection studies}{9}{subsection.2.3.2}%
+\contentsline {section}{\numberline {2.3}LLM-generated text detection studies}{9}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Human participant AI-detection studies}{9}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}LLM-tool detection by LLMs studies}{9}{subsection.2.3.2}%
 \contentsline {section}{\numberline {2.4}Background summary}{9}{section.2.4}%
 \contentsline {chapter}{\numberline {3}Methodology}{10}{chapter.3}%
 \contentsline {section}{\numberline {3.1}Data collection}{10}{section.3.1}%
@@ -24,10 +24,10 @@
 \contentsline {subsection}{\numberline {3.2.1}Surface-level analysis}{11}{subsection.3.2.1}%
 \contentsline {subsection}{\numberline {3.2.2}Content-level analysis}{11}{subsection.3.2.2}%
 \contentsline {section}{\numberline {3.3}Experiment 2: LLM-generated text detection}{11}{section.3.3}%
-\contentsline {subsection}{\numberline {3.3.1}AI detection}{11}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.1}LLM-detection experimental set-up}{11}{subsection.3.3.1}%
 \contentsline {subsection}{\numberline {3.3.2}Human detection}{11}{subsection.3.3.2}%
-\contentsline {subsection}{\numberline {3.3.3}LLM-detection experimental set-up}{11}{subsection.3.3.3}%
-\contentsline {chapter}{\numberline {4}Results}{12}{chapter.4}%
-\contentsline {chapter}{\numberline {5}Discussion}{13}{chapter.5}%
-\contentsline {chapter}{\numberline {6}Conclusion}{14}{chapter.6}%
+\contentsline {subsection}{\numberline {3.3.3}AI detection}{12}{subsection.3.3.3}%
+\contentsline {chapter}{\numberline {4}Results}{13}{chapter.4}%
+\contentsline {chapter}{\numberline {5}Discussion}{14}{chapter.5}%
+\contentsline {chapter}{\numberline {6}Conclusion}{15}{chapter.6}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

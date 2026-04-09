@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Abstract Table Viewer</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      background: #f5f5f5;
+      color: #1a1a1a;
+      padding: 24px;
+    }
+
+    h1 {
+      font-size: 1.4rem;
+      margin-bottom: 6px;
+      color: #ea6c0a;
+    }
+
+    .meta {
+      font-size: 0.85rem;
+      color: #666;
+      margin-bottom: 20px;
+    }
+
+    .controls {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    .controls input[type="text"] {
+      flex: 1;
+      min-width: 200px;
+      padding: 7px 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      outline: none;
+    }
+
+    .controls input[type="text"]:focus {
+      border-color: #ea6c0a;
+      box-shadow: 0 0 0 3px rgba(234, 108, 10, 0.15);
+    }
+
+    .controls label {
+      font-size: 0.85rem;
+      color: #555;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      cursor: pointer;
+    }
+
+    .row-count {
+      font-size: 0.85rem;
+      color: #666;
+      margin-left: auto;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      font-size: 0.875rem;
+    }
+
+    thead th {
+      background: #ea6c0a;
+      color: #fff;
+      padding: 11px 14px;
+      text-align: left;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    thead th:first-child { border-radius: 12px 0 0 0; }
+    thead th:last-child  { border-radius: 0 12px 0 0; }
+
+    tbody tr:nth-child(even) { background: #fdf6f0; }
+    tbody tr:hover { background: #ffeedd; }
+
+    td {
+      padding: 10px 14px;
+      vertical-align: top;
+      border-bottom: 1px solid #eee;
+    }
+
+    /* Row number */
+    td.num {
+      color: #aaa;
+      font-size: 0.78rem;
+      text-align: right;
+      padding-right: 8px;
+      white-space: nowrap;
+      width: 36px;
+    }
+
+    /* Title columns */
+    td.title {
+      width: 18%;
+      font-weight: 500;
+      line-height: 1.4;
+    }
+
+    /* Abstract columns */
+    td.abstract {
+      width: 32%;
+      line-height: 1.55;
+    }
+
+    .cell-inner {
+      max-height: 120px;
+      overflow: hidden;
+      transition: max-height 0.25s ease;
+      position: relative;
+    }
+
+    .cell-inner.expanded {
+      max-height: 2000px;
+    }
+
+    .expand-btn {
+      display: inline-block;
+      margin-top: 4px;
+      font-size: 0.78rem;
+      color: #ea6c0a;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
+      text-decoration: underline;
+    }
+
+    .expand-btn:hover { color: #b83c08; }
+
+    .highlight { background: #ffdd99; border-radius: 2px; }
+
+    .empty { color: #ccc; font-style: italic; }
+
+    #drop-zone {
+      border: 2px dashed #ea6c0a;
+      border-radius: 12px;
+      padding: 40px;
+      text-align: center;
+      color: #ea6c0a;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-bottom: 20px;
+      background: #fff7f0;
+      transition: background 0.15s;
+    }
+
+    #drop-zone:hover, #drop-zone.drag-over { background: #ffeedd; }
+    #drop-zone input { display: none; }
+
+    #main { display: none; }
+  </style>
+</head>
+<body>
+
+<h1>Abstract Table Viewer</h1>
+<p class="meta">Drag and drop the CSV file, or click to browse.</p>
+
+<div id="drop-zone">
+  Drop <strong>sv_ai_generated_abstracts.csv</strong> here, or click to open
+  <input type="file" id="file-input" accept=".csv" />
+</div>
+
+<div id="main">
+  <div class="controls">
+    <input type="text" id="search" placeholder="Search all columns..." />
+    <label>
+      <input type="checkbox" id="expand-all" /> Expand all
+    </label>
+    <span class="row-count" id="row-count"></span>
+  </div>
+
+  <div class="table-wrap">
+    <table id="table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Human Thesis Title</th>
+          <th>AI Thesis Title</th>
+          <th>Human Abstract</th>
+          <th>AI Abstract</th>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+  let allRows = [];
+
+  // --- File loading ---
+  const dropZone = document.getElementById("drop-zone");
+  const fileInput = document.getElementById("file-input");
+
+  dropZone.addEventListener("click", () => fileInput.click());
+  fileInput.addEventListener("change", e => loadFile(e.target.files[0]));
+
+  dropZone.addEventListener("dragover", e => { e.preventDefault(); dropZone.classList.add("drag-over"); });
+  dropZone.addEventListener("dragleave", () => dropZone.classList.remove("drag-over"));
+  dropZone.addEventListener("drop", e => {
+    e.preventDefault();
+    dropZone.classList.remove("drag-over");
+    if (e.dataTransfer.files[0]) loadFile(e.dataTransfer.files[0]);
+  });
+
+  function loadFile(file) {
+    const reader = new FileReader();
+    reader.onload = e => {
+      allRows = parseCSV(e.target.result);
+      dropZone.style.display = "none";
+      document.getElementById("main").style.display = "block";
+      renderTable(allRows);
+    };
+    reader.readAsText(file, "UTF-8");
+  }
+
+  // --- CSV parser (handles quoted fields with embedded newlines/commas) ---
+  function parseCSV(text) {
+    const rows = [];
+    let i = 0;
+    const n = text.length;
+
+    function parseField() {
+      if (text[i] === '"') {
+        i++; // skip opening quote
+        let val = "";
+        while (i < n) {
+          if (text[i] === '"' && text[i + 1] === '"') { val += '"'; i += 2; }
+          else if (text[i] === '"') { i++; break; }
+          else { val += text[i++]; }
+        }
+        return val;
+      } else {
+        let val = "";
+        while (i < n && text[i] !== "," && text[i] !== "\n") val += text[i++];
+        return val;
+      }
+    }
+
+    function parseRow() {
+      const fields = [];
+      while (i < n && text[i] !== "\n") {
+        fields.push(parseField());
+        if (text[i] === ",") i++;
+      }
+      if (text[i] === "\n") i++;
+      return fields;
+    }
+
+    const header = parseRow(); // skip header row
+    while (i < n) {
+      const fields = parseRow();
+      if (fields.length >= 4 && fields.some(f => f.trim())) {
+        rows.push({
+          human_title: fields[0] || "",
+          ai_title:    fields[1] || "",
+          human_abs:   fields[2] || "",
+          ai_abs:      fields[3] || "",
+        });
+      }
+    }
+    return rows;
+  }
+
+  // --- Rendering ---
+  const TRUNCATE = 120; // chars before "show more"
+
+  function makeCell(text, cls, query) {
+    const td = document.createElement("td");
+    td.className = cls;
+
+    const display = query ? highlight(text, query) : escHtml(text);
+    const plain = text;
+
+    if (plain.length <= TRUNCATE) {
+      td.innerHTML = `<div class="cell-inner expanded">${display}</div>`;
+    } else {
+      const short = query ? highlight(plain.slice(0, TRUNCATE), query) : escHtml(plain.slice(0, TRUNCATE));
+      td.innerHTML = `
+        <div class="cell-inner" data-full="${escAttr(plain)}" data-query="${escAttr(query || '')}">
+          <span class="preview">${short}&hellip;</span>
+          <span class="full" style="display:none">${display}</span>
+        </div>
+        <button class="expand-btn">Visa mer</button>`;
+      td.querySelector(".expand-btn").addEventListener("click", function() {
+        const inner = td.querySelector(".cell-inner");
+        const isExp = inner.classList.toggle("expanded");
+        td.querySelector(".preview").style.display = isExp ? "none" : "";
+        td.querySelector(".full").style.display = isExp ? "" : "none";
+        this.textContent = isExp ? "Visa mindre" : "Visa mer";
+      });
+    }
+
+    return td;
+  }
+
+  function renderTable(rows, query = "") {
+    const tbody = document.getElementById("tbody");
+    tbody.innerHTML = "";
+    document.getElementById("row-count").textContent = `${rows.length} rader`;
+
+    rows.forEach((row, idx) => {
+      const tr = document.createElement("tr");
+
+      const numTd = document.createElement("td");
+      numTd.className = "num";
+      numTd.textContent = allRows.indexOf(row) + 1;
+      tr.appendChild(numTd);
+
+      tr.appendChild(makeCell(row.human_title, "title", query));
+      tr.appendChild(makeCell(row.ai_title,    "title", query));
+      tr.appendChild(makeCell(row.human_abs,   "abstract", query));
+      tr.appendChild(makeCell(row.ai_abs,      "abstract", query));
+
+      tbody.appendChild(tr);
+    });
+  }
+
+  // --- Search ---
+  let searchTimer;
+  document.getElementById("search").addEventListener("input", function() {
+    clearTimeout(searchTimer);
+    searchTimer = setTimeout(() => {
+      const q = this.value.trim().toLowerCase();
+      const filtered = q
+        ? allRows.filter(r =>
+            r.human_title.toLowerCase().includes(q) ||
+            r.ai_title.toLowerCase().includes(q) ||
+            r.human_abs.toLowerCase().includes(q) ||
+            r.ai_abs.toLowerCase().includes(q))
+        : allRows;
+      renderTable(filtered, q);
+    }, 200);
+  });
+
+  // --- Expand all ---
+  document.getElementById("expand-all").addEventListener("change", function() {
+    document.querySelectorAll(".cell-inner").forEach(el => {
+      const btn = el.parentElement.querySelector(".expand-btn");
+      if (this.checked) {
+        el.classList.add("expanded");
+        if (el.querySelector(".preview")) el.querySelector(".preview").style.display = "none";
+        if (el.querySelector(".full"))    el.querySelector(".full").style.display = "";
+        if (btn) btn.textContent = "Visa mindre";
+      } else {
+        el.classList.remove("expanded");
+        if (el.querySelector(".preview")) el.querySelector(".preview").style.display = "";
+        if (el.querySelector(".full"))    el.querySelector(".full").style.display = "none";
+        if (btn) btn.textContent = "Visa mer";
+      }
+    });
+  });
+
+  // --- Helpers ---
+  function escHtml(s) {
+    return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+  }
+  function escAttr(s) {
+    return s.replace(/"/g, "&quot;");
+  }
+  function highlight(text, query) {
+    if (!query) return escHtml(text);
+    const safe = query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    return escHtml(text).replace(new RegExp(safe, "gi"), m => `<mark class="highlight">${m}</mark>`);
+  }
+</script>
+</body>
+</html>
