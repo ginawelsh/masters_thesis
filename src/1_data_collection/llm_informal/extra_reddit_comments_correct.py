@@ -49,14 +49,15 @@ def main():
 
     comment_rows = []
     for question in questions:
-        try:
-            comment = generate_comment(question)
-            comment_rows.append({
-                "question": question,
-                "comment": comment,
-            })
-        except Exception as e:
-            print(f"  Error: {e}")
+        for _ in range(3):
+            try:
+                comment = generate_comment(question)
+                comment_rows.append({
+                    "question": question,
+                    "comment": comment,
+                })
+            except Exception as e:
+                print(f"  Error: {e}")
 
     with open(out_path, "w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=["question", "comment"])
