@@ -27,11 +27,11 @@ client = OpenAI(api_key=_api_key)
 # set general prompt for AI-generated questions
 
 COMMENT_PROMPT = (
-    "Svara på följande fråga med en kort, avslappnad svensk kommentar (som på ett forum). "
+    "Svara på följande fråga med en svensk kommentar på 20-60 ord, i stil med en kommentar på ett svenskt forum. "
     "Skriv bara kommentaren, inget annat.\n\nFråga: {question}"
 )
 
-questions = ["Lumpen – har ni gjort den? Jag tycker att vi måste blåsa lite liv i denna reddit, så jag föreslår att vi börjar snacka om det. Gjorde själv inte militärtjänst, var upptagen med andra dumma saker vid den åldern. Dock ångrar jag det väldigt mycket, tror att den hade varit en upplevelse. Åsikter/erfarenheter?", "Snus marknadsförs i USA – kommer det funka den här gången?", "Vad fick du i julklapp i år Sweddit?.", "Det slog mig att juldagen inte har samma \"självklara\" traditioner som julafton, visst firar många julafton olika men tex julklapparna öppnas ju alltid den 24:e. Vad är juldagen för dig?", "Vad är några roliga svenska uttryck som du använder dig av?", "Bokhandlar i Göteborg? Kan någon rekommendera en bra bokhandeln i Göteborg med läsvänlig atmosfär? Letar efter någonstans att spendera några timmar i helgen över en kopp kaffe, utan att vara bråttom att köpa (liksom Barnes & Noble, kanske) ...", "Varför tappade de rödgröna makten till att börja med? Jag är 94a så är rätt ung, men jag undrar hur det kommer sig att de rödgröna har regerat Sverige under en väldigt lång period och S alltid har varit det traditionellt största partiet, så kommer Alliansen från ingenstans och plötsligt vinner, och får dessutom sitta kvar i två mandatperioder. Finns det någon speciell anledning till att Alliansen vann? Typ någon dålig reform som sossarna gjorde eller något liknande.", "Vad är egentligen Sverigedemokraterna?", "Vilka enskilda politiker ger bäst intryck?", "Vad hände med Reddit Meetup Day? Det var ju under vår nationaldag har jag för mig. Tycker att det borde styras upp ifall det inte blev något :D"]
+questions = ["Vad hände med Reddit Meetup Day? Det var ju under vår nationaldag har jag för mig. Tycker att det borde styras upp ifall det inte blev något :D", "Vad fick du i julklapp i år Sweddit?.", "Lumpen – har ni gjort den? Jag tycker att vi måste blåsa lite liv i denna reddit, så jag föreslår att vi börjar snacka om det. Gjorde själv inte militärtjänst, var upptagen med andra dumma saker vid den åldern. Dock ångrar jag det väldigt mycket, tror att den hade varit en upplevelse. Åsikter/erfarenheter?"]
 comments = [""]
 
 # generate AI-generated comment with comment prompt identified above
@@ -45,11 +45,13 @@ def generate_comment(question: str) -> str:
 
 def main():
     data_dir = os.path.dirname(os.path.abspath(__file__))
-    out_path = os.path.join(data_dir, "reddit_comments_openai_NEW.csv")
+    out_path = os.path.join(data_dir, "reddit_comments_openai_NOT_AVSLAPPNAD_extra")
 
     comment_rows = []
     for question in questions:
-        for _ in range(3):
+        print(question)
+        for n in range(3):
+            print(f"generating comment{n}")
             try:
                 comment = generate_comment(question)
                 comment_rows.append({
