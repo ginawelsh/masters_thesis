@@ -1,6 +1,12 @@
 """
-Swedish Reddit comment scraper — pre-2017 data
-Uses Arctic Shift as primary API, falls back to PullPush if unreachable.
+Swedish Reddit comment scraper — historical data via PullPush API
+Targets r/sweden, r/svenskpolitik, r/Stockholm, r/Gothenburg.
+Collects top-level comments from BEFORE 2017-01-01 that are in Swedish.
+
+PullPush is a community-maintained Pushshift mirror:
+  https://api.pullpush.io
+
+Output: NEW_REAL_reddit_comments.csv  (columns: question, comment, link)
 
 Install deps:  pip install requests langdetect
 """
@@ -9,280 +15,251 @@ import csv
 import os
 import time
 import requests
-from datetime import datetime
 
 try:
     from langdetect import detect, LangDetectException
     HAS_LANGDETECT = True
 except ImportError:
     HAS_LANGDETECT = False
-    print("Warning: langdetect not installed (pip install langdetect). No language filtering applied.\n")
+    print("Warning: langdetect not installed (pip install langdetect). No language filtering.\n")
 
 # ── Config ────────────────────────────────────────────────────────────────────
-SUBREDDIT                = "sweden"
-BEFORE_DATE              = "2017-01-01"          # collect only data before this date
-BEFORE_TS                = int(datetime.strptime(BEFORE_DATE, "%Y-%m-%d").timestamp())
-TARGET_QUESTIONS         = 20
-MAX_COMMENTS_PER_QUESTION = 5
-REQUEST_DELAY            = 0.6                   # seconds between API calls
-OUT_FILE                 = "reddit_comments.csv"
+SUBREDDITS            = ["sweden", "svenskpolitik", "Stockholm", "Gothenburg"]
+TARGET_COMMENTS_TOTAL = 100
+MAX_COMMENTS_PER_POST = 5
+REQUEST_DELAY         = 1.2          # seconds between API calls
+OUT_FILE              = "NEW_REAL_reddit_comments.csv"
 
-# ── API backends ──────────────────────────────────────────────────────────────
-# Arctic Shift: best for historical data, supports link_id filtering on comments
-ARCTIC = "https://arctic-shift.photon-reddit.com/api"
+# Hard ceiling: ONLY comments strictly before 2017-01-01 00:00:00 UTC
+BEFORE_2017_TS        = 1483228800   # unix timestamp for 2017-01-01 00:00:00 UTC
 
-# PullPush: alternative Pushshift replacement (pullpush.io)
-PULLPUSH = "https://api.pullpush.io/reddit/search"
+PULLPUSH_BASE         = "https://api.pullpush.io/reddit/search"
+HEADERS               = {
+    "User-Agent": "thesis-scraper/1.0 (academic research; contact: thesis@example.com)"
+}
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
 
-def get(url, params=None, timeout=15):
-    try:
-        r = requests.get(url, params=params, timeout=timeout)
-        r.raise_for_status()
-        return r.json()
-    except requests.exceptions.ConnectionError as e:
-        print(f"  Connection error: {e}")
-        return None
-    except requests.exceptions.Timeout:
-        print(f"  Timeout on {url}")
-        return None
-    except Exception as e:
-        print(f"  Request failed: {e}")
-        return None
-
-
-def probe_arctic():
-    """Return True if Arctic Shift is reachable."""
-    r = get(f"{ARCTIC}/posts/search", params={"subreddit": SUBREDDIT, "limit": 1, "before": BEFORE_DATE})
-    return r is not None
-
-
-def extract_list(response, keys=("data", "posts", "comments")):
-    if response is None:
-        return []
-    if isinstance(response, list):
-        return response
-    if isinstance(response, dict):
-        for key in keys:
-            if key in response and isinstance(response[key], list):
-                return response[key]
-        for v in response.values():
-            if isinstance(v, list):
-                return v
-    return []
+def get_json(url, params=None, retries=3):
+    """Fetch JSON from url, returning None on failure."""
+    for attempt in range(1, retries + 1):
+        try:
+            r = requests.get(url, params=params, headers=HEADERS, timeout=30)
+            if r.status_code == 429:
+                wait = 15 * attempt
+                print(f"  Rate-limited. Waiting {wait}s...")
+                time.sleep(wait)
+                continue
+            r.raise_for_status()
+            return r.json()
+        except requests.exceptions.ConnectionError as e:
+            print(f"  Connection error (attempt {attempt}): {e}")
+        except requests.exceptions.Timeout:
+            print(f"  Timeout (attempt {attempt}): {url}")
+        except Exception as e:
+            print(f"  Request failed (attempt {attempt}): {e}")
+        time.sleep(3)
+    return None
 
 
 def is_swedish(text):
-    if not text or not text.strip():
-        return False
+    """Return True if langdetect identifies the text as Swedish."""
     if not HAS_LANGDETECT:
         return True
+    if not text or len(text.strip()) < 10:
+        return False
     try:
         return detect(text) == "sv"
     except LangDetectException:
         return False
 
 
-def is_swedish_question(title, selftext=""):
-    full = f"{title}\n{selftext}".strip()
-    return "?" in full and is_swedish(full)
+def is_question_post(title):
+    """A post is a question if its title contains '?'."""
+    return "?" in title
 
 
-def is_top_level(comment, post_id):
-    parent = comment.get("parent_id", "")
-    return parent in (f"t3_{post_id}", post_id)
+def build_comment_link(subreddit, post_id, comment_id):
+    """Return a direct permalink to a specific comment."""
+    return f"https://www.reddit.com/r/{subreddit}/comments/{post_id}/_/{comment_id}/"
 
 
-def ts_before(item):
-    """Return True if item's created_utc is strictly before BEFORE_TS."""
-    ts = item.get("created_utc", 0)
-    try:
-        return int(ts) < BEFORE_TS
-    except (ValueError, TypeError):
-        return False
+# ── PullPush fetching ─────────────────────────────────────────────────────────
 
+def fetch_question_posts_historical(subreddit, min_posts=30):
+    """
+    Fetch question posts (title contains '?') from PullPush,
+    strictly before 2017-01-01.
 
-# ── Arctic Shift backend ──────────────────────────────────────────────────────
+    PullPush paginates via the 'before' timestamp of the last-seen post.
+    We walk backwards from the ceiling (2017-01-01) through all available data.
+    """
+    posts = []
+    seen  = set()
+    before_cursor = BEFORE_2017_TS  # start at the ceiling and walk backwards
 
-def arctic_fetch_questions(target):
-    print(f"[Arctic Shift] Fetching posts from r/{SUBREDDIT} before {BEFORE_DATE}...")
-    questions = {}
-    before = BEFORE_DATE  # moves backwards as a Unix timestamp string after first page
+    print(f"  Querying PullPush for r/{subreddit} posts before 2017...")
 
-    while len(questions) < target:
-        resp = get(f"{ARCTIC}/posts/search", params={
-            "subreddit": SUBREDDIT,
-            "before":    before,
-            "limit":     100,
-            "sort":      "desc",
-        })
-        posts = extract_list(resp)
-        if not posts:
-            print("  No more posts.")
-            break
-
-        for p in posts:
-            # Double-check timestamp — API occasionally returns items slightly
-            # outside the requested window on page boundaries
-            if not ts_before(p):
-                continue
-            pid      = p.get("id", "")
-            title    = p.get("title", "")
-            selftext = p.get("selftext", "") or ""
-            if pid and is_swedish_question(title, selftext):
-                questions[pid] = {"title": title, "selftext": selftext}
-                if len(questions) >= target:
-                    break
-
-        # Advance cursor: one second before the oldest post in this batch
-        oldest_ts = posts[-1].get("created_utc")
-        if not oldest_ts:
-            break
-        before = str(int(oldest_ts) - 1)
-        print(f"  {len(questions)}/{target} questions found...")
-        time.sleep(REQUEST_DELAY)
-
-    return questions
-
-
-def arctic_fetch_comments(post_id):
-    resp = get(f"{ARCTIC}/comments/search", params={
-        "subreddit": SUBREDDIT,
-        "link_id":   post_id,
-        "before":    BEFORE_DATE,
-        "limit":     100,
-    })
-    all_comments = extract_list(resp)
-
-    swedish_top = []
-    for c in all_comments:
-        if not ts_before(c):          # extra guard: skip anything post-2017
-            continue
-        if not is_top_level(c, post_id):
-            continue
-        body = (c.get("body") or "").strip()
-        if not body or body in ("[deleted]", "[removed]", "[not found in archive]"):
-            continue
-        if is_swedish(body):
-            swedish_top.append(body)
-        if len(swedish_top) >= MAX_COMMENTS_PER_QUESTION:
-            break
-
-    return swedish_top
-
-
-# ── PullPush backend ──────────────────────────────────────────────────────────
-
-def pullpush_fetch_questions(target):
-    print(f"[PullPush] Fetching posts from r/{SUBREDDIT} before {BEFORE_DATE}...")
-    questions = {}
-    before = BEFORE_TS
-
-    while len(questions) < target:
-        resp = get(f"{PULLPUSH}/submission", params={
-            "subreddit": SUBREDDIT,
-            "before":    before,
-            "size":      100,
+    while len(posts) < min_posts:
+        params = {
+            "subreddit": subreddit,
+            "before":    before_cursor,
+            "size":      100,           # PullPush uses 'size' not 'limit'
             "sort":      "desc",
             "sort_type": "created_utc",
-        })
-        posts = extract_list(resp, keys=("data",))
-        if not posts:
-            print("  No more posts.")
+        }
+        data = get_json(f"{PULLPUSH_BASE}/submission/", params=params)
+
+        if not data:
+            print("  No response from PullPush — stopping post pagination.")
             break
 
-        for p in posts:
-            if not ts_before(p):
+        items = data if isinstance(data, list) else data.get("data", [])
+        if not items:
+            print("  No more posts returned.")
+            break
+
+        for item in items:
+            pid   = item.get("id", "")
+            title = item.get("title", "")
+            ts    = int(item.get("created_utc", 0))
+
+            # Enforce the hard ceiling
+            if ts >= BEFORE_2017_TS:
                 continue
-            pid      = p.get("id", "")
-            title    = p.get("title", "")
-            selftext = p.get("selftext", "") or ""
-            if pid and is_swedish_question(title, selftext):
-                questions[pid] = {"title": title, "selftext": selftext}
-                if len(questions) >= target:
-                    break
+            if not pid or pid in seen:
+                continue
+            seen.add(pid)
 
-        oldest_ts = posts[-1].get("created_utc")
-        if not oldest_ts:
+            if is_question_post(title):
+                posts.append({
+                    "id":        pid,
+                    "title":     title,
+                    "selftext":  item.get("selftext") or "",
+                    "subreddit": subreddit,
+                    "created":   ts,
+                })
+
+        # Advance the cursor to just before the oldest post we saw
+        oldest_ts = min(int(i.get("created_utc", BEFORE_2017_TS)) for i in items)
+        if oldest_ts >= before_cursor:
             break
-        before = int(oldest_ts) - 1
-        print(f"  {len(questions)}/{target} questions found...")
+        before_cursor = oldest_ts
+
         time.sleep(REQUEST_DELAY)
 
-    return questions
+    return posts
 
 
-def pullpush_fetch_comments(post_id):
-    resp = get(f"{PULLPUSH}/comment", params={
-        "link_id": f"t3_{post_id}",
-        "before":  BEFORE_TS,
-        "size":    100,
-    })
-    all_comments = extract_list(resp, keys=("data",))
+def fetch_swedish_comments_historical(post):
+    """
+    Fetch top-level comments for a post via PullPush,
+    keeping only Swedish comments posted before 2017-01-01.
 
-    swedish_top = []
-    for c in all_comments:
-        if not ts_before(c):
+    PullPush filters comments by parent post using the 'link_id' parameter
+    (Reddit fullname: t3_<post_id>).
+    """
+    subreddit = post["subreddit"]
+    post_id   = post["id"]
+    results   = []
+
+    params = {
+        "link_id": post_id,   # PullPush expects bare post ID, no t3_ prefix
+        "size":    200,
+    }
+    data = get_json(f"{PULLPUSH_BASE}/comment/", params=params)
+
+    if not data:
+        return []
+
+    items = data if isinstance(data, list) else data.get("data", [])
+
+    for item in items:
+        # Only top-level comments (parent_id == the post's fullname)
+        parent_id = item.get("parent_id", "")
+        if parent_id != f"t3_{post_id}":
             continue
-        if not is_top_level(c, post_id):
+
+        ts = int(item.get("created_utc", 0))
+        if ts >= BEFORE_2017_TS:
             continue
-        body = (c.get("body") or "").strip()
+
+        body       = item.get("body", "")
+        comment_id = item.get("id", "")
+
         if not body or body in ("[deleted]", "[removed]"):
             continue
-        if is_swedish(body):
-            swedish_top.append(body)
-        if len(swedish_top) >= MAX_COMMENTS_PER_QUESTION:
+        if not is_swedish(body):
+            continue
+
+        link = build_comment_link(subreddit, post_id, comment_id)
+        results.append({
+            "body":       body,
+            "comment_id": comment_id,
+            "link":       link,
+            "created":    ts,
+        })
+
+        if len(results) >= MAX_COMMENTS_PER_POST:
             break
 
-    return swedish_top
+    return results
 
 
 # ── Main ──────────────────────────────────────────────────────────────────────
 
 def main():
-    # Choose backend
-    print("Checking API availability...")
-    if probe_arctic():
-        print("Arctic Shift is reachable — using it as primary.\n")
-        fetch_questions = arctic_fetch_questions
-        fetch_comments  = arctic_fetch_comments
-    else:
-        print("Arctic Shift unreachable — falling back to PullPush.\n")
-        fetch_questions = pullpush_fetch_questions
-        fetch_comments  = pullpush_fetch_comments
+    print("NOTE: Collecting ONLY Swedish Reddit comments from before 2017-01-01.")
+    print(f"      Using PullPush API: {PULLPUSH_BASE}\n")
 
-    questions = fetch_questions(TARGET_QUESTIONS)
-    if not questions:
-        print("No questions found. Check your network or try the other API.")
-        return
+    all_rows = []
 
-    if len(questions) < TARGET_QUESTIONS:
-        print(f"Warning: only found {len(questions)} Swedish questions (target {TARGET_QUESTIONS}).")
+    for subreddit in SUBREDDITS:
+        if len(all_rows) >= TARGET_COMMENTS_TOTAL:
+            break
 
-    rows = []
-    total = len(questions)
-    for i, (post_id, post) in enumerate(questions.items(), 1):
-        full_question = f"{post['title']}\n{post['selftext']}".strip()
-        print(f"[{i}/{total}] Fetching comments for post {post_id}...")
-        comments = fetch_comments(post_id)
-        print(f"  → {len(comments)} Swedish top-level comments (pre-{BEFORE_DATE})")
-        for body in comments:
-            rows.append({
-                "link_id":  post_id,
-                "question": full_question,
-                "comment":  body,
-            })
-        time.sleep(REQUEST_DELAY)
+        remaining = TARGET_COMMENTS_TOTAL - len(all_rows)
+        min_posts = max(10, (remaining // MAX_COMMENTS_PER_POST) + 5)
+        print(f"\n=== r/{subreddit} — looking for ~{min_posts} pre-2017 question posts ===")
 
-    out_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), OUT_FILE)
-    with open(out_path, "w", newline="", encoding="utf-8") as f:
-        writer = csv.DictWriter(f, fieldnames=["link_id", "question", "comment"])
+        posts = fetch_question_posts_historical(subreddit, min_posts=min_posts)
+        print(f"  Found {len(posts)} question posts in r/{subreddit} before 2017")
+
+        for i, post in enumerate(posts, 1):
+            if len(all_rows) >= TARGET_COMMENTS_TOTAL:
+                break
+
+            question_text = post["title"]
+            if post["selftext"].strip():
+                question_text = question_text + "\n\n" + post["selftext"]
+
+            print(f"  [{i}/{len(posts)}] {post['id']} — {post['title'][:60]!r}")
+            comments = fetch_swedish_comments_historical(post)
+            print(f"    → {len(comments)} Swedish pre-2017 top-level comment(s)")
+
+            for c in comments:
+                all_rows.append({
+                    "question": question_text,
+                    "comment":  c["body"],
+                    "link":     c["link"],
+                })
+
+            time.sleep(REQUEST_DELAY)
+
+    # Write output
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    out_path   = os.path.join(script_dir, OUT_FILE)
+
+    with open(out_path, "w", newline="", encoding="utf-8-sig") as f:
+        writer = csv.DictWriter(f, fieldnames=["question", "comment", "link"],
+                                quoting=csv.QUOTE_ALL)
         writer.writeheader()
-        writer.writerows(rows)
+        writer.writerows(all_rows)
 
-    print(f"\nDone. Wrote {len(rows)} rows to {out_path}")
-    print(f"Posts covered: {total}, avg {len(rows)/max(total,1):.1f} comments/post")
+    print(f"\nDone. Wrote {len(all_rows)} rows to:\n  {out_path}")
+    print("\nSample links for manual verification:")
+    for row in all_rows[:3]:
+        print(f"  {row['link']}")
 
 
 if __name__ == "__main__":

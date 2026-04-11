@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reddit Comments Viewer</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #f6f7f8;
+      color: #1c1c1e;
+      padding: 24px;
+    }
+
+    h1 {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+      color: #333;
+    }
+
+    .controls {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .controls input {
+      flex: 1;
+      min-width: 200px;
+      padding: 8px 12px;
+      border: 1px solid #d1d1d6;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      background: #fff;
+      outline: none;
+    }
+
+    .controls input:focus {
+      border-color: #ff4500;
+      box-shadow: 0 0 0 2px rgba(255, 69, 0, 0.15);
+    }
+
+    .count {
+      font-size: 0.85rem;
+      color: #888;
+      white-space: nowrap;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }
+
+    thead tr {
+      background: #ff4500;
+      color: #fff;
+      text-align: left;
+    }
+
+    thead th {
+      padding: 12px 16px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    tbody tr {
+      border-bottom: 1px solid #f0f0f0;
+      transition: background 0.15s;
+    }
+
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: #fff8f5; }
+
+    td {
+      padding: 12px 16px;
+      font-size: 0.88rem;
+      vertical-align: top;
+      line-height: 1.5;
+    }
+
+    td.question {
+      width: 28%;
+      color: #555;
+      font-style: italic;
+    }
+
+    td.comment {
+      width: 60%;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    td.link {
+      width: 12%;
+      word-break: break-all;
+    }
+
+    td.link a {
+      color: #ff4500;
+      text-decoration: none;
+      font-size: 0.8rem;
+    }
+
+    td.link a:hover { text-decoration: underline; }
+
+    .empty {
+      text-align: center;
+      padding: 48px;
+      color: #aaa;
+      font-size: 0.95rem;
+    }
+
+    .row-num {
+      color: #bbb;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding-right: 4px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Reddit Comments — Swedish Data</h1>
+
+<div class="controls">
+  <input id="search" type="text" placeholder="Search questions, comments..." />
+  <span class="count" id="count"></span>
+</div>
+
+<table id="table">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Question</th>
+      <th>Comment</th>
+      <th>Link</th>
+    </tr>
+  </thead>
+  <tbody id="tbody"></tbody>
+</table>
+
+<script>
+  // PapaParse bundled inline (minified, ~50 KB) — no network request needed
+  // Using the browser's built-in approach instead: fetch the CSV from the same folder
+  const CSV_FILE = "NEW_REAL_reddit_comments.csv";
+
+  let rows = [];
+
+  async function loadCSV() {
+    const resp = await fetch(CSV_FILE);
+    const text = await resp.text();
+    rows = parseCSV(text);
+    render(rows);
+  }
+
+  // Minimal but robust CSV parser handling quoted fields with embedded newlines
+  function parseCSV(text) {
+    const results = [];
+    let i = 0;
+    const n = text.length;
+
+    function parseField() {
+      if (i < n && text[i] === '"') {
+        i++; // skip opening quote
+        let field = "";
+        while (i < n) {
+          if (text[i] === '"') {
+            i++;
+            if (i < n && text[i] === '"') { field += '"'; i++; } // escaped quote
+            else break; // closing quote
+          } else {
+            field += text[i++];
+          }
+        }
+        return field;
+      } else {
+        let field = "";
+        while (i < n && text[i] !== ',' && text[i] !== '\n' && text[i] !== '\r') {
+          field += text[i++];
+        }
+        return field;
+      }
+    }
+
+    function parseRow() {
+      const row = [];
+      while (i < n && text[i] !== '\n' && text[i] !== '\r') {
+        row.push(parseField());
+        if (i < n && text[i] === ',') i++;
+        else break;
+      }
+      // consume line ending
+      if (i < n && text[i] === '\r') i++;
+      if (i < n && text[i] === '\n') i++;
+      return row;
+    }
+
+    // skip header
+    parseRow();
+
+    while (i < n) {
+      if (text[i] === '\r' || text[i] === '\n') { i++; continue; }
+      const row = parseRow();
+      if (row.length >= 2) results.push(row);
+    }
+    return results;
+  }
+
+  function escHtml(s) {
+    return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+  }
+
+  function render(data) {
+    const tbody = document.getElementById("tbody");
+    document.getElementById("count").textContent = `${data.length} rows`;
+
+    if (data.length === 0) {
+      tbody.innerHTML = `<tr><td colspan="4" class="empty">No results found.</td></tr>`;
+      return;
+    }
+
+    tbody.innerHTML = data.map((row, idx) => {
+      const question = row[0] || "";
+      const comment  = row[1] || "";
+      const link     = row[2] || "";
+      return `<tr>
+        <td class="row-num">${escHtml(String(idx + 1))}</td>
+        <td class="question">${escHtml(question)}</td>
+        <td class="comment">${escHtml(comment)}</td>
+        <td class="link">${link ? `<a href="${escHtml(link)}" target="_blank" rel="noopener">open ↗</a>` : ""}</td>
+      </tr>`;
+    }).join("");
+  }
+
+  document.getElementById("search").addEventListener("input", function () {
+    const q = this.value.toLowerCase();
+    if (!q) { render(rows); return; }
+    render(rows.filter(r => r.join(" ").toLowerCase().includes(q)));
+  });
+
+  loadCSV().catch(err => {
+    document.getElementById("tbody").innerHTML =
+      `<tr><td colspan="4" class="empty">Failed to load CSV: ${err.message}</td></tr>`;
+  });
+</script>
+
+</body>
+</html>

@@ -48,7 +48,7 @@ client = OpenAI(api_key=_api_key)
 
 # prompt for generating AI-generated reddit comment
 COMMENT_PROMPT = (
-    "Svara på följande fråga med en kort, avslappnad svensk kommentar (som på ett forum). "
+    "Svara på följande fråga med en svensk kommentar på 2-150 ord, i stil med en kommentar på ett svenskt forum. "
     "Skriv bara kommentaren, inget annat.\n\nFråga: {question}"
 )
 
