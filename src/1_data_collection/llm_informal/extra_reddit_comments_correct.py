@@ -27,12 +27,11 @@ client = OpenAI(api_key=_api_key)
 # set general prompt for AI-generated questions
 
 COMMENT_PROMPT = (
-    "Svara på följande fråga med en svensk kommentar på 20-60 ord, i stil med en kommentar på ett svenskt forum. "
+    "Svara på följande fråga med en svensk kommentar på 3-120 ord, i stil med en kommentar på ett svenskt forum. "
     "Skriv bara kommentaren, inget annat.\n\nFråga: {question}"
 )
 
-questions = ["Vad hände med Reddit Meetup Day? Det var ju under vår nationaldag har jag för mig. Tycker att det borde styras upp ifall det inte blev något :D", "Vad fick du i julklapp i år Sweddit?.", "Lumpen – har ni gjort den? Jag tycker att vi måste blåsa lite liv i denna reddit, så jag föreslår att vi börjar snacka om det. Gjorde själv inte militärtjänst, var upptagen med andra dumma saker vid den åldern. Dock ångrar jag det väldigt mycket, tror att den hade varit en upplevelse. Åsikter/erfarenheter?"]
-comments = [""]
+questions = []
 
 # generate AI-generated comment with comment prompt identified above
 def generate_comment(question: str) -> str:
