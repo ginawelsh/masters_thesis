@@ -330,13 +330,16 @@ def _call_deepseek(prompt: str) -> str:
     """Call DeepSeek chat API with exponential-backoff retry."""
     for attempt in range(MAX_RETRIES):
         try:
+            # send prompt to API
             response = client.chat.completions.create(
                 model="deepseek-chat",
                 messages=[{"role": "user", "content": prompt}],
                 temperature=0,
             )
+            # return text from API response
             return response.choices[0].message.content
         except Exception as e:
+            # retry mechanics - if hit max retries, raise error. else, wait and retry
             if attempt == MAX_RETRIES - 1:
                 raise
             wait = RETRY_BASE_SEC * (2 ** attempt)
@@ -348,7 +351,7 @@ def _call_deepseek(prompt: str) -> str:
 def detect_formal(abstract_text: str) -> str:
     """Ask DeepSeek to classify a bachelor's thesis abstract as AI or human."""
     prompt = (
-        "Du är expert på att identifiera AI-genererad akademisk text på svenska.\n\n"
+        "Du deltar i en studie som handlar om att identifiera AI-genererad akademisk text på svenska.\n\n"
         "Analysera följande kandidatuppsatsabstrakt och avgör om det är skrivet av en AI "
         "eller av en människa. Titta på saker som språklig variation, formuleringsval, "
         "meningsbyggnad, och om texten känns autentiskt akademisk eller mallartad.\n\n"
@@ -363,7 +366,7 @@ def detect_formal(abstract_text: str) -> str:
 def detect_informal(comment_text: str) -> str:
     """Ask DeepSeek to classify a Reddit comment as AI or human."""
     prompt = (
-        "Du är expert på att identifiera AI-genererade texter på svenska.\n\n"
+        "Du deltar i en studie som handlar om att identifiera AI-genererad akademisk text på svenska.\n\n"
         "Analysera följande Reddit-kommentar och avgör om den är skriven av en AI "
         "eller av en människa. Titta på saker som informellt/vardagligt språk, stavfel, "
         "personliga referenser, naturlig röst, och om texten känns genuin eller generisk.\n\n"
