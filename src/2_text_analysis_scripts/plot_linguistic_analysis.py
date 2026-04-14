@@ -133,6 +133,7 @@ def process_group(nlp, texts: list[str]):
 # Sentiment analysis
 # ---------------------------------------------------------------------------
 
+# load pipeline from kblab
 def load_sentiment_pipeline():
     """Load KBLab Swedish sentiment model. Install: pip install transformers torch"""
     try:
