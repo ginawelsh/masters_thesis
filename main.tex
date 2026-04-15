@@ -129,7 +129,8 @@ detecting both the formal and informal data.
 
 
 \chapter{Background}
-
+[REDO SUMMARY]
+\paragraph{}
 This chapter will provide an overview of previous studies
 related to this topic. First, it will outline the development of
 large language models and their text generation abilities for
@@ -138,6 +139,9 @@ comparing AI-generated text with human-written text. The chapter
 will then outline tools and human participant studies related to
 AI-generated text detection.
 \section{Transformer-based Large Language Models}
+
+[NEED ADD CITES]
+\paragraph{}
 In this thesis, "Large Language Models" refers to those that are transformer-based, that is, based on a neural network architecture with multi-head attention mechanisms. This type of architecture was first proposed in \textcite{vaswani2017attention}, where the authors developed an architecture that did not rely on earlier recurrent neural architectures and demonstrated superior performance and lower training time for a variety of tasks, including text generation, including optical recognition,
 speech processing, and text generation \parencite{islam2023, radford2022robustspeechrecognitionlargescale}. The strength of
 transformers in their adaptation to a wide variety of tasks lies in their ability to handle long dependencies between different elements of input sequences, meaning that it
@@ -147,12 +151,7 @@ within a sequence. This ability has shown to improve the fluency and coherence o
 
 \section{LLMs and text generation}
 
-Transformer-based LLMs normally contain tens to thousands of billions of parameters, pre-trained on massive amounts of text data from the Web (CITE Minaee et al.). 
-
-English has a vast amount of data - list major datasets used for
-LLM development in English.
-
-LLMs are pretrained on amounts of data text corpora
+Transformer-based LLMs for text generation normally contain tens to thousands of billions of parameters, pre-trained on massive amounts of text data from the Web (CITE Minaee et al.). The scale of data and parameters varies by each LLM and release version.  LLMs are pre-trained on diverse sources of textual data from many domains, such as web crawl data, online encyclopedias (including Wikipedia), news outlets, academic articles, books, and code repositories. This data collection is then often filtered out in the process of model development to enhance data quality, relevance and generalisation of the data to different user inputs. 
 
 Talk about compositions of English-dominant LLMs - data type
 
@@ -164,9 +163,9 @@ examples:
 
 Large language models are trained on very large amounts of data relative to previous language models, especially those after the release of GPT-3 \parencite{Brown2020LanguageMA}
 
-\section{Multilingual models}
+\subsection{Multilingual models}
 
-[MULTILINGUAL MODELS]
+[ENGLISH-PROMINENT Models]
 
 
 [NORDIC SPECIFIC MODELS
@@ -185,6 +184,8 @@ including mathematical reasoning and Swedish cultural
 adaptation. In addition, the study showed that GPT-3 models did
 not appear to exhibit unwanted over-generalisation of cultural
 aspects to Swedish.
+
+\subsection{Instruction-tuned models}
 
 
 \section{Analysis of LLM-generated text}

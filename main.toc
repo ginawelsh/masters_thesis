@@ -5,12 +5,13 @@
 \contentsline {chapter}{\numberline {2}Background}{7}{chapter.2}%
 \contentsline {section}{\numberline {2.1}Transformer-based Large Language Models}{7}{section.2.1}%
 \contentsline {section}{\numberline {2.2}LLMs and text generation}{7}{section.2.2}%
-\contentsline {section}{\numberline {2.3}Multilingual models}{7}{section.2.3}%
-\contentsline {section}{\numberline {2.4}Analysis of LLM-generated text}{8}{section.2.4}%
-\contentsline {section}{\numberline {2.5}LLM-generated text detection studies}{9}{section.2.5}%
-\contentsline {subsection}{\numberline {2.5.1}Human participant AI-detection studies}{9}{subsection.2.5.1}%
-\contentsline {subsection}{\numberline {2.5.2}LLM-tool detection by LLMs studies}{9}{subsection.2.5.2}%
-\contentsline {section}{\numberline {2.6}Background summary}{9}{section.2.6}%
+\contentsline {subsection}{\numberline {2.2.1}Multilingual models}{8}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}Instruction-tuned models}{8}{subsection.2.2.2}%
+\contentsline {section}{\numberline {2.3}Analysis of LLM-generated text}{8}{section.2.3}%
+\contentsline {section}{\numberline {2.4}LLM-generated text detection studies}{9}{section.2.4}%
+\contentsline {subsection}{\numberline {2.4.1}Human participant AI-detection studies}{9}{subsection.2.4.1}%
+\contentsline {subsection}{\numberline {2.4.2}LLM-tool detection by LLMs studies}{9}{subsection.2.4.2}%
+\contentsline {section}{\numberline {2.5}Background summary}{9}{section.2.5}%
 \contentsline {chapter}{\numberline {3}Methodology}{10}{chapter.3}%
 \contentsline {section}{\numberline {3.1}Data collection}{10}{section.3.1}%
 \contentsline {subsection}{\numberline {3.1.1}Human-written abstracts}{10}{subsection.3.1.1}%
