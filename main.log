@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.2.13)  15 APR 2026 14:03
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.2.13)  17 APR 2026 15:57
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1355,13 +1355,13 @@ Package csquotes Info: ... configuration file loaded successfully.
 (C:\Users\GinaWelsh\AppData\Local\Programs\MiKTeX\tex/latex/csquotes\csquotes.c
 fg
 File: csquotes.cfg 
-)) (main.aux)
+))
+No file main.aux.
 \openout1 = `main.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/nxlmi/m/it on input line 6.
 LaTeX Font Info:    Trying to load font information for OML+nxlmi on input line
  6.
-
 (C:\Users\GinaWelsh\AppData\Local\Programs\MiKTeX\tex/latex/newtx\omlnxlmi.fd
 File: omlnxlmi.fd 2013/11/19 Fontinst v1.933 font definitions for OML/nxlmi.
 )
@@ -1577,89 +1577,10 @@ LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-TOsF/m/n' will be
 (Font)              scaled to size 20.74pt on input line 30.
 Package tocbasic Info: character protrusion at toc deactivated on input line 30
 .
- (main.toc
-LaTeX Font Info:    Trying to load font information for OT1+LinuxLibertineT-TOs
-F on input line 3.
 
-(C:\Users\GinaWelsh\AppData\Local\Programs\MiKTeX\tex/latex/libertine\ot1linuxl
-ibertinet-tosf.fd
-File: OT1LinuxLibertineT-TOsF.fd 2017/03/20 (autoinst) Font definitions for OT1
-/LinuxLibertineT-TOsF.
-)
-LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TOsF/m/n' will be
-(Font)              scaled to size 10.95pt on input line 3.
-Package microtype Info: Loading generic protrusion settings for font family
-(microtype)             `LinuxLibertineT-TOsF' (encoding: OT1).
-(microtype)             For optimal results, create family-specific settings.
-(microtype)             See the microtype manual for details.
-LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TOsF/m/n' will be
-(Font)              scaled to size 8.0pt on input line 3.
-LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TOsF/m/n' will be
-(Font)              scaled to size 6.1pt on input line 3.
-LaTeX Font Info:    Font shape `OML/nxlmi/m/it' will be
-(Font)              scaled to size 10.95pt on input line 3.
-LaTeX Font Info:    Font shape `OML/nxlmi/m/it' will be
-(Font)              scaled to size 8.0pt on input line 3.
-LaTeX Font Info:    Font shape `OML/nxlmi/m/it' will be
-(Font)              scaled to size 6.1pt on input line 3.
-LaTeX Font Info:    Font shape `LMS/ntxsy/m/n' will be
-(Font)              scaled to size 10.95pt on input line 3.
-LaTeX Font Info:    Font shape `LMS/ntxsy/m/n' will be
-(Font)              scaled to size 8.0pt on input line 3.
-LaTeX Font Info:    Font shape `LMS/ntxsy/m/n' will be
-(Font)              scaled to size 6.1pt on input line 3.
-LaTeX Font Info:    Font shape `LMX/ntxexx/m/n' will be
-(Font)              scaled to size 10.95pt on input line 3.
-LaTeX Font Info:    Font shape `LMX/ntxexx/m/n' will be
-(Font)              scaled to size 8.0pt on input line 3.
-LaTeX Font Info:    Font shape `LMX/ntxexx/m/n' will be
-(Font)              scaled to size 6.1pt on input line 3.
-LaTeX Font Info:    Trying to load font information for U+ntxmia on input line 
-3.
-
-(C:\Users\GinaWelsh\AppData\Local\Programs\MiKTeX\tex/latex/newtx\untxmia.fd
-File: untxmia.fd 2024/04/09 Fontinst v1.933 font definitions for U/ntxmia.
-)
-LaTeX Font Info:    Font shape `U/ntxmia/m/it' will be
-(Font)              scaled to size 10.95pt on input line 3.
-LaTeX Font Info:    Font shape `U/ntxmia/m/it' will be
-(Font)              scaled to size 8.0pt on input line 3.
-LaTeX Font Info:    Font shape `U/ntxmia/m/it' will be
-(Font)              scaled to size 6.1pt on input line 3.
-LaTeX Font Info:    Trying to load font information for U+ntxsym on input line 
-3.
-
-(C:\Users\GinaWelsh\AppData\Local\Programs\MiKTeX\tex/latex/newtx\untxsym.fd
-File: untxsym.fd 2023/08/16 Fontinst v1.933 font definitions for U/ntxsym.
-)
-LaTeX Font Info:    Font shape `U/ntxsym/m/n' will be
-(Font)              scaled to size 10.95pt on input line 3.
-LaTeX Font Info:    Font shape `U/ntxsym/m/n' will be
-(Font)              scaled to size 8.0pt on input line 3.
-LaTeX Font Info:    Font shape `U/ntxsym/m/n' will be
-(Font)              scaled to size 6.1pt on input line 3.
-LaTeX Font Info:    Trying to load font information for U+ntxsyc on input line 
-3.
-
-(C:\Users\GinaWelsh\AppData\Local\Programs\MiKTeX\tex/latex/newtx\untxsyc.fd
-File: untxsyc.fd 2012/04/12 Fontinst v1.933 font definitions for U/ntxsyc.
-)
-LaTeX Font Info:    Font shape `U/ntxsyc/m/n' will be
-(Font)              scaled to size 10.95pt on input line 3.
-LaTeX Font Info:    Font shape `U/ntxsyc/m/n' will be
-(Font)              scaled to size 8.0pt on input line 3.
-LaTeX Font Info:    Font shape `U/ntxsyc/m/n' will be
-(Font)              scaled to size 6.1pt on input line 3.
-LaTeX Font Info:    Font shape `U/ntxexa/m/n' will be
-(Font)              scaled to size 10.95pt on input line 3.
-LaTeX Font Info:    Font shape `U/ntxexa/m/n' will be
-(Font)              scaled to size 8.0pt on input line 3.
-LaTeX Font Info:    Font shape `U/ntxexa/m/n' will be
-(Font)              scaled to size 6.1pt on input line 3.
-)
+No file main.toc.
 \tf@toc=\write4
 \openout4 = `main.toc'.
-
 
 [3
 
@@ -1677,69 +1598,49 @@ LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-TOsF/m/n' will be
 chapter 2.
 
 LaTeX Warning: Citation 'vaswani2017attention' on page 7 undefined on input lin
-e 145.
+e 144.
 
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TOsF/sb/n' will be
-(Font)              scaled to size 10.95pt on input line 145.
-
-LaTeX Warning: Citation 'islam2023' on page 7 undefined on input line 146.
-
-
-LaTeX Warning: Citation 'radford2022robustspeechrecognitionlargescale' on page 
-7 undefined on input line 146.
-
-
-Overfull \hbox (23.53679pt too wide) in paragraph at lines 145--151
-\T1/LinuxLibertineT-TOsF/m/n/10.95 (-20) text gen-er-a-tion ([]; []). The stren
-gth
- []
-
+(Font)              scaled to size 10.95pt on input line 144.
 
 LaTeX Warning: Citation 'Brown2020LanguageMA' on page 7 undefined on input line
- 164.
+ 152.
 
-
-Overfull \hbox (0.3976pt too wide) in paragraph at lines 164--165
-\T1/LinuxLibertineT-TOsF/m/n/10.95 (-20) lan-guage mod-els, es-pe-cially those 
-af-ter the re-lease of GPT-3 ([]) 
- []
-
+LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-TOsF/m/n' will be
+(Font)              scaled to size 12.0pt on input line 154.
 [7
 
-]
-LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-TOsF/m/n' will be
-(Font)              scaled to size 12.0pt on input line 166.
- [8] [9]
+] [8] [9] [10]
 chapter 3.
-[10
+[11
 
 ]
-LaTeX Font Info:    Trying to load font information for T1+fvm on input line 36
-9.
+LaTeX Font Info:    Trying to load font information for T1+fvm on input line 35
+8.
  (C:\Users\GinaWelsh\AppData\Local\Programs\MiKTeX\tex/latex/bera\t1fvm.fd
 File: t1fvm.fd 2004/09/07 scalable font definitions for T1/fvm.
 )
 LaTeX Font Info:    Font shape `T1/fvm/m/n' will be
-(Font)              scaled to size 8.8038pt on input line 369.
+(Font)              scaled to size 8.8038pt on input line 358.
 Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `fvm' (encoding: T1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
-[11{C:/Users/GinaWelsh/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.en
-c}] [12]
+[12{C:/Users/GinaWelsh/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.en
+c}] [13]
 chapter 4.
-[13
+[14
 
 ]
 chapter 5.
-[14
+[15
 
 ]
 chapter 6.
 
-LaTeX Warning: Empty bibliography on input line 448.
+LaTeX Warning: Empty bibliography on input line 437.
 
-[15
+[16
 
 ] (main.aux)
  ***********
@@ -1760,11 +1661,11 @@ Package logreq Info: Writing requests to 'main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 28848 strings out of 467871
- 528906 string characters out of 5416440
- 1497431 words of memory out of 5000000
- 57089 multiletter control sequences out of 15000+600000
- 742275 words of font info for 231 fonts, out of 8000000 for 9000
+ 28679 strings out of 467871
+ 524813 string characters out of 5416440
+ 1495162 words of memory out of 5000000
+ 56949 multiletter control sequences out of 15000+600000
+ 728428 words of font info for 205 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  122i,8n,121p,11210b,1573s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/GinaWelsh/AppData/Local/Programs/MiKTeX/fonts/type1/public/libertin
@@ -1773,9 +1674,9 @@ e/LinBiolinumT.pfb><C:/Users/GinaWelsh/AppData/Local/Programs/MiKTeX/fonts/type
 /MiKTeX/fonts/type1/public/libertine/LinLibertineT.pfb><C:/Users/GinaWelsh/AppD
 ata/Local/Programs/MiKTeX/fonts/type1/public/libertine/LinLibertineTZ.pfb><C:/U
 sers/GinaWelsh/AppData/Local/Programs/MiKTeX/fonts/type1/bera/fvmr8a.pfb>
-Output written on main.pdf (15 pages, 415604 bytes).
+Output written on main.pdf (16 pages, 409028 bytes).
 PDF statistics:
- 289 PDF objects out of 1000 (max. 8388607)
- 57 named destinations out of 1000 (max. 500000)
- 62211 words of extra memory for PDF output out of 74296 (max. 10000000)
+ 264 PDF objects out of 1000 (max. 8388607)
+ 62 named destinations out of 1000 (max. 500000)
+ 56059 words of extra memory for PDF output out of 61914 (max. 10000000)
 
