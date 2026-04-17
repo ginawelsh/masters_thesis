@@ -31,10 +31,13 @@ from scrape_reddit import (
     MAX_POSTS_FETCH,
 )
 
-TARGET_COMMENTS = 100
+TARGET_QUESTIONS = 100
 COMMENTS_PER_QUESTION = 3
-MIN_QUESTIONS_NEEDED = (TARGET_COMMENTS + COMMENTS_PER_QUESTION - 1) // COMMENTS_PER_QUESTION  # 34
 
+# (100 + 3 - 1) comments divided by 3 - 102//3 == ~~~34 questions~~~
+MIN_QUESTIONS_NEEDED = (TARGET_QUESTIONS + COMMENTS_PER_QUESTION - 1) // COMMENTS_PER_QUESTION  
+
+# connect using API key
 _api_key = os.environ.get("OPENAI_API_KEY")
 if not _api_key:
     raise ValueError(
@@ -42,12 +45,14 @@ if not _api_key:
     )
 client = OpenAI(api_key=_api_key)
 
+
+# prompt for generating AI-generated reddit comment
 COMMENT_PROMPT = (
-    "Svara på följande fråga med en kort, avslappnad svensk kommentar (som på ett forum). "
+    "Svara på följande fråga med en svensk kommentar på 2-150 ord, i stil med en kommentar på ett svenskt forum. "
     "Skriv bara kommentaren, inget annat.\n\nFråga: {question}"
 )
 
-
+# generate AI-generated comment with comment prompt identified above
 def generate_comment(question: str) -> str:
     response = client.chat.completions.create(
         model="gpt-4o-mini",
@@ -55,7 +60,7 @@ def generate_comment(question: str) -> str:
     )
     return (response.choices[0].message.content or "").strip()
 
-
+# gather human-written comments
 def fetch_questions(min_questions: int):
     """Fetch Swedish questions from same API as scrape_reddit. Returns list of (link_id, question_text)."""
     post_ids = []
@@ -105,9 +110,9 @@ def main():
 
     comment_rows = []
     for idx, (link_id, question_text) in enumerate(questions):
-        if len(comment_rows) >= TARGET_COMMENTS:
+        if len(comment_rows) >= TARGET_QUESTIONS:
             break
-        n_this = min(COMMENTS_PER_QUESTION, TARGET_COMMENTS - len(comment_rows))
+        n_this = min(COMMENTS_PER_QUESTION, TARGET_QUESTIONS - len(comment_rows))
         print(f"Question {idx + 1}/{len(questions)} (link_id={link_id}): generating {n_this} comments...")
         for _ in range(n_this):
             try:
@@ -125,7 +130,7 @@ def main():
         writer.writeheader()
         writer.writerows(comment_rows)
 
-    print(f"Wrote {len(comment_rows)} comments to {out_path} (target {TARGET_COMMENTS})")
+    print(f"Wrote {len(comment_rows)} comments to {out_path} (target {TARGET_QUESTIONS})")
 
 
 if __name__ == "__main__":

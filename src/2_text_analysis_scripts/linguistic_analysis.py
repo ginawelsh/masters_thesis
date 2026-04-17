@@ -2,6 +2,11 @@
 Linguistic analysis (spaCy) on Abstract and Generated Abstract from formal CSV.
 Install: pip install -r requirements.txt
 Swedish: python -m spacy download sv_core_news_sm
+
+The sv_core_news_sm model supports:
+  - POS tagging  (already in pipeline)
+  - Dependency parsing  (arc labels: ROOT, nsubj, obj, nmod, …)
+  - Named entity recognition  (PER, ORG, LOC, MISC)
 """
 import argparse
 import os
@@ -23,6 +28,7 @@ LLM_INFORMAL_DIR = os.path.join(_root, "1_data_collection", "llm_informal")
 TOKEN_SEP = ","  # separator for tokens/POS in CSV cells
 POS_SEP = " | "  # separator for TAG:n lists in CSV cells (matches existing checked-in counts file)
 VERBOSE = False  # set True to print per-row token/POS debug output
+MIN_TOKENS = 30  # rows where either text has fewer tokens than this are excluded
 
 
 def parse_args():
@@ -47,6 +53,10 @@ def resolve_config(dataset: str) -> dict:
             "out_pos_counts": os.path.join(output_dir, "linguistic_analysis_pos_counts.csv"),
             "out_pos_proportions": os.path.join(output_dir, "linguistic_analysis_pos_proportions.csv"),
             "out_pos_differences": os.path.join(output_dir, "linguistic_analysis_pos_differences.csv"),
+            "out_dep": os.path.join(output_dir, "linguistic_analysis_dep.csv"),
+            "out_dep_counts": os.path.join(output_dir, "linguistic_analysis_dep_counts.csv"),
+            "out_entities": os.path.join(output_dir, "linguistic_analysis_entities.csv"),
+            "out_entity_counts": os.path.join(output_dir, "linguistic_analysis_entity_counts.csv"),
             "human_col": "comment",
             "generated_col_candidates": ["Generated_OpenAI_Comment"],
             "human_label": "Comment",
@@ -62,6 +72,10 @@ def resolve_config(dataset: str) -> dict:
         "out_pos_counts": os.path.join(output_dir, "linguistic_analysis_pos_counts.csv"),
         "out_pos_proportions": os.path.join(output_dir, "linguistic_analysis_pos_proportions.csv"),
         "out_pos_differences": os.path.join(output_dir, "linguistic_analysis_pos_differences.csv"),
+        "out_dep": os.path.join(output_dir, "linguistic_analysis_dep.csv"),
+        "out_dep_counts": os.path.join(output_dir, "linguistic_analysis_dep_counts.csv"),
+        "out_entities": os.path.join(output_dir, "linguistic_analysis_entities.csv"),
+        "out_entity_counts": os.path.join(output_dir, "linguistic_analysis_entity_counts.csv"),
         "human_col": "Abstract",
         "generated_col_candidates": ["Generated_Abstract", "Generated Abstract"],
         "human_label": "Abstract",
@@ -91,6 +105,52 @@ def pos_counts_string(doc) -> str:
         return ""
     counts = Counter(t.pos_ for t in doc)
     return POS_SEP.join(f"{tag}:{n}" for tag, n in sorted(counts.items()))
+
+
+# ---------------------------------------------------------------------------
+# Dependency parsing helpers
+# ---------------------------------------------------------------------------
+
+def dep_counts_string(doc) -> str:
+    """Return dependency-relation counts as 'DEP:n | DEP:n | ...' sorted by label."""
+    if doc is None:
+        return ""
+    counts = Counter(t.dep_ for t in doc)
+    return POS_SEP.join(f"{dep}:{n}" for dep, n in sorted(counts.items()))
+
+
+def dep_tree_string(doc) -> str:
+    """Return 'token/dep/head' triples joined by TOKEN_SEP for inspecting the arc structure."""
+    if doc is None:
+        return ""
+    return TOKEN_SEP.join(f"{t.text}/{t.dep_}/{t.head.text}" for t in doc)
+
+
+def parse_dep_counts_string(s: str) -> Counter:
+    """Parse a 'DEP:n | DEP:n | ...' string into a Counter (same format as POS counts)."""
+    return parse_pos_counts_string(s)  # identical format
+
+
+# ---------------------------------------------------------------------------
+# Named entity recognition helpers
+# ---------------------------------------------------------------------------
+
+def entity_counts_string(doc) -> str:
+    """Return entity-type counts as 'TYPE:n | TYPE:n | ...' sorted by label.
+
+    Swedish sv_core_news_sm labels: PER, ORG, LOC, MISC.
+    """
+    if doc is None:
+        return ""
+    counts = Counter(ent.label_ for ent in doc.ents)
+    return POS_SEP.join(f"{label}:{n}" for label, n in sorted(counts.items()))
+
+
+def entities_string(doc) -> str:
+    """Return 'text:LABEL' pairs joined by TOKEN_SEP for all recognised entities."""
+    if doc is None:
+        return ""
+    return TOKEN_SEP.join(f"{ent.text}:{ent.label_}" for ent in doc.ents)
 
 
 def parse_pos_counts_string(s: str) -> Counter:
@@ -212,6 +272,10 @@ def main():
     out_pos_counts_csv_path = cfg["out_pos_counts"]
     out_pos_proportions_csv_path = cfg["out_pos_proportions"]
     out_pos_differences_csv_path = cfg["out_pos_differences"]
+    out_dep_csv_path = cfg["out_dep"]
+    out_dep_counts_csv_path = cfg["out_dep_counts"]
+    out_entities_csv_path = cfg["out_entities"]
+    out_entity_counts_csv_path = cfg["out_entity_counts"]
     human_col = cfg["human_col"]
     generated_col_candidates = cfg["generated_col_candidates"]
     human_label = cfg["human_label"]
@@ -222,18 +286,26 @@ def main():
     if os.path.exists(out_pos_counts_csv_path):
         df_counts = pd.read_csv(out_pos_counts_csv_path, encoding="utf-8")
         rows_pos_props = []
+        skipped = 0
         for idx in range(len(df_counts)):
             row = df_counts.iloc[idx]
             abs_counts = parse_pos_counts_string(row.get("Abstract_POS_Counts", ""))
             gen_counts = parse_pos_counts_string(row.get("Generated_Abstract_POS_Counts", ""))
+            abs_len = token_length_from_counts(abs_counts)
+            gen_len = token_length_from_counts(gen_counts)
+            if (0 < abs_len < MIN_TOKENS) or (0 < gen_len < MIN_TOKENS):
+                skipped += 1
+                continue
             rows_pos_props.append(
                 {
                     "Abstract_POS_Proportions": pos_proportions_string(abs_counts),
                     "Generated_Abstract_POS_Proportions": pos_proportions_string(gen_counts),
-                    "Abstract_Word_Length": token_length_from_counts(abs_counts),
-                    "Generated_Abstract_Word_Length": token_length_from_counts(gen_counts),
+                    "Abstract_Word_Length": abs_len,
+                    "Generated_Abstract_Word_Length": gen_len,
                 }
             )
+        if skipped:
+            print(f"Skipped {skipped} rows with fewer than {MIN_TOKENS} tokens in either text.")
 
         df_pos_props = pd.DataFrame(rows_pos_props)
         df_pos_props.to_csv(out_pos_proportions_csv_path, index=False, encoding="utf-8")
@@ -249,6 +321,10 @@ def main():
     rows_pos = []
     rows_pos_counts = []
     rows_pos_props = []
+    rows_dep = []
+    rows_dep_counts = []
+    rows_entities = []
+    rows_entity_counts = []
 
     for idx in range(len(df)):
         row = df.iloc[idx]
@@ -293,6 +369,11 @@ def main():
         gen_len = 0 if doc_gen is None else len(doc_gen)
         gen_props = pos_proportions_string(Counter(t.pos_ for t in doc_gen)) if doc_gen is not None else ""
 
+        if (0 < abs_len < MIN_TOKENS) or (0 < gen_len < MIN_TOKENS):
+            if VERBOSE:
+                print(f"  Skipping row {idx + 1}: human={abs_len} tokens, generated={gen_len} tokens (min={MIN_TOKENS})")
+            continue
+
         rows_out.append({
             "Abstract_Tokens": abs_tokens,
             "Generated_Abstract_Tokens": gen_tokens,
@@ -314,6 +395,23 @@ def main():
             }
         )
 
+        rows_dep.append({
+            "Abstract_Dep_Tree": dep_tree_string(doc_abs),
+            "Generated_Abstract_Dep_Tree": dep_tree_string(doc_gen),
+        })
+        rows_dep_counts.append({
+            "Abstract_Dep_Counts": dep_counts_string(doc_abs),
+            "Generated_Abstract_Dep_Counts": dep_counts_string(doc_gen),
+        })
+        rows_entities.append({
+            "Abstract_Entities": entities_string(doc_abs),
+            "Generated_Abstract_Entities": entities_string(doc_gen),
+        })
+        rows_entity_counts.append({
+            "Abstract_Entity_Counts": entity_counts_string(doc_abs),
+            "Generated_Abstract_Entity_Counts": entity_counts_string(doc_gen),
+        })
+
     pd.DataFrame(rows_out).to_csv(out_csv_path, index=False, encoding="utf-8")
     print(f"\nWrote {len(rows_out)} rows to {out_csv_path}")
 
@@ -328,6 +426,18 @@ def main():
     print(f"Wrote {len(rows_pos_props)} rows to {out_pos_proportions_csv_path}")
 
     write_pos_differences_csv(df_pos_props, out_pos_differences_csv_path)
+
+    pd.DataFrame(rows_dep).to_csv(out_dep_csv_path, index=False, encoding="utf-8")
+    print(f"Wrote {len(rows_dep)} rows to {out_dep_csv_path}")
+
+    pd.DataFrame(rows_dep_counts).to_csv(out_dep_counts_csv_path, index=False, encoding="utf-8")
+    print(f"Wrote {len(rows_dep_counts)} rows to {out_dep_counts_csv_path}")
+
+    pd.DataFrame(rows_entities).to_csv(out_entities_csv_path, index=False, encoding="utf-8")
+    print(f"Wrote {len(rows_entities)} rows to {out_entities_csv_path}")
+
+    pd.DataFrame(rows_entity_counts).to_csv(out_entity_counts_csv_path, index=False, encoding="utf-8")
+    print(f"Wrote {len(rows_entity_counts)} rows to {out_entity_counts_csv_path}")
 
 
 if __name__ == "__main__":
