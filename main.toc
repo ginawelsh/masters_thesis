@@ -7,12 +7,11 @@
 \contentsline {section}{\numberline {2.2}LLM development methodology}{7}{section.2.2}%
 \contentsline {subsection}{\numberline {2.2.1}Multilingual LLMs}{8}{subsection.2.2.1}%
 \contentsline {subsubsection}{\nonumberline Language diversity within multilingual LLM datasets}{8}{subsubsection*.7}%
-\contentsline {subsubsection}{\nonumberline Nordic LLMs}{8}{subsubsection*.8}%
-\contentsline {subsubsection}{\nonumberline LLM cross-lingual transfer capabilities}{8}{subsubsection*.9}%
-\contentsline {section}{\numberline {2.3}Textual analysis of LLM output}{8}{section.2.3}%
-\contentsline {section}{\numberline {2.4}AI-text detection studies}{9}{section.2.4}%
-\contentsline {subsection}{\numberline {2.4.1}AI-detection by humans}{9}{subsection.2.4.1}%
-\contentsline {subsection}{\numberline {2.4.2}AI-detection by LLMs}{10}{subsection.2.4.2}%
+\contentsline {subsubsection}{\nonumberline Scandinavian language-centric LLMs}{8}{subsubsection*.9}%
+\contentsline {section}{\numberline {2.3}LLM textual analysis studies}{9}{section.2.3}%
+\contentsline {section}{\numberline {2.4}LLM-detection studies}{10}{section.2.4}%
+\contentsline {subsection}{\numberline {2.4.1}LLM-detection by humans}{10}{subsection.2.4.1}%
+\contentsline {subsection}{\numberline {2.4.2}LLM-detection by LLMs}{10}{subsection.2.4.2}%
 \contentsline {section}{\numberline {2.5}Background summary}{10}{section.2.5}%
 \contentsline {chapter}{\numberline {3}Methodology}{11}{chapter.3}%
 \contentsline {section}{\numberline {3.1}Data collection}{11}{section.3.1}%
