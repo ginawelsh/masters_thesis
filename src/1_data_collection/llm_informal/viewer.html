@@ -178,6 +178,33 @@
       font-size: 15px;
     }
 
+    .file-prompt {
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    .file-prompt p {
+      color: #555;
+      font-size: 15px;
+      margin-bottom: 16px;
+    }
+
+    .file-btn {
+      display: inline-block;
+      background: #ff4500;
+      color: white;
+      padding: 10px 22px;
+      border-radius: 4px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+    }
+
+    .file-btn:hover { background: #cc3700; }
+
+    #fileInput { display: none; }
+
     /* single-column modes */
     .only-real .comments-row,
     .only-gen  .comments-row {
@@ -205,7 +232,7 @@
 </div>
 
 <script>
-const CSV_FILE = "LLM_consolidated_reddit_comments.csv";
+const CSV_FILE = "LLM_consolidated_reddit_comments_2.csv";
 
 // Robust CSV parser: handles RFC 4180 quoted fields with embedded commas/newlines
 function parseCSV(text) {
@@ -296,6 +323,7 @@ function render() {
       <div class="comment-block">
         <div class="comment-label label-real">
           <span class="badge badge-real">Human</span> Real Comment
+          ${d.link ? `<a href="${esc(d.link)}" target="_blank" rel="noopener" style="margin-left:auto;font-size:10px;color:#0079d3;text-decoration:none;" title="View on Reddit">↗ source</a>` : ''}
         </div>
         <div class="comment-text">${highlight(d.real, q)}</div>
       </div>` : '';
@@ -323,32 +351,51 @@ function render() {
   }).join('');
 }
 
+function loadText(text) {
+  const rows = parseCSV(text);
+  allData = rows.slice(1)
+    .filter(r => r.length >= 3)
+    .map((r, i) => ({
+      index: i + 1,
+      question: r[0].trim(),
+      real: r[1].trim(),
+      link: r.length >= 4 ? r[2].trim() : '',
+      gen: r.length >= 4 ? r[3].trim() : r[2].trim(),
+    }));
+
+  ['search', 'hideGen', 'hideReal', 'minWords'].forEach(id => {
+    document.getElementById(id).addEventListener('input', render);
+    document.getElementById(id).addEventListener('change', render);
+  });
+
+  render();
+}
+
+function showFilePicker() {
+  document.getElementById('feed').innerHTML = `
+    <div class="file-prompt">
+      <p>Browser security blocks direct file loading.<br>Pick the CSV file manually:</p>
+      <label class="file-btn" for="fileInput">Open CSV file…</label>
+      <input type="file" id="fileInput" accept=".csv" />
+    </div>`;
+
+  document.getElementById('fileInput').addEventListener('change', e => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = ev => loadText(ev.target.result);
+    reader.readAsText(file, 'UTF-8');
+  });
+}
+
 async function init() {
   try {
     const resp = await fetch(CSV_FILE);
     if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
     const text = await resp.text();
-    const rows = parseCSV(text);
-
-    allData = rows.slice(1)
-      .filter(r => r.length >= 3)
-      .map((r, i) => ({
-        index: i + 1,
-        question: r[0].trim(),
-        real: r[1].trim(),
-        gen: r[2].trim(),
-      }));
-
-    ['search', 'hideGen', 'hideReal', 'minWords'].forEach(id => {
-      document.getElementById(id).addEventListener('input', render);
-      document.getElementById(id).addEventListener('change', render);
-    });
-
-    render();
+    loadText(text);
   } catch (err) {
-    document.getElementById('feed').innerHTML =
-      `<div class="empty">Error loading CSV: ${esc(err.message)}<br><br>
-       Open this file via a local server or place it in the same folder as the CSV.</div>`;
+    showFilePicker();
   }
 }
 

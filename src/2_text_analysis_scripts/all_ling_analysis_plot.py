@@ -33,7 +33,7 @@ _root = os.path.dirname(_script_dir)
 
 FORMAL_HUMAN_CSV = os.path.join(_root, "1_data_collection", "human_formal", "sv_human_collection_with_kws.csv")
 FORMAL_LLM_CSV = os.path.join(_root, "1_data_collection", "llm_formal", "abstracts", "sv_ai_generated_abstracts.csv")
-INFORMAL_CSV = os.path.join(_root, "1_data_collection", "llm_informal", "LLM_consolidated_reddit_comments.csv")
+INFORMAL_CSV = os.path.join(_root, "1_data_collection", "llm_informal", "LLM_consolidated_reddit_comments_2.csv")
 
 FIGURES_DIR = os.path.join(_script_dir, "figures")
 INFORMAL_FIGURES_DIR = os.path.join(_script_dir, "figures", "informal_comparison")
@@ -45,20 +45,20 @@ MODEL = "sv_core_news_sm"
 # ---------------------------------------------------------------------------
 GROUP_ORDER = ["Formal Human", "Formal LLM", "Informal Human", "Informal LLM"]
 GROUP_COLORS = {
-    "Formal Human":   "#4878D0",
-    "Formal LLM":     "#EE854A",
-    "Informal Human": "#6ACC65",
-    "Informal LLM":   "#D65F5F",
+    "Formal Human":   "#D06148",
+    "Formal LLM":     "#4A52EE",
+    "Informal Human": "#D06148",
+    "Informal LLM":   "#4A52EE",
 }
 
 # Top POS and dep tags to show in charts (others bundled as "OTHER")
 TOP_N_POS = 10
 TOP_N_DEP = 12
-INFORMAL_MIN_TOKENS = 20  # rows where either informal text has fewer words are excluded
+INFORMAL_MIN_TOKENS = 3  # rows where either informal text has fewer words are excluded
 
 SENTIMENT_MODEL = "KBLab/robust-swedish-sentiment-multiclass"
 SENTIMENT_LABELS = ["POSITIVE", "NEUTRAL", "NEGATIVE"]
-SENTIMENT_COLORS = {"POSITIVE": "#4CAF50", "NEUTRAL": "#9E9E9E", "NEGATIVE": "#F44336"}
+SENTIMENT_COLORS = {"POSITIVE": "#0C8E10", "NEUTRAL": "#9E9E9E", "NEGATIVE": "#D12115"}
 
 plt.rcParams.update({
     "figure.dpi": 150,
@@ -76,13 +76,13 @@ def load_texts() -> dict[str, list[str]]:
     """Load raw text lists for each group."""
     groups: dict[str, list[str]] = {}
 
-    # Formal Human — comma-separated CSV (TSV uses | which appears inside abstract text)
-    df_fh = pd.read_csv(FORMAL_HUMAN_CSV, encoding="utf-8")
-    groups["Formal Human"] = df_fh["Abstract"].dropna().astype(str).str.strip().tolist()
-
-    # Formal LLM
-    df_fl = pd.read_csv(FORMAL_LLM_CSV, encoding="utf-8")
-    groups["Formal LLM"] = df_fl["AI_Abstract"].dropna().astype(str).str.strip().tolist()
+    # Formal — both columns from same paired file so counts always match
+    df_fl = pd.read_csv(FORMAL_LLM_CSV, encoding="utf-8", on_bad_lines="warn")
+    df_fl = df_fl.dropna(subset=["Human_Abstract", "AI_Abstract"])
+    df_fl["Human_Abstract"] = df_fl["Human_Abstract"].astype(str).str.strip()
+    df_fl["AI_Abstract"] = df_fl["AI_Abstract"].astype(str).str.strip()
+    groups["Formal Human"] = df_fl["Human_Abstract"].tolist()
+    groups["Formal LLM"] = df_fl["AI_Abstract"].tolist()
 
     # Informal — both columns from same file; filter rows where either text is too short
     df_inf = pd.read_csv(INFORMAL_CSV, encoding="utf-8")
@@ -199,6 +199,7 @@ def plot_sentiment(group_sentiment: dict[str, Counter], out_dir: str) -> None:
     fig.savefig(path)
     plt.close(fig)
     print(f"Saved {path}")
+    _save_sentiment_csv(group_sentiment, GROUP_ORDER, os.path.join(out_dir, "data_sentiment_distribution.csv"))
 
 
 def plot_sentiment_pair(group_sentiment: dict[str, Counter], groups: list[str],
@@ -231,6 +232,7 @@ def plot_sentiment_pair(group_sentiment: dict[str, Counter], groups: list[str],
     fig.savefig(path)
     plt.close(fig)
     print(f"Saved {path}")
+    _save_sentiment_csv(group_sentiment, groups, os.path.join(out_dir, f"{prefix}_sentiment_distribution.csv"))
 
 
 # ---------------------------------------------------------------------------
@@ -271,6 +273,41 @@ def top_n_with_other(proportions: dict[str, float], top_n: int) -> dict[str, flo
     if other_sum > 0:
         top["OTHER"] = other_sum
     return top
+
+
+# ---------------------------------------------------------------------------
+# CSV export helpers
+# ---------------------------------------------------------------------------
+
+def _save_tag_data_csv(data: dict[str, dict[str, float]], path: str) -> None:
+    """Save {group: {tag: value}} to CSV with tags as rows, groups as columns."""
+    all_tags = sorted({tag for d in data.values() for tag in d})
+    rows = [{"tag": tag, **{g: data[g].get(tag, 0.0) for g in data}} for tag in all_tags]
+    pd.DataFrame(rows).to_csv(path, index=False, encoding="utf-8")
+    print(f"Saved {path}")
+
+
+def _save_token_lengths_csv(groups_order: list[str], group_results: dict, path: str) -> None:
+    """Save per-document token lengths (long form) to CSV."""
+    rows = [{"group": g, "token_length": length}
+            for g in groups_order for length in group_results[g]["lengths"]]
+    pd.DataFrame(rows).to_csv(path, index=False, encoding="utf-8")
+    print(f"Saved {path}")
+
+
+def _save_sentiment_csv(group_sentiment: dict[str, Counter], groups_order: list[str], path: str) -> None:
+    """Save sentiment counts and proportions to CSV."""
+    rows = []
+    for g in groups_order:
+        counts = group_sentiment[g]
+        total = sum(counts.values())
+        row = {"group": g}
+        for lbl in SENTIMENT_LABELS:
+            row[f"{lbl}_count"] = counts.get(lbl, 0)
+            row[f"{lbl}_proportion"] = counts.get(lbl, 0) / total if total else 0.0
+        rows.append(row)
+    pd.DataFrame(rows).to_csv(path, index=False, encoding="utf-8")
+    print(f"Saved {path}")
 
 
 # ---------------------------------------------------------------------------
@@ -337,6 +374,7 @@ def plot_pos(group_results: dict, out_dir: str) -> None:
             top["OTHER"] = other
         data[group] = top
 
+    _save_tag_data_csv(data, os.path.join(out_dir, "data_pos_distribution.csv"))
     fig, ax = plt.subplots(figsize=(12, 5))
     grouped_bar(ax, data, "Mean proportion per document", "POS tag distribution by group")
     fig.tight_layout()
@@ -364,6 +402,7 @@ def plot_dep(group_results: dict, out_dir: str) -> None:
             top["OTHER"] = other
         data[group] = top
 
+    _save_tag_data_csv(data, os.path.join(out_dir, "data_dep_distribution.csv"))
     fig, ax = plt.subplots(figsize=(13, 5))
     grouped_bar(ax, data, "Mean proportion per document", "Dependency relation distribution by group")
     fig.tight_layout()
@@ -394,6 +433,7 @@ def plot_ner(group_results: dict, out_dir: str) -> None:
         )
         data[group] = {label: rates.get(label, 0.0) for label in sorted_labels}
 
+    _save_tag_data_csv(data, os.path.join(out_dir, "data_ner_distribution.csv"))
     fig, ax = plt.subplots(figsize=(8, 5))
     grouped_bar(ax, data, "Mean entities per 100 tokens", "Named entity type rate by group",
                 y_fmt="{:.2f}")
@@ -407,6 +447,7 @@ def plot_ner(group_results: dict, out_dir: str) -> None:
 
 def plot_token_length(group_results: dict, out_dir: str) -> None:
     """Fig 4 — Token length distribution (violin + strip)."""
+    _save_token_lengths_csv(GROUP_ORDER, group_results, os.path.join(out_dir, "data_token_lengths.csv"))
     fig, ax = plt.subplots(figsize=(9, 5))
 
     positions = range(1, len(GROUP_ORDER) + 1)
@@ -495,6 +536,16 @@ def plot_dep_formal_vs_informal(group_results: dict, out_dir: str) -> None:
         ax.spines["top"].set_visible(False)
         ax.spines["right"].set_visible(False)
 
+    for (g1, g2), subtitle in zip(pair_groups, subtitles):
+        sub_data = {}
+        for g in (g1, g2):
+            props = aggregate_proportions(group_results[g]["dep"])
+            top = {t: props.get(t, 0.0) for t in top_tags}
+            other = sum(v for t, v in props.items() if t not in top_tags)
+            if other > 0:
+                top["OTHER"] = other
+            sub_data[g] = top
+        _save_tag_data_csv(sub_data, os.path.join(out_dir, f"data_dep_by_register_{subtitle.split()[0].lower()}.csv"))
     fig.suptitle("Dependency relation distribution: human vs LLM by register", fontsize=12)
     fig.tight_layout()
     path = os.path.join(out_dir, "fig_dep_by_register.png")
@@ -531,6 +582,9 @@ def plot_pos_heatmap(group_results: dict, out_dir: str) -> None:
             ax.text(j, i, f"{matrix[i, j]:.1%}", ha="center", va="center",
                     fontsize=7.5,
                     color="white" if matrix[i, j] > matrix.max() * 0.6 else "black")
+    heatmap_data = {group: {top_tags[j]: matrix[i, j] for j in range(len(top_tags))}
+                    for i, group in enumerate(GROUP_ORDER)}
+    _save_tag_data_csv(heatmap_data, os.path.join(out_dir, "data_pos_heatmap.csv"))
     ax.set_title("POS proportion heatmap")
     fig.tight_layout()
     path = os.path.join(out_dir, "fig_pos_heatmap.png")
@@ -609,6 +663,7 @@ def _plot_pair_comparison(group_results: dict, groups: list[str], colors: dict[s
             top["OTHER"] = other
         pos_data[g] = top
 
+    _save_tag_data_csv(pos_data, os.path.join(out_dir, f"{prefix}_pos_distribution.csv"))
     fig, ax = plt.subplots(figsize=(11, 5))
     _two_group_bar(ax, pos_data, "Mean proportion per document",
                    f"POS distribution — {g1} vs {g2}",
@@ -635,6 +690,7 @@ def _plot_pair_comparison(group_results: dict, groups: list[str], colors: dict[s
             top["OTHER"] = other
         dep_data[g] = top
 
+    _save_tag_data_csv(dep_data, os.path.join(out_dir, f"{prefix}_dep_distribution.csv"))
     fig, ax = plt.subplots(figsize=(12, 5))
     _two_group_bar(ax, dep_data, "Mean proportion per document",
                    f"Dependency relation distribution — {g1} vs {g2}",
@@ -658,6 +714,7 @@ def _plot_pair_comparison(group_results: dict, groups: list[str], colors: dict[s
         rates = aggregate_rate_per_100(group_results[g]["ent"], group_results[g]["lengths"])
         ner_data[g] = {lbl: rates.get(lbl, 0.0) for lbl in sorted_labels}
 
+    _save_tag_data_csv(ner_data, os.path.join(out_dir, f"{prefix}_ner_distribution.csv"))
     fig, ax = plt.subplots(figsize=(7, 5))
     _two_group_bar(ax, ner_data, "Mean entities per 100 tokens",
                    f"NER entity type rate — {g1} vs {g2}",
@@ -704,6 +761,7 @@ def _plot_pair_comparison(group_results: dict, groups: list[str], colors: dict[s
     fig.savefig(path)
     plt.close(fig)
     print(f"Saved {path}")
+    _save_token_lengths_csv(groups, group_results, os.path.join(out_dir, f"{prefix}_token_lengths.csv"))
 
     # --- POS heatmap (2-row) ---
     matrix = np.zeros((len(groups), len(top_pos)))
@@ -730,6 +788,9 @@ def _plot_pair_comparison(group_results: dict, groups: list[str], colors: dict[s
     fig.savefig(path)
     plt.close(fig)
     print(f"Saved {path}")
+    heatmap_data = {groups[i]: {top_pos[j]: matrix[i, j] for j in range(len(top_pos))}
+                    for i in range(len(groups))}
+    _save_tag_data_csv(heatmap_data, os.path.join(out_dir, f"{prefix}_pos_heatmap.csv"))
 
 
 def plot_informal_comparison(group_results: dict, out_dir: str) -> None:

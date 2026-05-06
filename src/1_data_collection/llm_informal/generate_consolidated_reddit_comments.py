@@ -1,7 +1,8 @@
 """
-Read NEW_REAL_reddit_comments.csv, generate one AI comment per row,
-and output consolidated_reddit_comments.csv with real and generated
-comments side by side.
+Read consolidated_reddit_comments.csv, generate one AI comment per row,
+and output LLM_consolidated_reddit_comments_2.csv with columns:
+question, human_comment, human_link, generated_comment.
+All fields are flattened to a single line (no embedded newlines).
 """
 
 import csv
@@ -27,7 +28,7 @@ if not _api_key:
 client = OpenAI(api_key=_api_key)
 
 COMMENT_PROMPT = (
-    "Svara på följande fråga med en svensk kommentar på upp till 120 ord, i stil med en kommentar på ett svenskt forum. "
+    "Svara på följande fråga med en svensk kommentar, i stil med en kommentar på ett svenskt forum. "
     "Skriv bara kommentaren, inget annat.\n\nFråga: {question}"
 )
 
@@ -46,13 +47,13 @@ def main():
         os.path.dirname(script_dir), "human_informal"
     )
     input_path = os.path.join(human_dir, "consolidated_reddit_comments.csv")
-    out_path = os.path.join(script_dir, "LLM_consolidated_reddit_comments.csv")
+    out_path = os.path.join(script_dir, "LLM_consolidated_reddit_comments_2.csv")
 
     def strip_newlines(text: str) -> str:
         return " ".join(text.split())
 
     # Read all real comment rows, stripping newlines from fields
-    with open(input_path, newline="", encoding="utf-8") as f:
+    with open(input_path, newline="", encoding="utf-8-sig") as f:
         reader = csv.DictReader(f)
         real_rows = [
             {k: strip_newlines(v) for k, v in row.items()}
@@ -74,13 +75,14 @@ def main():
             print(f"  Error: {e}")
             generated = ""
         consolidated.append({
-            "question": question,
-            "real_comment": row["comment"],
+            "question":          question,
+            "human_comment":     row["comment"],
+            "human_link":        row.get("link", ""),
             "generated_comment": generated,
         })
 
     with open(out_path, "w", newline="", encoding="utf-8") as f:
-        writer = csv.DictWriter(f, fieldnames=["question", "real_comment", "generated_comment"])
+        writer = csv.DictWriter(f, fieldnames=["question", "human_comment", "human_link", "generated_comment"])
         writer.writeheader()
         writer.writerows(consolidated)
 
