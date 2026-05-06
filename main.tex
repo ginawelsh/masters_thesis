@@ -129,7 +129,8 @@ detecting both the formal and informal data.
 
 \chapter{Background}
 \paragraph{}
-This chapter provides an overview of previous studies related to the topics of LLM development, textual analysis, and detection. First, it will outline the development of
+This chapter will provide an overview of previous studies
+related to this topic. First, it will outline the development of
 large language models and their text generation abilities for
 English and Swedish. Second, it will describe previous research
 comparing AI-generated text with human-written text. The chapter
@@ -138,43 +139,18 @@ AI-generated text detection.
 \section{Transformer-based Large Language Models}
 [Purpose: introducing the type of language model referred to in thesis, some architectural characteristics, and cross-task abilities, NEED ADD CITES]
 \paragraph{}
-In this thesis, the term "Large Language Models" refers to those that are transformer-based, that is, based on a neural network architecture with multi-head attention mechanisms. This type of
-architecture was first proposed in \textcite{vaswani2017attention}, where the authors developed an architecture that did not rely on earlier recurrent neural architectures and demonstrated superior
-performance and lower training time for a variety of tasks, including text generation, including optical recognition, speech processing, and text generation (CITE Islam 2023, Radford). The strength of transformers in their adaptation to a wide variety of tasks lies in their ability to handle long dependencies between different elements of input sequences, meaning that it can calculate how relevant
-different parts of input are to one
+In this thesis, the term "Large Language Models" refers to those that are transformer-based, that is, based on a neural network architecture with multi-head attention mechanisms. This type of architecture was first proposed in \textcite{vaswani2017attention}, where the authors developed an architecture that did not rely on earlier recurrent neural architectures and demonstrated superior performance and lower training time for a variety of tasks, including text generation, including optical recognition, speech processing, and text generation  (CITE Islam 2023, Radford). The strength of
+transformers in their adaptation to a wide variety of tasks lies in their ability to handle long dependencies between different elements of input sequences, meaning that it can calculate how relevant different parts of input are to one
 another, no matter how far apart one element is from another
-within a sequence. This ability has shown to improve the fluency and coherence of text, as well as emergent abilities that are not found in earlier language models, such as instruction-following
-(CITE) and reasoning (CITE). Examples of transformer-based large language models include GPT-5 (GET PAPER 5; https://arxiv.org/pdf/2303.08774v3), Claude Sonnet (GET PAPER), and LLaMa (GET PAPER).
-LLMs are autoregressive, meaning that it predicts the next word of a sentence based on all words it has generated up until that point as context. 
+within a sequence. This ability has shown to improve the fluency and coherence of text, as well as emergent abilities that are not found in earlier language models, such as instruction-following (CITE) and reasoning (CITE). Examples of transformer-based large language models include GPT-5 (GET PAPER 5; https://arxiv.org/pdf/2303.08774v3), Claude Sonnet (GET PAPER), and LLaMa (GET PAPER). 
 
 \section{LLM development methodology}
-[Purpose: Detailing the parameters, data sources of LLMs; training process]
+[Purpose: Detailing the data sources of LLMs; multilingual 
 \paragraph{}
-Compared to earlier statistical and neural network models, LLMs that have been released after GPT-3 are trained on very large amounts of data. Transformer-based LLMs for text generation normally
-contain tens to thousands of billions of parameters, pre-trained on diverse sources of textual data such as Web crawl data (CITE), online encyclopedias, news outlets, academic articles, books, and
-code repositories. The scale of data and parameters varies by each LLM and release version. During model development, the data collected is then often filtered to enhance data quality, relevance and
-generalisation of the data to different user inputs (CITE1, CITE2, \parencite{Brown2020LanguageMA}).
+Large language models are trained on very large amounts of data relative to previous language models, especially those after the release of GPT-3. Transformer-based LLMs for text generation normally contain tens to thousands of billions of parameters, pre-trained on massive amounts of text data from the Web (CITE Minaee et al.). The scale of data and parameters varies by each LLM and release version.  LLMs are pre-trained on diverse sources of textual data from many domains, such as web crawl data, online encyclopedias (including Wikipedia), news outlets, academic articles, books, and code repositories. This data collection is then often filtered out in the process of model development to enhance data quality, relevance and generalisation of the data to different user inputs (CITE1, CITE2, CITE3).  \parencite{Brown2020LanguageMA}
 
-\subsubsection{LLMs and the Swedish language}
-Several studies have developed datasets, models and evaluation methods specifically for Scandinavian languages. The most notable dataset is the Nordic Pile (Öhman et al., 2023), a 1.2 terabyte dataset trained primarily on Swedish, Norwegian, Danish, Icelandic, Faroese, and smaller subset of high-quality English data. The Nordic Pile was used to train GPT-SW3 (Ekgren et al., 2024), the first Scandinavian GPT model, the largest largest release model of which has 40 billion parameters at the time of writing. Further studies that incorporate GPT-SW3 in their pipelines include Olsén (2024), which focuses on instruction-tuning for Swedish language tasks, and (INSERT ANOTHER GPT-SW3 STUDY). AI Sweden has also released a model that further pretrains Llama (cite) with a subset of the Nordic Pile (footnote https://huggingface.co/AI-Sweden-Models/Llama-3-8B).
-\paragraph{}
-Existing evaluation benchmarks that are specifically tailored for LLM-generated Swedish include ScandEval (Nielsen, 2023), which offers several metrics including Swedish named entity recognition (NER), sentiment classification, and linguistic acceptability; a Sweden-related factual knowledge benchmark dataset by Kunz (2025);  SweSat (Kurfali et al. 2025), a benchmark from the Swedish university entrance exam (Högskoleprovet); and the Swedish Medical LLM Benchmark (Moëll et al. 2025), a framework to evaluate LLM capabilities for Swedish medical texts. These benchmarks can be evaluated on large-scale multilingual LLMs to test their performance specifically for the Swedish language and cultural context.
-
-\subsubsection{Multilingual LLMs}
-[Purpose: this thesis uses a multilingual LLM, need to know what cross-lingual capabilities transfer to Swedish, and what limitations it has. Cultural limitations? To guide the discussion of how the
-English-centric LLM could have limitations in the syntax and cultural information of the Swedish performance and AI detection reasoning.] Latest-release, large-scale LLMs such as OpenAI's GPT, Anthropic's Claude, and Google's Gemini are trained on data from multiple languages and therefore have multilingual capabilities (CITE OA, CITE AN, CITE GE). It is difficult to ascertain the exact amount of linguistic diversity within the training data of large-scale multilingual LLMs, as there is no publicly-accessible, detailed breakdown of the languages
-represented in the training data of the latest versions of large-scale multilingual LLMs, such as OpenAI's GPT, Anthropic's Claude, and Google's Gemini (check more open source ones?). 
-\paragraph{}
-However, an approximation of large-scale multilingual LLM's linguistic diversity can be obtained through other openly-accessible sources. The original paper that proposed the GPT-3 autoregressive language model (CITE; Brown et al. 2020) released a dataset detailing its multilingual distribution; 92.6\% of the total training data's word count was in English; the next languages were  The Swedish word count proportion was 0.11\%. In addition, the Common Crawl monthly archives, an
-open repository of web data cited as a major source in several large scale LLMs (CITE1, CITE2, CITE3), calculates the percentage of Swedish data within its corpus as between 0.68 - 0.72 \% across
-three versions released in 2026 (https://commoncrawl.github.io/cc-crawl-statistics/plots/languages). Overall, these sources indicate a proportion of Swedish training data within the large-scale,
-English-centric LLMs to be well below 1\%.
-\paragraph{}
-Despite the asymmetrical language proportions in their data, LLMs display emergent multilingual properties in pattern recognition of the linguistic structures of supported languages, displaying a high
-level of fluency across a range of natural language understanding and generation benchmarks (cite: Kew et al., 2024; Lai et al, 2023; Holmstrom et al., 2023; need more recent cites). On the other
-hand, since LLMs embed cultural norms and biases inherent in their training, they require benchmarking of not only linguistic fluency, but also cultural alignment - that is, the cultural references,
-expectations and biases of non-Anglocentric cultures. While there is also considerable evidence that LLMs can in fact successfully reflect the cultural contexts of non-Anglocentric cultures, some show
-that LLMs' performance are still stronger in English than other languages for reasoning tasks (Liu et al, 2024), figurative proverbs (Liu et al., 2024), and (insert other cites with tasks).
+\subsection{Multilingual LLMs}
+[Purpose: this thesis uses a multilingual LLM, need to know what cross-lingual capabilities transfer to Swedish, and what limitations it has. Cultural limitations? To guide the discussion of how the English-centric LLM could have limitations in the syntax and cultural information of the Swedish performance and AI detection reasoning.]
 \paragraph{}
 "Multilingual considerations demand increased attention. Specifically, existing
 benchmarks are mainly developed for English datasets, with only a few like MULTI-
@@ -220,20 +196,12 @@ vocabulary diversity, and contained information that human
 experts would consider more useful. The ChatGPT-generated
 medical texts appeared more fluent and logical, but expressed
 more generalised terminology rather than specific, effective
-information for the problem's context, which could be attributed to  human-written medical text being more tailored to situational modelling of the particular medical case (Mahowald et al., 2024).
-\paragraph{}
-- need add more synthesis
+information for the problem's context. Overall, this would point
+to the human-written medical text being more tailored to the
+situational modelling of the medical case (situational modelling
+defined in Mahowald et al., 2024) rather than the LLM-generated
+text.
 
-\section{LLM-detection studies}
-
-\subsection{LLM-detection by humans}
- [need add more info; Wikipedia signs of AI writing referenced studies]
-\subsection{LLM-detection by LLMs}
-
-Landberg (2024) investigated the effectiveness of AI chatbots to
-detect texts created by AI in Swedish and English. 
-
-\subsubsection{LLM reasoning}
 Previous work has also shown evidence of a distinction between
 the reasoning patterns of LLM tools when compared to those of
 humans. (CITE) evaluated the medical reasoning capabilities of
@@ -250,16 +218,24 @@ experts. The study also found a strong correlation between the
 length of output and the error rate of LLMs; t hat is, results
 from LLMs that were longer were more likely to contain incorrect
 diagnoses or medical details.
-\paragraph{}
-Möell and Boye (2025) studied the performance of
+
+- discuss differences in text stylistic 
+
+
+\section{LLM-detection studies}
+
+\subsection{LLM-detection by humans}
+Landberg (2024) investigated the effectiveness of AI chatbots to
+detect texts created by AI in Swedish and English. The main
+component of the study A recent study investigated LLM reasoning
+in Swedish. Moell and Boye (2025) studied the performance of
 LLMs on language complexity measurement tasks (LIX readability
 metric and Average Dependency Distance). The results of the
 study found that all models demonstrated at least come capacity
 for each of these tasks, but that LLMs remain prone to errors in
-explicit calculations and syntactic analysis. [need add more info; Wikipedia signs of AI writing referenced studies]
+explicit calculations and syntactic analysis.
 \subsection{LLM-detection by LLMs}
 
-- need more studies here!!
 
 \section{Background summary}
 
@@ -275,10 +251,6 @@ LLM-generated Swedish, and 2) a comparison between the detection
 rates of humans and LLM-detection of LLM-generated Swedish. Both
 parts of the methodology comprise of a human component and an
 LLM-generated component.
-\paragraph{}
-- why choose GPT-5.2 multilingual instead of SW3? GPT-5.2 was one of the top k performers for the Swedish language (CITE), with a massive estimated number of parameters (cite number, source). SW3, on
-the other hand, only had x number of parameters. The study did not want to have number of parameters as a confounding variable for the results of the study, and also didn't want to compare between LLM
-architectures without having a large-scale amount of Swedish human-written data
 
 
 
@@ -522,6 +494,11 @@ Textual analysis:
 
 \section{AI detection results}
 - potential points of discussion:
+
+Useful for Limitations
+- Category was completely human written and completely LLM written, without mixed text examples, which is a plausible scenario (Wu et al., 2024, more)
+- Human-written data was taken between 2007 - 2017, which did guarantee that no examples had any transformer-based LLM as help; however, human-written text written then could have outdated information or cultural references that mark the text as older and may be not so comparable for studies that use recent human-written data as examples. 
+- Another issue that has not been fully discussed is the human-edited text and LLM-assisted text. For example, after applying LLM to generate a text, humans often edit and modify certain words or passages (Wu et al., 2024). Conversely, humans may write an original text themselves before employing LLMs to modify the text's content and structure. Current mainstream LLM detectors show evidence of degrading in performance when categorising paraphrased text (Wolff 2020) This study only used generation techniques that completely generate a passage themselves using the title and key words (not re-writing the human written examples), but this technique would be less comparable for studies that look at partially LLM-assisted text. However, this type of study would be interesting to conduct in future research. 
 
 \section{Limitations}
 - Category was completely human written and completely LLM written, without mixed text examples, which is a plausible scenario (Wu et al., 2024, more)
