@@ -15,6 +15,7 @@ Sentiment model:     pip install transformers torch
 
 Output: src/2_text_analysis_scripts/figures/
 """
+print("importing modules...")
 import os
 from collections import Counter, defaultdict
 
@@ -25,6 +26,8 @@ import pandas as pd
 import spacy
 from transformers import pipeline as hf_pipeline
 
+print("Modules imported.")
+
 # ---------------------------------------------------------------------------
 # Paths
 # ---------------------------------------------------------------------------
@@ -33,7 +36,7 @@ _root = os.path.dirname(_script_dir)
 
 FORMAL_HUMAN_CSV = os.path.join(_root, "1_data_collection", "human_formal", "sv_human_collection_with_kws.csv")
 FORMAL_LLM_CSV = os.path.join(_root, "1_data_collection", "llm_formal", "abstracts", "sv_ai_generated_abstracts.csv")
-INFORMAL_CSV = os.path.join(_root, "1_data_collection", "llm_informal", "LLM_consolidated_reddit_comments_2.csv")
+INFORMAL_CSV = os.path.join(_root, "1_data_collection", "llm_informal", "LLM_consolidated_reddit_comments_MAY26.csv")
 
 FIGURES_DIR = os.path.join(_script_dir, "figures")
 INFORMAL_FIGURES_DIR = os.path.join(_script_dir, "figures", "informal_comparison")
@@ -86,16 +89,16 @@ def load_texts() -> dict[str, list[str]]:
 
     # Informal — both columns from same file; filter rows where either text is too short
     df_inf = pd.read_csv(INFORMAL_CSV, encoding="utf-8")
-    df_inf = df_inf.dropna(subset=["real_comment", "generated_comment"])
-    df_inf["real_comment"] = df_inf["real_comment"].astype(str).str.strip()
+    df_inf = df_inf.dropna(subset=["human_comment", "generated_comment"])
+    df_inf["human_comment"] = df_inf["human_comment"].astype(str).str.strip()
     df_inf["generated_comment"] = df_inf["generated_comment"].astype(str).str.strip()
     before = len(df_inf)
     df_inf = df_inf[
-        (df_inf["real_comment"].str.split().str.len() >= INFORMAL_MIN_TOKENS) &
+        (df_inf["human_comment"].str.split().str.len() >= INFORMAL_MIN_TOKENS) &
         (df_inf["generated_comment"].str.split().str.len() >= INFORMAL_MIN_TOKENS)
     ]
     print(f"  Informal: removed {before - len(df_inf)} rows under {INFORMAL_MIN_TOKENS} words, {len(df_inf)} remaining")
-    groups["Informal Human"] = df_inf["real_comment"].tolist()
+    groups["Informal Human"] = df_inf["human_comment"].tolist()
     groups["Informal LLM"] = df_inf["generated_comment"].tolist()
 
     for name, texts in groups.items():
