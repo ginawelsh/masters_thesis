@@ -35,7 +35,7 @@ import pandas as pd
 
 RegisterName = Literal["formal", "informal"]
 
-_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 _DATA = os.path.join(_ROOT, "1_data_collection")
 _HUMAN_FORMAL = os.path.join(_DATA, "human_formal")
 _HUMAN_INFORMAL = os.path.join(_DATA, "human_informal")

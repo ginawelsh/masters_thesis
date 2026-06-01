@@ -36,10 +36,11 @@ import pandas as pd
 from scipy.spatial.distance import jensenshannon
 from scipy.stats import wasserstein_distance
 
-_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-_data = os.path.join(_root, "1_data_collection")
 _script_dir = os.path.dirname(os.path.abspath(__file__))
-FEATURES_DIR = os.path.join(_script_dir, "features")
+_2tas_dir = os.path.dirname(_script_dir)
+_root = os.path.dirname(_2tas_dir)
+_data = os.path.join(_root, "1_data_collection")
+FEATURES_DIR = os.path.join(_2tas_dir, "csv_files")
 
 POS_SEP = " | "
 

@@ -9,7 +9,7 @@ import pandas as pd
 from transformers import pipeline
 
 # Same input as linguistic_analysis.py
-_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 CSV_PATH = os.path.join(_root, "data_collection", "formal", "sv_abstracts_generated.csv")
 OUT_CSV_PATH = os.path.join(_root, "data_collection", "formal", "sentiment_analysis.csv")
 

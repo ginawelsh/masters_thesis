@@ -22,7 +22,7 @@ POS_SEP = " | "  # matches linguistic_analysis_pos_proportions.csv cells
 
 
 def get_paths(dataset: str):
-    root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
     data_dir = os.path.join(root, "1_data_collection", f"human_{dataset}")
     csv_path = os.path.join(data_dir, "linguistic_analysis_pos_differences.csv")
     proportions_csv = os.path.join(data_dir, "linguistic_analysis_pos_proportions.csv")

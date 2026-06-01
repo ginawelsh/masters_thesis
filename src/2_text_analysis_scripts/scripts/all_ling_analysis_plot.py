@@ -32,15 +32,16 @@ print("Modules imported.")
 # Paths
 # ---------------------------------------------------------------------------
 _script_dir = os.path.dirname(os.path.abspath(__file__))
-_root = os.path.dirname(_script_dir)
+_2tas_dir = os.path.dirname(_script_dir)
+_root = os.path.dirname(_2tas_dir)
 
 FORMAL_HUMAN_CSV = os.path.join(_root, "1_data_collection", "human_formal", "sv_human_collection_with_kws.csv")
 FORMAL_LLM_CSV = os.path.join(_root, "1_data_collection", "llm_formal", "abstracts", "sv_ai_generated_abstracts.csv")
 INFORMAL_CSV = os.path.join(_root, "1_data_collection", "llm_informal", "LLM_consolidated_reddit_comments_MAY26.csv")
 
-FIGURES_DIR = os.path.join(_script_dir, "figures")
-INFORMAL_FIGURES_DIR = os.path.join(_script_dir, "figures", "informal_comparison")
-FORMAL_FIGURES_DIR = os.path.join(_script_dir, "figures", "formal_comparison")
+FIGURES_DIR = os.path.join(_2tas_dir, "figures")
+INFORMAL_FIGURES_DIR = os.path.join(_2tas_dir, "figures", "informal_comparison")
+FORMAL_FIGURES_DIR = os.path.join(_2tas_dir, "figures", "formal_comparison")
 MODEL = "sv_core_news_sm"
 
 # ---------------------------------------------------------------------------

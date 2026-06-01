@@ -18,7 +18,7 @@ from matplotlib.patches import Patch, Ellipse
 
 MODEL = "sv_core_news_sm"
 
-_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 HUMAN_FORMAL_DIR = os.path.join(_root, "1_data_collection", "human_formal")
 LLM_FORMAL_DIR = os.path.join(_root, "1_data_collection", "llm_formal", "abstracts")
 LLM_INFORMAL_DIR = os.path.join(_root, "1_data_collection", "llm_informal")

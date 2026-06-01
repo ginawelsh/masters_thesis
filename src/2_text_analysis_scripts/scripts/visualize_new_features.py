@@ -33,8 +33,9 @@ import seaborn as sns
 warnings.filterwarnings("ignore", category=FutureWarning)
 
 _script_dir = os.path.dirname(os.path.abspath(__file__))
-FEAT_DIR    = os.path.join(_script_dir, "features")
-FIG_DIR     = os.path.join(_script_dir, "figures")
+_2tas_dir   = os.path.dirname(_script_dir)
+FEAT_DIR    = os.path.join(_2tas_dir, "csv_files")
+FIG_DIR     = os.path.join(_2tas_dir, "figures")
 
 PALETTE = {
     "Formal Human":   "#1565C0",

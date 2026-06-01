@@ -27,10 +27,11 @@ from data_utils import read_csv_robust
 
 MODEL = "sv_core_news_sm"
 
-_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-_data = os.path.join(_root, "1_data_collection")
 _script_dir = os.path.dirname(os.path.abspath(__file__))
-OUT_DIR = os.path.join(_script_dir, "features")
+_2tas_dir = os.path.dirname(_script_dir)
+_root = os.path.dirname(_2tas_dir)
+_data = os.path.join(_root, "1_data_collection")
+OUT_DIR = os.path.join(_2tas_dir, "csv_files")
 
 SUBORDINATE_DEPS = {
     "advcl", "relcl", "acl", "acl:relcl",
