@@ -30,6 +30,9 @@ MAX_COMMENTS_PER_POST = 5
 REQUEST_DELAY         = 1.2          # seconds between API calls
 OUT_FILE              = "NEW_REAL_reddit_comments.csv"
 
+# Column name used in the analysis scripts (resolve_config human_col)
+HUMAN_COL             = "real_comment"
+
 # Hard ceiling: ONLY comments strictly before 2017-01-01 00:00:00 UTC
 BEFORE_2017_TS        = 1483228800   # unix timestamp for 2017-01-01 00:00:00 UTC
 
@@ -239,9 +242,9 @@ def main():
 
             for c in comments:
                 all_rows.append({
-                    "question": question_text,
-                    "comment":  c["body"],
-                    "link":     c["link"],
+                    "question":   question_text,
+                    HUMAN_COL:    c["body"],
+                    "link":       c["link"],
                 })
 
             time.sleep(REQUEST_DELAY)
@@ -251,7 +254,7 @@ def main():
     out_path   = os.path.join(script_dir, OUT_FILE)
 
     with open(out_path, "w", newline="", encoding="utf-8-sig") as f:
-        writer = csv.DictWriter(f, fieldnames=["question", "comment", "link"],
+        writer = csv.DictWriter(f, fieldnames=["question", HUMAN_COL, "link"],
                                 quoting=csv.QUOTE_ALL)
         writer.writeheader()
         writer.writerows(all_rows)
