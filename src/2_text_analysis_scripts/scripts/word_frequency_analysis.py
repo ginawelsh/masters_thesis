@@ -37,9 +37,9 @@ def parse_args():
 def resolve_config(dataset: str) -> dict:
     if dataset == "informal":
         return {
-            "csv_path": os.path.join(LLM_INFORMAL_DIR, "reddit_comments_openai.csv"),
-            "human_col": "comment",
-            "ai_col": "Generated_OpenAI_Comment",
+            "csv_path": os.path.join(_root, "1_data_collection", "llm_comments", "consolidated_informal_comments.csv"),
+            "human_col": "human_comment",
+            "ai_col": "generated_comment",
             "human_label": "Human comment",
             "ai_label": "AI comment",
             "out_csv": os.path.join(OUT_DIR, "word_freq_informal.csv"),
