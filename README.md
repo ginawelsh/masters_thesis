@@ -35,29 +35,58 @@ Informal data: 208 Reddit comments + 1,014 Flashback comments (84 threads).
 
 ### Feature coverage (Table 3.3)
 
-| Feature | Script |
-|---|---|
-| Dependency distribution | `all_ling_analysis_plot.py` |
-| Dependency distance | `syntactic_complexity.py` |
-| Parse tree depth | `syntactic_complexity.py` |
-| Subordinate-clause rate | `syntactic_complexity.py` |
-| NER distribution | `all_ling_analysis_plot.py` |
-| POS distribution | `all_ling_analysis_plot.py` |
-| N-gram repetition rate | `stylometric_surface.py` |
-| Word length distribution | `stylometric_surface.py` |
-| Sentence length distribution | `all_ling_analysis_plot.py` |
-| Punctuation patterns | `stylometric_surface.py` |
-| Function-word frequencies | `stylometric_surface.py` |
-| Vocabulary richness (TTR, MATTR, MTLD) | `stylometric_surface.py` |
-| Affective extremity / polarity magnitude | `affective_analysis.py` |
-| Subjectivity vs objectivity | `affective_analysis.py` |
-| Emotion categories | `affective_analysis.py` |
-| Hedging markers | `pragmatic_markers.py` |
-| Boosters/intensifiers | `pragmatic_markers.py` |
-| Negation rate | `pragmatic_markers.py` |
-| Epistemic markers | `pragmatic_markers.py` |
-| Jensen–Shannon divergence | `distribution_distances.py` |
-| Wasserstein distance | `distribution_distances.py` |
+Organised by output CSV. All scripts accept `--dataset formal` or `--dataset informal`.
+
+**`syntactic_complexity_{dataset}.csv`** — `syntactic_complexity.py`
+
+| Feature |
+|---|
+| Dependency distance |
+| Parse tree depth |
+| Subordinate-clause rate |
+
+**`stylometric_surface_{dataset}.csv`** — `stylometric_surface.py`
+
+| Feature |
+|---|
+| N-gram repetition rate |
+| Word length distribution |
+| Punctuation patterns |
+| Function-word frequencies |
+| Vocabulary richness (TTR, MATTR, MTLD) |
+
+**`pragmatic_markers_{dataset}.csv`** — `pragmatic_markers.py`
+
+| Feature |
+|---|
+| Hedging markers |
+| Boosters/intensifiers |
+| Negation rate |
+| Epistemic markers |
+
+**`affective_analysis_{dataset}.csv`** — `affective_analysis.py`
+
+| Feature |
+|---|
+| Affective extremity / polarity magnitude |
+| Subjectivity vs objectivity |
+| Emotion categories |
+
+**`distribution_distances_{dataset}.csv`** — `distribution_distances.py`
+
+| Feature |
+|---|
+| Jensen–Shannon divergence |
+| Wasserstein distance |
+
+**`figures/data_{pos,dep,ner,token}*.csv`** — `all_ling_analysis_plot.py`
+
+| Feature |
+|---|
+| POS distribution |
+| Dependency distribution |
+| NER distribution |
+| Sentence length distribution |
 
 ### Additional scripts
 
