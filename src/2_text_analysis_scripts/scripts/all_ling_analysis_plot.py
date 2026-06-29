@@ -36,8 +36,8 @@ _2tas_dir = os.path.dirname(_script_dir)
 _root = os.path.dirname(_2tas_dir)
 
 FORMAL_HUMAN_CSV = os.path.join(_root, "1_data_collection", "human_formal", "sv_human_collection_with_kws.csv")
-FORMAL_LLM_CSV = os.path.join(_root, "1_data_collection", "llm_formal", "abstracts", "sv_ai_generated_abstracts.csv")
-INFORMAL_CSV = os.path.join(_root, "1_data_collection", "llm_informal", "LLM_consolidated_reddit_comments_MAY26.csv")
+FORMAL_LLM_CSV = os.path.join(_root, "1_data_collection", "llm_abstracts", "abstracts", "sv_ai_generated_abstracts.csv")
+INFORMAL_CSV = os.path.join(_root, "1_data_collection", "llm_comments", "consolidated_informal_comments.csv")
 
 FIGURES_DIR = os.path.join(_2tas_dir, "figures")
 INFORMAL_FIGURES_DIR = os.path.join(_2tas_dir, "figures", "informal_comparison")
@@ -59,6 +59,7 @@ GROUP_COLORS = {
 TOP_N_POS = 10
 TOP_N_DEP = 12
 INFORMAL_MIN_TOKENS = 3  # rows where either informal text has fewer words are excluded
+NER_MIN_TOKENS = 20      # secondary NER analysis threshold — filters informal pairs where either text is shorter
 
 SENTIMENT_MODEL = "KBLab/robust-swedish-sentiment-multiclass"
 SENTIMENT_LABELS = ["POSITIVE", "NEUTRAL", "NEGATIVE"]
@@ -417,33 +418,61 @@ def plot_dep(group_results: dict, out_dir: str) -> None:
 
 
 def plot_ner(group_results: dict, out_dir: str) -> None:
-    """Fig 3 — NER entity-type rate per 100 content tokens."""
-    # sv model labels: PER, ORG, LOC, MISC
+    """Fig 3 — NER entity-type rate per 100 content tokens (full sample + filtered)."""
     all_labels: set[str] = set()
     for group in GROUP_ORDER:
-        rates = aggregate_rate_per_100(
-            group_results[group]["ent"],
-            group_results[group]["lengths"],
+        all_labels.update(
+            aggregate_rate_per_100(group_results[group]["ent"], group_results[group]["lengths"]).keys()
         )
-        all_labels.update(rates.keys())
-
     sorted_labels = sorted(all_labels)
 
-    data = {}
+    # Full-sample rates
+    data_full = {}
     for group in GROUP_ORDER:
-        rates = aggregate_rate_per_100(
-            group_results[group]["ent"],
-            group_results[group]["lengths"],
-        )
-        data[group] = {label: rates.get(label, 0.0) for label in sorted_labels}
+        rates = aggregate_rate_per_100(group_results[group]["ent"], group_results[group]["lengths"])
+        data_full[group] = {label: rates.get(label, 0.0) for label in sorted_labels}
 
-    _save_tag_data_csv(data, os.path.join(out_dir, "data_ner_distribution.csv"))
+    # Filtered rates: keep only informal pairs where BOTH texts have >= NER_MIN_TOKENS content tokens.
+    # Informal Human and Informal LLM share the same index (loaded from the same paired dataframe row).
+    inf_h_lengths = group_results["Informal Human"]["lengths"]
+    inf_l_lengths = group_results["Informal LLM"]["lengths"]
+    keep_idx = [i for i, (lh, ll) in enumerate(zip(inf_h_lengths, inf_l_lengths))
+                if lh >= NER_MIN_TOKENS and ll >= NER_MIN_TOKENS]
+    n_kept = len(keep_idx)
+    n_total_inf = len(inf_h_lengths)
+    print(f"  NER filter: {n_kept}/{n_total_inf} informal pairs retained (both >= {NER_MIN_TOKENS} tokens)")
+
+    data_filtered = {}
+    for group in GROUP_ORDER:
+        if group in INFORMAL_GROUPS:
+            ent_f = [group_results[group]["ent"][i] for i in keep_idx]
+            lengths_f = [group_results[group]["lengths"][i] for i in keep_idx]
+        else:
+            ent_f = group_results[group]["ent"]
+            lengths_f = group_results[group]["lengths"]
+        rates = aggregate_rate_per_100(ent_f, lengths_f)
+        data_filtered[group] = {label: rates.get(label, 0.0) for label in sorted_labels}
+
+    _save_tag_data_csv(data_full, os.path.join(out_dir, "data_ner_distribution.csv"))
+    _save_tag_data_csv(data_filtered, os.path.join(out_dir, f"data_ner_distribution_min{NER_MIN_TOKENS}.csv"))
+
     fig, ax = plt.subplots(figsize=(8, 5))
-    grouped_bar(ax, data, "Mean entities per 100 tokens", "Named entity type rate by group",
-                y_fmt="{:.2f}")
+    grouped_bar(ax, data_full, "Mean entities per 100 tokens",
+                "Named entity type rate by group (all comments)", y_fmt="{:.2f}")
     ax.yaxis.set_major_formatter(mticker.FuncFormatter(lambda v, _: f"{v:.2f}"))
     fig.tight_layout()
     path = os.path.join(out_dir, "fig_ner_distribution.png")
+    fig.savefig(path)
+    plt.close(fig)
+    print(f"Saved {path}")
+
+    fig, ax = plt.subplots(figsize=(8, 5))
+    grouped_bar(ax, data_filtered, "Mean entities per 100 tokens",
+                f"Named entity type rate by group (informal >= {NER_MIN_TOKENS} tokens, n={n_kept})",
+                y_fmt="{:.2f}")
+    ax.yaxis.set_major_formatter(mticker.FuncFormatter(lambda v, _: f"{v:.2f}"))
+    fig.tight_layout()
+    path = os.path.join(out_dir, f"fig_ner_distribution_min{NER_MIN_TOKENS}.png")
     fig.savefig(path)
     plt.close(fig)
     print(f"Saved {path}")
@@ -730,6 +759,35 @@ def _plot_pair_comparison(group_results: dict, groups: list[str], colors: dict[s
     plt.close(fig)
     print(f"Saved {path}")
 
+    # Filtered NER (informal only) — keep pairs where BOTH texts have >= NER_MIN_TOKENS tokens
+    if set(groups) == set(INFORMAL_GROUPS):
+        lengths_a = group_results[groups[0]]["lengths"]
+        lengths_b = group_results[groups[1]]["lengths"]
+        keep_idx = [i for i, (la, lb) in enumerate(zip(lengths_a, lengths_b))
+                    if la >= NER_MIN_TOKENS and lb >= NER_MIN_TOKENS]
+        n_kept = len(keep_idx)
+        n_total = len(lengths_a)
+        print(f"  NER filter ({prefix}): {n_kept}/{n_total} pairs retained (both >= {NER_MIN_TOKENS} tokens)")
+
+        ner_data_f = {}
+        for g in groups:
+            ent_f = [group_results[g]["ent"][i] for i in keep_idx]
+            lengths_f = [group_results[g]["lengths"][i] for i in keep_idx]
+            rates = aggregate_rate_per_100(ent_f, lengths_f)
+            ner_data_f[g] = {lbl: rates.get(lbl, 0.0) for lbl in sorted_labels}
+
+        _save_tag_data_csv(ner_data_f, os.path.join(out_dir, f"{prefix}_ner_distribution_min{NER_MIN_TOKENS}.csv"))
+        fig, ax = plt.subplots(figsize=(7, 5))
+        _two_group_bar(ax, ner_data_f, "Mean entities per 100 tokens",
+                       f"NER entity type rate — {g1} vs {g2} (>= {NER_MIN_TOKENS} tokens, n={n_kept})",
+                       groups=groups, colors=colors, y_fmt="{:.2f}")
+        ax.yaxis.set_major_formatter(mticker.FuncFormatter(lambda v, _: f"{v:.2f}"))
+        fig.tight_layout()
+        path = os.path.join(out_dir, f"{prefix}_ner_distribution_min{NER_MIN_TOKENS}.png")
+        fig.savefig(path)
+        plt.close(fig)
+        print(f"Saved {path}")
+
     # --- Token length violin ---
     fig, ax = plt.subplots(figsize=(7, 5))
     data_lists = [group_results[g]["lengths"] for g in groups]
@@ -812,6 +870,12 @@ def plot_formal_comparison(group_results: dict, out_dir: str) -> None:
 # ---------------------------------------------------------------------------
 
 def main() -> None:
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--skip-sentiment", action="store_true",
+                        help="Skip the HuggingFace sentiment model (faster reruns)")
+    args = parser.parse_args()
+
     os.makedirs(FIGURES_DIR, exist_ok=True)
 
     print("Loading texts...")
@@ -850,22 +914,25 @@ def main() -> None:
     print("\nGenerating formal comparison figures...")
     plot_formal_comparison(group_results, FORMAL_FIGURES_DIR)
 
-    print(f"\nLoading sentiment model '{SENTIMENT_MODEL}'...")
-    sentiment_pipe = load_sentiment_pipeline()
+    if args.skip_sentiment:
+        print("\nSkipping sentiment analysis (--skip-sentiment).")
+    else:
+        print(f"\nLoading sentiment model '{SENTIMENT_MODEL}'...")
+        sentiment_pipe = load_sentiment_pipeline()
 
-    print("\nRunning sentiment analysis...")
-    group_sentiment: dict[str, Counter] = {}
-    for group in GROUP_ORDER:
-        print(f"  Sentiment: {group} ({len(groups[group])} texts)...")
-        group_sentiment[group] = process_sentiment(sentiment_pipe, groups[group])
-        counts = group_sentiment[group]
-        total = sum(counts.values())
-        print(f"    {', '.join(f'{lbl}: {counts.get(lbl,0)/total:.0%}' for lbl in SENTIMENT_LABELS)}")
+        print("\nRunning sentiment analysis...")
+        group_sentiment: dict[str, Counter] = {}
+        for group in GROUP_ORDER:
+            print(f"  Sentiment: {group} ({len(groups[group])} texts)...")
+            group_sentiment[group] = process_sentiment(sentiment_pipe, groups[group])
+            counts = group_sentiment[group]
+            total = sum(counts.values())
+            print(f"    {', '.join(f'{lbl}: {counts.get(lbl,0)/total:.0%}' for lbl in SENTIMENT_LABELS)}")
 
-    print("\nGenerating sentiment figures...")
-    plot_sentiment(group_sentiment, FIGURES_DIR)
-    plot_sentiment_pair(group_sentiment, INFORMAL_GROUPS, prefix="inf", out_dir=INFORMAL_FIGURES_DIR)
-    plot_sentiment_pair(group_sentiment, FORMAL_GROUPS, prefix="frm", out_dir=FORMAL_FIGURES_DIR)
+        print("\nGenerating sentiment figures...")
+        plot_sentiment(group_sentiment, FIGURES_DIR)
+        plot_sentiment_pair(group_sentiment, INFORMAL_GROUPS, prefix="inf", out_dir=INFORMAL_FIGURES_DIR)
+        plot_sentiment_pair(group_sentiment, FORMAL_GROUPS, prefix="frm", out_dir=FORMAL_FIGURES_DIR)
 
     print(f"\nDone.")
     print(f"  All-group figures  → {FIGURES_DIR}")
