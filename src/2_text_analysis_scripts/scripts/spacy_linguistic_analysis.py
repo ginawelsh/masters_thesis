@@ -21,9 +21,9 @@ MODEL = "sv_core_news_lg"
 # NOTE: This repo currently stores outputs under `src/1_data_collection/...`.
 # Some older paths in this script referenced `src/data_collection/...`.
 _root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-HUMAN_FORMAL_DIR = os.path.join(_root, "1_data_collection", "human_formal")
-HUMAN_INFORMAL_DIR = os.path.join(_root, "1_data_collection", "human_informal")
-LLM_INFORMAL_DIR = os.path.join(_root, "1_data_collection", "llm_informal")
+HUMAN_FORMAL_DIR = os.path.join(_root, "1_data_collection", "human_abstracts")
+HUMAN_INFORMAL_DIR = os.path.join(_root, "1_data_collection", "human_comments")
+LLM_INFORMAL_DIR = os.path.join(_root, "1_data_collection", "llm_comments")
 
 TOKEN_SEP = ","  # separator for tokens/POS in CSV cells
 POS_SEP = " | "  # separator for TAG:n lists in CSV cells (matches existing checked-in counts file)
@@ -44,7 +44,7 @@ def parse_args():
 
 def resolve_config(dataset: str) -> dict:
     if dataset == "informal":
-        input_csv = os.path.join(LLM_INFORMAL_DIR, "reddit_comments_openai.csv")
+        input_csv = os.path.join(LLM_INFORMAL_DIR, "consolidated_informal_comments.csv")
         output_dir = HUMAN_INFORMAL_DIR
         return {
             "csv_path": input_csv,
@@ -57,8 +57,8 @@ def resolve_config(dataset: str) -> dict:
             "out_dep_counts": os.path.join(output_dir, "linguistic_analysis_dep_counts.csv"),
             "out_entities": os.path.join(output_dir, "linguistic_analysis_entities.csv"),
             "out_entity_counts": os.path.join(output_dir, "linguistic_analysis_entity_counts.csv"),
-            "human_col": "comment",
-            "generated_col_candidates": ["Generated_OpenAI_Comment"],
+            "human_col": "human_comment",
+            "generated_col_candidates": ["generated_comment"],
             "human_label": "Comment",
             "generated_label": "Generated Comment",
         }
