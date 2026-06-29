@@ -1,9 +1,9 @@
 """
 Linguistic analysis (spaCy) on Abstract and Generated Abstract from formal CSV.
 Install: pip install -r requirements.txt
-Swedish: python -m spacy download sv_core_news_sm
+Swedish: python -m spacy download sv_core_news_lg
 
-The sv_core_news_sm model supports:
+The sv_core_news_lg model supports:
   - POS tagging  (already in pipeline)
   - Dependency parsing  (arc labels: ROOT, nsubj, obj, nmod, …)
   - Named entity recognition  (PER, ORG, LOC, MISC)
@@ -16,7 +16,7 @@ import pandas as pd
 import spacy
 
 # Use Swedish small model for thesis data
-MODEL = "sv_core_news_sm"
+MODEL = "sv_core_news_lg"
 
 # NOTE: This repo currently stores outputs under `src/1_data_collection/...`.
 # Some older paths in this script referenced `src/data_collection/...`.
@@ -138,7 +138,7 @@ def parse_dep_counts_string(s: str) -> Counter:
 def entity_counts_string(doc) -> str:
     """Return entity-type counts as 'TYPE:n | TYPE:n | ...' sorted by label.
 
-    Swedish sv_core_news_sm labels: PER, ORG, LOC, MISC.
+    Swedish sv_core_news_lg labels: PER, ORG, LOC, MISC.
     """
     if doc is None:
         return ""

@@ -9,7 +9,7 @@ Groups
   Informal Human  — LLM_consolidated_reddit_comments.csv  (real_comment)
   Informal LLM    — LLM_consolidated_reddit_comments.csv  (generated_comment)
 
-Swedish spaCy model: python -m spacy download sv_core_news_sm
+Swedish spaCy model: python -m spacy download sv_core_news_lg
 Sentiment model:     pip install transformers torch
                      KBLab/robust-swedish-sentiment-multiclass (downloaded automatically)
 
@@ -42,7 +42,7 @@ INFORMAL_CSV = os.path.join(_root, "1_data_collection", "llm_comments", "consoli
 FIGURES_DIR = os.path.join(_2tas_dir, "figures")
 INFORMAL_FIGURES_DIR = os.path.join(_2tas_dir, "figures", "informal_comparison")
 FORMAL_FIGURES_DIR = os.path.join(_2tas_dir, "figures", "formal_comparison")
-MODEL = "sv_core_news_sm"
+MODEL = "sv_core_news_lg"
 
 # ---------------------------------------------------------------------------
 # Styling

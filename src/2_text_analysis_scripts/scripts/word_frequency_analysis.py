@@ -16,7 +16,7 @@ import spacy
 import matplotlib.pyplot as plt
 from matplotlib.patches import Patch, Ellipse
 
-MODEL = "sv_core_news_sm"
+MODEL = "sv_core_news_lg"
 
 _root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 HUMAN_FORMAL_DIR = os.path.join(_root, "1_data_collection", "human_formal")

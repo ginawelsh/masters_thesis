@@ -103,7 +103,7 @@ Organised by output CSV. All scripts accept `--dataset formal` or `--dataset inf
 Install dependencies:
 ```
 pip install -r src/2_text_analysis_scripts/requirements.txt
-python -m spacy download sv_core_news_sm
+python -m spacy download sv_core_news_lg
 ```
 
 Main linguistic analysis (POS, DEP, NER, token length):
@@ -123,6 +123,6 @@ python src/2_text_analysis_scripts/scripts/distribution_distances.py
 
 ## NER notes
 
-NER uses the Swedish SUC tagset via `sv_core_news_sm`: PRS (person), ORG (organisation), LOC (location), TME (time), MSR (measure), WRK (work of art), OBJ (object).
+NER uses the Swedish SUC tagset via `sv_core_news_lg`: PRS (person), ORG (organisation), LOC (location), TME (time), MSR (measure), WRK (work of art), OBJ (object).
 
 Values are **rates per 100 content tokens**, not proportions — values above 1.0 are expected. Two outputs are generated: full sample and a filtered version (`min20`) keeping only informal pairs where both texts have ≥ 20 content tokens, to reduce inflation from very short comments (median informal comment: 31 tokens, Q1: 15 tokens).

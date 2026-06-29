@@ -23,7 +23,7 @@ import spacy
 
 from data_utils import read_csv_robust
 
-MODEL = "sv_core_news_sm"
+MODEL = "sv_core_news_lg"
 MATTR_WINDOW = 100
 MTLD_THRESHOLD = 0.72
 

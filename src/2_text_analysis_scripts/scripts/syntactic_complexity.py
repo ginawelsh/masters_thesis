@@ -25,7 +25,7 @@ import spacy
 
 from data_utils import read_csv_robust
 
-MODEL = "sv_core_news_sm"
+MODEL = "sv_core_news_lg"
 
 _script_dir = os.path.dirname(os.path.abspath(__file__))
 _2tas_dir = os.path.dirname(_script_dir)
