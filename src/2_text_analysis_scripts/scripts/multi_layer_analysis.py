@@ -37,8 +37,8 @@ RegisterName = Literal["formal", "informal"]
 
 _ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 _DATA = os.path.join(_ROOT, "1_data_collection")
-_HUMAN_FORMAL = os.path.join(_DATA, "human_formal")
-_HUMAN_INFORMAL = os.path.join(_DATA, "human_informal")
+_HUMAN_FORMAL = os.path.join(_DATA, "human_abstracts")
+_HUMAN_INFORMAL = os.path.join(_DATA, "human_comments")
 
 DEFAULT_SOURCES: dict[str, dict] = {
     "formal": {
@@ -339,6 +339,8 @@ def run_register(
     max_docs: Optional[int],
     skip_bertopic: bool,
     skip_discourse_plots: bool,
+    skip_embeddings: bool = False,
+    skip_morphology: bool = False,
 ) -> None:
     out_dir = os.path.join(output_base, register)
     os.makedirs(out_dir, exist_ok=True)
@@ -348,22 +350,28 @@ def run_register(
 
     print(f"[{register}] Loaded {len(bundle.texts)} documents → {out_dir}")
 
-    print(f"[{register}] Morphology & syntax (spaCy + Stanza)...")
-    morph_df = analyze_morphology_syntax(bundle)
-    morph_df.to_csv(os.path.join(out_dir, "morphology_syntax.csv"), index=False, encoding="utf-8")
+    if not skip_morphology:
+        print(f"[{register}] Morphology & syntax (spaCy + Stanza)...")
+        morph_df = analyze_morphology_syntax(bundle)
+        morph_df.to_csv(os.path.join(out_dir, "morphology_syntax.csv"), index=False, encoding="utf-8")
+    else:
+        print(f"[{register}] Skipping morphology & syntax (--skip-morphology).")
 
-    print(f"[{register}] Discourse (Sentence Transformers + PCA)...")
-    analyze_discourse_embeddings(
-        bundle,
-        output_dir=out_dir,
-        save_plot=not skip_discourse_plots,
-    )
+    if not skip_embeddings:
+        print(f"[{register}] Discourse (Sentence Transformers + PCA)...")
+        analyze_discourse_embeddings(
+            bundle,
+            output_dir=out_dir,
+            save_plot=not skip_discourse_plots,
+        )
+    else:
+        print(f"[{register}] Skipping discourse embeddings (--skip-embeddings).")
 
     print(f"[{register}] Content (textstat + BERTopic)...")
     analyze_content_bertopic_textstat(
         bundle,
         output_dir=out_dir,
-        skip_bertopic=skip_bertopic,
+        skip_bertopic=skip_bertopic if not skip_embeddings else True,
     )
 
 
@@ -398,6 +406,16 @@ def parse_args():
         action="store_true",
         help="Skip PCA scatter PNG (still saves embeddings .npy and CSV)",
     )
+    p.add_argument(
+        "--skip-embeddings",
+        action="store_true",
+        help="Skip all embedding-based analyses (discourse PCA + BERTopic); run only morphology/syntax",
+    )
+    p.add_argument(
+        "--skip-morphology",
+        action="store_true",
+        help="Skip spaCy + Stanza morphology/syntax analysis",
+    )
     return p.parse_args()
 
 
@@ -413,6 +431,8 @@ def main():
             max_docs=args.max_docs,
             skip_bertopic=args.skip_bertopic,
             skip_discourse_plots=args.skip_discourse_plots,
+            skip_embeddings=args.skip_embeddings,
+            skip_morphology=args.skip_morphology,
         )
     print("Done.")
 
