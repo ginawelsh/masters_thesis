@@ -48,15 +48,15 @@ def parse_args():
 def resolve_config(dataset):
     if dataset == "informal":
         return {
-            "csv": os.path.join(_data, "llm_comments", "consolidated_informal_comments.csv"),
+            "csv": os.path.join(_data, "llm_comments", "consolidated_informal_comments_JUN26.csv"),
             "human_col": "human_comment",
             "llm_col": "generated_comment",
             "min_tokens": 5,
         }
     return {
-        "csv": os.path.join(_data, "llm_abstracts", "abstracts", "sv_ai_generated_abstracts.csv"),
-        "human_col": "Human_Abstract",
-        "llm_col": "AI_Abstract",
+        "csv": os.path.join(_data, "llm_abstracts", "abstracts", "sv_abstracts_openai_2.csv"),
+        "human_col": "Abstract",
+        "llm_col": "Generated_OpenAI_Abstract",
         "min_tokens": 30,
     }
 

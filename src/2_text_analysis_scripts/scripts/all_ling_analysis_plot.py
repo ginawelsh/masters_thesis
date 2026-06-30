@@ -36,8 +36,8 @@ _2tas_dir = os.path.dirname(_script_dir)
 _root = os.path.dirname(_2tas_dir)
 
 FORMAL_HUMAN_CSV = os.path.join(_root, "1_data_collection", "human_formal", "sv_human_collection_with_kws.csv")
-FORMAL_LLM_CSV = os.path.join(_root, "1_data_collection", "llm_abstracts", "abstracts", "sv_ai_generated_abstracts.csv")
-INFORMAL_CSV = os.path.join(_root, "1_data_collection", "llm_comments", "consolidated_informal_comments.csv")
+FORMAL_LLM_CSV = os.path.join(_root, "1_data_collection", "llm_abstracts", "abstracts", "sv_abstracts_openai_2.csv")
+INFORMAL_CSV = os.path.join(_root, "1_data_collection", "llm_comments", "consolidated_informal_comments_JUN26.csv")
 
 FIGURES_DIR = os.path.join(_2tas_dir, "figures")
 INFORMAL_FIGURES_DIR = os.path.join(_2tas_dir, "figures", "informal_comparison")
@@ -83,11 +83,11 @@ def load_texts() -> dict[str, list[str]]:
 
     # Formal — both columns from same paired file so counts always match
     df_fl = pd.read_csv(FORMAL_LLM_CSV, encoding="utf-8", on_bad_lines="warn")
-    df_fl = df_fl.dropna(subset=["Human_Abstract", "AI_Abstract"])
-    df_fl["Human_Abstract"] = df_fl["Human_Abstract"].astype(str).str.strip()
-    df_fl["AI_Abstract"] = df_fl["AI_Abstract"].astype(str).str.strip()
-    groups["Formal Human"] = df_fl["Human_Abstract"].tolist()
-    groups["Formal LLM"] = df_fl["AI_Abstract"].tolist()
+    df_fl = df_fl.dropna(subset=["Abstract", "Generated_OpenAI_Abstract"])
+    df_fl["Abstract"] = df_fl["Abstract"].astype(str).str.strip()
+    df_fl["Generated_OpenAI_Abstract"] = df_fl["Generated_OpenAI_Abstract"].astype(str).str.strip()
+    groups["Formal Human"] = df_fl["Abstract"].tolist()
+    groups["Formal LLM"] = df_fl["Generated_OpenAI_Abstract"].tolist()
 
     # Informal — both columns from same file; filter rows where either text is too short
     df_inf = pd.read_csv(INFORMAL_CSV, encoding="utf-8")

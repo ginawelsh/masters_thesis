@@ -47,7 +47,7 @@ DEFAULT_SOURCES: dict[str, dict] = {
         "context_columns": ["Year", "Level", "Title", "Topic Category"],
     },
     "informal": {
-        "csv_path": os.path.join(_DATA, "llm_comments", "consolidated_informal_comments.csv"),
+        "csv_path": os.path.join(_DATA, "llm_comments", "consolidated_informal_comments_JUN26.csv"),
         "text_column": "human_comment",
         "prepend_column": "question",
         "context_columns": ["source", "topic"],

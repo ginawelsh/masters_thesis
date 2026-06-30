@@ -112,8 +112,8 @@ def wass(series_a, series_b):
 def _counts_paths(dataset):
     """Return (dir, human_prefix) for the existing spaCy counts files."""
     if dataset == "formal":
-        return os.path.join(_data, "human_abstracts"), "Abstract"
-    return os.path.join(_data, "human_comments"), "Abstract"  # same prefix used by spacy_linguistic_analysis
+        return os.path.join(_2tas_dir, "results", "formal"), "Abstract"
+    return os.path.join(_2tas_dir, "results", "informal"), "Abstract"
 
 
 def categorical_js(dataset):

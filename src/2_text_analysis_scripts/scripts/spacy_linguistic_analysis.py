@@ -20,10 +20,13 @@ MODEL = "sv_core_news_lg"
 
 # NOTE: This repo currently stores outputs under `src/1_data_collection/...`.
 # Some older paths in this script referenced `src/data_collection/...`.
-_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+_script_dir = os.path.dirname(os.path.abspath(__file__))
+_2tas_dir = os.path.dirname(_script_dir)
+_root = os.path.dirname(_2tas_dir)
 HUMAN_FORMAL_DIR = os.path.join(_root, "1_data_collection", "human_abstracts")
-HUMAN_INFORMAL_DIR = os.path.join(_root, "1_data_collection", "human_comments")
 LLM_INFORMAL_DIR = os.path.join(_root, "1_data_collection", "llm_comments")
+RESULTS_FORMAL_DIR = os.path.join(_2tas_dir, "results", "formal")
+RESULTS_INFORMAL_DIR = os.path.join(_2tas_dir, "results", "informal")
 
 TOKEN_SEP = ","  # separator for tokens/POS in CSV cells
 POS_SEP = " | "  # separator for TAG:n lists in CSV cells (matches existing checked-in counts file)
@@ -44,8 +47,9 @@ def parse_args():
 
 def resolve_config(dataset: str) -> dict:
     if dataset == "informal":
-        input_csv = os.path.join(LLM_INFORMAL_DIR, "consolidated_informal_comments.csv")
-        output_dir = HUMAN_INFORMAL_DIR
+        input_csv = os.path.join(LLM_INFORMAL_DIR, "consolidated_informal_comments_JUN26.csv")
+        output_dir = RESULTS_INFORMAL_DIR
+        os.makedirs(output_dir, exist_ok=True)
         return {
             "csv_path": input_csv,
             "out_tokens": os.path.join(output_dir, "linguistic_analysis_tokens.csv"),
@@ -64,7 +68,8 @@ def resolve_config(dataset: str) -> dict:
         }
 
     input_csv = os.path.join(HUMAN_FORMAL_DIR, "sv_human_collection_with_kws.csv")
-    output_dir = HUMAN_FORMAL_DIR
+    output_dir = RESULTS_FORMAL_DIR
+    os.makedirs(output_dir, exist_ok=True)
     return {
         "csv_path": input_csv,
         "out_tokens": os.path.join(output_dir, "linguistic_analysis_tokens.csv"),

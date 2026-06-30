@@ -37,7 +37,7 @@ def parse_args():
 def resolve_config(dataset: str) -> dict:
     if dataset == "informal":
         return {
-            "csv_path": os.path.join(_root, "1_data_collection", "llm_comments", "consolidated_informal_comments.csv"),
+            "csv_path": os.path.join(_root, "1_data_collection", "llm_comments", "consolidated_informal_comments_JUN26.csv"),
             "human_col": "human_comment",
             "ai_col": "generated_comment",
             "human_label": "Human comment",
@@ -46,9 +46,9 @@ def resolve_config(dataset: str) -> dict:
             "out_png": os.path.join(OUT_DIR, "word_freq_informal.png"),
         }
     return {
-        "csv_path": os.path.join(LLM_FORMAL_DIR, "sv_ai_generated_abstracts.csv"),
-        "human_col": "Human_Abstract",
-        "ai_col": "AI_Abstract",
+        "csv_path": os.path.join(LLM_FORMAL_DIR, "sv_abstracts_openai_2.csv"),
+        "human_col": "Abstract",
+        "ai_col": "Generated_OpenAI_Abstract",
         "human_label": "Human abstract",
         "ai_label": "AI abstract",
         "out_csv": os.path.join(OUT_DIR, "word_freq_formal.csv"),
