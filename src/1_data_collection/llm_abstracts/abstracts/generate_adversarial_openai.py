@@ -8,11 +8,12 @@ so length/style differences reflect the prompt, not model/run drift:
   detector_aware  - adversarial targeting the stylometric/detection signals
                     (sentence-length variation, no formulaic connectives, less hedging)
 
-Input / output: sv_abstracts_openai_2.csv  (170 rows; already has Title, Keywords,
-Abstract, Generated_OpenAI_Abstract). Three columns are appended:
+Input:  sv_abstracts_openai_2.csv  (170 rows; has Title, Keywords, Abstract).
+Output: sv_abstracts_adversarial.csv, with three generated columns added:
   Abstract_baseline, Abstract_human_like, Abstract_detector_aware
-The pre-existing Generated_OpenAI_Abstract column (older baseline run) is carried through
-untouched, so the freshly generated Abstract_baseline can be compared against it.
+The older-run Generated_OpenAI_Abstract column is dropped on write; Abstract_baseline
+(freshly generated under identical settings) is the sole baseline. Generated text is
+normalized to a single block to match the human abstracts' formatting.
 
 Output is written to sv_abstracts_adversarial.csv (the input file is left untouched).
 Generation is cached per (row, condition) in _gen_cache_adversarial.csv so the run can
@@ -66,9 +67,8 @@ _DETECTOR_AWARE = (
 )
 
 # All three conditions are generated here under identical settings (independent one-shot
-# calls), so length/style differences can't be blamed on model/run drift. The existing
-# Generated_OpenAI_Abstract column (from the earlier baseline run) is left untouched; the
-# freshly generated baseline lands in Abstract_baseline for an old-vs-new comparison.
+# calls), so length/style differences can't be blamed on model/run drift. The older-run
+# Generated_OpenAI_Abstract column is dropped on write; Abstract_baseline is the sole baseline.
 CONDITIONS = {
     "baseline": lambda t, k: _BASE.format(title=t, keywords=k),
     "human_like": lambda t, k: _BASE.format(title=t, keywords=k) + _HUMAN_LIKE,

@@ -12,10 +12,12 @@ Affective and expressive features:
 Sentiment model: KBLab/robust-swedish-sentiment-multiclass
 Emotion model:   joeddav/xlm-roberta-large-xnli  (multilingual zero-shot NLI)
 
+Informal register only: formal abstracts are near-uniformly neutral, so sentiment/emotion
+carries almost no variance there and is not analysed for abstracts.
+
 Usage:
-  python src/2_text_analysis_scripts/affective_analysis.py --dataset formal
   python src/2_text_analysis_scripts/affective_analysis.py --dataset informal
-  python src/2_text_analysis_scripts/affective_analysis.py --dataset formal --skip-emotion
+  python src/2_text_analysis_scripts/affective_analysis.py --dataset informal --skip-emotion
 """
 import argparse
 import os
@@ -23,7 +25,7 @@ import os
 import numpy as np
 import pandas as pd
 
-from data_utils import read_csv_robust
+from data_utils import read_csv_robust, resolve_conditions, condition_tag
 
 _script_dir = os.path.dirname(os.path.abspath(__file__))
 _2tas_dir = os.path.dirname(_script_dir)
@@ -39,24 +41,20 @@ NEUTRAL_LABELS = {"NEUTRAL", "neutral", "NEU"}
 
 
 def parse_args():
-    p = argparse.ArgumentParser(description="Affective and expressive analysis")
-    p.add_argument("--dataset", choices=["formal", "informal"], default="formal")
+    p = argparse.ArgumentParser(description="Affective and expressive analysis (informal register only)")
+    # Formal abstracts are near-uniformly neutral, so sentiment/emotion has almost no
+    # variance there; this analysis is restricted to the informal register.
+    p.add_argument("--dataset", choices=["informal"], default="informal")
     p.add_argument("--skip-emotion", action="store_true",
                    help="Skip zero-shot emotion classification (saves ~10 min)")
     return p.parse_args()
 
 
 def resolve_config(dataset):
-    if dataset == "informal":
-        return {
-            "csv": os.path.join(_data, "llm_comments", "consolidated_informal_comments_JUN26.csv"),
-            "human_col": "human_comment",
-            "llm_col": "generated_comment",
-        }
     return {
-        "csv": os.path.join(_data, "llm_abstracts", "abstracts", "sv_abstracts_openai_2.csv"),
-        "human_col": "Abstract",
-        "llm_col": "Generated_OpenAI_Abstract",
+        "csv": os.path.join(_data, "llm_comments", "consolidated_informal_comments_JUN26.csv"),
+        "human_col": "human_comment",
+        "llm_col": "generated_comment",
     }
 
 
@@ -118,41 +116,54 @@ def main():
 
     df = read_csv_robust(cfg["csv"])
     os.makedirs(OUT_DIR, exist_ok=True)
-
-    rows = []
     n = len(df)
+
+    def feats(text):
+        """Sentiment + (optional) emotion metrics for one text, without a human_/llm_ prefix."""
+        out = {}
+        label, score, extremity, is_subjective = run_sentiment(sent_pipe, text)
+        out["sentiment_label"] = label
+        out["sentiment_score"] = score
+        out["affective_extremity"] = extremity
+        out["is_subjective"] = is_subjective
+        if emo_pipe is not None:
+            for emo_lbl, emo_sc in run_emotion_zsc(emo_pipe, text).items():
+                out[f"emotion_{emo_lbl}"] = emo_sc
+        return out
+
+    # the human side is identical across conditions -> score it once and reuse
+    print("scoring human texts…", flush=True)
+    human_feats = []
     for i, row in df.iterrows():
         print(f"  {i + 1}/{n}", end="\r", flush=True)
-        out_row = {}
-
-        for prefix, col in [("human", cfg["human_col"]), ("llm", cfg["llm_col"])]:
-            text = row.get(col)
-            label, score, extremity, is_subjective = run_sentiment(sent_pipe, text)
-
-            out_row[f"{prefix}_sentiment_label"] = label
-            out_row[f"{prefix}_sentiment_score"] = score
-            out_row[f"{prefix}_affective_extremity"] = extremity
-            out_row[f"{prefix}_is_subjective"] = is_subjective
-
-            if emo_pipe is not None:
-                emos = run_emotion_zsc(emo_pipe, text)
-                for emo_lbl, emo_sc in emos.items():
-                    out_row[f"{prefix}_emotion_{emo_lbl}"] = emo_sc
-
-        rows.append(out_row)
-
+        human_feats.append(feats(row.get(cfg["human_col"])))
     print()
-    out_df = pd.DataFrame(rows)
-    out_path = os.path.join(OUT_DIR, f"affective_analysis_{args.dataset}.csv")
-    out_df.to_csv(out_path, index=False, encoding="utf-8")
-    print(f"Wrote {len(out_df)} rows → {out_path}")
 
-    numeric_df = out_df.select_dtypes(include=[float, int])
-    print("\nMeans (human | llm):")
-    for col in sorted(c for c in numeric_df.columns if c.startswith("human_")):
-        lcol = "llm_" + col[len("human_"):]
-        if lcol in numeric_df:
-            print(f"  {col[6:]:40s}  {numeric_df[col].mean():.4f}  |  {numeric_df[lcol].mean():.4f}")
+    for cond, llm_col in resolve_conditions(args.dataset):
+        if llm_col not in df.columns:
+            print(f"  skipping condition '{cond}': column '{llm_col}' not found")
+            continue
+        tag = condition_tag(args.dataset, cond)
+        print(f"scoring LLM texts [{cond or 'generated'}]…", flush=True)
+        rows = []
+        for i, (_, row) in enumerate(df.iterrows()):
+            print(f"  {i + 1}/{n}", end="\r", flush=True)
+            out_row = {f"human_{k}": v for k, v in human_feats[i].items()}
+            out_row.update({f"llm_{k}": v for k, v in feats(row.get(llm_col)).items()})
+            rows.append(out_row)
+        print()
+
+        out_df = pd.DataFrame(rows)
+        out_path = os.path.join(OUT_DIR, f"affective_analysis_{tag}.csv")
+        out_df.to_csv(out_path, index=False, encoding="utf-8")
+        print(f"[{cond or 'generated'}] Wrote {len(out_df)} rows → {out_path}")
+
+        numeric_df = out_df.select_dtypes(include=[float, int])
+        print("Means (human | llm):")
+        for col in sorted(c for c in numeric_df.columns if c.startswith("human_")):
+            lcol = "llm_" + col[len("human_"):]
+            if lcol in numeric_df:
+                print(f"  {col[6:]:40s}  {numeric_df[col].mean():.4f}  |  {numeric_df[lcol].mean():.4f}")
 
 
 if __name__ == "__main__":

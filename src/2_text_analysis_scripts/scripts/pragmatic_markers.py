@@ -27,7 +27,7 @@ import numpy as np
 import pandas as pd
 import spacy
 
-from data_utils import read_csv_robust
+from data_utils import read_csv_robust, add_condition_arg, resolve_conditions, condition_tag
 
 MODEL = "sv_core_news_lg"
 _script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -83,10 +83,16 @@ CATEGORIES = {
     "discourse_particle": DISCOURSE_PARTICLES,
 }
 
+# Formal abstracts: boosters and discourse particles are informal/spoken-register markers
+# that barely occur in academic writing (floor effect), so they are excluded for --dataset
+# formal. Hedges, negation and epistemic markers are meaningful in scholarly prose and kept.
+FORMAL_CATEGORIES = {k: CATEGORIES[k] for k in ("hedge", "negation", "epistemic")}
+
 
 def parse_args():
     p = argparse.ArgumentParser(description="Pragmatic marker rates")
     p.add_argument("--dataset", choices=["formal", "informal"], default="formal")
+    add_condition_arg(p)
     return p.parse_args()
 
 
@@ -98,9 +104,9 @@ def resolve_config(dataset):
             "llm_col": "generated_comment",
         }
     return {
-        "csv": os.path.join(_data, "llm_abstracts", "abstracts", "sv_abstracts_openai_2.csv"),
+        "csv": os.path.join(_data, "llm_abstracts", "abstracts", "sv_abstracts_adversarial.csv"),
         "human_col": "Abstract",
-        "llm_col": "Generated_OpenAI_Abstract",
+        "llm_col": "Abstract_baseline",
     }
 
 
@@ -111,7 +117,7 @@ def load_nlp():
         raise OSError(f"Run: python -m spacy download {MODEL}")
 
 
-def compute_metrics(nlp, text):
+def compute_metrics(nlp, text, categories=CATEGORIES):
     if pd.isna(text) or not str(text).strip():
         return None
     doc = nlp(str(text).strip())
@@ -121,7 +127,7 @@ def compute_metrics(nlp, text):
     n_sents = len(sents)
 
     result = {}
-    for cat, lexicon in CATEGORIES.items():
+    for cat, lexicon in categories.items():
         count = sum(1 for w in alpha_tokens if w in lexicon)
         result[f"{cat}_rate"] = count * 100.0 / n if n > 0 else 0.0
         result[f"{cat}_count"] = count
@@ -147,31 +153,44 @@ def main():
     nlp = load_nlp()
     df = read_csv_robust(cfg["csv"])
     os.makedirs(OUT_DIR, exist_ok=True)
-
-    rows = []
     n = len(df)
-    for i, row in df.iterrows():
-        print(f"  {i + 1}/{n}", end="\r", flush=True)
-        h = compute_metrics(nlp, row.get(cfg["human_col"]))
-        l = compute_metrics(nlp, row.get(cfg["llm_col"]))
-        if h is None or l is None:
+
+    # formal abstracts drop the informal-register marker categories (see FORMAL_CATEGORIES)
+    categories = CATEGORIES if args.dataset == "informal" else FORMAL_CATEGORIES
+
+    # human side is identical across conditions -> parse it once and reuse
+    print("parsing human texts…", flush=True)
+    human_feats = [compute_metrics(nlp, row.get(cfg["human_col"]), categories) for _, row in df.iterrows()]
+
+    for cond, llm_col in resolve_conditions(args.dataset, args.condition):
+        if llm_col not in df.columns:
+            print(f"  skipping condition '{cond}': column '{llm_col}' not found")
             continue
-        out_row = {f"human_{k}": v for k, v in h.items()}
-        out_row.update({f"llm_{k}": v for k, v in l.items()})
-        rows.append(out_row)
+        tag = condition_tag(args.dataset, cond)
+        print(f"parsing LLM texts [{cond or 'generated'}]…", flush=True)
+        rows = []
+        for i, (_, row) in enumerate(df.iterrows()):
+            print(f"  {i + 1}/{n}", end="\r", flush=True)
+            h = human_feats[i]
+            l = compute_metrics(nlp, row.get(llm_col), categories)
+            if h is None or l is None:
+                continue
+            out_row = {f"human_{k}": v for k, v in h.items()}
+            out_row.update({f"llm_{k}": v for k, v in l.items()})
+            rows.append(out_row)
+        print()
 
-    print()
-    out_df = pd.DataFrame(rows)
-    out_path = os.path.join(OUT_DIR, f"pragmatic_markers_{args.dataset}.csv")
-    out_df.to_csv(out_path, index=False, encoding="utf-8")
-    print(f"Wrote {len(out_df)} rows → {out_path}")
+        out_df = pd.DataFrame(rows)
+        out_path = os.path.join(OUT_DIR, f"pragmatic_markers_{tag}.csv")
+        out_df.to_csv(out_path, index=False, encoding="utf-8")
+        print(f"[{cond or 'generated'}] Wrote {len(out_df)} rows → {out_path}")
 
-    rate_cols = [c for c in out_df.columns if c.startswith("human_") and "rate" in c]
-    print("\nMean rates per 100 tokens (human | llm):")
-    for hcol in sorted(rate_cols):
-        lcol = "llm_" + hcol[len("human_"):]
-        if lcol in out_df:
-            print(f"  {hcol[6:]:35s}  {out_df[hcol].mean():.4f}  |  {out_df[lcol].mean():.4f}")
+        rate_cols = [c for c in out_df.columns if c.startswith("human_") and "rate" in c]
+        print("Mean rates per 100 tokens (human | llm):")
+        for hcol in sorted(rate_cols):
+            lcol = "llm_" + hcol[len("human_"):]
+            if lcol in out_df:
+                print(f"  {hcol[6:]:35s}  {out_df[hcol].mean():.4f}  |  {out_df[lcol].mean():.4f}")
 
 
 if __name__ == "__main__":

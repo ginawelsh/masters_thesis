@@ -15,7 +15,60 @@ AI-generated text from being split into extra fields.
 """
 import io
 import os
+import sys
 import pandas as pd
+
+# force UTF-8 stdout so status prints (→, …, Swedish chars) can't crash on a cp1252 console.
+# Applied on import so every analysis script that imports data_utils is covered.
+try:
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+except Exception:
+    pass
+
+
+# ---------------------------------------------------------------------------
+# Formal LLM prompt conditions
+# ---------------------------------------------------------------------------
+# The formal corpus (sv_abstracts_adversarial.csv) holds three independently
+# generated LLM columns: a neutral baseline and two adversarial prompts. The
+# informal corpus has a single generated column, so `condition` is not applicable
+# there and is reported as None.
+
+FORMAL_CONDITIONS = {
+    "baseline": "Abstract_baseline",
+    "human_like": "Abstract_human_like",
+    "detector_aware": "Abstract_detector_aware",
+}
+CONDITION_ARG_CHOICES = list(FORMAL_CONDITIONS) + ["all"]
+
+
+def add_condition_arg(parser, default="all"):
+    """Register a --condition CLI flag (choices: the formal conditions + 'all')."""
+    parser.add_argument(
+        "--condition", choices=CONDITION_ARG_CHOICES, default=default,
+        help="Which formal LLM prompt condition(s) to analyse. Ignored for --dataset informal.",
+    )
+
+
+def resolve_conditions(dataset, requested="all"):
+    """Return [(condition_name, llm_column), ...] to iterate over.
+
+    Formal -> one entry per requested condition ('all' = every condition).
+    Informal -> a single (None, 'generated_comment') entry (condition ignored).
+    """
+    if dataset == "informal":
+        return [(None, "generated_comment")]
+    names = list(FORMAL_CONDITIONS) if requested == "all" else [requested]
+    return [(name, FORMAL_CONDITIONS[name]) for name in names]
+
+
+def condition_tag(dataset, condition):
+    """Output-filename tag. Baseline/informal keep the legacy '<dataset>' name so
+    existing consumers keep working; adversarial conditions get '<dataset>_<condition>'.
+    """
+    if dataset == "informal" or condition in (None, "baseline"):
+        return dataset
+    return f"{dataset}_{condition}"
 
 
 def read_csv_robust(path, encoding="utf-8", **kwargs):

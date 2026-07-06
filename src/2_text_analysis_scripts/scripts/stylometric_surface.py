@@ -21,7 +21,7 @@ import numpy as np
 import pandas as pd
 import spacy
 
-from data_utils import read_csv_robust
+from data_utils import read_csv_robust, add_condition_arg, resolve_conditions, condition_tag
 
 MODEL = "sv_core_news_lg"
 MATTR_WINDOW = 100
@@ -70,6 +70,7 @@ SWEDISH_FUNCTION_WORDS = {
 def parse_args():
     p = argparse.ArgumentParser(description="Stylometric surface features")
     p.add_argument("--dataset", choices=["formal", "informal"], default="formal")
+    add_condition_arg(p)
     return p.parse_args()
 
 
@@ -81,9 +82,9 @@ def resolve_config(dataset):
             "llm_col": "generated_comment",
         }
     return {
-        "csv": os.path.join(_data, "llm_abstracts", "abstracts", "sv_abstracts_openai_2.csv"),
+        "csv": os.path.join(_data, "llm_abstracts", "abstracts", "sv_abstracts_adversarial.csv"),
         "human_col": "Abstract",
-        "llm_col": "Generated_OpenAI_Abstract",
+        "llm_col": "Abstract_baseline",
     }
 
 
@@ -109,10 +110,14 @@ def ngram_repetition_rate(tokens, n):
     return repeated / len(ngrams)
 
 
-def punctuation_rates(raw_text, n_tokens):
-    """Per-100-token rates for common punctuation marks."""
+def punctuation_rates(raw_text, n_tokens, drop_expressive=False):
+    """Per-100-token rates for common punctuation marks.
+
+    drop_expressive=True removes !, ? and … — effectively absent in formal abstracts
+    (floor effect), so they add no signal there and are excluded for --dataset formal.
+    """
     scale = 100.0 / n_tokens if n_tokens > 0 else 0.0
-    return {
+    rates = {
         "punct_period":    raw_text.count(".") * scale,
         "punct_exclaim":   raw_text.count("!") * scale,
         "punct_question":  raw_text.count("?") * scale,
@@ -122,6 +127,10 @@ def punctuation_rates(raw_text, n_tokens):
         "punct_dash":      (raw_text.count("—") + raw_text.count("–")) * scale,
         "punct_ellipsis":  raw_text.count("...") * scale,
     }
+    if drop_expressive:
+        for k in ("punct_exclaim", "punct_question", "punct_ellipsis"):
+            rates.pop(k, None)
+    return rates
 
 
 def function_word_rate(alpha_tokens):
@@ -178,7 +187,7 @@ def mtld(alpha_tokens, threshold=MTLD_THRESHOLD):
 # Per-document entry point
 # ---------------------------------------------------------------------------
 
-def compute_metrics(nlp, text):
+def compute_metrics(nlp, text, drop_expressive=False):
     if pd.isna(text) or not str(text).strip():
         return None
     raw = str(text).strip()
@@ -195,7 +204,7 @@ def compute_metrics(nlp, text):
         "mattr":                   mattr(alpha_tokens),
         "mtld":                    mtld(alpha_tokens),
     }
-    result.update(punctuation_rates(raw, n_tokens))
+    result.update(punctuation_rates(raw, n_tokens, drop_expressive))
     return result
 
 
@@ -205,32 +214,46 @@ def main():
     nlp = load_nlp()
     df = read_csv_robust(cfg["csv"])
     os.makedirs(OUT_DIR, exist_ok=True)
-
-    rows = []
     n = len(df)
-    for i, row in df.iterrows():
-        print(f"  {i + 1}/{n}", end="\r", flush=True)
-        h = compute_metrics(nlp, row.get(cfg["human_col"]))
-        l = compute_metrics(nlp, row.get(cfg["llm_col"]))
-        if h is None or l is None:
+
+    # formal abstracts drop the expressive punctuation marks (!, ?, …) — floor effect
+    drop_expressive = args.dataset != "informal"
+
+    # human side is identical across conditions -> parse it once and reuse
+    print("parsing human texts…", flush=True)
+    human_feats = [compute_metrics(nlp, row.get(cfg["human_col"]), drop_expressive) for _, row in df.iterrows()]
+
+    for cond, llm_col in resolve_conditions(args.dataset, args.condition):
+        if llm_col not in df.columns:
+            print(f"  skipping condition '{cond}': column '{llm_col}' not found")
             continue
-        out_row = {f"human_{k}": v for k, v in h.items()}
-        out_row.update({f"llm_{k}": v for k, v in l.items()})
-        rows.append(out_row)
+        tag = condition_tag(args.dataset, cond)
+        print(f"parsing LLM texts [{cond or 'generated'}]…", flush=True)
+        rows = []
+        for i, (_, row) in enumerate(df.iterrows()):
+            print(f"  {i + 1}/{n}", end="\r", flush=True)
+            h = human_feats[i]
+            l = compute_metrics(nlp, row.get(llm_col), drop_expressive)
+            if h is None or l is None:
+                continue
+            out_row = {f"human_{k}": v for k, v in h.items()}
+            out_row.update({f"llm_{k}": v for k, v in l.items()})
+            rows.append(out_row)
+        print()
 
-    print()
-    out_df = pd.DataFrame(rows)
-    out_path = os.path.join(OUT_DIR, f"stylometric_surface_{args.dataset}.csv")
-    out_df.to_csv(out_path, index=False, encoding="utf-8")
-    print(f"Wrote {len(out_df)} rows → {out_path}")
+        if not rows:
+            print(f"[{cond or 'generated'}] no paired rows; skipped")
+            continue
+        out_df = pd.DataFrame(rows)
+        out_path = os.path.join(OUT_DIR, f"stylometric_surface_{tag}.csv")
+        out_df.to_csv(out_path, index=False, encoding="utf-8")
+        print(f"[{cond or 'generated'}] Wrote {len(out_df)} rows → {out_path}")
 
-    print("\nMeans (human | llm):")
-    feature_keys = [k for k in rows[0] if k.startswith("human_")]
-    for hcol in sorted(feature_keys):
-        lcol = "llm_" + hcol[len("human_"):]
-        h_mean = out_df[hcol].mean()
-        l_mean = out_df[lcol].mean()
-        print(f"  {hcol[6:]:35s}  {h_mean:.4f}  |  {l_mean:.4f}")
+        print("Means (human | llm):")
+        feature_keys = [k for k in rows[0] if k.startswith("human_")]
+        for hcol in sorted(feature_keys):
+            lcol = "llm_" + hcol[len("human_"):]
+            print(f"  {hcol[6:]:35s}  {out_df[hcol].mean():.4f}  |  {out_df[lcol].mean():.4f}")
 
 
 if __name__ == "__main__":

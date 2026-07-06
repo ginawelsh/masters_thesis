@@ -16,6 +16,8 @@ import spacy
 import matplotlib.pyplot as plt
 from matplotlib.patches import Patch, Ellipse
 
+from data_utils import add_condition_arg, resolve_conditions, condition_tag
+
 MODEL = "sv_core_news_lg"
 
 _root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -31,6 +33,7 @@ def parse_args():
     parser = argparse.ArgumentParser(description="Word frequency analysis for formal/informal datasets")
     parser.add_argument("--dataset", choices=["formal", "informal"], default="formal")
     parser.add_argument("--top-n", type=int, default=DEFAULT_TOP_N, help="Number of top words to show")
+    add_condition_arg(parser)
     return parser.parse_args()
 
 
@@ -46,9 +49,9 @@ def resolve_config(dataset: str) -> dict:
             "out_png": os.path.join(OUT_DIR, "word_freq_informal.png"),
         }
     return {
-        "csv_path": os.path.join(LLM_FORMAL_DIR, "sv_abstracts_openai_2.csv"),
+        "csv_path": os.path.join(LLM_FORMAL_DIR, "sv_abstracts_adversarial.csv"),
         "human_col": "Abstract",
-        "ai_col": "Generated_OpenAI_Abstract",
+        "ai_col": "Abstract_baseline",
         "human_label": "Human abstract",
         "ai_label": "AI abstract",
         "out_csv": os.path.join(OUT_DIR, "word_freq_formal.csv"),
@@ -203,25 +206,34 @@ def main():
 
     nlp = load_nlp()
 
-    human_texts = df[cfg["human_col"]].tolist()
-    ai_texts = df[cfg["ai_col"]].tolist()
+    # human frequencies are identical across conditions -> compute once
+    print("Computing human word frequencies...")
+    human_freq = word_freq(nlp, df[cfg["human_col"]].tolist(), top_n)
 
-    print("Computing word frequencies...")
-    human_freq = word_freq(nlp, human_texts, top_n)
-    ai_freq = word_freq(nlp, ai_texts, top_n)
+    for cond, llm_col in resolve_conditions(args.dataset, args.condition):
+        if llm_col not in df.columns:
+            print(f"  skipping condition '{cond}': column '{llm_col}' not found")
+            continue
+        tag = condition_tag(args.dataset, cond)
+        ai_label = cfg["ai_label"] if cond in (None, "baseline") else f"{cfg['ai_label']} ({cond})"
+        out_csv = os.path.join(OUT_DIR, f"word_freq_{tag}.csv")
+        out_png = os.path.join(OUT_DIR, f"word_freq_{tag}.png")
 
-    merged = human_freq.rename(columns={"count": "human_count"}).merge(
-        ai_freq.rename(columns={"count": "ai_count"}),
-        on="word", how="outer"
-    ).fillna(0).astype({"human_count": int, "ai_count": int})
-    merged["diff"] = merged["human_count"] - merged["ai_count"]
-    merged = merged.sort_values("human_count", ascending=False)
+        print(f"Computing AI word frequencies [{cond or 'generated'}]...")
+        ai_freq = word_freq(nlp, df[llm_col].tolist(), top_n)
 
-    merged.to_csv(cfg["out_csv"], index=False, encoding="utf-8")
-    print(f"Saved frequency table to {cfg['out_csv']}")
+        merged = human_freq.rename(columns={"count": "human_count"}).merge(
+            ai_freq.rename(columns={"count": "ai_count"}),
+            on="word", how="outer"
+        ).fillna(0).astype({"human_count": int, "ai_count": int})
+        merged["diff"] = merged["human_count"] - merged["ai_count"]
+        merged = merged.sort_values("human_count", ascending=False)
 
-    plot_comparison(human_freq, ai_freq, cfg["human_label"], cfg["ai_label"], cfg["out_png"], top_n)
-    plot_venn(human_freq, ai_freq, cfg["human_label"], cfg["ai_label"], cfg["out_png"], top_n)
+        merged.to_csv(out_csv, index=False, encoding="utf-8")
+        print(f"Saved frequency table to {out_csv}")
+
+        plot_comparison(human_freq, ai_freq, cfg["human_label"], ai_label, out_png, top_n)
+        plot_venn(human_freq, ai_freq, cfg["human_label"], ai_label, out_png, top_n)
 
 
 if __name__ == "__main__":
