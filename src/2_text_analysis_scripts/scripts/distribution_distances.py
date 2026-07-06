@@ -36,6 +36,8 @@ import pandas as pd
 from scipy.spatial.distance import jensenshannon
 from scipy.stats import wasserstein_distance
 
+from data_utils import add_condition_arg, resolve_conditions, condition_tag
+
 _script_dir = os.path.dirname(os.path.abspath(__file__))
 _2tas_dir = os.path.dirname(_script_dir)
 _root = os.path.dirname(_2tas_dir)
@@ -48,6 +50,7 @@ POS_SEP = " | "
 def parse_args():
     p = argparse.ArgumentParser(description="JS divergence and Wasserstein distances")
     p.add_argument("--dataset", choices=["formal", "informal", "both"], default="both")
+    add_condition_arg(p)
     return p.parse_args()
 
 
@@ -109,16 +112,21 @@ def wass(series_a, series_b):
 # Dataset-specific loaders
 # ---------------------------------------------------------------------------
 
-def _counts_paths(dataset):
-    """Return (dir, human_prefix) for the existing spaCy counts files."""
-    if dataset == "formal":
-        return os.path.join(_2tas_dir, "results", "formal"), "Abstract"
-    return os.path.join(_2tas_dir, "results", "informal"), "Abstract"
+def _counts_paths(dataset, condition=None):
+    """Return (dir, human_prefix) for the spaCy counts files.
+
+    Mirrors spacy_linguistic_analysis output layout: each formal condition lives in
+    results/<dataset>/<condition>/; informal (condition=None) in results/<dataset>/.
+    """
+    base = os.path.join(_2tas_dir, "results", dataset)
+    if condition:
+        base = os.path.join(base, condition)
+    return base, "Abstract"
 
 
-def categorical_js(dataset):
+def categorical_js(dataset, condition=None):
     """JS divergence for POS / dep / entity distributions from spaCy counts CSVs."""
-    counts_dir, prefix = _counts_paths(dataset)
+    counts_dir, prefix = _counts_paths(dataset, condition)
     results = []
 
     for feat, fname in [
@@ -149,9 +157,9 @@ def categorical_js(dataset):
     return results
 
 
-def continuous_wass(dataset, feat_name):
+def continuous_wass(dataset, tag, feat_name):
     """Wasserstein distance for every numeric human_* / llm_* pair in a feature CSV."""
-    path = os.path.join(FEATURES_DIR, f"{feat_name}_{dataset}.csv")
+    path = os.path.join(FEATURES_DIR, f"{feat_name}_{tag}.csv")
     results = []
     if not os.path.exists(path):
         print(f"  [skip] {path} not found — run {feat_name}.py first")
@@ -177,9 +185,9 @@ def continuous_wass(dataset, feat_name):
     return results
 
 
-def sentiment_js(dataset):
+def sentiment_js(dataset, tag):
     """JS divergence over sentiment label distributions from affective_analysis CSV."""
-    path = os.path.join(FEATURES_DIR, f"affective_analysis_{dataset}.csv")
+    path = os.path.join(FEATURES_DIR, f"affective_analysis_{tag}.csv")
     if not os.path.exists(path):
         print(f"  [skip] {path} not found — run affective_analysis.py first")
         return []
@@ -200,13 +208,21 @@ def sentiment_js(dataset):
 # Main
 # ---------------------------------------------------------------------------
 
-def run_dataset(dataset):
+def run_dataset(dataset, requested="all"):
     results = []
-    results += categorical_js(dataset)
-    results += sentiment_js(dataset)
-    for feat in ["syntactic_complexity", "stylometric_surface",
-                 "pragmatic_markers", "affective_analysis"]:
-        results += continuous_wass(dataset, feat)
+    for cond, _ in resolve_conditions(dataset, requested):
+        tag = condition_tag(dataset, cond)
+        cond_label = cond or "baseline"
+        print(f"  [{cond_label}]")
+        cond_results = []
+        cond_results += categorical_js(dataset, cond)
+        cond_results += sentiment_js(dataset, tag)
+        for feat in ["syntactic_complexity", "stylometric_surface",
+                     "pragmatic_markers", "affective_analysis"]:
+            cond_results += continuous_wass(dataset, tag, feat)
+        for r in cond_results:
+            r["condition"] = cond_label
+        results += cond_results
     return results
 
 
@@ -217,16 +233,19 @@ def main():
     all_results = []
     for ds in datasets:
         print(f"\n--- {ds} ---")
-        all_results += run_dataset(ds)
+        all_results += run_dataset(ds, args.condition)
 
     os.makedirs(FEATURES_DIR, exist_ok=True)
     out_df = pd.DataFrame(all_results)
+    if not out_df.empty:
+        lead = ["dataset", "condition", "feature", "metric", "value"]
+        out_df = out_df[lead + [c for c in out_df.columns if c not in lead]]
     out_path = os.path.join(FEATURES_DIR, f"distribution_distances_{args.dataset}.csv")
     out_df.to_csv(out_path, index=False, encoding="utf-8")
     print(f"\nWrote {len(out_df)} rows → {out_path}")
 
     if not out_df.empty:
-        print("\n" + out_df[["dataset", "feature", "metric", "value"]].to_string(index=False))
+        print("\n" + out_df[["dataset", "condition", "feature", "metric", "value"]].to_string(index=False))
 
 
 if __name__ == "__main__":

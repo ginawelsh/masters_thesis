@@ -357,9 +357,9 @@ def main():
     nlp = None
 
     for cond, gen_col in resolve_conditions(args.dataset, args.condition):
-        tag = condition_tag(args.dataset, cond)
-        # baseline / informal -> legacy results dir; adversarial conditions -> per-condition subdir
-        output_dir = cfg["results_dir"] if tag == args.dataset else os.path.join(cfg["results_dir"], cond)
+        # each formal condition (baseline/human_like/detector_aware) -> its own subdir;
+        # informal (cond=None, single generated column) -> the register dir directly.
+        output_dir = os.path.join(cfg["results_dir"], cond) if cond else cfg["results_dir"]
         out = build_out_paths(output_dir)
         print(f"\n=== condition: {cond or 'generated'}  ->  {output_dir} ===")
 

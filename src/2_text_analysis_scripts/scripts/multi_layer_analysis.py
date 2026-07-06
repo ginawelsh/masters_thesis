@@ -2,7 +2,7 @@
 Multi-layer text analysis for Swedish formal (abstracts) and informal (e.g. Reddit) registers.
 
 Three analysis families:
-  1. Morphology & syntax — Stanza (UPOS/lemma/deps) + spaCy (POS, sentences, token stats)
+  1. Morphology & syntax — spaCy (UPOS counts, dependency relations, unique lemmas, token/sentence stats)
   2. Discourse-oriented semantic space — Sentence-Transformers embeddings + 2D PCA scatter
   3. Content — BERTopic topic model + textstat readability-style metrics (English-oriented; interpret Swedish with care)
 
@@ -14,11 +14,10 @@ Usage:
   python src/2_text_analysis_scripts/multi_layer_analysis.py --register both --max-docs 80
 
 Optional:
-  python ... --register both --skip-bertopic --skip-discourse-plots
+  python ... --register both --bertopic --skip-discourse-plots   # BERTopic is opt-in
 
-Stanza Swedish uses tokenize+pos+lemma+depparse only (no mwt). If a previous run failed,
-delete the broken folder under %LOCALAPPDATA%\\StanfordNLP\\stanza\\Cache\\...\\sv\\
-and re-run so stanza.download can fetch models again.
+Morphology/syntax uses spaCy (sv_core_news_lg) only; the detailed paired POS/DEP/NER
+analysis lives in spacy_linguistic_analysis.py.
 """
 from __future__ import annotations
 
@@ -26,12 +25,19 @@ import argparse
 import json
 import os
 import re
+import sys
 from collections import Counter
 from dataclasses import dataclass
 from typing import Iterable, Literal, Optional
 
 import numpy as np
 import pandas as pd
+
+# force UTF-8 stdout so status prints (→, …, Swedish chars) can't crash on a cp1252 console
+try:
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+except Exception:
+    pass
 
 RegisterName = Literal["formal", "informal"]
 
@@ -116,71 +122,36 @@ def _lazy_spacy():
     return spacy.load("sv_core_news_lg")
 
 
-def _lazy_stanza():
-    import stanza
-
-    # Swedish has no MWT processor in Stanza; including "mwt" breaks the pipeline and
-    # can leave a bad cache path (see UnsupportedProcessorError / missing default.pt).
-    _processors = "tokenize,pos,lemma,depparse"
-    try:
-        stanza.download("sv", processors=_processors, verbose=False)
-    except TypeError:
-        try:
-            stanza.download("sv", processors=_processors)
-        except TypeError:
-            try:
-                stanza.download("sv", verbose=False)
-            except TypeError:
-                stanza.download("sv")
-    return stanza.Pipeline(
-        "sv",
-        processors=_processors,
-        use_gpu=False,
-        verbose=False,
-    )
-
-
 def analyze_morphology_syntax(
     bundle: TextBundle,
     nlp_spacy=None,
-    nlp_stanza=None,
 ) -> pd.DataFrame:
-    """
-    Per document: spaCy POS counts, sentence & token counts; Stanza UPOS counts, lemma count, dep-root counts sample.
+    """Per document (spaCy sv_core_news_lg): token/sentence counts, UPOS counts,
+    unique-lemma count and top dependency relations.
+
+    spaCy only. A previous version also ran Stanza, but its UPOS/lemma/deprel output
+    duplicated spaCy's (token.pos_ / .lemma_ / .dep_), and the detailed paired POS/DEP/NER
+    comparison lives in spacy_linguistic_analysis.py — so the redundant Stanza pass (the
+    main runtime cost of this script) was removed.
     """
     if nlp_spacy is None:
         nlp_spacy = _lazy_spacy()
-    if nlp_stanza is None:
-        nlp_stanza = _lazy_stanza()
 
     rows = []
     for j, text in enumerate(bundle.texts):
-        row: dict = {"doc_index": j, "register": bundle.register}
-        doc_sp = nlp_spacy(text)
-        pos_c = Counter(t.pos_ for t in doc_sp)
-        row["n_tokens_spacy"] = len(doc_sp)
-        row["n_sents_spacy"] = len(list(doc_sp.sents))
-        row["pos_counts_spacy_json"] = json.dumps(dict(sorted(pos_c.items())), ensure_ascii=False)
-
-        doc_st = nlp_stanza(text)
-        upos_c: Counter = Counter()
-        lemmas: list[str] = []
-        dep_roots: Counter = Counter()
-        for sent in doc_st.sentences:
-            for w in sent.words:
-                if w.upos:
-                    upos_c[w.upos] += 1
-                if w.lemma:
-                    lemmas.append(w.lemma)
-                if w.deprel:
-                    dep_roots[w.deprel] += 1
-        row["n_words_stanza"] = sum(upos_c.values())
-        row["upos_counts_json"] = json.dumps(dict(sorted(upos_c.items())), ensure_ascii=False)
-        row["n_unique_lemmas_stanza"] = len(set(lemmas))
-        row["top_deprel_json"] = json.dumps(
-            dict(dep_roots.most_common(12)), ensure_ascii=False
-        )
-        rows.append(row)
+        doc = nlp_spacy(str(text))
+        pos_c = Counter(t.pos_ for t in doc)
+        dep_c = Counter(t.dep_ for t in doc)
+        lemmas = [t.lemma_.lower() for t in doc if t.is_alpha]
+        rows.append({
+            "doc_index": j,
+            "register": bundle.register,
+            "n_tokens": len(doc),
+            "n_sents": len(list(doc.sents)),
+            "pos_counts_json": json.dumps(dict(sorted(pos_c.items())), ensure_ascii=False),
+            "n_unique_lemmas": len(set(lemmas)),
+            "top_deprel_json": json.dumps(dict(dep_c.most_common(12)), ensure_ascii=False),
+        })
 
     return pd.DataFrame(rows)
 
@@ -351,7 +322,7 @@ def run_register(
     print(f"[{register}] Loaded {len(bundle.texts)} documents → {out_dir}")
 
     if not skip_morphology:
-        print(f"[{register}] Morphology & syntax (spaCy + Stanza)...")
+        print(f"[{register}] Morphology & syntax (spaCy)...")
         morph_df = analyze_morphology_syntax(bundle)
         morph_df.to_csv(os.path.join(out_dir, "morphology_syntax.csv"), index=False, encoding="utf-8")
     else:
@@ -400,7 +371,10 @@ def parse_args():
         help="Directory for run outputs (subfolders formal/ informal/)",
     )
     p.add_argument("--max-docs", type=int, default=None, help="Cap documents per register")
-    p.add_argument("--skip-bertopic", action="store_true", help="Skip BERTopic (faster)")
+    p.add_argument("--bertopic", action="store_true",
+                   help="Run BERTopic topic modelling. Off by default: topic is matched per "
+                        "human/LLM pair (so it can't discriminate them) and the corpus already "
+                        "carries thread/subforum topic metadata.")
     p.add_argument(
         "--skip-discourse-plots",
         action="store_true",
@@ -414,7 +388,7 @@ def parse_args():
     p.add_argument(
         "--skip-morphology",
         action="store_true",
-        help="Skip spaCy + Stanza morphology/syntax analysis",
+        help="Skip morphology/syntax analysis (spaCy)",
     )
     return p.parse_args()
 
@@ -429,7 +403,7 @@ def main():
             reg,
             output_base=args.output_base,
             max_docs=args.max_docs,
-            skip_bertopic=args.skip_bertopic,
+            skip_bertopic=not args.bertopic,
             skip_discourse_plots=args.skip_discourse_plots,
             skip_embeddings=args.skip_embeddings,
             skip_morphology=args.skip_morphology,

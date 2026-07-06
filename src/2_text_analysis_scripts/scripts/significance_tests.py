@@ -8,20 +8,26 @@ LLM regeneration from the same title/keywords or question). For every numeric
 `human_<feat>` / `llm_<feat>` column pair we run a paired Wilcoxon signed-rank
 test, compute effect sizes (matched-pairs rank-biserial correlation and
 Cohen's dz), then correct for multiple comparisons with Benjamini-Hochberg FDR
-*within each dataset* (formal / informal).
+*within each (dataset, condition) family* (formal baseline / human_like /
+detector_aware; informal).
 
 Why Wilcoxon (not paired t-test): most features are rates/proportions/counts
 that are not normally distributed. Wilcoxon is the robust paired choice.
 
-Output: csv_files/significance_tests_results.csv  (one row per feature/dataset)
+Output: csv_files/significance_tests_results.csv
+        (one row per feature/dataset/condition)
         + a printed summary of the significant features ranked by effect size.
 
 Run:  python src/2_text_analysis_scripts/scripts/significance_tests.py
+      python .../significance_tests.py --dataset formal --condition detector_aware
 """
+import argparse
 import os
 import numpy as np
 import pandas as pd
 from scipy.stats import wilcoxon, rankdata
+
+from data_utils import add_condition_arg, resolve_conditions, condition_tag
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 CSV_DIR = os.path.join(os.path.dirname(HERE), "csv_files")   # ...2_text_analysis_scripts/csv_files
@@ -30,7 +36,6 @@ OUT = os.path.join(CSV_DIR, "significance_tests_results.csv")
 # per-document paired feature files (group -> file stem); {dataset} filled in below
 FEATURE_GROUPS = ["syntactic_complexity", "stylometric_surface",
                   "pragmatic_markers", "affective_analysis"]
-DATASETS = ["formal", "informal"]
 
 # columns to skip (non-numeric labels, or binary that wants McNemar not Wilcoxon)
 SKIP_EXACT = {"sentiment_label"}
@@ -95,59 +100,70 @@ def test_feature(h, l):
                 median_llm=float(df["l"].median()))
 
 
+def parse_args():
+    p = argparse.ArgumentParser(description="Paired Wilcoxon tests over feature CSVs")
+    p.add_argument("--dataset", choices=["formal", "informal", "both"], default="both")
+    add_condition_arg(p)
+    return p.parse_args()
+
+
 def main():
+    args = parse_args()
+    datasets = ["formal", "informal"] if args.dataset == "both" else [args.dataset]
+
     rows = []
-    for ds in DATASETS:
-        ds_rows = []
-        for grp in FEATURE_GROUPS:
-            path = os.path.join(CSV_DIR, f"{grp}_{ds}.csv")
-            if not os.path.exists(path):
-                print(f"  [skip] {os.path.basename(path)} not found")
-                continue
-            df = pd.read_csv(path, encoding="utf-8")
-            for hcol in [c for c in df.columns if c.startswith("human_")]:
-                feat = hcol[len("human_"):]
-                if feat in SKIP_EXACT:
+    for ds in datasets:
+        for cond, _ in resolve_conditions(ds, args.condition):
+            tag = condition_tag(ds, cond)
+            cond_label = cond or "baseline"
+            fam_rows = []
+            for grp in FEATURE_GROUPS:
+                path = os.path.join(CSV_DIR, f"{grp}_{tag}.csv")
+                if not os.path.exists(path):
+                    print(f"  [skip] {os.path.basename(path)} not found")
                     continue
-                lcol = "llm_" + feat
-                if lcol not in df.columns:
-                    continue
-                res = test_feature(df[hcol], df[lcol])
-                if res is None:
-                    continue
-                direction = ("llm > human" if res["median_llm"] > res["median_human"]
-                             else "human > llm" if res["median_llm"] < res["median_human"]
-                             else "equal")
-                ds_rows.append(dict(dataset=ds, feature_group=grp, feature=feat,
-                                    n_pairs=res["n"], median_human=round(res["median_human"], 4),
-                                    median_llm=round(res["median_llm"], 4), direction=direction,
-                                    wilcoxon_stat=res["stat"], p_value=res["p"],
-                                    rank_biserial=res["rbc"], cohens_dz=res["dz"],
-                                    binary_flag=(feat in BINARY_FLAG)))
-        # FDR within this dataset
-        if ds_rows:
-            q = bh_fdr([r["p_value"] for r in ds_rows])
-            for r, qi in zip(ds_rows, q):
-                r["p_fdr_bh"] = float(qi)
-                r["significant_fdr_0.05"] = bool(qi < 0.05)
-            rows.extend(ds_rows)
+                df = pd.read_csv(path, encoding="utf-8")
+                for hcol in [c for c in df.columns if c.startswith("human_")]:
+                    feat = hcol[len("human_"):]
+                    if feat in SKIP_EXACT:
+                        continue
+                    lcol = "llm_" + feat
+                    if lcol not in df.columns:
+                        continue
+                    res = test_feature(df[hcol], df[lcol])
+                    if res is None:
+                        continue
+                    direction = ("llm > human" if res["median_llm"] > res["median_human"]
+                                 else "human > llm" if res["median_llm"] < res["median_human"]
+                                 else "equal")
+                    fam_rows.append(dict(dataset=ds, condition=cond_label, feature_group=grp,
+                                         feature=feat,
+                                         n_pairs=res["n"], median_human=round(res["median_human"], 4),
+                                         median_llm=round(res["median_llm"], 4), direction=direction,
+                                         wilcoxon_stat=res["stat"], p_value=res["p"],
+                                         rank_biserial=res["rbc"], cohens_dz=res["dz"],
+                                         binary_flag=(feat in BINARY_FLAG)))
+            # FDR within this (dataset, condition) family
+            if fam_rows:
+                q = bh_fdr([r["p_value"] for r in fam_rows])
+                for r, qi in zip(fam_rows, q):
+                    r["p_fdr_bh"] = float(qi)
+                    r["significant_fdr_0.05"] = bool(qi < 0.05)
+                rows.extend(fam_rows)
 
     out = pd.DataFrame(rows)
     # order columns
-    cols = ["dataset", "feature_group", "feature", "n_pairs", "median_human",
+    cols = ["dataset", "condition", "feature_group", "feature", "n_pairs", "median_human",
             "median_llm", "direction", "cohens_dz", "rank_biserial",
             "p_value", "p_fdr_bh", "significant_fdr_0.05", "wilcoxon_stat", "binary_flag"]
-    out = out[cols].sort_values(["dataset", "p_fdr_bh"]).reset_index(drop=True)
+    out = out[cols].sort_values(["dataset", "condition", "p_fdr_bh"]).reset_index(drop=True)
     out.to_csv(OUT, index=False, encoding="utf-8")
 
     print(f"\nWrote {OUT}\n")
-    for ds in DATASETS:
-        sub = out[out.dataset == ds]
-        if sub.empty:
-            continue
+    for (ds, cond_label), sub in out.groupby(["dataset", "condition"], sort=True):
         sig = sub[sub["significant_fdr_0.05"]]
         n = int(sub["n_pairs"].max()) if not sub.empty else 0
-        print(f"=== {ds.upper()} (n~{n} pairs) - {len(sig)}/{len(sub)} features significant after BH-FDR ===")
+        print(f"=== {ds.upper()} / {cond_label} (n~{n} pairs) - {len(sig)}/{len(sub)} features significant after BH-FDR ===")
         show = sig.reindex(sig["cohens_dz"].abs().sort_values(ascending=False).index)
         for _, r in show.head(15).iterrows():
             flag = "  [binary: use McNemar]" if r["binary_flag"] else ""

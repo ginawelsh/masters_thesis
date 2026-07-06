@@ -1,10 +1,9 @@
-# Extended stack for multi_layer_analysis.py (morphology/syntax, discourse embeddings, BERTopic, readability).
+# Extended stack for multi_layer_analysis.py (morphology/syntax, discourse embeddings, readability;
+# BERTopic is opt-in via --bertopic).
 # Install: pip install -r requirements_analysis.txt
 # Then: python -m spacy download sv_core_news_lg
-# Stanza Swedish is downloaded on first use via stanza.download('sv') or automatically by the pipeline.
 
 spacy>=3.7.0
-stanza>=1.8.0
 pandas>=1.5.0
 numpy>=1.24.0
 matplotlib>=3.7.0

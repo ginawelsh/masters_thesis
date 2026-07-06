@@ -1,0 +1,10 @@
+metric,value
+condition,human_like
+n_per_class,170
+mean_pair_cosine,0.7604
+median_pair_cosine,0.8004
+classifier_cv_roc_auc,0.7642
+permutation_p_value,0.000999000999000999
+null_mean_auc,0.501
+n_permutations,1000
+embedding_model,paraphrase-multilingual-mpnet-base-v2
