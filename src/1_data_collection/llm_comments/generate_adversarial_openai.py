@@ -14,12 +14,16 @@ question, human_comment, generated_comment). Two columns are appended:
   comment_human_like, comment_detector_aware
 
 Output is written to consolidated_informal_comments_adversarial.csv (input left untouched).
-Generation is cached per (row, condition) in _gen_cache_adversarial.csv so the run can
-resume after an interruption without paying for completed cells again.
+Calls run concurrently (CONCURRENCY workers) with retry/backoff. Generation is cached per
+(row, condition) in _gen_cache_adversarial.csv, so an interrupted run resumes without
+paying for completed cells again.
 """
 import os
-import re
 import sys
+import time
+import threading
+from concurrent.futures import ThreadPoolExecutor, as_completed
+
 import pandas as pd
 from openai import OpenAI
 
@@ -30,6 +34,9 @@ except Exception:
     pass
 
 MODEL = "gpt-4o-mini"  # matches the model used for the existing baseline comments
+CONCURRENCY = 8        # parallel API calls
+MAX_RETRIES = 5        # per-call retries on transient/rate-limit errors
+RETRY_BASE_SEC = 4     # exponential backoff base
 
 # script is at src/1_data_collection/llm_comments/ -> project root is 4 levels up
 _root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
@@ -72,18 +79,24 @@ CONDITIONS = {
     "detector_aware": lambda q: _BASE.format(question=q) + _DETECTOR_AWARE,
 }
 
+_cache_lock = threading.Lock()
+
 
 def _generate(prompt):
-    resp = client.chat.completions.create(
-        model=MODEL,
-        messages=[{"role": "user", "content": prompt}],
-    )
-    return (resp.choices[0].message.content or "").strip()
-
-
-def _norm(text):
-    """Collapse newlines/whitespace to a single block, matching the human comments' format."""
-    return re.sub(r"\s+", " ", str(text)).strip()
+    for attempt in range(MAX_RETRIES):
+        try:
+            resp = client.chat.completions.create(
+                model=MODEL,
+                messages=[{"role": "user", "content": prompt}],
+            )
+            return (resp.choices[0].message.content or "").strip()
+        except Exception as e:
+            if attempt == MAX_RETRIES - 1:
+                raise
+            wait = RETRY_BASE_SEC * (2 ** attempt)
+            print(f"    API error ({e}); retry in {wait}s", flush=True)
+            time.sleep(wait)
+    return ""
 
 
 def _load_cache():
@@ -95,7 +108,9 @@ def _load_cache():
 
 def _append_cache(row_i, condition, comment):
     line = pd.DataFrame([{"row": row_i, "condition": condition, "comment": comment}])
-    line.to_csv(_cache_path, mode="a", header=not os.path.exists(_cache_path), index=False, encoding="utf-8")
+    with _cache_lock:  # serialize appends from worker threads
+        line.to_csv(_cache_path, mode="a", header=not os.path.exists(_cache_path),
+                    index=False, encoding="utf-8")
 
 
 if __name__ == "__main__":
@@ -110,21 +125,46 @@ if __name__ == "__main__":
     for cond in CONDITIONS:
         data[f"comment_{cond}"] = pd.NA
 
+    # collect the (row, condition) cells that still need generating
+    tasks = []
     for i in range(n):
         q = data["question"].iloc[i]
         if pd.isna(q) or not str(q).strip():
             continue
-        print(f"[{i + 1}/{n}] {str(q)[:60]}")
         for cond, build in CONDITIONS.items():
-            if (i, cond) in cache:
-                comment = cache[(i, cond)]
-                print(f"    {cond:<15} (cached)")
-            else:
-                comment = _generate(build(str(q)))
-                _append_cache(i, cond, comment)
-                print(f"    {cond:<15} {comment[:60]}...")
-            # cache keeps the raw text (line above); output is normalized to single-block
-            data.loc[data.index[i], f"comment_{cond}"] = _norm(comment)
+            if (i, cond) not in cache:
+                tasks.append((i, cond, build(str(q))))
+
+    print(f"{len(tasks)} cells to generate with {CONCURRENCY} parallel workers "
+          f"({len(cache)} already cached)")
+
+    def _work(task):
+        i, cond, prompt = task
+        text = _generate(prompt)
+        _append_cache(i, cond, text)  # persist immediately so progress survives interruption
+        return i, cond, text
+
+    done = 0
+    if tasks:
+        with ThreadPoolExecutor(max_workers=CONCURRENCY) as ex:
+            futures = [ex.submit(_work, t) for t in tasks]
+            for fut in as_completed(futures):
+                try:
+                    i, cond, text = fut.result()
+                except Exception as e:
+                    print(f"  [error] a cell failed after retries: {e}", flush=True)
+                    continue
+                cache[(i, cond)] = text
+                done += 1
+                if done % 50 == 0 or done == len(tasks):
+                    print(f"  {done}/{len(tasks)} generated", flush=True)
+
+    # fill output columns from cache verbatim — line breaks preserved to match the human
+    # and baseline comment columns (forum multi-line structure is a genuine register signal)
+    for (i, cond), text in cache.items():
+        col = f"comment_{cond}"
+        if 0 <= i < n and col in data.columns:
+            data.loc[data.index[i], col] = text
 
     data.to_csv(_out_path, index=False, encoding="utf-8")
     print(f"\nFinished. Saved {n} rows (+{len(CONDITIONS)} adversarial cols) to {_out_path}")

@@ -33,7 +33,9 @@ RESULTS_INFORMAL_DIR = os.path.join(_2tas_dir, "results", "informal")
 TOKEN_SEP = ","  # separator for tokens/POS in CSV cells
 POS_SEP = " | "  # separator for TAG:n lists in CSV cells (matches existing checked-in counts file)
 VERBOSE = False  # set True to print per-row token/POS debug output
-MIN_TOKENS = 30  # rows where either text has fewer tokens than this are excluded
+# per-register token floor: abstracts are long (drop fragments < 30 tokens); comments are
+# short, so keep everything (0 = no floor) rather than lose ~40% of the corpus.
+MIN_TOKENS_BY_DATASET = {"formal": 30, "informal": 0}
 
 
 def parse_args():
@@ -56,7 +58,7 @@ def parse_args():
 def resolve_config(dataset: str) -> dict:
     if dataset == "informal":
         return {
-            "csv_path": os.path.join(LLM_INFORMAL_DIR, "consolidated_informal_comments_JUN26.csv"),
+            "csv_path": os.path.join(LLM_INFORMAL_DIR, "consolidated_informal_comments_adversarial.csv"),
             "results_dir": RESULTS_INFORMAL_DIR,
             "human_col": "human_comment",
             "human_label": "Comment",
@@ -270,7 +272,7 @@ def write_pos_differences_csv(df_pos_props: pd.DataFrame, out_path: str, ndigits
     print(f"Wrote {len(out_rows)} rows to {out_path}")
 
 
-def _fast_path(out):
+def _fast_path(out, min_tokens):
     """Derive POS proportions + differences from an existing counts file (no spaCy re-run)."""
     df_counts = pd.read_csv(out["out_pos_counts"], encoding="utf-8")
     rows_pos_props = []
@@ -281,7 +283,7 @@ def _fast_path(out):
         gen_counts = parse_pos_counts_string(row.get("Generated_Abstract_POS_Counts", ""))
         abs_len = token_length_from_counts(abs_counts)
         gen_len = token_length_from_counts(gen_counts)
-        if (0 < abs_len < MIN_TOKENS) or (0 < gen_len < MIN_TOKENS):
+        if (0 < abs_len < min_tokens) or (0 < gen_len < min_tokens):
             skipped += 1
             continue
         rows_pos_props.append({
@@ -291,14 +293,14 @@ def _fast_path(out):
             "Generated_Abstract_Word_Length": gen_len,
         })
     if skipped:
-        print(f"  Skipped {skipped} rows with fewer than {MIN_TOKENS} tokens in either text.")
+        print(f"  Skipped {skipped} rows with fewer than {min_tokens} tokens in either text.")
     df_pos_props = pd.DataFrame(rows_pos_props)
     df_pos_props.to_csv(out["out_pos_proportions"], index=False, encoding="utf-8")
     print(f"  Wrote {len(rows_pos_props)} rows to {out['out_pos_proportions']}")
     write_pos_differences_csv(df_pos_props, out["out_pos_differences"])
 
 
-def _process_condition(df, nlp, out, human_col, gen_col):
+def _process_condition(df, nlp, out, human_col, gen_col, min_tokens):
     """Full spaCy analysis for one (human, generated) column pairing; writes all nine CSVs."""
     rows_out, rows_pos, rows_pos_counts, rows_pos_props = [], [], [], []
     rows_dep, rows_dep_counts, rows_entities, rows_entity_counts = [], [], [], []
@@ -320,7 +322,7 @@ def _process_condition(df, nlp, out, human_col, gen_col):
         gen_len = 0 if doc_gen is None else len(doc_gen)
         gen_props = pos_proportions_string(Counter(t.pos_ for t in doc_gen)) if doc_gen is not None else ""
 
-        if (0 < abs_len < MIN_TOKENS) or (0 < gen_len < MIN_TOKENS):
+        if (0 < abs_len < min_tokens) or (0 < gen_len < min_tokens):
             continue
 
         rows_out.append({"Abstract_Tokens": abs_tokens, "Generated_Abstract_Tokens": gen_tokens})
@@ -353,6 +355,7 @@ def _process_condition(df, nlp, out, human_col, gen_col):
 def main():
     args = parse_args()
     cfg = resolve_config(args.dataset)
+    min_tokens = MIN_TOKENS_BY_DATASET.get(args.dataset, 30)
     df = None
     nlp = None
 
@@ -366,7 +369,7 @@ def main():
         # Fast path (opt-in): reuse an existing counts file to derive proportions without spaCy.
         if args.use_cache and os.path.exists(out["out_pos_counts"]):
             print("  using cached POS counts (--use-cache)")
-            _fast_path(out)
+            _fast_path(out, min_tokens)
             continue
 
         if df is None:
@@ -377,7 +380,7 @@ def main():
         if nlp is None:
             nlp = load_nlp()
 
-        _process_condition(df, nlp, out, cfg["human_col"], gen_col)
+        _process_condition(df, nlp, out, cfg["human_col"], gen_col, min_tokens)
 
 
 if __name__ == "__main__":

@@ -40,7 +40,7 @@ def parse_args():
 def resolve_config(dataset: str) -> dict:
     if dataset == "informal":
         return {
-            "csv_path": os.path.join(_root, "1_data_collection", "llm_comments", "consolidated_informal_comments_JUN26.csv"),
+            "csv_path": os.path.join(_root, "1_data_collection", "llm_comments", "consolidated_informal_comments_adversarial.csv"),
             "human_col": "human_comment",
             "ai_col": "generated_comment",
             "human_label": "Human comment",

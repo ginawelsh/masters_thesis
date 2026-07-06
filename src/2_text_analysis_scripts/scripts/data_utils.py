@@ -39,34 +39,40 @@ FORMAL_CONDITIONS = {
     "human_like": "Abstract_human_like",
     "detector_aware": "Abstract_detector_aware",
 }
+INFORMAL_CONDITIONS = {
+    "baseline": "generated_comment",
+    "human_like": "comment_human_like",
+    "detector_aware": "comment_detector_aware",
+}
+CONDITIONS_BY_DATASET = {"formal": FORMAL_CONDITIONS, "informal": INFORMAL_CONDITIONS}
 CONDITION_ARG_CHOICES = list(FORMAL_CONDITIONS) + ["all"]
 
 
 def add_condition_arg(parser, default="all"):
-    """Register a --condition CLI flag (choices: the formal conditions + 'all')."""
+    """Register a --condition CLI flag (choices: the prompt conditions + 'all')."""
     parser.add_argument(
         "--condition", choices=CONDITION_ARG_CHOICES, default=default,
-        help="Which formal LLM prompt condition(s) to analyse. Ignored for --dataset informal.",
+        help="Which LLM prompt condition(s) to analyse: baseline / human_like / detector_aware / all.",
     )
 
 
 def resolve_conditions(dataset, requested="all"):
     """Return [(condition_name, llm_column), ...] to iterate over.
 
-    Formal -> one entry per requested condition ('all' = every condition).
-    Informal -> a single (None, 'generated_comment') entry (condition ignored).
+    Both registers carry all three prompt conditions (baseline / human_like /
+    detector_aware), each mapped to its column in that register's CSV. 'all' returns
+    every condition; otherwise just the requested one.
     """
-    if dataset == "informal":
-        return [(None, "generated_comment")]
-    names = list(FORMAL_CONDITIONS) if requested == "all" else [requested]
-    return [(name, FORMAL_CONDITIONS[name]) for name in names]
+    cols = CONDITIONS_BY_DATASET[dataset]
+    names = list(cols) if requested == "all" else [requested]
+    return [(name, cols[name]) for name in names]
 
 
 def condition_tag(dataset, condition):
-    """Output-filename tag. Baseline/informal keep the legacy '<dataset>' name so
-    existing consumers keep working; adversarial conditions get '<dataset>_<condition>'.
+    """Output-filename tag. Baseline keeps the legacy '<dataset>' name so existing
+    consumers keep working; adversarial conditions get '<dataset>_<condition>'.
     """
-    if dataset == "informal" or condition in (None, "baseline"):
+    if condition in (None, "baseline"):
         return dataset
     return f"{dataset}_{condition}"
 

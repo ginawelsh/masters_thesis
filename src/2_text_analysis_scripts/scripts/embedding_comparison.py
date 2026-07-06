@@ -32,7 +32,7 @@ MODEL = "paraphrase-multilingual-mpnet-base-v2"
 SOURCES = {
     "formal": dict(csv=os.path.join(_DATA, "llm_abstracts", "abstracts", "sv_abstracts_adversarial.csv"),
                    human_col="Abstract", llm_col="Abstract_baseline", label_col="Title"),
-    "informal": dict(csv=os.path.join(_DATA, "llm_comments", "consolidated_informal_comments_JUN26.csv"),
+    "informal": dict(csv=os.path.join(_DATA, "llm_comments", "consolidated_informal_comments_adversarial.csv"),
                      human_col="human_comment", llm_col="generated_comment", label_col="question"),
 }
 

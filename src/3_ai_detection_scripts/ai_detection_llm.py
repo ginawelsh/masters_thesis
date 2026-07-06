@@ -1,6 +1,7 @@
 # LLM AI detection workflows
 # Detection tool: DeepSeek API
-# Quiz: 1st half = bachelor's thesis abstracts (formal), 2nd half = Reddit comments (informal)
+# Quiz: mixed abstract quiz from mixed_quiz.csv (human + baseline/human_like/detector_aware),
+#       scored overall and per prompt condition. Informal comments run only if labelled.
 
 import os
 import time
@@ -23,6 +24,29 @@ except ImportError:
 
 DEEPSEEK_API_KEY = os.environ.get("DEEPSEEK_API_KEY")
 client = OpenAI(api_key=DEEPSEEK_API_KEY, base_url="https://api.deepseek.com")
+
+_script_dir = os.path.dirname(os.path.abspath(__file__))
+MIXED_QUIZ_CSV = os.path.join(_script_dir, "mixed_quiz.csv")
+
+
+def load_mixed_quiz(path=MIXED_QUIZ_CSV):
+    """Load the mixed abstract quiz (verbatim texts + ground truth + prompt condition).
+
+    Built by make_mixed_quiz.py: an equal mixture of baseline / human_like / detector_aware
+    LLM abstracts plus human abstracts. `is_human` is ground truth; `condition` records which
+    prompt produced each LLM item (so detection accuracy can be scored per condition).
+    """
+    df = pd.read_csv(path, encoding="utf-8")
+    items = []
+    for _, r in df.iterrows():
+        items.append({
+            "title": str(r["title"]),
+            "text": str(r["text"]),
+            "is_human": str(r["is_human"]).strip().lower() in ("true", "1"),
+            "condition": str(r["condition"]),
+        })
+    return items
+
 
 # ---------------------------------------------------------------------------
 # QUIZ DATA
@@ -405,6 +429,24 @@ def measure_accuracy(results: list[dict]) -> dict:
     }
 
 
+def per_condition_report(results: list[dict]) -> list[dict]:
+    """Per prompt-condition accuracy for abstracts (the evasion question).
+
+    For LLM conditions this is AI-recall (share correctly flagged as AI); for `human`
+    it is the share correctly called human. Adversarial evasion shows up as a *lower*
+    detection rate for human_like / detector_aware than for baseline.
+    """
+    abs_res = [r for r in results if r["type"] == "abstract"]
+    out = []
+    for cond in ["human", "baseline", "human_like", "detector_aware"]:
+        sub = [r for r in abs_res if r.get("condition") == cond]
+        if not sub:
+            continue
+        out.append({"condition": cond, "n": len(sub),
+                    "accuracy": sum(1 for r in sub if r["correct"]) / len(sub)})
+    return out
+
+
 # ---------------------------------------------------------------------------
 # MAIN
 # ---------------------------------------------------------------------------
@@ -412,22 +454,24 @@ def measure_accuracy(results: list[dict]) -> dict:
 if __name__ == "__main__":
     results = []
 
-    # ---- First half: abstracts (formal) ----
+    # ---- Abstracts: mixed human/LLM quiz (baseline / human_like / detector_aware) ----
     print("=" * 60)
-    print("FORMAL DETECTION: BACHELOR'S THESIS ABSTRACTS")
+    print("FORMAL DETECTION: MIXED ABSTRACT QUIZ (3 prompt conditions)")
     print("=" * 60)
-    for i, item in enumerate(ABSTRACTS_QUIZ):
+    abstracts = load_mixed_quiz()
+    for i, item in enumerate(abstracts):
         label = "Human" if item["is_human"] else "AI"
-        print(f"[{i+1:02d}/{len(ABSTRACTS_QUIZ)}] {item['title'][:55]}...", flush=True)
+        print(f"[{i+1:02d}/{len(abstracts)}] ({item['condition']}) {item['title'][:45]}...", flush=True)
         raw = detect_formal(item["text"])
         classification, confidence, reasoning = parse_response(raw)
         predicted_human = (classification == "MÄNNISKA")
         correct = (predicted_human == item["is_human"])
         tick = "✓" if correct else "✗"
-        print(f"       Ground truth: {label:5s}  |  Predicted: {classification}  "
+        print(f"       Ground truth: {label:5s} ({item['condition']})  |  Predicted: {classification}  "
               f"(conf: {confidence})  {tick}")
         results.append({
             "type":        "abstract",
+            "condition":   item["condition"],
             "title":       item["title"],
             "text":        item["text"][:80] + "...",
             "is_human":    item["is_human"],
@@ -437,33 +481,40 @@ if __name__ == "__main__":
             "correct":     correct,
         })
 
-    # ---- Second half: Reddit comments (informal) ----
-    print()
-    print("=" * 60)
-    print("INFORMAL DETECTION: REDDIT COMMENTS")
-    print("=" * 60)
-    for t_idx, thread in enumerate(THREADS_QUIZ):
-        print(f"\nThread {t_idx+1}: {thread['question'][:70]}...")
-        for c_idx, comment in enumerate(thread["comments"]):
-            label = "Human" if comment["is_human"] else "AI"
-            print(f"  Comment {c_idx+1}...", end=" ", flush=True)
-            raw = detect_informal(comment["text"])
-            classification, confidence, reasoning = parse_response(raw)
-            predicted_human = (classification == "MÄNNISKA")
-            correct = (predicted_human == comment["is_human"])
-            tick = "✓" if correct else "✗"
-            print(f"Ground truth: {label:5s}  |  Predicted: {classification}  "
-                  f"(conf: {confidence})  {tick}")
-            results.append({
-                "type":        "comment",
-                "title":       f"Thread {t_idx+1}, Comment {c_idx+1}",
-                "text":        comment["text"][:80] + "...",
-                "is_human":    comment["is_human"],
-                "predicted":   classification,
-                "confidence":  confidence,
-                "reasoning":   reasoning,
-                "correct":     correct,
-            })
+    # ---- Informal comments — only if the quiz carries ground-truth labels ----
+    informal_labeled = bool(THREADS_QUIZ) and all(
+        "is_human" in c for thread in THREADS_QUIZ for c in thread["comments"]
+    )
+    if informal_labeled:
+        print()
+        print("=" * 60)
+        print("INFORMAL DETECTION: REDDIT COMMENTS")
+        print("=" * 60)
+        for t_idx, thread in enumerate(THREADS_QUIZ):
+            print(f"\nThread {t_idx+1}: {thread['question'][:70]}...")
+            for c_idx, comment in enumerate(thread["comments"]):
+                label = "Human" if comment["is_human"] else "AI"
+                print(f"  Comment {c_idx+1}...", end=" ", flush=True)
+                raw = detect_informal(comment["text"])
+                classification, confidence, reasoning = parse_response(raw)
+                predicted_human = (classification == "MÄNNISKA")
+                correct = (predicted_human == comment["is_human"])
+                tick = "✓" if correct else "✗"
+                print(f"Ground truth: {label:5s}  |  Predicted: {classification}  "
+                      f"(conf: {confidence})  {tick}")
+                results.append({
+                    "type":        "comment",
+                    "condition":   "n/a",
+                    "title":       f"Thread {t_idx+1}, Comment {c_idx+1}",
+                    "text":        comment["text"][:80] + "...",
+                    "is_human":    comment["is_human"],
+                    "predicted":   classification,
+                    "confidence":  confidence,
+                    "reasoning":   reasoning,
+                    "correct":     correct,
+                })
+    else:
+        print("\n[skip] Informal quiz has no ground-truth (is_human) labels — running abstracts only.")
 
     # ---- Accuracy report ----
     print()
@@ -473,16 +524,20 @@ if __name__ == "__main__":
     m = measure_accuracy(results)
     print(f"Overall accuracy  : {m['total_accuracy']:.1%}  ({m['correct']}/{m['total']})")
     print(f"Abstract accuracy : {m['abstract_accuracy']:.1%}")
-    print(f"Comment accuracy  : {m['comment_accuracy']:.1%}")
+    if m["comment_accuracy"]:
+        print(f"Comment accuracy  : {m['comment_accuracy']:.1%}")
     print(f"Precision (AI+)   : {m['precision_ai']:.1%}")
     print(f"Recall    (AI+)   : {m['recall_ai']:.1%}")
     print(f"F1 score  (AI+)   : {m['f1_ai']:.3f}")
     print(f"TP={m['tp']}  FP={m['fp']}  TN={m['tn']}  FN={m['fn']}")
 
-    # ---- Save results ----
-    out_path = os.path.join(
-        _root, "src", "3_ai_detection_scripts", "detection_results_deepseek.csv"
-    )
+    print("\nPer prompt condition (abstracts) — share correctly classified:")
+    for row in per_condition_report(results):
+        tag = "called human" if row["condition"] == "human" else "detected as AI"
+        print(f"  {row['condition']:15s} {row['accuracy']:6.1%}  ({tag}, n={row['n']})")
+
+    # ---- Save results (new file; does not overwrite the earlier quiz's results) ----
+    out_path = os.path.join(_script_dir, "detection_results_mixed.csv")
     df = pd.DataFrame(results)
     df.to_csv(out_path, index=False, encoding="utf-8")
     print(f"\nResults saved → {out_path}")

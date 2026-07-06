@@ -49,10 +49,10 @@ def parse_args():
 def resolve_config(dataset):
     if dataset == "informal":
         return {
-            "csv": os.path.join(_data, "llm_comments", "consolidated_informal_comments_JUN26.csv"),
+            "csv": os.path.join(_data, "llm_comments", "consolidated_informal_comments_adversarial.csv"),
             "human_col": "human_comment",
             "llm_col": "generated_comment",
-            "min_tokens": 5,
+            "min_tokens": 0,  # keep all comments (no token floor for the informal register)
         }
     return {
         "csv": os.path.join(_data, "llm_abstracts", "abstracts", "sv_abstracts_adversarial.csv"),
