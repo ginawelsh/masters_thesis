@@ -67,7 +67,7 @@ def resolve_config(dataset: str) -> dict:
             "generated_label": "Generated Comment",
         }
 
-    input_csv = os.path.join(HUMAN_FORMAL_DIR, "sv_human_collection_with_kws.csv")
+    input_csv = os.path.join(os.path.dirname(HUMAN_FORMAL_DIR), "llm_abstracts", "abstracts", "sv_abstracts_openai_2.csv")
     output_dir = RESULTS_FORMAL_DIR
     os.makedirs(output_dir, exist_ok=True)
     return {
@@ -82,7 +82,7 @@ def resolve_config(dataset: str) -> dict:
         "out_entities": os.path.join(output_dir, "linguistic_analysis_entities.csv"),
         "out_entity_counts": os.path.join(output_dir, "linguistic_analysis_entity_counts.csv"),
         "human_col": "Abstract",
-        "generated_col_candidates": ["Generated_Abstract", "Generated Abstract"],
+        "generated_col_candidates": ["Generated_OpenAI_Abstract", "Generated_Abstract", "Generated Abstract"],
         "human_label": "Abstract",
         "generated_label": "Generated Abstract",
     }

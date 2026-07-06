@@ -12,7 +12,7 @@ Distribution distance measures between human and LLM text distributions.
     punctuation rates, vocabulary richness scores, pragmatic marker rates, etc.
 
 Input sources (loaded automatically when they exist):
-  1. Existing spaCy counts CSVs in human_abstracts/ or human_comments/
+  1. Existing spaCy counts CSVs in results/formal/ or results/informal/
        linguistic_analysis_dep_counts.csv
        linguistic_analysis_entity_counts.csv
      (POS counts are stored per-row; the script aggregates them to corpus level)

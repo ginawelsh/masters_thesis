@@ -42,7 +42,7 @@ _HUMAN_INFORMAL = os.path.join(_DATA, "human_comments")
 
 DEFAULT_SOURCES: dict[str, dict] = {
     "formal": {
-        "csv_path": os.path.join(_HUMAN_FORMAL, "sv_human_collection_with_kws.csv"),
+        "csv_path": os.path.join(_HUMAN_FORMAL, "master_human_theses.csv"),
         "text_column": "Abstract",
         "context_columns": ["Year", "Level", "Title", "Topic Category"],
     },

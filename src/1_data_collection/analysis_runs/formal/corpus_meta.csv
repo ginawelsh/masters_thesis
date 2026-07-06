@@ -1,140 +1,171 @@
 doc_index,register,source_row,Year,Level,Title,Topic Category
-0,formal,0,,Bachelor's Thesis,Visionen om det narkotikafria samhället: En diskursanalys,Social Sciences
-1,formal,1,,Bachelor's Thesis,Kraften av beröring: Beröring som komplementär metod för att minska stress på arbetsplatsen,Social Sciences
-2,formal,2,,Bachelor's Thesis,Det är så brett så jag vet inte vart jag ska börja,Social Sciences
-3,formal,3,,Bachelor's Thesis,Handledningsprocesser i Medarbetarsamtalet,Social Sciences
-4,formal,4,,Bachelor's Thesis,Samkönade äktenskaps vara eller icke vara inom Svenska kyrkan.: En argumentationsanalys av debattartiklar från Kyrkans tidning och Dagens Nyheter.,Humanities and the Arts
-5,formal,5,,Bachelor's Thesis,Kön; sexualitet; etnicitet och socioekonomisk bakgrund: Om intersektionalitet i gymnasiets religionsläroböcker,Humanities and the Arts
-6,formal,6,,Bachelor's Thesis,Paulus lagsyn i Rom 3:21-31,Humanities and the Arts
-7,formal,7,,Bachelor's Thesis,Mesopotamiens gudomligförklarade kungar: En undersökning av teologiska perspektiv på två gudomligförklarade kungar i det forntida Mesopotamien,Humanities and the Arts
-8,formal,8,,Bachelor's Thesis,Kyrkan som plats vid skolavslutningar?: En studie av lärare och lärarstudenters attityder gentemot kyrkovistelse och konfessionella inslag,Humanities and the Arts
-9,formal,9,,Bachelor's Thesis,Effektivisering av bygglovsprocessen gällande ändring av kulturhistoriskt värdefull bebyggelse: En fallstudie av ett miljonprogramsområde-Nya Nordostprojektet i Gävle,Engineering and Technology
-10,formal,10,,Bachelor's Thesis,1800-talets London i spelet Crysis Reflektioner kring verket ”London Crysis”,Engineering and Technology
-11,formal,11,,Bachelor's Thesis,3D-animerat teckenspråk i spelmiljö: Perspektiv kontra förståelse,Engineering and Technology
-12,formal,12,,Bachelor's Thesis,3D och kommunal fysisk planering En undersökning om motiven till användandet av 3D i den kommunala fysiska planeringen,Engineering and Technology
-13,formal,13,,Bachelor's Thesis,3D på webben: nästa steg för E-handeln? Stereoskopisk 3D som produktpresentation,Engineering and Technology
-14,formal,14,,Bachelor's Thesis,Abakavir och lamivudin i kombination med efavirenz eller atazanavir vid behandling av HIV.: En jämförande litteraturstudie om effekt och säkerhet,Medical and Health Sciences
-15,formal,15,,Bachelor's Thesis,Allergenspecifik immunterapi: sublingual respektive subkutan administrering vid husdammskvalsterallergi,Medical and Health Sciences
-16,formal,16,,Bachelor's Thesis,Akutpreventivmedel: Hur skiljer sig effektivitet och säkerhet för de tre godkända metoderna levonorgestrel; ulipristal och kopparspiral?,Medical and Health Sciences
-17,formal,17,,Bachelor's Thesis,Alternativa fröer i bröd: En teknisk och sensorisk utvärdering av amarant; bovete; chia; hirs samt quinoa i bröd och bakning,Medical and Health Sciences
-18,formal,18,,Bachelor's Thesis,Art- och genusbestämning av bakterier direkt från blododlingar med MALDI-TOF MS,Medical and Health Sciences
-19,formal,19,,Bachelor's Thesis,3-5 åringar möter matematik: En studie kring The English School i Älmhults arbete med taluppfattning,Natural Sciences
-20,formal,20,,Bachelor's Thesis,Artificiell intelligens - ANN och evolution i shooterspel,Natural Sciences
-21,formal,21,,Bachelor's Thesis,Procedurella Texturer: Skapande av en procedurell textur utifrån en referensbild med hjälp av en genetisk algoritm,Natural Sciences
-22,formal,22,,Bachelor's Thesis,Användarverifiering från webbkamera,Natural Sciences
-23,formal,23,,Bachelor's Thesis,IT-stöd för Migrationsverket: En studie om nyttjande av beslutsstödssystem vid placeringen av ensamkommande flyktingbarn,Natural Sciences
-24,formal,24,,Bachelor's Thesis,När mat blir sopor; och när den inte blir det: En studie om matsvinn ur ett miljö –och individperspektiv,Agricultural and Veterinary Sciences
-25,formal,25,,Bachelor's Thesis,"""Jag ville ge mitt barn de bästa förutsättningarna"": En kvalitativ intervjustudie om tankar kring matvanor under graviditet hos nyblivna förstagångsmammor",Agricultural and Veterinary Sciences
-26,formal,26,,Bachelor's Thesis,Treåringars matvanor; fysiska aktivitet; samt Body Mass Index i Västerbotten: I relation till amningsduration och familjekonstellation,Agricultural and Veterinary Sciences
-27,formal,27,,Bachelor's Thesis,Kvotflyktingar i Sverige: En kvalitativ studie om arbete och samverkan inom flyktingmottagande,Social Sciences
-28,formal,28,,Bachelor's Thesis,En ny arbetsmarknadspolitik,Social Sciences
-29,formal,29,,Bachelor's Thesis,Kommunikationspolicyn: En studie av svenska offentliga organisationers kommunikationspolicys med utgångspunkt i samtida forskningsperspektiv,Social Sciences
-30,formal,30,,Bachelor's Thesis,Att arbeta integrerat med asylbarn i allmän förskola: En kvalitativ studie baserad på lärarintervjuer,Agricultural and Veterinary Sciences
-31,formal,31,,Bachelor's Thesis,"""Men det här är ju kvinnogöra"": En studie om hur lärare ser på och praktiserar jämställdhet och genus i HKK",Agricultural and Veterinary Sciences
-32,formal,32,,Bachelor's Thesis,Hur blev det med hälsan?: En kvalitativ studie om elevers syn på hälsa i ämnet Idrott och hälsa i årskurs nio.,Agricultural and Veterinary Sciences
-33,formal,33,,Bachelor's Thesis,Handledningsprocesser i Medarbetarsamtalet,Agricultural and Veterinary Sciences
-34,formal,34,,Bachelor's Thesis,Drömmen om ett arbete: En undersökning om anställningsbarhet i förhållande till personlighet och sökbeteende,Social Sciences
-35,formal,35,,Bachelor's Thesis,Att vara syskon eller partner till en person med ätstörningsproblematik,Social Sciences
-36,formal,36,,Bachelor's Thesis,Kalmar - ett platsvarumärke i skuggan av Öland och Glasriket: En studie om destinationsutveckling,Social Sciences
-37,formal,37,,Bachelor's Thesis,Användandet av miljöledningssystem och gröna nyckeltal: – en studie av drivkrafter hos mindre företag,Social Sciences
-38,formal,38,,Bachelor's Thesis,Principalansvaret för vårdnadshavare: Föräldrars skadeståndsansvar för skada vållad av barn,Social Sciences
-39,formal,39,,Bachelor's Thesis,Fytoremediering med perenn solros i åkerjord,Natural Sciences
-40,formal,40,,Bachelor's Thesis,Videokompression och användarnytta,Natural Sciences
-41,formal,41,,Bachelor's Thesis,Mer lättläst: Påbyggnad av ett automatiskt omskrivningsverktyg till lätt svenska,Natural Sciences
-42,formal,42,,Bachelor's Thesis,"""Jag tror inte han är där än; alltså rent språkligt"": Gymnasielärares beskrivningar av och attityder till förortssvenska och förortsslang",Humanities and the Arts
-43,formal,43,,Bachelor's Thesis,Eventbubblan i syd: En studie av Film i Skånes eventverksamhet,Humanities and the Arts
-44,formal,44,,Bachelor's Thesis,Vad är det för vits med humor i vården?,Medicine
-45,formal,45,,Bachelor's Thesis,Äldre och ensamhet: en kvalitativ studie om ensamhet bland äldre boende i eget hem och på servicehus,Social Work
-46,formal,46,,Bachelor's Thesis,PRO i Österåkers kommun: en studie över PRO: s roll inom äldreomsorgen,Social Work
-47,formal,47,,Bachelor's Thesis,Är en skola för alla bra för alla? - ur elevperspektiv,Social and Behavioural Science
-48,formal,48,,Bachelor's Thesis,Dom vill ju spela så då spelar vi!: En belysande studie av faktorer som påverkar läraren vid planeringen av unervisningen i estetisk verksamhet,Pedagogy
-49,formal,49,,Bachelor's Thesis,Finansiell riskredovisning,Business Administration
-50,formal,50,,Bachelor's Thesis,Differentiering – en möjlighet att möta elevers olika förutsättningar och behov,Social Sciences
-51,formal,51,2001.0,Bachelor's Thesis,Metoder vid implementation av affärssystem: en studie om anpassning,"2006 (Swedish)Independent thesis Basic level (degree of Bachelor), 10 credits / 15 HE creditsStudent thesis"
-52,formal,52,2006.0,Bachelor's Thesis,"2006 (Swedish)Independent thesis Basic level (degree of Bachelor), 10 credits / 15 HE creditsStudent thesis",
-53,formal,53,2006.0,Bachelor's Thesis,"Ingen kan göra allt, men alla kan göra något – en studie kring pedagogers uppfattning om sin kompetens i att möta barn i sorg",
-54,formal,54,2005.0,Bachelor's Thesis,2005 (Swedish)Independent thesis Basic level (degree of Bachelor)Student thesis,Nursing
-55,formal,55,2002.0,Bachelor's Thesis,2002 (Swedish)Independent thesis Basic level (degree of Bachelor)Student thesisAlternative title,
-56,formal,56,2006.0,Bachelor's Thesis,Från Hakkaribergen till Orans kust: en jämförelse mellan genrerna raweh och rai,
-57,formal,57,2006.0,Bachelor's Thesis,Läroplanens konkreta spår i det pedagogiska arbetet,
-58,formal,58,2005.0,Bachelor's Thesis,Balettmapp Kungliga Operan: Operahusens design och arkitektur,
-59,formal,59,2001.0,Bachelor's Thesis,Vidareutveckling av informationssystem: Vilka olika aktiviteter går att identifiera i VAD-fasen?,Information Systems
-60,formal,60,2003.0,Bachelor's Thesis,En jämförelse mellan materiella investeringar och investeringar i kompetensutveckling,Business Administration
-61,formal,61,2003.0,Bachelor's Thesis,Datakvalitetsverktyg i datalager: Hur hanterar datakvalitetsverktyg datakvalitetsfaktorer?,Information Systems
-62,formal,62,2006.0,Bachelor's Thesis,Internetpoker: En studie i köpbeteendet hos pokerproffs,Business Administration
-63,formal,63,2006.0,Bachelor's Thesis,Aktiemarknadens effektivitet: En studie av effektiviteten på den svenska aktiemarknaden i samband med kvartalsrapporter,Economics
-64,formal,64,2003.0,Bachelor's Thesis,En studie av inbyggda brandväggar: Microsoft XP och Red Hat Linux,Computer Sciences
-65,formal,65,2001.0,Bachelor's Thesis,Affärsrelationer vid elektronisk handel,Information Systems
-66,formal,66,2005.0,Bachelor's Thesis,Integration på två arbetsplatser,Social Sciences
-67,formal,67,2002.0,Bachelor's Thesis,Innan den strukturella differentieringens tidevarv,Religious Studies Religious Studies Humanities
-68,formal,68,2006.0,Bachelor's Thesis,Vad orsakar ilska?,Psychology
-69,formal,69,2006.0,Bachelor's Thesis,Har utlandsadopterade barn språkproblem?: En undersökning om vad föräldrar och pedagoger anser,General Language Studies and Linguistics
-70,formal,70,2006.0,Bachelor's Thesis,Etableringsstrategier på arbetsmarknaden: En intervjustudie av unga akademiker två år efter examen,
-71,formal,71,2006.0,Bachelor's Thesis,Matematik för alla?: Hur lärare arbetar med individualisering,
-72,formal,72,2006.0,Bachelor's Thesis,Effekten av varumärkes beskrivning på studenters attityd kring värdering och ägande av produkter,
-73,formal,73,2005.0,Bachelor's Thesis,Transkulturell omvårdnad,
-74,formal,74,2003.0,Bachelor's Thesis,Om personalförmåner motiverar de anställda,
-75,formal,75,2006.0,Bachelor's Thesis,JÄVLAR ANAMMA! EN STUDIE OM VÄGEN UT UR MISSBRUK / THE SPIRIT WITHIN. A STUDY ON THE WAY OUT OF DRUGADDICTION,
-76,formal,76,2003.0,Bachelor's Thesis,Koordination och organisation: - två viktiga begrepp vid skapandet av en innehållsrik hemsida för kommunala myndigheter,
-77,formal,77,2006.0,Bachelor's Thesis,KommunistJesus och Varumärke: Talet om Che Guevara,
-78,formal,78,2005.0,Bachelor's Thesis,"Lärande på elevers villkor: En studie om lärande på omvårdnadsprogrammet, med fokus på medicinsk grundkurs",
-79,formal,79,2005.0,Bachelor's Thesis,Sjuksköterskan och döden,
-80,formal,80,2006.0,Bachelor's Thesis,Damtidningar: ett behov?: En studie om återköp,
-81,formal,81,2006.0,Bachelor's Thesis,Anmälningsskyldighet för kuratorer på ungdomsmottagningar: en studie i hur ett urval kuratorer på ungdomsmottagningar förhåller sig i sitt möte med barn under 15 år som är sexuellt aktiva,
-82,formal,82,2005.0,Bachelor's Thesis,Sexualundervisning på särgymnasiet,Social Work
-83,formal,83,2006.0,Bachelor's Thesis,En studie om flickor och kvinnor på elektrikerutbildningen,Nursing
-84,formal,84,2006.0,Bachelor's Thesis,Ingen rädder för vargen?: En kvantitativ innehållsanalys av tre tidningstyper med avseende på rapporteringen om varg,
-85,formal,85,2003.0,Bachelor's Thesis,Pappersmakulatur vid Bobergs Tryckeri AB - orsaker och förbättringsförslag,
-86,formal,86,2006.0,Bachelor's Thesis,Balanserat styrkort i primärvården: En fallstudie om styrning med balanserat styrkort på KvaLita Närsjukvård AB,
-87,formal,87,2006.0,Bachelor's Thesis,Ickeverbal kommunikation: Hur kontakt kan skapas med demensdrabbade genom beröring och genom musik,
-88,formal,88,2005.0,Bachelor's Thesis,Vad är dyskalkyli?: En teoretisk-praktisk studie av dyskalkyli i skolan och om det är möjligt att bli hjälpt?,
-89,formal,89,2001.0,Bachelor's Thesis,"Andersson, Anna-Karin",
-90,formal,90,2004.0,Bachelor's Thesis,Verksamhetsanalys vid ett snickeriföretag – behov av organisationsanpassning vid expansion,
-91,formal,91,2002.0,Bachelor's Thesis,Etik och ansvar. Sjuksköterskans upplevelse av inre etiskt ansvar i omvårdnaden,
-92,formal,92,2002.0,Bachelor's Thesis,"Andersson, Annika",
-93,formal,93,2006.0,Bachelor's Thesis,Sjuksköterskans upplevelser efter hot och våld i somatisk vård: en litteraturstudie,
-94,formal,94,2006.0,Bachelor's Thesis,Kan iranska aktörer påverkas?: USA:s förmåga till strategiskt inflytande ur ett fältperspektiv,
-95,formal,95,2004.0,Bachelor's Thesis,"Andersson, Bodil",Social Work
-96,formal,96,2004.0,Bachelor's Thesis,Svårigheter i mötet mellan svensk sjukvårdspersonal och personer med invandrarbakgrund: en litteraturstudie,Nursing
-97,formal,97,2002.0,Bachelor's Thesis,Faktorer som kan påverka samarbetet mellan användare och systemutvecklare,
-98,formal,98,2006.0,Bachelor's Thesis,Att vara eller inte vara: styrs uttaget av föräldraledighet av föreställningar eller faktiska förhållanden?,"Production Engineering, Human Work Science and Ergonomics"
-99,formal,99,2004.0,Bachelor's Thesis,Organiserat samarbete mellan lärare och kollegor inom IKT-baserad distansundervisning,Other Social Sciences not elsewhere specified
-100,formal,100,2006.0,Bachelor's Thesis,Är granskningen av 90-kontoinnehavare tillräcklig: Kritisk granskning av SFI:s rutiner,Business Administration
-101,formal,101,2006.0,Bachelor's Thesis,"Andersson, Caroline",Sociology
-102,formal,102,2006.0,Bachelor's Thesis,Upplevelser av interaktionen mellan klient och socialsekreterare -sett ur ett maktperspektiv,
-103,formal,103,2004.0,Bachelor's Thesis,Personalens uppfattning om och möjlighet att påverka måltidernas innehåll i en förskola,Social Sciences
-104,formal,104,2006.0,Bachelor's Thesis,Att drabbas av prostatacancer: Männens upplevelser av sjukdomen,Nursing
-105,formal,105,2005.0,Bachelor's Thesis,Lek en livsnödvändighet: Tänkande om lek i grundskolan och träningsskolan,
-106,formal,106,2004.0,Bachelor's Thesis,Inlärningsstilar - ett sätt att individanpassa undervisningen?,Social Sciences
-107,formal,107,2004.0,Bachelor's Thesis,Framgångsfaktorer bakom gerillakrigföring,Social Sciences
-108,formal,108,2005.0,Bachelor's Thesis,Straff- och offentligrättsliga legalitetsprincipen,
-109,formal,109,2006.0,Bachelor's Thesis,Utveckling av ett företags marknadskommunikation med informationsteknik,Computer Engineering
-110,formal,110,2003.0,Bachelor's Thesis,Den ekologiska utvecklingen av Motala ström samt dess förutsättningar,
-111,formal,111,2002.0,Bachelor's Thesis,Evaluering av neurala nätverk för en fotbollsspelande mobil robot,Computer Sciences
-112,formal,112,2006.0,Bachelor's Thesis,Stickrädsla- En kvalitativ studie om sjuksköterskans omvårdnad av patienter med stickrädsla,
-113,formal,113,2005.0,Bachelor's Thesis,Frivillig information i delårsrapporter: Förekomsten av frivilligt offentliggjord information i delårsrapporter hos tio aktiebolag noterade på OMX Stockholmsbörsen,Business Administration
-114,formal,114,2006.0,Bachelor's Thesis,Uppföljningsarbetet av efterkalkyler på Portsystem 2000 AB,
-115,formal,115,2004.0,Bachelor's Thesis,En jämförelse av olika kommunikationstekniker och systemarkitekturiska lösningar vid uppbyggnad av nätverk i naturen,
-116,formal,116,2006.0,Bachelor's Thesis,Slöja i skolan?,
-117,formal,117,2004.0,Bachelor's Thesis,Informationens betydelse i den preoperativa vården,
-118,formal,118,2004.0,Bachelor's Thesis,You´ve got m@il: en studie om sambandet mellan e-post och effektiv kommunikation i en IT-intensiv organisation,
-119,formal,119,2005.0,Bachelor's Thesis,Hur den förändrade sexualiteten kan påverka mannens självbild och relationer efter behandling av prostatacancer,
-120,formal,120,2002.0,Bachelor's Thesis,"Andersson, Helena",
-121,formal,121,2005.0,Bachelor's Thesis,Fysisk beröring för människans välbefinnande?,Nursing
-122,formal,122,2006.0,Bachelor's Thesis,”Man kan vara sjuk och frisk samma dag”: En studie av psykiskt störda lagöverträdares rättsliga ställning,Law (excluding Law and Society)
-123,formal,123,2006.0,Bachelor's Thesis,Det moderna arbetslivets krav ur ett vuxenutvecklingspsykologiskt perspektiv,
-124,formal,124,2003.0,Bachelor's Thesis,Har Försvarsmakten behov av simuleringssystem för logistik?,
-125,formal,125,2000.0,Bachelor's Thesis,En undersökning om perspektivet på Islam i tre nyhetsprogram,
-126,formal,126,2006.0,Bachelor's Thesis,"Andersson, Jennie",
-127,formal,127,2006.0,Bachelor's Thesis,Medarbetarnas upplvelse av gruppdialogen enligt Amforas samtalsmodell,
-128,formal,128,2005.0,Bachelor's Thesis,Daglig fysisk aktivitet för elever – en utmaning för alla lärare i grundskolan,
-129,formal,129,2006.0,Bachelor's Thesis,Gymnasiematematik på distans: Varför så många avbryter sina distansstudier i matematik,
-130,formal,130,2001.0,Bachelor's Thesis,Argument för och emot privat sjukvård,Human Computer Interaction
-131,formal,131,2006.0,Bachelor's Thesis,Hur budgeterar gaseller?: En studie om tillväxtens påverkan på budgetering i gasellföretag,Business Administration
-132,formal,132,2005.0,Bachelor's Thesis,Teambuilding: En analys av den svenska marknaden ur ett konsultperspektiv,Business Administration
-133,formal,133,2004.0,Bachelor's Thesis,Datorstödd musikproduktion och tyst kunnande: En studie i design för användbarhet,
-134,formal,134,2006.0,Bachelor's Thesis,Stöd vid övervikt och fetma,Nursing
-135,formal,135,2004.0,Bachelor's Thesis,Lageroptimering med hjälp av datautvinning ur datalager,Computer Sciences
-136,formal,136,2006.0,Bachelor's Thesis,"Andersson, Jonas",Law
-137,formal,137,2006.0,Bachelor's Thesis,"Utvärdering av Malaria Antigen ELISA kit för diagnostik av malaria vid Christian Medical College and Hospital i Vellore, Indien.: en jämförande studie mellan Quantitative buffy coat och enzyme-linked immunosorbent assays (ELISA) metodik",Immunology
-138,formal,138,2005.0,Bachelor's Thesis,Uppmuntrar läroboken i matematik eleverna till att tänka självständigt?,Social Sciences
+0,formal,0,,Bachelor's Thesis,Kraften av beröring: Beröring som komplementär metod för att minska stress på arbetsplatsen,Social Sciences
+1,formal,1,,Bachelor's Thesis,Det är så brett så jag vet inte vart jag ska börja,Social Sciences
+2,formal,2,,Bachelor's Thesis,Handledningsprocesser i Medarbetarsamtalet,Social Sciences
+3,formal,3,,Bachelor's Thesis,Samkönade äktenskaps vara eller icke vara inom Svenska kyrkan.: En argumentationsanalys av debattartiklar från Kyrkans tidning och Dagens Nyheter.,Humanities and the Arts
+4,formal,4,,Bachelor's Thesis,Kön; sexualitet; etnicitet och socioekonomisk bakgrund: Om intersektionalitet i gymnasiets religionsläroböcker,Humanities and the Arts
+5,formal,5,,Bachelor's Thesis,Paulus lagsyn i Rom 3:21-31,Humanities and the Arts
+6,formal,6,,Bachelor's Thesis,Mesopotamiens gudomligförklarade kungar: En undersökning av teologiska perspektiv på två gudomligförklarade kungar i det forntida Mesopotamien,Humanities and the Arts
+7,formal,7,,Bachelor's Thesis,Kyrkan som plats vid skolavslutningar?: En studie av lärare och lärarstudenters attityder gentemot kyrkovistelse och konfessionella inslag,Humanities and the Arts
+8,formal,8,,Bachelor's Thesis,Effektivisering av bygglovsprocessen gällande ändring av kulturhistoriskt värdefull bebyggelse: En fallstudie av ett miljonprogramsområde-Nya Nordostprojektet i Gävle,Engineering and Technology
+9,formal,9,,Bachelor's Thesis,1800-talets London i spelet Crysis Reflektioner kring verket ”London Crysis”,Engineering and Technology
+10,formal,10,,Bachelor's Thesis,3D-animerat teckenspråk i spelmiljö: Perspektiv kontra förståelse,Engineering and Technology
+11,formal,11,,Bachelor's Thesis,3D och kommunal fysisk planering En undersökning om motiven till användandet av 3D i den kommunala fysiska planeringen,Engineering and Technology
+12,formal,12,,Bachelor's Thesis,3D på webben: nästa steg för E-handeln? Stereoskopisk 3D som produktpresentation,Engineering and Technology
+13,formal,13,,Bachelor's Thesis,Abakavir och lamivudin i kombination med efavirenz eller atazanavir vid behandling av HIV.: En jämförande litteraturstudie om effekt och säkerhet,Medical and Health Sciences
+14,formal,14,,Bachelor's Thesis,Allergenspecifik immunterapi: sublingual respektive subkutan administrering vid husdammskvalsterallergi,Medical and Health Sciences
+15,formal,15,,Bachelor's Thesis,Akutpreventivmedel: Hur skiljer sig effektivitet och säkerhet för de tre godkända metoderna levonorgestrel; ulipristal och kopparspiral?,Medical and Health Sciences
+16,formal,16,,Bachelor's Thesis,Alternativa fröer i bröd: En teknisk och sensorisk utvärdering av amarant; bovete; chia; hirs samt quinoa i bröd och bakning,Medical and Health Sciences
+17,formal,17,,Bachelor's Thesis,Art- och genusbestämning av bakterier direkt från blododlingar med MALDI-TOF MS,Medical and Health Sciences
+18,formal,18,,Bachelor's Thesis,3-5 åringar möter matematik: En studie kring The English School i Älmhults arbete med taluppfattning,Natural Sciences
+19,formal,19,,Bachelor's Thesis,Artificiell intelligens - ANN och evolution i shooterspel,Natural Sciences
+20,formal,20,,Bachelor's Thesis,Procedurella Texturer: Skapande av en procedurell textur utifrån en referensbild med hjälp av en genetisk algoritm,Natural Sciences
+21,formal,21,,Bachelor's Thesis,Användarverifiering från webbkamera,Natural Sciences
+22,formal,22,,Bachelor's Thesis,IT-stöd för Migrationsverket: En studie om nyttjande av beslutsstödssystem vid placeringen av ensamkommande flyktingbarn,Natural Sciences
+23,formal,23,,Bachelor's Thesis,När mat blir sopor; och när den inte blir det: En studie om matsvinn ur ett miljö –och individperspektiv,Agricultural and Veterinary Sciences
+24,formal,24,,Bachelor's Thesis,"""Jag ville ge mitt barn de bästa förutsättningarna"": En kvalitativ intervjustudie om tankar kring matvanor under graviditet hos nyblivna förstagångsmammor",Agricultural and Veterinary Sciences
+25,formal,25,,Bachelor's Thesis,Treåringars matvanor; fysiska aktivitet; samt Body Mass Index i Västerbotten: I relation till amningsduration och familjekonstellation,Agricultural and Veterinary Sciences
+26,formal,26,,Bachelor's Thesis,Kvotflyktingar i Sverige: En kvalitativ studie om arbete och samverkan inom flyktingmottagande,Social Sciences
+27,formal,27,,Bachelor's Thesis,En ny arbetsmarknadspolitik,Social Sciences
+28,formal,28,,Bachelor's Thesis,Kommunikationspolicyn: En studie av svenska offentliga organisationers kommunikationspolicys med utgångspunkt i samtida forskningsperspektiv,Social Sciences
+29,formal,29,,Bachelor's Thesis,Att arbeta integrerat med asylbarn i allmän förskola: En kvalitativ studie baserad på lärarintervjuer,Agricultural and Veterinary Sciences
+30,formal,30,,Bachelor's Thesis,"""Men det här är ju kvinnogöra"": En studie om hur lärare ser på och praktiserar jämställdhet och genus i HKK",Agricultural and Veterinary Sciences
+31,formal,31,,Bachelor's Thesis,Hur blev det med hälsan?: En kvalitativ studie om elevers syn på hälsa i ämnet Idrott och hälsa i årskurs nio.,Agricultural and Veterinary Sciences
+32,formal,32,,Bachelor's Thesis,Handledningsprocesser i Medarbetarsamtalet,Agricultural and Veterinary Sciences
+33,formal,33,,Bachelor's Thesis,Drömmen om ett arbete: En undersökning om anställningsbarhet i förhållande till personlighet och sökbeteende,Social Sciences
+34,formal,34,,Bachelor's Thesis,Att vara syskon eller partner till en person med ätstörningsproblematik,Social Sciences
+35,formal,35,,Bachelor's Thesis,Kalmar - ett platsvarumärke i skuggan av Öland och Glasriket: En studie om destinationsutveckling,Social Sciences
+36,formal,36,,Bachelor's Thesis,Användandet av miljöledningssystem och gröna nyckeltal: – en studie av drivkrafter hos mindre företag,Social Sciences
+37,formal,37,,Bachelor's Thesis,Principalansvaret för vårdnadshavare: Föräldrars skadeståndsansvar för skada vållad av barn,Social Sciences
+38,formal,38,,Bachelor's Thesis,Fytoremediering med perenn solros i åkerjord,Natural Sciences
+39,formal,39,,Bachelor's Thesis,Videokompression och användarnytta,Natural Sciences
+40,formal,40,,Bachelor's Thesis,Mer lättläst: Påbyggnad av ett automatiskt omskrivningsverktyg till lätt svenska,Natural Sciences
+41,formal,41,,Bachelor's Thesis,"""Jag tror inte han är där än; alltså rent språkligt"": Gymnasielärares beskrivningar av och attityder till förortssvenska och förortsslang",Humanities and the Arts
+42,formal,42,,Bachelor's Thesis,Eventbubblan i syd: En studie av Film i Skånes eventverksamhet,Humanities and the Arts
+43,formal,43,,Bachelor's Thesis,Vad är det för vits med humor i vården?,Medicine
+44,formal,44,,Bachelor's Thesis,Äldre och ensamhet: en kvalitativ studie om ensamhet bland äldre boende i eget hem och på servicehus,Social Work
+45,formal,45,,Bachelor's Thesis,PRO i Österåkers kommun: en studie över PRO: s roll inom äldreomsorgen,Social Work
+46,formal,46,,Bachelor's Thesis,Är en skola för alla bra för alla? - ur elevperspektiv,Social and Behavioural Science
+47,formal,47,,Bachelor's Thesis,Dom vill ju spela så då spelar vi!: En belysande studie av faktorer som påverkar läraren vid planeringen av unervisningen i estetisk verksamhet,Pedagogy
+48,formal,48,,Bachelor's Thesis,Finansiell riskredovisning,Business Administration
+49,formal,49,,Bachelor's Thesis,Differentiering – en möjlighet att möta elevers olika förutsättningar och behov,Social Sciences
+50,formal,50,2001.0,Bachelor's Thesis,Metoder vid implementation av affärssystem: en studie om anpassning,"2006 (Swedish)Independent thesis Basic level (degree of Bachelor), 10 credits / 15 HE creditsStudent thesis"
+51,formal,51,2006.0,Bachelor's Thesis,"2006 (Swedish)Independent thesis Basic level (degree of Bachelor), 10 credits / 15 HE creditsStudent thesis",
+52,formal,52,2006.0,Bachelor's Thesis,"Ingen kan göra allt, men alla kan göra något – en studie kring pedagogers uppfattning om sin kompetens i att möta barn i sorg",
+53,formal,53,2005.0,Bachelor's Thesis,2005 (Swedish)Independent thesis Basic level (degree of Bachelor)Student thesis,Nursing
+54,formal,54,2002.0,Bachelor's Thesis,2002 (Swedish)Independent thesis Basic level (degree of Bachelor)Student thesisAlternative title,
+55,formal,55,2006.0,Bachelor's Thesis,Från Hakkaribergen till Orans kust: en jämförelse mellan genrerna raweh och rai,
+56,formal,56,2006.0,Bachelor's Thesis,Läroplanens konkreta spår i det pedagogiska arbetet,
+57,formal,57,2005.0,Bachelor's Thesis,Balettmapp Kungliga Operan: Operahusens design och arkitektur,
+58,formal,58,2001.0,Bachelor's Thesis,Vidareutveckling av informationssystem: Vilka olika aktiviteter går att identifiera i VAD-fasen?,Information Systems
+59,formal,59,2003.0,Bachelor's Thesis,En jämförelse mellan materiella investeringar och investeringar i kompetensutveckling,Business Administration
+60,formal,60,2003.0,Bachelor's Thesis,Datakvalitetsverktyg i datalager: Hur hanterar datakvalitetsverktyg datakvalitetsfaktorer?,Information Systems
+61,formal,61,2006.0,Bachelor's Thesis,Internetpoker: En studie i köpbeteendet hos pokerproffs,Business Administration
+62,formal,62,2006.0,Bachelor's Thesis,Aktiemarknadens effektivitet: En studie av effektiviteten på den svenska aktiemarknaden i samband med kvartalsrapporter,Economics
+63,formal,63,2003.0,Bachelor's Thesis,En studie av inbyggda brandväggar: Microsoft XP och Red Hat Linux,Computer Sciences
+64,formal,64,2001.0,Bachelor's Thesis,Affärsrelationer vid elektronisk handel,Information Systems
+65,formal,65,2005.0,Bachelor's Thesis,Integration på två arbetsplatser,Social Sciences
+66,formal,66,2002.0,Bachelor's Thesis,Innan den strukturella differentieringens tidevarv,Religious Studies Religious Studies Humanities
+67,formal,67,2006.0,Bachelor's Thesis,Vad orsakar ilska?,Psychology
+68,formal,68,2006.0,Bachelor's Thesis,Har utlandsadopterade barn språkproblem?: En undersökning om vad föräldrar och pedagoger anser,General Language Studies and Linguistics
+69,formal,69,2006.0,Bachelor's Thesis,Etableringsstrategier på arbetsmarknaden: En intervjustudie av unga akademiker två år efter examen,
+70,formal,70,2006.0,Bachelor's Thesis,Matematik för alla?: Hur lärare arbetar med individualisering,
+71,formal,71,2006.0,Bachelor's Thesis,Effekten av varumärkes beskrivning på studenters attityd kring värdering och ägande av produkter,
+72,formal,72,2005.0,Bachelor's Thesis,Transkulturell omvårdnad,
+73,formal,73,2003.0,Bachelor's Thesis,Om personalförmåner motiverar de anställda,
+74,formal,74,2006.0,Bachelor's Thesis,JÄVLAR ANAMMA! EN STUDIE OM VÄGEN UT UR MISSBRUK / THE SPIRIT WITHIN. A STUDY ON THE WAY OUT OF DRUGADDICTION,
+75,formal,75,2003.0,Bachelor's Thesis,Koordination och organisation: - två viktiga begrepp vid skapandet av en innehållsrik hemsida för kommunala myndigheter,
+76,formal,76,2006.0,Bachelor's Thesis,KommunistJesus och Varumärke: Talet om Che Guevara,
+77,formal,77,2005.0,Bachelor's Thesis,"Lärande på elevers villkor: En studie om lärande på omvårdnadsprogrammet, med fokus på medicinsk grundkurs",
+78,formal,78,2005.0,Bachelor's Thesis,Sjuksköterskan och döden,
+79,formal,79,2006.0,Bachelor's Thesis,Damtidningar: ett behov?: En studie om återköp,
+80,formal,80,2006.0,Bachelor's Thesis,Anmälningsskyldighet för kuratorer på ungdomsmottagningar: en studie i hur ett urval kuratorer på ungdomsmottagningar förhåller sig i sitt möte med barn under 15 år som är sexuellt aktiva,
+81,formal,81,2005.0,Bachelor's Thesis,Sexualundervisning på särgymnasiet,Social Work
+82,formal,82,2006.0,Bachelor's Thesis,En studie om flickor och kvinnor på elektrikerutbildningen,Nursing
+83,formal,83,2006.0,Bachelor's Thesis,Ingen rädder för vargen?: En kvantitativ innehållsanalys av tre tidningstyper med avseende på rapporteringen om varg,
+84,formal,84,2003.0,Bachelor's Thesis,Pappersmakulatur vid Bobergs Tryckeri AB - orsaker och förbättringsförslag,
+85,formal,85,2006.0,Bachelor's Thesis,Balanserat styrkort i primärvården: En fallstudie om styrning med balanserat styrkort på KvaLita Närsjukvård AB,
+86,formal,86,2006.0,Bachelor's Thesis,Ickeverbal kommunikation: Hur kontakt kan skapas med demensdrabbade genom beröring och genom musik,
+87,formal,87,2005.0,Bachelor's Thesis,Vad är dyskalkyli?: En teoretisk-praktisk studie av dyskalkyli i skolan och om det är möjligt att bli hjälpt?,
+88,formal,88,2001.0,Bachelor's Thesis,"Andersson, Anna-Karin",
+89,formal,89,2004.0,Bachelor's Thesis,Verksamhetsanalys vid ett snickeriföretag – behov av organisationsanpassning vid expansion,
+90,formal,90,2002.0,Bachelor's Thesis,Etik och ansvar. Sjuksköterskans upplevelse av inre etiskt ansvar i omvårdnaden,
+91,formal,91,2002.0,Bachelor's Thesis,"Andersson, Annika",
+92,formal,92,2006.0,Bachelor's Thesis,Sjuksköterskans upplevelser efter hot och våld i somatisk vård: en litteraturstudie,
+93,formal,93,2006.0,Bachelor's Thesis,Kan iranska aktörer påverkas?: USA:s förmåga till strategiskt inflytande ur ett fältperspektiv,
+94,formal,94,2004.0,Bachelor's Thesis,"Andersson, Bodil",Social Work
+95,formal,95,2004.0,Bachelor's Thesis,Svårigheter i mötet mellan svensk sjukvårdspersonal och personer med invandrarbakgrund: en litteraturstudie,Nursing
+96,formal,96,2002.0,Bachelor's Thesis,Faktorer som kan påverka samarbetet mellan användare och systemutvecklare,
+97,formal,97,2006.0,Bachelor's Thesis,Att vara eller inte vara: styrs uttaget av föräldraledighet av föreställningar eller faktiska förhållanden?,"Production Engineering, Human Work Science and Ergonomics"
+98,formal,98,2004.0,Bachelor's Thesis,Organiserat samarbete mellan lärare och kollegor inom IKT-baserad distansundervisning,Other Social Sciences not elsewhere specified
+99,formal,99,2006.0,Bachelor's Thesis,Är granskningen av 90-kontoinnehavare tillräcklig: Kritisk granskning av SFI:s rutiner,Business Administration
+100,formal,100,2006.0,Bachelor's Thesis,"Andersson, Caroline",Sociology
+101,formal,101,2006.0,Bachelor's Thesis,Upplevelser av interaktionen mellan klient och socialsekreterare -sett ur ett maktperspektiv,
+102,formal,102,2004.0,Bachelor's Thesis,Personalens uppfattning om och möjlighet att påverka måltidernas innehåll i en förskola,Social Sciences
+103,formal,103,2006.0,Bachelor's Thesis,Att drabbas av prostatacancer: Männens upplevelser av sjukdomen,Nursing
+104,formal,104,2005.0,Bachelor's Thesis,Lek en livsnödvändighet: Tänkande om lek i grundskolan och träningsskolan,
+105,formal,105,2004.0,Bachelor's Thesis,Inlärningsstilar - ett sätt att individanpassa undervisningen?,Social Sciences
+106,formal,106,2004.0,Bachelor's Thesis,Framgångsfaktorer bakom gerillakrigföring,Social Sciences
+107,formal,107,2005.0,Bachelor's Thesis,Straff- och offentligrättsliga legalitetsprincipen,
+108,formal,108,2006.0,Bachelor's Thesis,Utveckling av ett företags marknadskommunikation med informationsteknik,Computer Engineering
+109,formal,109,2003.0,Bachelor's Thesis,Den ekologiska utvecklingen av Motala ström samt dess förutsättningar,
+110,formal,110,2002.0,Bachelor's Thesis,Evaluering av neurala nätverk för en fotbollsspelande mobil robot,Computer Sciences
+111,formal,111,2006.0,Bachelor's Thesis,Stickrädsla- En kvalitativ studie om sjuksköterskans omvårdnad av patienter med stickrädsla,
+112,formal,112,2005.0,Bachelor's Thesis,Frivillig information i delårsrapporter: Förekomsten av frivilligt offentliggjord information i delårsrapporter hos tio aktiebolag noterade på OMX Stockholmsbörsen,Business Administration
+113,formal,113,2006.0,Bachelor's Thesis,Uppföljningsarbetet av efterkalkyler på Portsystem 2000 AB,
+114,formal,114,2004.0,Bachelor's Thesis,En jämförelse av olika kommunikationstekniker och systemarkitekturiska lösningar vid uppbyggnad av nätverk i naturen,
+115,formal,115,2006.0,Bachelor's Thesis,Slöja i skolan?,
+116,formal,116,2004.0,Bachelor's Thesis,Informationens betydelse i den preoperativa vården,
+117,formal,117,2004.0,Bachelor's Thesis,You´ve got m@il: en studie om sambandet mellan e-post och effektiv kommunikation i en IT-intensiv organisation,
+118,formal,118,2005.0,Bachelor's Thesis,Hur den förändrade sexualiteten kan påverka mannens självbild och relationer efter behandling av prostatacancer,
+119,formal,119,2002.0,Bachelor's Thesis,"Andersson, Helena",
+120,formal,120,2005.0,Bachelor's Thesis,Fysisk beröring för människans välbefinnande?,Nursing
+121,formal,121,2006.0,Bachelor's Thesis,”Man kan vara sjuk och frisk samma dag”: En studie av psykiskt störda lagöverträdares rättsliga ställning,Law (excluding Law and Society)
+122,formal,122,2006.0,Bachelor's Thesis,Det moderna arbetslivets krav ur ett vuxenutvecklingspsykologiskt perspektiv,
+123,formal,123,2003.0,Bachelor's Thesis,Har Försvarsmakten behov av simuleringssystem för logistik?,
+124,formal,124,2000.0,Bachelor's Thesis,En undersökning om perspektivet på Islam i tre nyhetsprogram,
+125,formal,125,2006.0,Bachelor's Thesis,"Andersson, Jennie",
+126,formal,126,2006.0,Bachelor's Thesis,Medarbetarnas upplvelse av gruppdialogen enligt Amforas samtalsmodell,
+127,formal,127,2005.0,Bachelor's Thesis,Daglig fysisk aktivitet för elever – en utmaning för alla lärare i grundskolan,
+128,formal,128,2006.0,Bachelor's Thesis,Gymnasiematematik på distans: Varför så många avbryter sina distansstudier i matematik,
+129,formal,129,2001.0,Bachelor's Thesis,Argument för och emot privat sjukvård,Human Computer Interaction
+130,formal,130,2006.0,Bachelor's Thesis,Hur budgeterar gaseller?: En studie om tillväxtens påverkan på budgetering i gasellföretag,Business Administration
+131,formal,131,2005.0,Bachelor's Thesis,Teambuilding: En analys av den svenska marknaden ur ett konsultperspektiv,Business Administration
+132,formal,132,2004.0,Bachelor's Thesis,Datorstödd musikproduktion och tyst kunnande: En studie i design för användbarhet,
+133,formal,133,2006.0,Bachelor's Thesis,Stöd vid övervikt och fetma,Nursing
+134,formal,134,2004.0,Bachelor's Thesis,Lageroptimering med hjälp av datautvinning ur datalager,Computer Sciences
+135,formal,135,2006.0,Bachelor's Thesis,"Andersson, Jonas",Law
+136,formal,136,2006.0,Bachelor's Thesis,"Utvärdering av Malaria Antigen ELISA kit för diagnostik av malaria vid Christian Medical College and Hospital i Vellore, Indien.: en jämförande studie mellan Quantitative buffy coat och enzyme-linked immunosorbent assays (ELISA) metodik",Immunology
+137,formal,137,2005.0,Bachelor's Thesis,Uppmuntrar läroboken i matematik eleverna till att tänka självständigt?,Social Sciences
+138,formal,138,2005.0,Independent thesis Basic level (degree of Bachelor)Student thesis,"Palliativ vård Blekinge Institute of Technology, School of Health Science. Blekinge Institute of Technology, School of Health Science.",Nursing
+139,formal,139,2002.0,Independent thesis Basic level (degree of Bachelor)Student thesisAlternative title,Säkerhetskapital En del av det Intellektuella Kapitalet,Business Administration
+140,formal,140,2002.0,"Independent thesis Basic level (degree of Bachelor), 10 credits / 15 HE creditsStudent thesis",Innan den strukturella differentieringens tidevarv,Religious Studies
+141,formal,141,2006.0,"Independent thesis Basic level (degree of Bachelor), 10 credits / 15 HE creditsStudent thesis","Matematik för alla?: Hur lärare arbetar med individualisering Alén, Leif",Didactics
+142,formal,142,2006.0,Independent thesis Basic level (degree of Bachelor)Student thesis,"Effekten av varumärkes beskrivning på studenters attityd kring värdering och ägande av produkter Blekinge Institute of Technology, School of Management.",Business Administration
+143,formal,143,2006.0,Independent thesis Basic level (degree of Bachelor)Student thesis,"Ickeverbal kommunikation: Hur kontakt kan skapas med demensdrabbade genom beröring och genom musik Blekinge Institute of Technology, School of Health Science. Blekinge Institute of Technology, School of Health Science.",Nursing
+144,formal,144,2001.0,Independent thesis Basic level (degree of Bachelor)Student thesis,Varför team? En fallstudie på tre företag.,Business Administration
+145,formal,145,2002.0,Independent thesis Basic level (degree of Bachelor)Student thesisAlternative title,Kartläggning och utvärdering av utbildningar: en svaghet i företag?,Business Administration
+146,formal,146,2006.0,"Independent thesis Basic level (degree of Bachelor), 10 credits / 15 HE creditsStudent thesis",Kan iranska aktörer påverkas?: USA:s förmåga till strategiskt inflytande ur ett fältperspektiv Swedish National Defence College.,Political Science
+147,formal,147,2004.0,"Independent thesis Basic level (degree of Bachelor), 10 credits / 15 HE creditsStudent thesis",Inställningar till självläkning: - en studie av diskurser kring beroendeproblematik,Social Work
+148,formal,148,2004.0,Independent thesis Basic level (degree of Bachelor)Student thesis,"Svårigheter i mötet mellan svensk sjukvårdspersonal och personer med invandrarbakgrund: en litteraturstudie Blekinge Institute of Technology, School of Health Science. Blekinge Institute of Technology, School of Health Science.",Nursing
+149,formal,149,2004.0,Independent thesis Basic level (degree of Bachelor)Student thesis,"Organiserat samarbete mellan lärare och kollegor inom IKT-baserad distansundervisning Blekinge Institute of Technology, School of Management. Blekinge Institute of Technology, School of Management.",Pedagogy
+150,formal,150,2006.0,"Independent thesis Basic level (degree of Bachelor), 10 credits / 15 HE creditsStudent thesis",”Ett papper som hamnar någonstans?” En kvalitativ undersökning om åtgärdsprogram i förskolan,Pedagogy
+151,formal,151,2006.0,Independent thesis Basic level (degree of Bachelor)Student thesis,"Upplevelser av interaktionen mellan klient och socialsekreterare -sett ur ett maktperspektiv Blekinge Institute of Technology, School of Management. Blekinge Institute of Technology, School of Management.",Social Work
+152,formal,152,2006.0,Independent thesis Basic level (degree of Bachelor)Student thesis,"Att drabbas av prostatacancer: Männens upplevelser av sjukdomen Blekinge Institute of Technology, School of Health Science. Blekinge Institute of Technology, School of Health Science.",Nursing
+153,formal,153,2005.0,"Independent thesis Basic level (degree of Bachelor), 10 points / 15 hpStudent thesis","Lek en livsnödvändighet: Tänkande om lek i grundskolan och träningsskolan Wiss Kvist, Ann-Christin",Pedagogy
+154,formal,154,2004.0,"Independent thesis Basic level (degree of Bachelor), 10 credits / 15 HE creditsStudent thesis",Framgångsfaktorer bakom gerillakrigföring Swedish National Defence College.,Political Science
+155,formal,155,2004.0,Independent thesis Basic level (degree of Bachelor)Student thesis,"Informationens betydelse i den preoperativa vården Blekinge Institute of Technology, School of Health Science. Blekinge Institute of Technology, School of Health Science.",Nursing
+156,formal,156,2005.0,Independent thesis Basic level (degree of Bachelor)Student thesis,"Hur den förändrade sexualiteten kan påverka mannens självbild och relationer efter behandling av prostatacancer Blekinge Institute of Technology, School of Health Science. Blekinge Institute of Technology, School of Health Science.",Nursing
+157,formal,157,2002.0,Independent thesis Basic level (degree of Bachelor)Student thesisAlternative title,"Trouble Ticket ""Kommunikationen gav oss vind i seglen""",Information Systems
+158,formal,158,2005.0,Independent thesis Basic level (degree of Bachelor)Student thesisAlternative title,"Fysisk beröring för människans välbefinnande? Blekinge Institute of Technology, School of Health Science. Blekinge Institute of Technology, School of Health Science.",Nursing
+159,formal,159,2003.0,"Independent thesis Basic level (degree of Bachelor), 10 credits / 15 HE creditsStudent thesis",Har Försvarsmakten behov av simuleringssystem för logistik? Swedish National Defence College.,Information Systems
+160,formal,160,2006.0,"Independent thesis Basic level (degree of Bachelor), 10 credits / 15 HE creditsStudent thesis",Hur utvecklas familjehemsvården vidare?: sikta mot något nytt och okänt eller använda gamla rutiner?,Social Work
+161,formal,161,2005.0,Independent thesis Basic level (degree of Bachelor),"Argument för och emot privat sjukvård Blekinge Institute of Technology, School of Management. Blekinge Institute of Technology, School of Management.",Economics
+162,formal,162,2001.0,Independent thesis Basic level (degree of Bachelor)Student thesis,Expertkunskap och metakognition: experters förmåga till metakognitiv övervakning,Psychology
+163,formal,163,2006.0,Independent thesis Basic level (degree of Bachelor)Student thesis,"Stöd vid övervikt och fetma Blekinge Institute of Technology, School of Health Science. Blekinge Institute of Technology, School of Health Science.",Nursing
+164,formal,164,2006.0,Independent thesis Basic level (degree of Bachelor)Student thesis,Förmögenhetsbeskattning av onoterade aktier - är den ändamålsenligt utformad för den skatteskyldige?,Law
+165,formal,165,2015.0,Bachelor's Thesis,Granvirkes permeabilitet beroende av dess fysikaliska utformning och applicerat färgsystem,Agricultural and Veterinary Sciences
+166,formal,166,2012.0,Bachelor's Thesis,Nutidens ventilationssystem i lantbrukets lösdriftstallar: En undersökning av sex stycken ventilationssystem,Agricultural and Veterinary Sciences
+167,formal,167,2014.0,Bachelor's Thesis,Jag är väl ingen sexuell? - En textanalys om barns sexualitet inom förskolans arena,Social Sciences
+168,formal,168,2017.0,Bachelor's Thesis,Pojkar som skriver: En kvalitativ studie om vad som utmärker mer avancerade skrivare,Social Sciences
+169,formal,169,2011.0,Bachelor's Thesis,”Och så händer det något som förändrar ens liv”: En antologi om omställningar i livet,Social Sciences
