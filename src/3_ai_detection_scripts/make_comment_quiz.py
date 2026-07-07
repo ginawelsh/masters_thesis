@@ -50,16 +50,45 @@ COND_COL = {
 }
 CONDITIONS = ["human", "baseline", "human_like", "detector_aware"]
 
+# Explicit / adult-content blocklist. A whole thread (question + every comment
+# variant of every row) is DROPPED if any of these match, so no such text can be
+# selected. Word boundaries / stems are used to avoid false positives like
+# "analys", "kanal", "sexton", "Fittja". This never edits text — it only excludes.
+import re
+
+_BLOCK_PATTERNS = [
+    r"porr", r"porno", r"pornogr", r"\bporn\b", r"\bxxx\b",
+    r"knull", r"\bfitt(a|an|or|orna)\b", r"\bkuk(ar|en)?\b", r"snopp",
+    r"runk", r"onan", r"samlag", r"orgasm", r"avsug", r"\bdildo",
+    r"vibrator", r"\bsex\b", r"sexuell", r"sexst", r"sexchatt", r"sexfilm",
+    r"sexvideo", r"analsex", r"\banala\b", r"trekant", r"gangbang",
+    r"blowjob", r"\bhora\b", r"\bhoror\b", r"bordell", r"prostitu",
+    r"eskort", r"\bescort", r"nakenbild", r"\bnaken\b", r"brostvart",
+    r"stånd", r"erektion", r"\bslampa\b", r"\bhorunge\b",
+]
+_BLOCK_RE = re.compile("|".join(_BLOCK_PATTERNS), re.IGNORECASE)
+
+
+def _is_blocked(text):
+    return bool(_BLOCK_RE.search(str(text)))
+
 
 def _in_band(text):
     return MIN_LEN <= len(str(text)) <= MAX_LEN
 
 
 def _candidate_questions(df):
-    """Questions short enough, with >= COMMENTS_PER_THREAD rows and >=1 band-valid human row."""
+    """Questions short enough, with >= COMMENTS_PER_THREAD rows and >=1 band-valid human row.
+
+    Any question is excluded outright if the question text or ANY comment variant
+    (human or the three AI columns) in ANY of its rows hits the content blocklist.
+    """
+    text_cols = ["question"] + list(COND_COL.values())
     cands = []
     for q, g in df.groupby("question"):
         if len(str(q)) > MAX_QLEN:
+            continue
+        if g[text_cols].apply(lambda r: any(_is_blocked(v) for v in r), axis=1).any():
             continue
         if len(g) < COMMENTS_PER_THREAD:
             continue
