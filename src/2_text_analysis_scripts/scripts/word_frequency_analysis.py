@@ -25,6 +25,8 @@ HUMAN_FORMAL_DIR = os.path.join(_root, "1_data_collection", "human_formal")
 LLM_FORMAL_DIR = os.path.join(_root, "1_data_collection", "llm_abstracts", "abstracts")
 LLM_INFORMAL_DIR = os.path.join(_root, "1_data_collection", "llm_informal")
 OUT_DIR = os.path.join(_root, "2_text_analysis_scripts")
+FIG_DIR = os.path.join(OUT_DIR, "figures")    # plots (PNGs)
+CSV_DIR = os.path.join(OUT_DIR, "csv_files")   # frequency tables
 
 DEFAULT_TOP_N = 20
 
@@ -45,8 +47,6 @@ def resolve_config(dataset: str) -> dict:
             "ai_col": "generated_comment",
             "human_label": "Human comment",
             "ai_label": "AI comment",
-            "out_csv": os.path.join(OUT_DIR, "word_freq_informal.csv"),
-            "out_png": os.path.join(OUT_DIR, "word_freq_informal.png"),
         }
     return {
         "csv_path": os.path.join(LLM_FORMAL_DIR, "sv_abstracts_adversarial.csv"),
@@ -54,8 +54,6 @@ def resolve_config(dataset: str) -> dict:
         "ai_col": "Abstract_baseline",
         "human_label": "Human abstract",
         "ai_label": "AI abstract",
-        "out_csv": os.path.join(OUT_DIR, "word_freq_formal.csv"),
-        "out_png": os.path.join(OUT_DIR, "word_freq_formal.png"),
     }
 
 
@@ -215,9 +213,11 @@ def main():
             print(f"  skipping condition '{cond}': column '{llm_col}' not found")
             continue
         tag = condition_tag(args.dataset, cond)
-        ai_label = cfg["ai_label"] if cond in (None, "baseline") else f"{cfg['ai_label']} ({cond})"
-        out_csv = os.path.join(OUT_DIR, f"word_freq_{tag}.csv")
-        out_png = os.path.join(OUT_DIR, f"word_freq_{tag}.png")
+        ai_label = cfg["ai_label"] if cond is None else f"{cfg['ai_label']} ({cond})"
+        os.makedirs(FIG_DIR, exist_ok=True)
+        os.makedirs(CSV_DIR, exist_ok=True)
+        out_csv = os.path.join(CSV_DIR, f"word_freq_{tag}.csv")   # table -> csv_files/
+        out_png = os.path.join(FIG_DIR, f"word_freq_{tag}.png")   # plot  -> figures/
 
         print(f"Computing AI word frequencies [{cond or 'generated'}]...")
         ai_freq = word_freq(nlp, df[llm_col].tolist(), top_n)

@@ -69,10 +69,12 @@ def resolve_conditions(dataset, requested="all"):
 
 
 def condition_tag(dataset, condition):
-    """Output-filename tag. Baseline keeps the legacy '<dataset>' name so existing
-    consumers keep working; adversarial conditions get '<dataset>_<condition>'.
+    """Output-filename tag: '<dataset>_<condition>' for every prompt condition
+    (baseline / human_like / detector_aware), so the condition is always explicit
+    in the output filename. None (no specific condition) falls back to the bare
+    dataset name.
     """
-    if condition in (None, "baseline"):
+    if condition is None:
         return dataset
     return f"{dataset}_{condition}"
 

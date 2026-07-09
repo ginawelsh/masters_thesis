@@ -43,6 +43,7 @@ RegisterName = Literal["formal", "informal"]
 
 _ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 _DATA = os.path.join(_ROOT, "1_data_collection")
+_FIG_DIR = os.path.join(_ROOT, "2_text_analysis_scripts", "figures")  # plots live here
 _HUMAN_FORMAL = os.path.join(_DATA, "human_abstracts")
 _HUMAN_INFORMAL = os.path.join(_DATA, "human_comments")
 
@@ -208,8 +209,9 @@ def analyze_discourse_embeddings(
             plt.ylabel("PCA 2")
             plt.title(f"Discourse space (embeddings → PCA) — {bundle.register}")
             plt.tight_layout()
-            plt.savefig(
-                os.path.join(output_dir, f"discourse_scatter_{bundle.register}.png"),
+            os.makedirs(_FIG_DIR, exist_ok=True)
+            plt.savefig(  # plot -> figures/ (data stays in analysis_runs/)
+                os.path.join(_FIG_DIR, f"discourse_scatter_{bundle.register}.png"),
                 dpi=160,
             )
             plt.close()
