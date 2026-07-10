@@ -30,14 +30,16 @@ FIG_DIR = os.path.join(_2TAS, "figures")
 
 # validated categorical palette (node scripts/validate_palette.js — all checks pass, CVD ΔE≈18)
 PALETTE = {
-    "Human":          "#0F9E84",
-    "baseline":       "#3B6FB0",
-    "human_like":     "#C77F2C",
-    "detector_aware": "#9A56B8",
+    "Human":           "#0F9E84",
+    "baseline":        "#3B6FB0",
+    "human_like":      "#C77F2C",
+    "detector_aware":  "#9A56B8",
+    "detector_evasive": "#C6495B",  # NB: extends the validated 4-colour set; re-run scripts/validate_palette.js
 }
 COND_LABEL = {
     "Human": "Human", "baseline": "LLM baseline",
     "human_like": "LLM human-like", "detector_aware": "LLM detector-aware",
+    "detector_evasive": "LLM detector-evasive",
     None: "LLM",
 }
 INK, MUTED, GRID = "#1b1f27", "#667085", "#e3e7ec"
@@ -179,7 +181,7 @@ def plot_effect_sizes(dataset):
     if s.empty:
         print(f"  [skip] no {dataset} rows in significance results")
         return
-    cond_order = [c for c in ["baseline", "human_like", "detector_aware"]
+    cond_order = [c for c in ["baseline", "human_like", "detector_aware", "detector_evasive"]
                   if c in s["condition"].unique()]
     dz = s.pivot_table(index="feature", columns="condition", values="cohens_dz", aggfunc="first")
     sig = s.pivot_table(index="feature", columns="condition",

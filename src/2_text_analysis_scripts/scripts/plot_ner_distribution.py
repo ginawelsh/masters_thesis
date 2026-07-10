@@ -44,16 +44,18 @@ FIG_DIR = os.path.join(_2TAS, "figures")
 
 # palette + labels shared with plot_condition_comparison.py
 PALETTE = {
-    "Human":          "#0F9E84",
-    "baseline":       "#3B6FB0",
-    "human_like":     "#C77F2C",
-    "detector_aware": "#9A56B8",
+    "Human":           "#0F9E84",
+    "baseline":        "#3B6FB0",
+    "human_like":      "#C77F2C",
+    "detector_aware":  "#9A56B8",
+    "detector_evasive": "#C6495B",
 }
 COND_LABEL = {
     "Human": "Human", "baseline": "LLM baseline",
     "human_like": "LLM human-like", "detector_aware": "LLM detector-aware",
+    "detector_evasive": "LLM detector-evasive",
 }
-GROUP_ORDER = ["Human", "baseline", "human_like", "detector_aware"]
+GROUP_ORDER = ["Human", "baseline", "human_like", "detector_aware", "detector_evasive"]
 INK, MUTED, GRID = "#1b1f27", "#667085", "#e3e7ec"
 
 # Swedish SUC / Språkbanken entity labels -> readable names (see main.tex NER section)

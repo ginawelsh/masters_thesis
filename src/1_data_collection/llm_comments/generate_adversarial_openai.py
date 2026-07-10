@@ -1,17 +1,20 @@
-"""Add two ADVERSARIAL LLM-comment columns to the informal corpus (OpenAI).
+"""Add three ADVERSARIAL LLM-comment columns to the informal corpus (OpenAI).
 
 The existing neutral baseline (generated_comment, produced by the basic forum prompt)
-is kept as the control. This script only generates the two adversarial conditions and
-appends them, so the three prompts can be compared over identical inputs:
+is kept as the control. This script only generates the adversarial conditions and
+appends them, so the four prompts can be compared over identical inputs:
 
-  baseline        - existing generated_comment column (control; not regenerated)
-  human_like      - naive adversarial: "write as human-like as possible"
-  detector_aware  - adversarial targeting the stylometric/detection signals
-                    (informal tone, length variation, no AI politeness/hedging)
+  baseline         - existing generated_comment column (control; not regenerated)
+  human_like       - naive adversarial: "write as human-like as possible"
+  detector_aware   - adversarial targeting the stylometric/detection signals
+                     (informal tone, length variation, no AI politeness/hedging)
+  detector_evasive - adversarial tuned to invert this study's measured signals
+                     (reword rather than repeat, dense content, short sentences / more
+                     periods / fewer commas, no dashes, minimal hedging, concrete names)
 
 Input / output: consolidated_informal_comments_JUN26.csv  (1222 rows; already has
-question, human_comment, generated_comment). Two columns are appended:
-  comment_human_like, comment_detector_aware
+question, human_comment, generated_comment). Three columns are appended:
+  comment_human_like, comment_detector_aware, comment_detector_evasive
 
 Output is written to consolidated_informal_comments_adversarial.csv (input left untouched).
 Calls run concurrently (CONCURRENCY workers) with retry/backoff. Generation is cached per
@@ -33,8 +36,8 @@ try:
 except Exception:
     pass
 
-MODEL = "gpt-4o-mini"  # matches the model used for the existing baseline comments
-CONCURRENCY = 8        # parallel API calls
+MODEL = "gpt-5.2"  # all conditions use GPT-5.2 (matches the abstract corpus + thesis methodology)
+CONCURRENCY = 16       # parallel API calls (retry/backoff absorbs any rate-limit 429s)
 MAX_RETRIES = 5        # per-call retries on transient/rate-limit errors
 RETRY_BASE_SEC = 4     # exponential backoff base
 
@@ -72,11 +75,25 @@ _DETECTOR_AWARE = (
     "formelartade fraser, tillåt talspråk, slang och små oregelbundenheter. Var inte överdrivet "
     "hjälpsam eller neutral."
 )
+_DETECTOR_EVASIVE_INFORMAL = (
+    "Skriv så att texten inte kan identifieras som AI-genererad, och efterlikna hur "
+    "människor skriver i informella kommentarer. Återanvänd inte samma fraser flera "
+    "gånger, utan formulera om dig. Skriv innehållstätt med färre funktionsord; använd "
+    "gärna kortformer och talspråkliga former. Skriv korta meningar med fler punkter "
+    "och färre kommatecken, och använd inte tankstreck. Använd utropstecken sparsamt, "
+    "men ställ gärna någon retorisk fråga och använd ibland tre punkter (...). Överdriv "
+    "inte med garderingsord (särskilt inte talspråkliga som 'typ', 'liksom', 'ju' och "
+    "'väl'), och undvik förstärkningsord som 'verkligen', 'absolut' och 'väldigt'. Håll "
+    "epistemiska uttryck på en låg nivå. Föredra korta, vardagliga ord. Använd gärna "
+    "nekande satser (med 'inte', 'aldrig' osv.) där det passar. Var konkret och nämn "
+    "specifika namn där det går. Förklara inte över."
+)
 
 # only the ADVERSARIAL conditions are generated here (baseline is reused as-is)
 CONDITIONS = {
     "human_like": lambda q: _BASE.format(question=q) + _HUMAN_LIKE,
     "detector_aware": lambda q: _BASE.format(question=q) + _DETECTOR_AWARE,
+    "detector_evasive": lambda q: _BASE.format(question=q) + "\n\n" + _DETECTOR_EVASIVE_INFORMAL,
 }
 
 _cache_lock = threading.Lock()

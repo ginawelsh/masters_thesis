@@ -14,7 +14,7 @@ Sverige:LOC,Svenska kyrkan:ORG
 ,
 "Frankrike:LOC,USA:LOC",
 "IFN-γ:PRS,SLIT:ORG,SCIT:ORG,SLIT:LOC,SCIT:ORG,SLIT:LOC,SCIT:ORG,IFN-γ:PRS,SLIT:LOC,SCIT:ORG,SLIT:LOC,SCIT:ORG,IFN-γ:PRS,SLIT:LOC,SCIT:ORG,SLIT:LOC,SCIT:ORG",SCIT:ORG
-Sverige:LOC,Levonorgestrel:PRS
+"Sverige:LOC,57%:MSR",Levonorgestrel:PRS
 Quinoas:PRS,
 "MALDI-TOF MS:ORG,MALDI-TOF MS:ORG","MALDI-TOF MS:EVN,MALDI-TOF MS:EVN,MALDI-TOF MS:ORG"
 "The English School:ORG,Älmhult:LOC,Lpfö 98:OBJ","The English School:ORG,Älmhult:LOC"
@@ -24,7 +24,7 @@ Quinoas:PRS,
 "Sverige:LOC,de senaste åren:TME,Migrationsverket:ORG",
 "Sverige:LOC,Sverige:LOC",
 Livsmedelsverket:ORG,
-"Västerbottens läns landsting:ORG,Thesis:PRS,FULLTEXT01.pdf:PRS,Thesis:PRS,Thesis:PRS,Social Sciences:ORG,Malmö:LOC,Foucault:PRS,Textanalys,,https://www.diva-portal.org:PRS,Thesis:PRS,Social Sciences:ORG,Social Sciences:ORG,Abrashis:PRS,Annika Sternlund:PRS,Amanda Sundberg:PRS,Helenas Valentinsons:PRS","Västerbotten:LOC,Västerbotten:LOC"
+"Västerbottens läns landsting:ORG,FULLTEXT01.pdf:PRS,FULLTEXT01.pdf:PRS,Thesis:PRS,Social Sciences:ORG,Malmö:LOC,Foucault:PRS,Textanalys,,https://www.diva-portal.org:PRS,FULLTEXT01.pdf:PRS,Social Sciences:ORG,FULLTEXT01.pdf:PRS,Social Sciences:ORG,Abrashis:PRS,Annika Sternlund:PRS,Amanda Sundberg:PRS,Helenas Valentinsons:PRS","Västerbotten:LOC,Västerbotten:LOC"
 ,Sverige:LOC
 "Moderaterna:ORG,Sverige:LOC,Moderaterna:ORG,Moderaterna:ORG",
 ,

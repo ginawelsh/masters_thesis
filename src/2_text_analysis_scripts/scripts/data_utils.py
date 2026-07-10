@@ -38,11 +38,13 @@ FORMAL_CONDITIONS = {
     "baseline": "Abstract_baseline",
     "human_like": "Abstract_human_like",
     "detector_aware": "Abstract_detector_aware",
+    "detector_evasive": "Abstract_detector_evasive",
 }
 INFORMAL_CONDITIONS = {
     "baseline": "generated_comment",
     "human_like": "comment_human_like",
     "detector_aware": "comment_detector_aware",
+    "detector_evasive": "comment_detector_evasive",
 }
 CONDITIONS_BY_DATASET = {"formal": FORMAL_CONDITIONS, "informal": INFORMAL_CONDITIONS}
 CONDITION_ARG_CHOICES = list(FORMAL_CONDITIONS) + ["all"]

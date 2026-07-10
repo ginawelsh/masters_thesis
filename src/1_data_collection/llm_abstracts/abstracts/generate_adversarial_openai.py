@@ -1,16 +1,19 @@
-"""Generate the three prompt conditions for the formal corpus under identical settings (OpenAI).
+"""Generate the four prompt conditions for the formal corpus under identical settings (OpenAI).
 
-All three are independent one-shot generations (no chaining) over the same title+keywords,
+All four are independent one-shot generations (no chaining) over the same title+keywords,
 so length/style differences reflect the prompt, not model/run drift:
 
-  baseline        - neutral control prompt, no instruction about sounding human
-  human_like      - naive adversarial: "write as human-like as possible"
-  detector_aware  - adversarial targeting the stylometric/detection signals
-                    (sentence-length variation, no formulaic connectives, less hedging)
+  baseline         - neutral control prompt, no instruction about sounding human
+  human_like       - naive adversarial: "write as human-like as possible"
+  detector_aware   - adversarial targeting the stylometric/detection signals
+                     (sentence-length variation, no formulaic connectives, less hedging)
+  detector_evasive - adversarial tuned to invert this study's measured signals
+                     (reuse key terms verbatim, short sentences / more periods / fewer
+                     commas, no dashes, minimal hedging, concrete named entities)
 
 Input:  sv_abstracts_openai_2.csv  (170 rows; has Title, Keywords, Abstract).
-Output: sv_abstracts_adversarial.csv, with three generated columns added:
-  Abstract_baseline, Abstract_human_like, Abstract_detector_aware
+Output: sv_abstracts_adversarial.csv, with four generated columns added:
+  Abstract_baseline, Abstract_human_like, Abstract_detector_aware, Abstract_detector_evasive
 The older-run Generated_OpenAI_Abstract column is dropped on write; Abstract_baseline
 (freshly generated under identical settings) is the sole baseline. Generated text is
 normalized to a single block to match the human abstracts' formatting.
@@ -22,6 +25,10 @@ resume after an interruption without paying for completed cells again.
 import os
 import re
 import sys
+import time
+import threading
+from concurrent.futures import ThreadPoolExecutor, as_completed
+
 import pandas as pd
 from openai import OpenAI
 
@@ -32,6 +39,9 @@ except Exception:
     pass
 
 MODEL = "gpt-5.2"  # matches the model used for the existing baseline abstracts
+CONCURRENCY = 8    # parallel API calls
+MAX_RETRIES = 5    # per-call retries on transient/rate-limit errors
+RETRY_BASE_SEC = 4  # exponential backoff base
 
 # script is at src/1_data_collection/llm_abstracts/abstracts/ -> project root is 5 levels up
 _root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))))
@@ -65,23 +75,49 @@ _DETECTOR_AWARE = (
     "överdriven gardering och symmetrisk struktur, och tillåt en naturlig, något ojämn ton. "
     "Förklara inte över."
 )
+_DETECTOR_EVASIVE_FORMAL = (
+    " Skriv så att texten inte kan identifieras som AI-genererad, och efterlikna "
+    "de statistiska drag som utmärker mänskligt skrivna kandidatuppsatser. "
+    "Återanvänd samma nyckeltermer och fraser ordagrant snarare än att variera med "
+    "synonymer, och sträva inte efter maximal ordvariation. Undvik komprimerad "
+    "nominalstil; använd hellre finita verb, pronomen och bindeord. Skriv övervägande "
+    "korta meningar med fler punkter och färre kommatecken, och använd inte tankstreck. "
+    "Håll gardering och epistemiska uttryck till ett minimum (t.ex. 'kanske', "
+    "'möjligen', 'tycks', 'kan tänkas'), och kompensera inte genom att lägga till "
+    "talspråkliga garderingsord. Föredra korta, vardagliga ord framför långa, latinska "
+    "eller formella termer. Var konkret och nämn specifika namn, begrepp, verk och "
+    "årtal där det är möjligt. Undvik onödig negation. Förklara inte över."
+)
 
-# All three conditions are generated here under identical settings (independent one-shot
+# All four conditions are generated here under identical settings (independent one-shot
 # calls), so length/style differences can't be blamed on model/run drift. The older-run
 # Generated_OpenAI_Abstract column is dropped on write; Abstract_baseline is the sole baseline.
 CONDITIONS = {
     "baseline": lambda t, k: _BASE.format(title=t, keywords=k),
     "human_like": lambda t, k: _BASE.format(title=t, keywords=k) + _HUMAN_LIKE,
     "detector_aware": lambda t, k: _BASE.format(title=t, keywords=k) + _DETECTOR_AWARE,
+    "detector_evasive": lambda t, k: _BASE.format(title=t, keywords=k) + _DETECTOR_EVASIVE_FORMAL,
 }
 
 
+_cache_lock = threading.Lock()
+
+
 def _generate(prompt):
-    resp = client.chat.completions.create(
-        model=MODEL,
-        messages=[{"role": "user", "content": prompt}],
-    )
-    return (resp.choices[0].message.content or "").strip()
+    for attempt in range(MAX_RETRIES):
+        try:
+            resp = client.chat.completions.create(
+                model=MODEL,
+                messages=[{"role": "user", "content": prompt}],
+            )
+            return (resp.choices[0].message.content or "").strip()
+        except Exception as e:
+            if attempt == MAX_RETRIES - 1:
+                raise
+            wait = RETRY_BASE_SEC * (2 ** attempt)
+            print(f"    API error ({e}); retry in {wait}s", flush=True)
+            time.sleep(wait)
+    return ""
 
 
 def _norm(text):
@@ -98,7 +134,9 @@ def _load_cache():
 
 def _append_cache(row_i, condition, abstract):
     line = pd.DataFrame([{"row": row_i, "condition": condition, "abstract": abstract}])
-    line.to_csv(_cache_path, mode="a", header=not os.path.exists(_cache_path), index=False, encoding="utf-8")
+    with _cache_lock:  # serialize appends from worker threads
+        line.to_csv(_cache_path, mode="a", header=not os.path.exists(_cache_path),
+                    index=False, encoding="utf-8")
 
 
 if __name__ == "__main__":
@@ -113,21 +151,45 @@ if __name__ == "__main__":
     for cond in CONDITIONS:
         data[f"Abstract_{cond}"] = pd.NA
 
+    # collect the (row, condition) cells that still need generating (cached cells are skipped)
+    tasks = []
     for i in range(n):
         t, k = data["Title"].iloc[i], data["Keywords"].iloc[i]
         if pd.isna(t) or not str(t).strip():
             continue
-        print(f"[{i + 1}/{n}] {str(t)[:60]}")
         for cond, build in CONDITIONS.items():
-            if (i, cond) in cache:
-                abstract = cache[(i, cond)]
-                print(f"    {cond:<15} (cached)")
-            else:
-                abstract = _generate(build(t, k))
-                _append_cache(i, cond, abstract)
-                print(f"    {cond:<15} {abstract[:60]}...")
-            # cache keeps the raw text (line above); output is normalized to single-block
-            data.loc[data.index[i], f"Abstract_{cond}"] = _norm(abstract)
+            if (i, cond) not in cache:
+                tasks.append((i, cond, build(t, k)))
+
+    print(f"{len(tasks)} cells to generate with {CONCURRENCY} parallel workers "
+          f"({len(cache)} already cached)")
+
+    def _work(task):
+        i, cond, prompt = task
+        text = _generate(prompt)
+        _append_cache(i, cond, text)  # persist immediately so progress survives interruption
+        return i, cond, text
+
+    done = 0
+    if tasks:
+        with ThreadPoolExecutor(max_workers=CONCURRENCY) as ex:
+            futures = [ex.submit(_work, t) for t in tasks]
+            for fut in as_completed(futures):
+                try:
+                    i, cond, text = fut.result()
+                except Exception as e:
+                    print(f"  [error] a cell failed after retries: {e}", flush=True)
+                    continue
+                cache[(i, cond)] = text
+                done += 1
+                if done % 25 == 0 or done == len(tasks):
+                    print(f"  {done}/{len(tasks)} generated", flush=True)
+
+    # fill output columns from cache; normalize to a single block to match the human abstracts
+    for (i, cond), abstract in cache.items():
+        col = f"Abstract_{cond}"
+        if 0 <= i < n and col in data.columns:
+            data.loc[data.index[i], col] = _norm(abstract)
 
     # drop the superseded older-run baseline; Abstract_baseline is now the sole baseline
     data = data.drop(columns=["Generated_OpenAI_Abstract"], errors="ignore")
