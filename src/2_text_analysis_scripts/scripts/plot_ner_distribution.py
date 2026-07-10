@@ -151,17 +151,18 @@ def entity_order(rates):
     return [tag for tag, _ in totals.most_common()]
 
 
-def plot_ner(dataset, rates, counts, min_tokens=0):
-    groups = [g for g in GROUP_ORDER if g in rates]
+def plot_ner(dataset, rates, counts, min_tokens=0, keep=None, tag=""):
+    groups = [g for g in GROUP_ORDER
+              if g in rates and (g == "Human" or keep is None or g in keep)]
     if not groups:
         print(f"  [skip] no groups loaded for {dataset}")
         return
-    tags = entity_order(rates)
+    tags = entity_order({g: rates[g] for g in groups})
     if not tags:
         print(f"  [skip] no entities found for {dataset}")
         return
 
-    suffix = f"_min{min_tokens}" if min_tokens else ""
+    suffix = tag + (f"_min{min_tokens}" if min_tokens else "")
     note = f"  (≥{min_tokens} tokens)" if min_tokens else ""
 
     x = np.arange(len(tags))
@@ -208,12 +209,18 @@ def main():
     ap.add_argument("--min-tokens", type=int, default=0,
                     help="Drop documents shorter than this many spaCy tokens (per group); "
                          "output gets a _min<N> suffix. 0 = no filter.")
+    ap.add_argument("--conditions", default="all",
+                    help="comma-separated condition subset (e.g. baseline,human_like,detector_evasive); default all")
+    ap.add_argument("--tag", default="",
+                    help="filename suffix so a subset view does not overwrite the canonical figure")
     args = ap.parse_args()
+    keep = None if args.conditions == "all" else [c.strip() for c in args.conditions.split(",")]
+    tag = f"_{args.tag}" if args.tag else ""
     datasets = ["formal", "informal"] if args.dataset == "both" else [args.dataset]
     for ds in datasets:
         print(f"[{ds}]")
         rates, counts = load_dataset(ds, args.min_tokens)
-        plot_ner(ds, rates, counts, args.min_tokens)
+        plot_ner(ds, rates, counts, args.min_tokens, keep, tag)
 
 
 if __name__ == "__main__":

@@ -91,10 +91,13 @@ def _style(ax):
     ax.set_axisbelow(True)
 
 
-def load_groups(dataset):
-    """Return (order, {feature: {group: np.array}}). Human is shared across conditions."""
-    conds = resolve_conditions(dataset, "all")          # formal: baseline/human_like/detector_aware
-    order = ["Human"] + [c for c, _ in conds if c] if conds[0][0] else ["Human"] + [None]
+def load_groups(dataset, keep=None):
+    """Return (order, {feature: {group: np.array}}). Human is shared across conditions.
+    keep: optional list of condition names to include (default all)."""
+    conds = resolve_conditions(dataset, "all")          # baseline/human_like/detector_aware/detector_evasive
+    if keep is not None:
+        conds = [(c, col) for c, col in conds if c in keep]
+    order = ["Human"] + [c for c, _ in conds if c] if conds and conds[0][0] else ["Human"] + [None]
     data = {}
     human_done = set()
     for grp in FEATURE_GROUPS:
@@ -126,7 +129,7 @@ def load_groups(dataset):
 # Figure 1: distribution box plots across the 4 groups
 # ---------------------------------------------------------------------------
 
-def plot_boxplots(dataset, order, data):
+def plot_boxplots(dataset, order, data, tag=""):
     feats = [f for f in CURATED if f in data and "Human" in data[f]]
     if not feats:
         print("  [skip] no curated features found for boxplots")
@@ -161,7 +164,7 @@ def plot_boxplots(dataset, order, data):
     fig.suptitle(f"Feature distributions — Human vs LLM conditions ({dataset})",
                  fontsize=12, fontweight="700", color=INK, y=1.0)
     fig.tight_layout(rect=(0, 0.03, 1, 0.98))
-    out = os.path.join(FIG_DIR, f"condition_boxplots_{dataset}.png")
+    out = os.path.join(FIG_DIR, f"condition_boxplots_{dataset}{tag}.png")
     fig.savefig(out, dpi=170, bbox_inches="tight", facecolor="white")
     plt.close(fig)
     print(f"  wrote {out}")
@@ -171,7 +174,7 @@ def plot_boxplots(dataset, order, data):
 # Figure 2: Cohen's dz heatmap (feature x condition)
 # ---------------------------------------------------------------------------
 
-def plot_effect_sizes(dataset):
+def plot_effect_sizes(dataset, keep=None, tag=""):
     path = os.path.join(CSV_DIR, "significance_tests_results.csv")
     if not os.path.exists(path):
         print("  [skip] significance_tests_results.csv not found")
@@ -182,7 +185,7 @@ def plot_effect_sizes(dataset):
         print(f"  [skip] no {dataset} rows in significance results")
         return
     cond_order = [c for c in ["baseline", "human_like", "detector_aware", "detector_evasive"]
-                  if c in s["condition"].unique()]
+                  if c in s["condition"].unique() and (keep is None or c in keep)]
     dz = s.pivot_table(index="feature", columns="condition", values="cohens_dz", aggfunc="first")
     sig = s.pivot_table(index="feature", columns="condition",
                         values="significant_fdr_0.05", aggfunc="first")
@@ -219,7 +222,7 @@ def plot_effect_sizes(dataset):
     ax.set_title(f"Effect size vs Human by condition ({dataset})   * = sig. (BH-FDR<0.05)",
                  fontsize=11, fontweight="700", color=INK, pad=10)
     fig.tight_layout()
-    out = os.path.join(FIG_DIR, f"condition_effect_sizes_{dataset}.png")
+    out = os.path.join(FIG_DIR, f"condition_effect_sizes_{dataset}{tag}.png")
     fig.savefig(out, dpi=170, bbox_inches="tight", facecolor="white")
     plt.close(fig)
     print(f"  wrote {out}")
@@ -229,12 +232,12 @@ def plot_effect_sizes(dataset):
 # Figure 3: embedding detectability (ROC AUC) per condition
 # ---------------------------------------------------------------------------
 
-def plot_detectability(dataset):
-    conds = [c for c, _ in resolve_conditions(dataset, "all")]
+def plot_detectability(dataset, keep=None, tag=""):
+    conds = [c for c, _ in resolve_conditions(dataset, "all") if (keep is None or c in keep)]
     aucs = []
     for cond in conds:
-        tag = condition_tag(dataset, cond)
-        path = os.path.join(CSV_DIR, f"embedding_twosample_{tag}.csv")
+        ctag = condition_tag(dataset, cond)
+        path = os.path.join(CSV_DIR, f"embedding_twosample_{ctag}.csv")
         if not os.path.exists(path):
             continue
         m = dict(zip(*[pd.read_csv(path)[c] for c in ("metric", "value")]))
@@ -263,7 +266,7 @@ def plot_detectability(dataset):
     ax.set_title(f"Detectability by condition ({dataset})", fontsize=11,
                  fontweight="700", color=INK, pad=12)
     fig.tight_layout()
-    out = os.path.join(FIG_DIR, f"condition_detectability_{dataset}.png")
+    out = os.path.join(FIG_DIR, f"condition_detectability_{dataset}{tag}.png")
     fig.savefig(out, dpi=170, bbox_inches="tight", facecolor="white")
     plt.close(fig)
     print(f"  wrote {out}")
@@ -272,14 +275,20 @@ def plot_detectability(dataset):
 def main():
     ap = argparse.ArgumentParser(description="Comparison figures across Human + LLM conditions")
     ap.add_argument("--dataset", choices=["formal", "informal"], default="formal")
+    ap.add_argument("--conditions", default="all",
+                    help="comma-separated condition subset (e.g. baseline,human_like,detector_evasive); default all")
+    ap.add_argument("--tag", default="",
+                    help="filename suffix so a subset view does not overwrite the canonical figures")
     args = ap.parse_args()
     os.makedirs(FIG_DIR, exist_ok=True)
 
-    order, data = load_groups(args.dataset)
+    keep = None if args.conditions == "all" else [c.strip() for c in args.conditions.split(",")]
+    tag = f"_{args.tag}" if args.tag else ""
+    order, data = load_groups(args.dataset, keep)
     print(f"[{args.dataset}] groups: {[COND_LABEL[g] for g in order]}")
-    plot_boxplots(args.dataset, order, data)
-    plot_effect_sizes(args.dataset)
-    plot_detectability(args.dataset)
+    plot_boxplots(args.dataset, order, data, tag)
+    plot_effect_sizes(args.dataset, keep, tag)
+    plot_detectability(args.dataset, keep, tag)
 
 
 if __name__ == "__main__":

@@ -1,0 +1,9 @@
+,Human,LLM baseline,LLM human-like,LLM detector-evasive
+Location (LOC),0.7605,0.4169,0.4714,0.8584
+Person (PRS),0.5547,0.213,0.213,0.5379
+Organisation (ORG),0.162,0.1345,0.1317,0.341
+Time (TME),0.0471,0.015,0.0118,0.0345
+Work/Artefact (WRK),0.0153,0.0186,0.0135,0.0278
+Object (OBJ),0.0081,0.0208,0.007,0.0131
+Measure (MSR),0.0073,0.0008,0.0009,0.004
+Event (EVN),0.0015,0.0,0.0068,0.0031

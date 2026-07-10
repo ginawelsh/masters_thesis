@@ -1,0 +1,11 @@
+dataset,group,sents_per_doc,tokens_per_doc,words_per_sentence,periods_per_100tok
+formal,Human,11.5,190.1,16.5,4.73
+formal,baseline,8.4,201.9,24.0,3.66
+formal,human_like,14.2,339.7,24.0,3.61
+formal,detector_aware,17.0,343.9,20.3,4.16
+formal,detector_evasive,41.9,400.7,9.6,8.84
+informal,Human,3.5,46.9,13.2,8.88
+informal,baseline,6.6,94.5,14.2,4.15
+informal,human_like,10.5,190.2,18.1,4.1
+informal,detector_aware,11.4,180.9,15.9,4.56
+informal,detector_evasive,22.2,153.4,6.9,11.91

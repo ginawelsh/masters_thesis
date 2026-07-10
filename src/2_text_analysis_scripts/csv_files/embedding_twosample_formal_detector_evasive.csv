@@ -1,0 +1,10 @@
+metric,value
+condition,detector_evasive
+n_per_class,170
+mean_pair_cosine,0.7489
+median_pair_cosine,0.778
+classifier_cv_roc_auc,0.8799
+permutation_p_value,0.000999000999000999
+null_mean_auc,0.5027
+n_permutations,1000
+embedding_model,paraphrase-multilingual-mpnet-base-v2

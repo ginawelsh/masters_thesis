@@ -4,7 +4,7 @@ n_per_class,1222
 mean_pair_cosine,0.468
 median_pair_cosine,0.4804
 classifier_cv_roc_auc,0.9598
-permutation_p_value,0.004975124378109453
-null_mean_auc,0.4993
-n_permutations,200
+permutation_p_value,0.000999000999000999
+null_mean_auc,0.4994
+n_permutations,1000
 embedding_model,paraphrase-multilingual-mpnet-base-v2
