@@ -47,7 +47,9 @@ FEATURE_GROUPS = ["syntactic_complexity", "stylometric_surface", "pragmatic_mark
 CURATED = [
     "dep_distance_mean", "tree_depth_mean", "subordinate_clause_rate",
     "mtld", "mattr", "ttr", "function_word_rate", "bigram_repetition_rate",
-    "punct_comma", "punct_period", "hedge_rate", "negation_rate",
+    "punct_comma", "punct_period", "hedge_rate",
+    "hedge_formal_rate", "hedge_neutral_rate", "hedge_informal_rate",
+    "negation_rate",
 ]
 PRETTY = {
     "dep_distance_mean": "Dependency distance", "tree_depth_mean": "Parse-tree depth",
@@ -63,6 +65,10 @@ PRETTY = {
     "punct_semicolon": "Semicolons /100 tok", "hedge_count": "Hedges (count)",
     "negation_count": "Negation (count)", "negation_sentence_rate": "Negation-sentence rate",
     "epistemic_rate": "Epistemic /100 tok", "epistemic_count": "Epistemic (count)",
+    # hedges split by register (F/N/I) — see pragmatic_markers.HEDGE_LEXICON
+    "hedge_formal_rate": "Hedges: formal /100 tok", "hedge_formal_count": "Hedges: formal (count)",
+    "hedge_neutral_rate": "Hedges: neutral /100 tok", "hedge_neutral_count": "Hedges: neutral (count)",
+    "hedge_informal_rate": "Hedges: informal /100 tok", "hedge_informal_count": "Hedges: informal (count)",
 }
 
 
