@@ -35,7 +35,7 @@ OUT = os.path.join(CSV_DIR, "significance_tests_results.csv")
 
 # per-document paired feature files (group -> file stem); {dataset} filled in below
 FEATURE_GROUPS = ["syntactic_complexity", "stylometric_surface",
-                  "pragmatic_markers", "affective_analysis"]
+                  "pragmatic_markers", "affective_analysis", "ner"]
 
 # columns to skip (non-numeric labels, or binary that wants McNemar not Wilcoxon)
 SKIP_EXACT = {"sentiment_label"}

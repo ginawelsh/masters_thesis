@@ -69,6 +69,12 @@ PRETTY = {
     "hedge_formal_rate": "Hedges: formal /100 tok", "hedge_formal_count": "Hedges: formal (count)",
     "hedge_neutral_rate": "Hedges: neutral /100 tok", "hedge_neutral_count": "Hedges: neutral (count)",
     "hedge_informal_rate": "Hedges: informal /100 tok", "hedge_informal_count": "Hedges: informal (count)",
+    # named-entity rates per 100 tokens (see ner_features.py / plot_ner_distribution.py)
+    "ner_total_rate": "NER: total /100 tok",
+    "ner_LOC_rate": "NER: Location /100 tok", "ner_PRS_rate": "NER: Person /100 tok",
+    "ner_ORG_rate": "NER: Organisation /100 tok", "ner_TME_rate": "NER: Time /100 tok",
+    "ner_WRK_rate": "NER: Work/Artefact /100 tok", "ner_MSR_rate": "NER: Measure /100 tok",
+    "ner_OBJ_rate": "NER: Object /100 tok", "ner_EVN_rate": "NER: Event /100 tok",
 }
 
 
