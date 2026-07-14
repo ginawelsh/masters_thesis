@@ -1,0 +1,83 @@
+COMMENTS DATA — QUESTIONS & TOPICS SUMMARY
+==========================================
+Source files: src/1_data_collection/llm_comments/
+  - consolidated_informal_comments_JUN26.csv
+  - consolidated_informal_comments_adversarial.csv
+    (same comment rows; the adversarial file adds extra
+     generated-comment variant columns)
+Generated: 2026-07-14  (updated after link/image exclusion)
+
+
+EXCLUSIONS APPLIED
+------------------
+11 OP questions whose post text contained a link and/or an embedded
+image (image = image URL; no BBCode [IMG] tags present) were removed
+from both corpus files in place. The removed rows were written to:
+  - excluded_link_image_questions_JUN26.csv        (73 rows, 11 questions)
+  - excluded_link_image_questions_adversarial.csv  (73 rows, 11 questions)
+Excluded split: 4 Reddit + 7 Flashback questions.
+
+Before exclusion: 1,222 rows / 147 questions.
+After  exclusion: 1,149 rows / 136 questions.
+
+
+QUESTIONS WITH A GENERATED COMMENT
+----------------------------------
+All 136 remaining questions have at least one generated comment.
+(Every one of the 1,149 comment rows carries a generated_comment,
+ so there are no questions without one.)
+
+By source:
+  Flashback   77 questions
+  Reddit      59 questions
+  TOTAL      136 questions
+
+Comments per question: min 1  |  median 5  |  max 30
+
+
+RANGE OF TOPICS
+---------------
+The `topic` column behaves differently for the two sources.
+
+Reddit (59 questions) — tagged by subreddit:
+  r/sweden          26 questions
+  r/svenskpolitik   13 questions
+  r/Stockholm       11 questions
+  r/Gothenburg       1 question
+  (untagged)         9 questions
+  (counts sum to slightly more than 59 because a question can carry
+   more than one topic tag — see caveats)
+
+Flashback (77 questions) — no category labels; the topic field just
+holds the thread title, while `question` holds the OP post text, so each
+question is effectively its own topic. Thematically the threads span a
+broad everyday-forum range:
+
+  - Relationships / dating / sex  (breakups, attraction, first-time questions)
+  - Drugs & substances            (benzos, Ritalin, cannabis "cb", Xanor,
+                                   smuggling, alcohol import)
+  - Law & crime                   (sentencing, court proceedings, police)
+  - Tech & gadgets                (phones LG/HTC/Samsung/Sony, computers,
+                                   cameras, MacBook, Win7)
+  - Health & medical              (allergic reactions, gynecomastia,
+                                   pregnancy diet, sleep paralysis)
+  - Travel                        (Thailand/Bangkok, France, easiest
+                                   countries to emigrate to)
+  - Food & cooking                (sauces, weight gain, spoiled spices)
+  - Careers & education           (becoming a chef/hairdresser/vet,
+                                   traineeships)
+  - Cars & vehicles               (BMW parts, amplifiers)
+  - Politics                      (party choice - Moderaterna, SD;
+                                   direct democracy)
+  - Firearms / military, pets, finance/loans, and misc. hobby questions
+
+
+CAVEATS FOR ANALYSIS
+--------------------
+  - The two sources use inconsistent `topic` semantics
+    (Reddit = subreddit; Flashback = thread title).
+  - 16 rows have a missing topic value.
+  - A clean categorical topic variable would require normalising this
+    column (e.g. mapping the Flashback titles into high-level categories).
+  - The originals were overwritten in place but are git-tracked, so the
+    pre-exclusion versions are recoverable via `git checkout`.
