@@ -1,0 +1,12 @@
+source,condition,n,POSITIVE,NEUTRAL,NEGATIVE,median_signed_polarity,mean_extremity
+human,-,1149,0.0705,0.7711,0.1584,-0.0319,0.3073
+gpt,ALL,4596,0.0722,0.7735,0.1543,-0.0149,0.3229
+gpt,baseline,1149,0.2141,0.7198,0.0661,0.1229,0.3819
+gpt,human_like,1149,0.0409,0.8303,0.1288,-0.0105,0.2501
+gpt,detector_aware,1149,0.0218,0.7728,0.2054,-0.0825,0.3142
+gpt,detector_evasive,1149,0.0122,0.7711,0.2167,-0.1059,0.3454
+mistral,ALL,4596,0.0631,0.7622,0.1747,-0.0308,0.3224
+mistral,baseline,1149,0.067,0.7493,0.1836,-0.0224,0.3243
+mistral,human_like,1149,0.0966,0.792,0.1114,-0.0032,0.2958
+mistral,detector_aware,1149,0.04,0.7598,0.2002,-0.0453,0.3193
+mistral,detector_evasive,1149,0.0487,0.7476,0.2037,-0.0649,0.3502

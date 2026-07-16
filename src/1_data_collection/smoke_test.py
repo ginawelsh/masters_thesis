@@ -130,8 +130,18 @@ def _wrap(text: str, width: int = 88) -> str:
     return "\n".join(out)
 
 
-def run_smoke(models, conditions, registers) -> None:
+def run_smoke(models, conditions, registers, temps=None) -> None:
+    """temps: optional list of temperatures. When given, every model is run once
+    per temperature (a within-model A/B) so you can see how much sampling temp
+    changes the Swedish -- otherwise the pipeline default (no override) is used,
+    which is the byte-identical production contract."""
     _register_open_models()
+
+    # (label, GenParams) pairs to run per model
+    if temps:
+        settings = [(f"temp={t}", pipe.GenParams(temperature=t)) for t in temps]
+    else:
+        settings = [("default", pipe.DEFAULT_PARAMS)]
 
     for register in registers:
         for item in SAMPLE_ITEMS.get(register, []):
@@ -148,14 +158,16 @@ def run_smoke(models, conditions, registers) -> None:
                 print("-" * 90)
 
                 for model in models:
-                    print(f"\n>>> [{model}]")
-                    try:
-                        rec = pipe.generate(model, condition, register, item)
-                        print(_wrap(rec.output))
-                    except KeyError:
-                        print(f"    (model '{model}' not in registry -- skipped)")
-                    except Exception as e:  # backend/env/auth errors
-                        print(f"    (ERROR: {type(e).__name__}: {e})")
+                    for label, params in settings:
+                        tag = model if label == "default" else f"{model} @ {label}"
+                        print(f"\n>>> [{tag}]")
+                        try:
+                            rec = pipe.generate(model, condition, register, item, params)
+                            print(_wrap(rec.output))
+                        except KeyError:
+                            print(f"    (model '{model}' not in registry -- skipped)")
+                        except Exception as e:  # backend/env/auth errors
+                            print(f"    (ERROR: {type(e).__name__}: {e})")
                 print()
 
 
@@ -172,6 +184,9 @@ if __name__ == "__main__":
                     help=f"subset of {ALL_CONDITIONS}")
     ap.add_argument("--registers", nargs="+", default=ALL_REGISTERS,
                     help=f"subset of {ALL_REGISTERS}")
+    ap.add_argument("--temps", nargs="+", type=float, default=None,
+                    help="optional temperatures to A/B per model, e.g. --temps 0.15 1.0 "
+                         "(default: pipeline's no-override production contract)")
     args = ap.parse_args()
 
-    run_smoke(args.models, args.conditions, args.registers)
+    run_smoke(args.models, args.conditions, args.registers, args.temps)

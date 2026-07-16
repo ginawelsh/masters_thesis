@@ -7,11 +7,12 @@ Single source of truth for:
   - the model registry + generation call, behind an OpenAI-compatible client.
 
 INVARIANT (do not break): every backend is called byte-identically -- a single
-user message, no system prompt, and no temperature override (so each provider's
-default of 1.0 is used). Mistral-Small-3.2 recommends temperature ~0.15 and a
-system prompt; those are DELIBERATELY NOT applied, so the prompt/condition stays
-the only variable across models. If you ever need to override, do it via
-GenParams (and document it) -- never special-case a single backend.
+user message, no system prompt, and temperature EXPLICITLY pinned to 1.0 (not left
+to each provider's default, which differs: OpenAI 1.0 but Mistral/OpenRouter lower).
+Mistral recommends temperature ~0.15 and a system prompt; those are DELIBERATELY
+NOT applied, so the prompt/condition stays the only variable across models. If you
+ever need to override, do it via GenParams (and document it) -- never special-case
+a single backend.
 
 Adding a model = one entry in MODELS. Prompts never change per model.
 
@@ -134,9 +135,11 @@ def build_prompt(condition: str, register: str, item: dict) -> str:
 # ---------------------------------------------------------------------------
 @dataclass
 class GenParams:
-    """Generation params. Defaults keep the invariant: no temperature override
-    (provider default 1.0) and no system prompt. Override only deliberately."""
-    temperature: Optional[float] = None
+    """Generation params. Defaults keep the invariant: temperature pinned to 1.0
+    (explicit, so every backend matches -- not left to differing provider defaults)
+    and no system prompt. Set temperature=None to omit the field entirely; override
+    only deliberately."""
+    temperature: Optional[float] = 1.0
     system_prompt: Optional[str] = None
     max_retries: int = 5
     retry_base_sec: int = 4
@@ -175,6 +178,7 @@ class OpenAICompatibleClient:
 @dataclass
 class ModelSpec:
     """A registry entry: a factory that builds the client for one model."""
+    # instantiates 3 models: GPT-5.2, mistral-small-2506,  
     make_client: Callable[[], OpenAICompatibleClient]
 
 
@@ -186,15 +190,33 @@ MODELS: dict[str, ModelSpec] = {
             model="gpt-5.2", base_url=None, api_key_env="OPENAI_API_KEY",
         ),
     ),
-    # Mistral-Small-3.2-24B-Instruct-2506 via OpenRouter (OpenAI-compatible).
-    # Called with the SAME contract as every backend: temp 1.0, no system prompt.
-    # Override the slug/endpoint with MISTRAL_MODEL / MISTRAL_BASE_URL if you
-    # self-host (vLLM/NIM slug: mistralai/Mistral-Small-3.2-24B-Instruct-2506).
+    # Mistral Small (mistral-small-2506) via Mistral's own API / La Plateforme
+    # (https://api.mistral.ai/v1, OpenAI-compatible). Called with the SAME contract
+    # as every backend: temp 1.0, no system prompt (the model card recommends 0.15
+    # + a system prompt; per the module INVARIANT those are NOT applied). Override
+    # with MISTRAL_MODEL / MISTRAL_BASE_URL (e.g. OpenRouter slug
+    # mistralai/mistral-small-3.2-24b-instruct at https://openrouter.ai/api/v1).
     "mistral": ModelSpec(
         make_client=lambda: OpenAICompatibleClient(
-            model=os.environ.get("MISTRAL_MODEL", "mistralai/mistral-small-3.2-24b-instruct"),
-            base_url=os.environ.get("MISTRAL_BASE_URL", "https://openrouter.ai/api/v1"),
+            model=os.environ.get("MISTRAL_MODEL", "mistral-small-2506"),
+            base_url=os.environ.get("MISTRAL_BASE_URL", "https://api.mistral.ai/v1"),
             api_key_env="MISTRAL_API_KEY",
+        ),
+    ),
+    # Same model, self-hosted behind a local vLLM OpenAI-compatible server:
+    #   vllm serve mistralai/Mistral-Small-3.2-24B-Instruct-2506 \
+    #     --tokenizer_mode mistral --config_format mistral --load_format mistral
+    # (~55 GB GPU RAM in bf16/fp16). The model card recommends temperature=0.15
+    # and a system prompt; per the module INVARIANT those are NOT applied here so
+    # the prompt/condition stays the only variable across models. vLLM ignores the
+    # API key, so MISTRAL_LOCAL_API_KEY can be any non-empty value (e.g. "EMPTY").
+    "mistral-local": ModelSpec(
+        make_client=lambda: OpenAICompatibleClient(
+            model=os.environ.get(
+                "MISTRAL_LOCAL_MODEL", "mistralai/Mistral-Small-3.2-24B-Instruct-2506"
+            ),
+            base_url=os.environ.get("MISTRAL_LOCAL_BASE_URL", "http://localhost:8000/v1"),
+            api_key_env="MISTRAL_LOCAL_API_KEY",
         ),
     ),
 }
