@@ -326,9 +326,17 @@ English translation: Look at the title and keywords and create a
 summary of the thesis abstract in your own words: <title,
 keywords>
 \paragraph{}
--  The LLM generation prompt also did not use additional evasion tactics
-such as "write it in the style as close as possible to a native Swedish speaker" or "use a more diverse amount of vocabulary". While these would be very interesting and useful experiments in further
-work on this topic, this study focused on a minimal prompt to control for evasion tactics, and to focus on the "bare-bones" / zero-shot generation of the Swedish text.
+\paragraph{}
+Rather than a single prompt, each abstract was generated under \emph{four}
+independent prompt conditions: a neutral \emph{baseline} and three
+\emph{adversarial} prompts designed to reduce detectability ---
+\emph{human\_like}, \emph{detector\_aware} and \emph{detector\_evasive}. The
+baseline prompt is the one shown above; the full set of prompts, in Swedish
+with English translations, is given in Appendix~\ref{app:prompts}. All four
+conditions were produced as independent one-shot generations from the same
+input (title and keywords), with the prompt as the only variable across
+conditions (a single user message, no system prompt, and temperature fixed
+at $1.0$).
 
 \subsection{LLM-generated informal data}
 
@@ -336,6 +344,20 @@ work on this topic, this study focused on a minimal prompt to control for evasio
 
     "Svara på följande fråga med en svensk kommentar, i stil med en kommentar på ett svenskt forum. "
     "Skriv bara kommentaren, inget annat. Fråga: <question>"
+\paragraph{}
+The informal register uses the same four prompt conditions as the formal
+register (a neutral baseline plus the adversarial \emph{human\_like},
+\emph{detector\_aware} and \emph{detector\_evasive} prompts); the baseline
+comment prompt is shown above, and the full set of prompts is given in
+Appendix~\ref{app:prompts}.
+\paragraph{}
+Generated text was normalised to a single block (newlines collapsed) to
+match the human formatting, and emoji were stripped from the generated
+comments. Because the human corpus was collected in 2005--2017, before the
+mobile-era rise in emoji use, it contains no emoji; emoji presence is
+therefore a temporal artefact rather than a human/LLM linguistic
+difference, and removing it prevents that confound from driving the
+comparison. Human text was left verbatim.
 
 \section{Experiment 1: textual analysis}
 
@@ -507,13 +529,16 @@ Useful for Limitations
 \paragraph{}
 - Another issue that has not been fully discussed is the human-edited text and LLM-assisted text. For example, after applying LLM to generate a text, humans often edit and modify certain words or passages (Wu et al., 2024). Conversely, humans may write an original text themselves before employing LLMs to modify the text's content and structure. Current mainstream LLM detectors show evidence of degrading in performance when categorising paraphrased text (Wolff 2020) This study only used generation techniques that completely generate a passage themselves using the title and key words (not re-writing the human written examples), but this technique would be less comparable for studies that look at partially LLM-assisted text. However, this type of study would be interesting to conduct in future research. 
 \paragraph{}
-- this study did not test the results of prompts that use evasion techniques, that is, techniques that change the output of an LLM in order to explicitly avoid detection, such as designing the prompt to give a more "human-like" response or other styles that suit the targeted domain. Instead, this thesis wanted to give a foundational result that future results could build on in the future. However, this would be very interesting to explore in future work. 
+- this study tested three adversarial prompt conditions (\emph{human\_like}, \emph{detector\_aware} and \emph{detector\_evasive}) alongside the neutral baseline, explicitly measuring how far prompt-based evasion narrows the observed human--LLM differences and affects detectability. Evasion strategies beyond single-shot prompting were not covered --- e.g.\ iterative or paraphrase-based rewriting, or prompts tuned against a specific detector --- and would be interesting to explore in future work. 
 \paragraph{}
 - participants in the AI study gave feedback that it was easy to spot patterns in AI text as the game went on, since they were receiving feedback after each round which AI and which human. this could make the study contrived in a way, since humans are explicitly looking for feedback and able to spot patterns as time goes on. at the same time, the immediate feedback signal from the game aimed to incentivise participants to complete the whole study through motivation. so, there is a trade-off - have more non-paid partipants engage in the game at the expense of results potentially being skewed due to immediate feedback facilitating pattern recognition. Also, there was a relatively high drop-out rate in the quiz - many participants completed the whole comments section, but fewer participants finished the abstract section. So, there is more data points for the comments and not so much for the abstracts.
 
 
 \chapter{Conclusion}
 text here
+
+\appendix
+\input{appendix_prompts}
 
 %\nocite{*}
 

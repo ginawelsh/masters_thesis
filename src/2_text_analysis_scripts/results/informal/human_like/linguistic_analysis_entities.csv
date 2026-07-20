@@ -57,7 +57,7 @@ Afghanistan:LOC,
 ,"Sverige:LOC,Sverige:LOC"
 ,
 ,Sverige:LOC
-,"Sverige:LOC,Sverige:LOC,Sverige:LOC"
+,"Sverige:LOC,samtidigt:TME,Sverige:LOC,Sverige:LOC"
 ,Sverige:LOC
 ,Sverige:LOC
 ,Sverige:LOC
@@ -72,10 +72,6 @@ hela natten:TME,"Israel:LOC,Palestina:LOC"
 ,Europa:LOC
 ,Sverige:LOC
 ,L:ORG
-,"Polisförbundets:ORG,ST:ORG"
-,"Riksrevisionens:ORG,Polisförbundet:ORG"
-"Dan Eliasson:PRS,Dan Eliasson:PRS,Sverige:LOC,Sverige:LOC,Sverige:LOC,flashback:LOC,sweddit:LOC",Polisförbundets:ORG
-,
 "Sjöstedt:PRS,Åkesson:PRS","Ygeman:PRS,Karin Karlsbro:PRS,L:ORG,Magdalena Andersson:PRS,Elisabeth Svantesson:PRS,Richard Jomshof:PRS"
 "Josefin Utas:PRS,Medborgerlig Samling:WRK","Ygeman:PRS,Elisabeth Svantesson:PRS,Maria Malmer Stenergard:PRS,Mikael Damberg:PRS"
 "Alice Bah Kunke:PRS,Jan Björklund:PRS,Jonas Sjöstedt:PRS","Ygeman:PRS,Elisabeth Svantesson:PRS,Johan Pehrson:PRS,Anders Holmberg-typen:PRS"
@@ -86,9 +82,6 @@ Mattias Karlsson:PRS,"Ygeman:PRS,Irene Svenonius:PRS,Anders Arborelius:PRS,Johan
 worldwar2:PRS,
 ,
 ,Sverige:LOC
-"Edit:PRS,USA:LOC",Regeringskansliet:ORG
-,Regeringskansliet:ORG
-,
 "Copenhagen:LOC,Seattle:LOC,robeph:PRS,Sverige:LOC",USA:LOC
 ,"chew:PRS,USA:LOC,Sverige:LOC,USA:LOC"
 ,ICA:ORG
@@ -182,10 +175,9 @@ Lasse Hölm:PRS,"Bromma:LOC,Kungsholmen:LOC,Solna:LOC,Sundbyberg:LOC,Bromma:LOC,
 "Enskede:LOC,Eriksdal, Universitetet:LOC,Östermalm:LOC,Kungliga tennishallen:ORG","Bromma:LOC,Kungsholmen:LOC,Solnahallen/”Racket”-ställen:ORG,Solna:LOC,Sundbyberg:LOC,Liljeholmen:LOC,Årsta:LOC,Brommahallen:LOC"
 ,"Bromma:LOC,Kungsholmen:LOC,Vällingby:LOC,Spånga-hållet:LOC,Solna:LOC,Sundbyberg:LOC,Gullmars/Telefonplan/:PRS,Årsta:LOC"
 ,"Janssons:PRS,Grand Hôtel:ORG,Ulla Winbladh:PRS,Djurgården:LOC,Skansen:LOC"
-"Ulriksdals:LOC,East:ORG","Stockholm:LOC,Ulla Winbladh:PRS,Djurgården:LOC,city:LOC"
+"Ulriksdals:LOC,East:ORG","Stockholm:LOC,Ulla Winbladh:PRS,Djurgården:LOC"
 "Wretman:PRS,Janssons:PRS","Grand Hôtel:LOC,Ulla Winbladh:PRS,Djurgården:LOC,Hasselbacken:LOC"
 "Hotel Reisen:ORG,Gamla Stan:LOC,Nordsjölax:LOC,Christian Hellberg:PRS,Niklas Ekstedt:PRS,Michelin:PRS,Gamla Riksarkivet:WRK,Carlshälls Gård:ORG,Långholmen:LOC,Stockholm:LOC,Oaxen:LOC,Winterwiken:ORG,Kaknästornet:LOC,Junibacken:LOC","Sthlm:LOC,Ulla Winbladh:PRS,Djurgården:LOC,Smålands:LOC"
-,"Strandvägen:LOC,Östermalm:LOC,Två sekunder:TME,Strandvägen-hållet:LOC,Nybroviken:LOC"
 ,"Sthlm:LOC,Academic Work:ORG,Poolia:ORG,Randstad:ORG,SEB:ORG,Swedbank:ORG,Grant Thornton:PRS"
 Stockholm:LOC,"Stockholm:LOC,Tillväxtverket:ORG,Trafikförvaltningen:ORG,Stockholm:LOC,SEB:ORG,Swedbank:ORG,Poolia:ORG,Manpower:ORG,Randstad:ORG,Stockholm:LOC"
 Sverige:LOC,"Stockholm:LOC,Skatteverket:ORG,SCB:ORG,Försäkringskassan:ORG,Stockholms:LOC,stad:LOC,Stockholm:LOC,Adecco Finance:ORG"
@@ -201,16 +193,13 @@ Taxi Stockholm:LOC,"Sverige:LOC,Stockholm:LOC,Taxi Göteborg:LOC,Taxi Kurir:ORG"
 Stockholm:LOC,"Stockholm:LOC,Göteborg:LOC,Taxi Kurir:ORG"
 "Sthlm:LOC,Ubers:ORG,UberX:ORG","Stockholm:LOC,Göteborg:LOC,Taxi Stockholm:ORG,Sthlm:LOC,Göteborg:LOC,Göteborg:LOC"
 Stockholm:LOC,"Sverige:LOC,nuförtiden:TME,Stockholm:LOC,Sthlm:LOC,Taxi Göteborg:ORG"
-,
-,
-,
 "Guldheden:LOC,Klippan:LOC","Göteborg:LOC,Skansen:LOC,Kronan:LOC,Skansberget:LOC,Ramberget:LOC,Slottsskogen:LOC,en stund:TME"
 ,"Gbg:LOC,Älvsborgsbron/Klippan:LOC,Masthuggsberget:LOC,Skansen:LOC,Göteborg:LOC,Göteborg:LOC"
 ,"Göteborg:LOC,Järntorget:LOC,Linné:PRS,Skansen:LOC,Kronan:LOC,Ramberget:LOC,Avenyn:LOC"
 Kjell & Company:PRS,
 ,
 ,
-"Homeplug:LOC,http://www.kjell.com/fraga-kjell/hur-funkar-det/natverk/hemnatverk/lokalt-tradbundet-natverk:LOC",
+Homeplug:LOC,
 ,Asus ZenWiFi:PRS
 kjell:PRS,Orbi:LOC
 ,
@@ -266,33 +255,6 @@ xperia Z:PRS,"HTC One:OBJ,Xperia Z:PRS,Nexus:OBJ,Xperia Z:PRS,S4 Active:OBJ"
 ,
 ,
 Eliza CT:PRS,
-D*niel M*nnberg:PRS,
-,"Sportbladet:WRK,Aftonbladet:WRK"
-,"Sportbladet:WRK,Henke:PRS"
-"D*niel M*nnberg:PRS,Luleå:LOC,Hockey:ORG",Aftonbladet:WRK
-,Zlatan:LOC
-Hockeylirarna:ORG,Sportbladet:WRK
-,"stjärna”-grej:LOC,Sportbladet:WRK,Henrik Larsson:PRS,Ljungberg:PRS,Aftonbladets:WRK"
-,"Rinkeby:LOC,Anna:PRS"
-Malmö:LOC,Rinkeby:LOC
-,Rinkeby:LOC
-,Rinkeby:LOC
-"Elisabeth Höglunds:PRS,Ingvar Storm:PRS,Gomorron Sverige:WRK",Rinkeby:LOC
-,Rinkeby:LOC
-"europa:LOC,Stockholm:LOC",Rinkeby:LOC
-"SR:ORG,i 30 år:TME",Rinkeby:LOC
-Ang Höglund:PRS,Rinkeby:LOC
-,Rinkeby:LOC
-Sveriges:LOC,Rinkeby:LOC
-"Aktuellts:ORG,Goebbels:PRS",Rinkeby:LOC
-,Rinkeby:LOC
-,Rinkeby:LOC
-,Rinkeby:LOC
-,Rinkeby:LOC
-Rosengård:LOC,"Rinkeby:LOC,Sverige:LOC"
-"Kettner:PRS,rinkeby:LOC",Rinkeby:LOC
-Ingvar Storms:PRS,"Södermalm:LOC,Rinkeby:LOC"
-"Lars Ohly:PRS,Ohly:PRS",Rinkeby:LOC
 ,
 ,
 ,
@@ -363,7 +325,7 @@ Peter Ahltin:PRS,
 ,
 ,
 L:ORG,
-RTFM:WRK,
+"RTFM:WRK,DOESN'T MAKE:PRS",
 ,
 ,
 ,
@@ -374,7 +336,7 @@ Max Power:PRS,
 ,
 "Filippinerna:LOC,Asien:LOC,Asien:LOC,Australien:LOC,Spanien:LOC","Manila:LOC,Cebu:LOC,Argentina:LOC,Buenos Aires:LOC,Chile:LOC,Santiago:LOC,Argentina:LOC,Chile:LOC"
 ,"Makati:LOC,Argentina:LOC,Buenos Aires:LOC,Europa:LOC,Chile:LOC,Santiago:LOC,Filippinerna:LOC,Argentina:LOC,Chile:LOC"
-Polen:LOC,"Filippinerna:LOC,Manila:LOC,Argentina:LOC,Santiago:LOC,Argentina:LOC,Chile:LOC"
+Polen:LOC,"Filippinerna:LOC,Manila:LOC,Argentina:LOC,Chile:LOC,Santiago:LOC,Argentina:LOC,Chile:LOC"
 "Mindanao:LOC,Mindanao:LOC","Manila:LOC,Argentina:LOC,från månad till månad:TME,Chile:LOC,Santiago:LOC,Argentina:LOC,Chile:LOC"
 ,"Argentina:LOC,Buenos Aires:LOC,Chile:LOC,Santiago:LOC,Latinamerikas:LOC,Chile:LOC,Argentina:LOC"
 Indien:LOC,"Metro Manila/:WRK,Chile:LOC,Santiago:LOC,Argentina:LOC,Chile:LOC,Argentina:LOC"
@@ -382,7 +344,6 @@ Indien:LOC,"Metro Manila/:WRK,Chile:LOC,Santiago:LOC,Argentina:LOC,Chile:LOC,Arg
 Polen:LOC,"Chile:LOC,Santiago:LOC,Argentina:LOC,Buenos Aires:LOC,Filippinerna:LOC,Manila:LOC,Chile:LOC,Argentina:LOC,Filippinerna:LOC,Argentina:LOC,Chile:LOC"
 Polen:LOC,"Argentina:LOC,Chile:LOC,Santiago:LOC,Manila:LOC,Cebu:LOC,Argentina:LOC,Buenos Aires:LOC,Chile:LOC,Santiago:LOC,Filippinerna:LOC,Argentina:LOC,Chile:LOC"
 ,"Argentina:LOC,Chile:LOC,Santiago:LOC,Makati:LOC,Argentina:LOC,Chile:LOC,latinamerika:LOC,Chile:LOC,Argentina:LOC"
-,"SEPA:ORG,Luxemburg:LOC,Slovenien:LOC"
 thailand:LOC,Thailand:LOC
 ,"Thailand:LOC,Sverige:LOC"
 Bangkok:LOC,"Thailand:LOC,Sverige:LOC"
@@ -396,7 +357,7 @@ Bangkok:LOC,"Thailand:LOC,Sverige:LOC"
 ,
 ,"Google:ORG,Sveriges Domstolar:ORG"
 ,Sveriges:LOC
-"http://www.skovdenyheter.se/nyhet/4521/atalas-festen-i-volvohuset:LOC,http://www.skovdenyheter.se/nyhet/4521/atalas-festen-i-volvohuset:LOC",
+,
 ,
 ,Sveriges Domstolar:ORG
 ,
@@ -488,7 +449,6 @@ Edit:PRS,TTS:ORG
 flashback:LOC,
 ,
 ,
-,"Angel eyes:PRS,Philips:ORG"
 sthlm:LOC,"Smedis:LOC,Youtube:ORG,Stockholmspolisen:LOC"
 ,
 ,
@@ -510,7 +470,7 @@ Edit:PRS,"Bjurholm:LOC,Dorotea:LOC,Åsele:LOC,Vilhelmina:LOC,Kjell:PRS,Danderyd:
 "Staffangymnasiet:ORG,Söderhamn:LOC,Sveigedemokraterna:ORG,32%:MSR,Ljusneskolan:LOC,Söderhamn:LOC,37%:MSR,http://helahalsingland.se/soderhamn/1.2350924-var-fjarde-elev-rostade-pa-sd:LOC","Bjurholm:LOC,Dorotea:LOC,Åsele:LOC,Vilhelmina:LOC,Storuman:LOC,Arjeplog:LOC,Kjell:PRS,Norrlands:LOC,Danderyd:LOC,Danderyd:LOC,Tanum:LOC,Årjäng:LOC,Piteå:LOC,Piteå:LOC,Luleå:LOC,Skåne:LOC,Skåne:LOC,Skåne:LOC,Blekinge:LOC,Sölvesborg:LOC,Karlskrona:LOC,Borlänge:LOC,Söderhamn:LOC,Söderhamn:LOC"
 ,"Kalle:PRS,Danderyd:LOC,Årjäng:LOC,Piteå:LOC,Skåne:LOC,Blekinge:LOC,Norrlands:LOC,Borlänge:LOC,Söderhamn:LOC,Borlänge:LOC"
 "Söderhamn:LOC,norrland:LOC,Sd:LOC,Sverige:LOC,Amerika:LOC","norrlandsgrej:LOC,Danderyd:LOC,Danderyd:LOC,Piteå:LOC,Piteå:LOC,Skåne:LOC,Blekinge:LOC,Skåne:LOC,Bjuv:LOC,Bromölla:LOC,Borlänge:LOC,Söderhamn:LOC,Söderhamn:LOC,Norrlandsstad:LOC,Skåne:LOC"
-"sverige:LOC,danmark:LOC,sydsverige:LOC,Tyskland:LOC,under andra världskriget:TME,skåne Malmö:LOC,helsingborg:LOC,landskrona:LOC,kristianstad:LOC,skåne:LOC","SD:s:ORG,Danderyd:LOC,Danderyd:LOC,Årjäng:LOC,Piteå:LOC,Piteå:LOC,Skåne:LOC,Skåne:LOC,Blekinge:LOC,Sverige:LOC,Stockholm:LOC,Borlänge:LOC,Söderhamn:LOC,Borlänge:LOC,länge:TME,Söderhamn:LOC"
+"sverige:LOC,danmark:LOC,sydsverige:LOC,Tyskland:LOC,under andra världskriget:TME,skåne Malmö:LOC,helsingborg:LOC,landskrona:LOC,kristianstad:LOC,skåne:LOC","SD:s:ORG,Danderyd:LOC,Danderyd:LOC,Årjäng:LOC,Piteå:LOC,Piteå:LOC,Skåne:LOC,Skåne:LOC,Blekinge:LOC,Sverige:LOC,Stockholm:LOC,Borlänge:LOC,Söderhamn:LOC,Borlänge:LOC,Söderhamn:LOC"
 ,"Norrland:LOC,Skåne:LOC,Bjurholm:LOC,Dorotea:LOC,Åsele:LOC,Norsjö:LOC,Vilhelmina:LOC,Storuman:LOC,Kalle:PRS,Piteå:LOC,Danderyd:LOC,Årjäng:LOC,Skåne:LOC,Borlänge:LOC,Söderhamn:LOC,Borlänge:LOC,Söderhamn:LOC,Skåne:LOC"
 Kronobergs län:LOC,"norrlandsgrej:LOC,Västerbotten:LOC,Norrbotten:LOC,Jämtland:LOC,Lasse:PRS,Bjurholm:LOC,Arjeplog:LOC,Åsele:LOC,Danderyd:LOC,Piteå:LOC,LO:ORG,Skåne:LOC,Malmö:LOC,Helsingborg:LOC,Landskrona:LOC,Kristianstad:LOC,Skåne:LOC,Blekinge:LOC,Borlänge:LOC,Söderhamn:LOC,Söderhamn:LOC,Hälsingland:LOC,Gävleborg:LOC"
 ,Sybil:PRS
@@ -553,23 +513,6 @@ PCB:ORG,
 USA:LOC,
 ,
 ,
-"Sverige:LOC,Schweiz:LOC,Hitler:PRS",
-"100 miljarder:MSR,Afrika:LOC,Stockholm:LOC,Afrika:LOC",
-Aktiv Demokratis forum:ORG,
-,
-Aktiv Demokratis webbsida:ORG,TikTok:ORG
-,TikTok:LOC
-wikipedia:PRS,
-,
-,Schweiz:LOC
-"Libyen:LOC,Umeå universitet:ORG,ryssland:LOC,Australien:LOC,Libyen:LOC,brittannien:LOC",
-,
-,
-Schweiz:LOC,
-,
-Schweiz:LOC,
-,
-,
 ,
 ,
 ,
@@ -579,20 +522,20 @@ Schweiz:LOC,
 Albanien:LOC,"Europa:LOC,Sverige:LOC,Norden:LOC,Nederländerna:LOC,Tyskland:LOC,Schweiz:LOC,Österrike:LOC,Portugal:LOC,Lissabon:LOC,Porto:LOC,Algarvekusten:LOC,Spanien:LOC,Málaga:LOC,Frankrike:LOC,Malta:LOC,Cypern:LOC,Kanarieöarna:LOC,Portugal:LOC,Spanien:LOC"
 "Frankrike:LOC,Sverige:LOC,Frankrike:LOC,Martinique:LOC,Guyana:LOC,Tahiti:LOC,Réunion:LOC,Spanien:LOC,Spanien:LOC","Europa:LOC,Europa:LOC,Spanien:LOC,Malta:LOC,Italien:LOC,Grekland:LOC,Cypern:LOC,Portugal:LOC,Sverige:LOC,Nederländerna:LOC,Danmark:LOC,Tyskland:LOC,Österrike:LOC,Schweiz:LOC,Frankrike:LOC,Nederländerna:LOC,Portugal:LOC,Lisbon:LOC,Porto:LOC,Spanien:LOC,Valencia:LOC,Málaga:LOC,Sverige:LOC,Malta:LOC,Cypern:LOC,Frankrike:LOC,Nice:LOC,Antibes:LOC"
 "Spanien:LOC,Frankrike:LOC","Sverige:LOC,Europa:LOC,Portugal:LOC,Lisabon/:LOC,Porto:LOC,Sverige:LOC,Europa:LOC,Spanien:LOC,Barcelona:LOC,Valencia:LOC,Madrid:LOC,Spanien:LOC,Rivieran:LOC,Nice:LOC,Sverige:LOC,Danmark:LOC,Nederländerna:LOC,Tyskland:LOC,Nordens:LOC"
-"Europa:LOC,Sverige:LOC,Blunda:LOC","samtidigt:TME,Sverige:LOC,Europa:LOC,Schweiz:LOC,Österrike:LOC,Tyskland:LOC,Nederländerna:LOC,Spanien:LOC,Portugal:LOC,Kanarieöarna:LOC,Sverige:LOC"
-"Europa:LOC,Södra Spanien:LOC,Andalusien:LOC,GENERELLT:ORG,Sverige:LOC,Fuengirola:LOC","Europa:LOC,Sydeuropa:LOC,Portugal:LOC,Lisabon/:LOC,Porto:LOC,Sverige:LOC,Spanien:LOC,Valencia:LOC,Málaga:LOC,Sverige:LOC,Sydfrankrike:LOC,Irland:LOC,Nederländerna:LOC,Belgien:LOC,Schweiz:LOC,Österrike:LOC,Europa:LOC,Portugals:LOC,Spanien:LOC,Sverige:LOC,Norden:LOC"
+"Europa:LOC,Sverige:LOC","samtidigt:TME,Sverige:LOC,Europa:LOC,Schweiz:LOC,Österrike:LOC,Tyskland:LOC,Nederländerna:LOC,Spanien:LOC,Portugal:LOC,Kanarieöarna:LOC,Sverige:LOC"
+"Europa:LOC,Spanien:LOC,Andalusien:LOC,GENERELLT:ORG,Sverige:LOC,Fuengirola:LOC","Europa:LOC,Sydeuropa:LOC,Portugal:LOC,Lisabon/:LOC,Porto:LOC,Sverige:LOC,Spanien:LOC,Valencia:LOC,Málaga:LOC,Sverige:LOC,Sydfrankrike:LOC,Irland:LOC,Nederländerna:LOC,Belgien:LOC,Schweiz:LOC,Österrike:LOC,Europa:LOC,Portugals:LOC,Spanien:LOC,Sverige:LOC,Norden:LOC"
 "Sverige:LOC,Sverige:LOC,Norge:LOC,Kanada:LOC,Sverige:LOC","Europa:LOC,Portugal:LOC,Lissabon:LOC,Porto:LOC,Spanien:LOC,Valencia:LOC,Málaga:LOC,Frankrike:LOC,Malta:LOC,Cypern:LOC,Sverige:LOC,Portugal:LOC,Spanien:LOC,Sverige:LOC"
 "Luxemburg:LOC,Sverige:LOC","Europa:LOC,Frankrike:LOC,Nice:LOC,Antibes:LOC,Norditalien:LOC,Milan:LOC,Turin:LOC,Bologna:LOC,Italien:LOC,Spanien:LOC,Madrid:LOC,Barcelona:LOC,Valencia:LOC,Sverige:LOC,Portugal:LOC,Lissabon:LOC,Porto:LOC,Lissabon:LOC,Danmark:LOC,Nederländerna:LOC,Tyskland:LOC,Valencia:LOC,Málaga:LOC,Algarve:LOC,Sverige:LOC,Europa:LOC"
 jumpcut:PRS,"Europa:LOC,Schweiz:LOC,Österrike:LOC,Tyskland:LOC,Nederländerna:LOC,Danmark:LOC,Sverige:LOC,Portugal:LOC,Lissabon:LOC,Porto:LOC,Spanien:LOC,Valencia:LOC,Málaga:LOC,Sverige:LOC,Malta:LOC,Cypern:LOC,Sverige:LOC,Portugal:LOC,Spanien:LOC,Sverige:LOC"
-"Europa:LOC,Östersjön:LOC,Frankrike:LOC,Schweiz:LOC,Medelhavet:LOC","Europa:LOC,Sydfrankrike:LOC,Nice:LOC,Antibes:LOC,Norditalien:LOC,Milano:LOC,Trento:LOC,Italien:LOC,Spanien:LOC,Portugal:LOC,Danmark:LOC,Tyskland:LOC,Nederländerna:LOC,Sverige:LOC,Australien:LOC,Europa:LOC,Europa:LOC,Norden:LOC,DACH:ORG,Frankrike:LOC,Frankrike:LOC,Spanien:LOC"
+"Europa:LOC,Östersjön:LOC,Frankrike:LOC,Peps:PRS,Schweiz:LOC,Medelhavet:LOC","Europa:LOC,Sydfrankrike:LOC,Nice:LOC,Antibes:LOC,Norditalien:LOC,Milano:LOC,Trento:LOC,Italien:LOC,Spanien:LOC,Portugal:LOC,Danmark:LOC,Tyskland:LOC,Nederländerna:LOC,Sverige:LOC,Australien:LOC,Europa:LOC,Europa:LOC,Norden:LOC,DACH:ORG,Frankrike:LOC,Frankrike:LOC,Spanien:LOC"
 ,"Sverige:LOC,Europa:LOC,Frankrike:LOC,Nice:LOC,Antibes:LOC,Montpellier:LOC,Schweiz:LOC,Lugano:LOC,Sverige:LOC,Österrike:LOC,Italien:LOC,Sydtyrolen:LOC,Sverige:LOC,Portugal:LOC,Spanien:LOC,Algarve:LOC,Valencia:LOC,Malaga:LOC,Sverige:LOC,Portugal:LOC,Spanien:LOC"
-"Andalusien:LOC,Sverige:LOC,Barcelona:LOC","Europa:LOC,Frankrike:LOC,Nice:LOC,Antibes:LOC,Spanien:LOC,Barcelona:LOC,Madrid:LOC,Portugal:LOC,Lisbon:PRS,Porto:LOC,Sverige:LOC,Lissabon:LOC,Malta:LOC,Cypern:LOC,Cypern:LOC,vibe:LOC,Schweiz:LOC,Österrike:LOC,Spanien:LOC,Europa:LOC"
-"IKEA:ORG,IKEA-kök:ORG,Sverige:LOC","samtidigt:TME,Sverige:LOC,Europa:LOC,Frankrike:LOC,Nice:LOC,Antibes:LOC,Montpellier:LOC,Nord-:LOC,Spanien:LOC,Baskien:LOC,Bilbao:LOC,San Sebastián:LOC,Andalusien:LOC,Spanien:LOC,Sverige:LOC,Portugal:LOC,Lissabon:LOC,Porto:LOC,Algarve:LOC,Schweiz:LOC"
+"Andalusien:LOC,Sverige:LOC,Barcelona:LOC","Europa:LOC,Frankrike:LOC,Nice:LOC,Antibes:LOC,Spanien:LOC,Barcelona:LOC,Madrid:LOC,Portugal:LOC,Lisbon:PRS,Porto:LOC,Sverige:LOC,Lissabon:LOC,Malta:LOC,Cypern:LOC,Cypern:LOC,Schweiz:LOC,Österrike:LOC,Spanien:LOC,Europa:LOC"
+"IKEA:ORG,IKEA-kök:ORG,Sverige:LOC","samtidigt:TME,Sverige:LOC,Europa:LOC,Frankrike:LOC,Nice:LOC,Antibes:LOC,Montpellier:LOC,Nord-:LOC,Spanien:LOC,Baskien:LOC,Bilbao:LOC,Andalusien:LOC,Spanien:LOC,Sverige:LOC,Portugal:LOC,Lissabon:LOC,Porto:LOC,Algarve:LOC,Schweiz:LOC"
 "Holland:LOC,Skandinavien:LOC,München:LOC","Europa:LOC,Nederländerna:LOC,Belgien:LOC,Frankrike:LOC,Tyskland:LOC,Österrike:LOC,Schweiz:LOC,Schweiz:LOC,Frankrike:LOC,Montpellier:LOC,Nice:LOC,Spanien:LOC,Barcelona:LOC,Madrid:LOC,Valencia:LOC,Portugal:LOC,Lissabon:LOC,Porto:LOC,Europa:LOC,Spanien:LOC,Kanarieöarna:LOC,Madeira:LOC"
 Holland:LOC,"Europa:LOC,Sverige:LOC,Portugal:LOC,Lissabon:LOC,Porto:LOC,Sverige:LOC,Spanien:LOC,Valencia:LOC,Málaga:LOC,Sverige:LOC,Frankrike:LOC,Italiens:LOC,Nederländerna:LOC,Belgien:LOC,Frankrike:LOC,Portugal:LOC,Spanien:LOC,Kanarieöarna:LOC,Europa:LOC"
 "Tyskland:LOC,Tyskland:LOC,Sverige:LOC,i juli:TME,Berlin:LOC,Sverige:LOC,Berlin:LOC,Sverige:LOC,Göteborg:LOC,Edit:PRS,Nederländerna:LOC,Sverige:LOC,Norden:LOC","Europa:LOC,Sydfrankrike:LOC,Nice:LOC,Antibes:LOC,Kanarieöarna:LOC,Schweiz:LOC,Lugano:LOC,Österrike:LOC,södern:LOC,Bayern:LOC,Spanien:LOC,Portugal:LOC,Skönast:ORG,Sverige:LOC,Kanarieöarna:LOC,Europa:LOC,Spanien:LOC,Portugal:LOC"
 "spanien:LOC,sverige:LOC,sverige:LOC,sverige:LOC,Torrevieja:LOC,Dar:LOC,engelskman:PRS,hollandare:PRS,spanien:LOC","Europa:LOC,Sverige:LOC,Nederländerna:LOC,Tyskland:LOC,Österrike:LOC,Schweiz:LOC,Medelhavsvärme:LOC,Spanien:LOC,Portugal:LOC,Frankrike:LOC,Italien:LOC,Grekland:LOC,Cypern:LOC,Malta:LOC,Kanarieöarna:LOC,Madeira:LOC,Cypern:LOC,Sverige:LOC,Portugal:LOC,Lissabon:LOC,Porto:LOC,Spanien:LOC,Valencia:LOC,Málaga:LOC,Kanarieöarna:LOC,Spanien:LOC,Europa:LOC,Frankrike:LOC,Spanien:LOC,Portugal:LOC"
-"Ang Tyskland:LOC,Holland:LOC,Sverige:LOC,Holland:LOC","Kanarieöarna:LOC,Sydfrankrike:LOC,Nice:LOC,Antibes:LOC,Montpellier:LOC,Spanien:LOC,Barcelona:LOC,Valencia:LOC,Málaga:LOC,Sverige:LOC,Norden:LOC,Portugal:LOC,Lissabon:LOC,Porto:LOC,Norditalien:LOC,Milano:LOC,Bologna:LOC,Irland:LOC,Spanien:LOC,Portugal:LOC"
+"Ang Tyskland:PRS,Holland:LOC,Sverige:LOC,Holland:LOC","Kanarieöarna:LOC,Sydfrankrike:LOC,Nice:LOC,Antibes:LOC,Montpellier:LOC,Spanien:LOC,Barcelona:LOC,Valencia:LOC,Málaga:LOC,Sverige:LOC,Norden:LOC,Portugal:LOC,Lissabon:LOC,Porto:LOC,Norditalien:LOC,Milano:LOC,Bologna:LOC,Irland:LOC,Spanien:LOC,Portugal:LOC"
 ,
 ,
 ,CSN:ORG
@@ -623,7 +566,7 @@ imorgon:TME,
 ,
 Vialerg:PRS,
 ,
-,snart:TME
+,
 ,
 ,
 ,
@@ -700,7 +643,7 @@ hittills:TME,Ritalin-dos:LOC
 ,
 ,
 ,
-,
+"Mvh:PRS,Oddball Moderator:ORG",
 ,
 ,
 ,
@@ -727,7 +670,7 @@ Benzo:PRS,
 ,
 ,
 ,max X:PRS
-Cigg:PRS,
+,
 ,
 ,
 fuck off:PRS,
@@ -740,16 +683,6 @@ fuck off:PRS,
 "Liechtenstein:PRS,Bürgergemeinde:LOC,Liechtenstein:PRS,Liechtenstein:PRS,Sverige:LOC","Sverige:LOC,Indien:LOC"
 ,Jönköping:LOC
 ,
-,"Amount:PRS,Radius:PRS"
-,
-,Bicubic Smoother:PRS
-,"Peta:PRS,High Pass:OBJ,Soft Light:ORG,Reduce Noise:PRS"
-,"Photoshop:WRK,Soft Light:ORG"
-,Gaussian:PRS
-,radius:PRS
-,
-,
-,AI-upscale:WRK
 ,Mac:PRS
 ,
 ,
@@ -809,7 +742,7 @@ Games:ORG,"Alphaspel:PRS,Kungsholmen:LOC,Hantverkargatan:LOC,Gamla Stan:LOC,Frid
 kungsholmen Stockholms:LOC,"Gamla Stan:LOC,Hägersten:LOC,city:LOC,Dragons Lair:ORG,Kungsholmen:LOC,Akademibokhandeln:LOC,Mäster Samuelsgatan:LOC,Catan:LOC"
 Stockholm:LOC,"Gamla stan:LOC,Alphaspel:PRS,Midsommarkransen:LOC,city:LOC,Catan:LOC,Webhallen:LOC,Sveavägen:LOC"
 "Alphaspel:PRS,öppettider:LOC","Alphaspel:PRS,Odenplan:LOC,Västmannagatan:LOC,SF:ORG,Gamla stan:LOC,Sergels torg:LOC,Science:ORG,Kista Galleria:LOC"
-"Gamla Stan:LOC,Västerlånggatan:LOC,USA:LOC,Arcane:PRS,Odenplan:LOC,Butik:ORG,Kungsholmstorg:LOC,Sveriges:LOC,Sveriges:LOC,Solberga:LOC","Alphaspel:PRS,Odenplan:LOC,SF Bokhandeln:ORG,Gamla stan:LOC,Catan:LOC,Sveavägen:LOC"
+"Gamla Stan:LOC,Västerlånggatan:LOC,USA:LOC,Arcane:PRS,Odenplan:LOC,Kungsholmstorg:LOC,Sveriges:LOC,Sveriges:LOC,Solberga:LOC","Alphaspel:PRS,Odenplan:LOC,SF Bokhandeln:ORG,Gamla stan:LOC,Catan:LOC,Sveavägen:LOC"
 ,"Alphaspel:PRS,Odenplan:LOC,SF Bokhandeln:ORG,Gamla stan:LOC,city:LOC,Catan:LOC,Alphaspel:PRS"
 ,
 ,Vilks:PRS
@@ -827,7 +760,7 @@ Muhammed:PRS,Vilks:PRS
 "Muhammed:PRS,Muhammed:PRS,Muhammed:PRS",Vilks:PRS
 ,Säpo:ORG
 Mohammed:PRS,Vilks:PRS
-,Vilks:PRS
+,
 "Jesus:PRS,Buddha:PRS",Migrationsverket:ORG
 Mohammed:PRS,Vilks:PRS
 ,Vilks:PRS
@@ -860,7 +793,7 @@ Facebook:ORG,
 ,faila:PRS
 ,
 ,WD Data:ORG
-,"XP sp3”-strul:WRK,Seatools:ORG,Seagate:ORG"
+,"XP sp3”-strul:WRK,Seatools:ORG,Seagate:ORG,WD Data:ORG"
 ,Seagate:ORG
 ,
 ,
@@ -871,7 +804,7 @@ Facebook:ORG,
 ,"Seagate:ORG,WD:ORG,OS:EVN,idag:TME"
 ,
 ,"SeaTools:ORG,Seagate:ORG,WD Data:ORG,Rufus:PRS"
-,Gamla XP:OBJ
+,
 ,
 ,
 ,faila:PRS
@@ -880,7 +813,7 @@ Facebook:ORG,
 ,
 ,OS:EVN
 ,
-,BIOS:ORG
+,
 ,"BIOS:LOC,Ström:PRS"
 ,OS:EVN
 Raidcard:PRS,
@@ -949,40 +882,40 @@ somalia:ORG,
 ,
 ,
 ,
-"Sveriges:LOC,Araber:LOC,2,65%:MSR,Jugoslaver:LOC,Skandinaver:LOC,1,07%:MSR,Väst-:LOC,Thailandska:LOC,Filippinska:LOC,Sveriges:LOC",
+"Sveriges:LOC,2,65%:MSR,1,07%:MSR,Väst-:LOC,Thailandska:LOC,Filippinska:LOC,Sveriges:LOC",
 "Stockholm:LOC,Thailand:LOC,afrika:LOC",
 Somalia:LOC,benen”-tjej:LOC
 ,
 ,"Felix Rostad Lök-dressing:PRS,Rydbergs:PRS,Felix:PRS,Heinz Burger Sauce:PRS,Max:PRS"
 ,"Rydbergs:PRS,Felix Rhode:PRS,Island:LOC,Johnny’s senapsdressing:PRS"
-"Erik Lallerstedts:PRS,Lohmanders:PRS,McDonald's:ORG,Louisiana:LOC","Felix Bearnaise:PRS,Rydbergs:PRS,nuggets:ORG,Santa Maria:LOC,Honey:PRS"
+"Erik Lallerstedts:PRS,Lohmanders:PRS,McDonald's:ORG","Felix Bearnaise:PRS,Rydbergs:PRS,nuggets:ORG,Santa Maria:LOC,Honey:PRS"
 "i somras:TME,Lohmanders:PRS,Heinz:PRS,Felix:PRS,Max:PRS",Felix Rostad:PRS
-,"Felix Rostad:PRS,Rydbergs Bearnaise:PRS,Lohmanders:PRS,Rydbergs:PRS,Zeinas Tahinisås:PRS,Maria Chipotle Mayo:PRS,Honorable:PRS,Heinz Burger Sauce:PRS"
+,"Felix Rostad:PRS,Rydbergs Bearnaise:PRS,Lohmanders:PRS,Rydbergs:PRS,Zeinas Tahinisås:PRS,Maria Chipotle Mayo:PRS,Heinz Burger Sauce:PRS"
 "Kroatien:LOC,cirkus:LOC,1 år sedan:TME,Ica:ORG,Felix:PRS","Felix Rökig BBQ:PRS,Heinz Garlic Sauce:PRS,Santa Maria:PRS"
-Jim Beam Barbeque sauce:PRS,"Felix Rhode:PRS,Island:LOC,Rydbergs Bearnaise:PRS,Maria Garlic & Herbs:PRS,Heinz Burger Sauce:PRS,Max:PRS"
+Jim Beam Barbeque sauce:PRS,"Felix Rhode:PRS,Island:LOC,Rydbergs Bearnaise:PRS,Maria Garlic & Herbs:PRS,Max:PRS"
 "Santa Marias Cheddardipp:PRS,Max:PRS","Felix Rhode:PRS,Island:LOC,Heinz Burger Sauce:PRS,Maria Garlic & Pepper:PRS,BBQ:ORG"
-"åxå:PRS,Blairs:PRS,åxå:PRS,hiilosmakkara:PRS,åxå:PRS","Felix Rostad:PRS,Hellmann’s Real Mayo:PRS,Rydbergs Bearnaise:PRS,Maria Chipotle Mayo:PRS,Heinz Burger Sauce:PRS"
+"åxå:PRS,Blairs:PRS,åxå:PRS,hiilosmakkara:PRS,åxå:PRS","Felix Rostad:PRS,Hellmann’s Real Mayo:PRS,Rydbergs Bearnaise:PRS,Maria Chipotle Mayo:PRS"
 Donkens Garlic Dipp:ORG,"Hellmann’s Real Mayo:PRS,Felix Rhode:PRS,Island:LOC,TS:ORG,Flying Goose:PRS,Santa Maria:LOC,Jack Daniel’:PRS"
 Max:PRS,"Rydbergs Bearnaise:PRS,Felix Hamburgerdressing:PRS,Maria Garlic & Pepper:PRS,Heinz Sweet:PRS,Lohmanders:PRS,England:LOC"
 "EastClintfood:PRS,Sriracha:LOC,för två månader sedan:TME","Hellmann’s majonnäs:PRS,Rydbergs Bearnaise:PRS,Felix Rostad:PRS"
-Lohmanders:PRS,"Felix Rostad:PRS,Maria Chipotle Mayo:PRS,Heinz Burger Sauce:PRS"
-,"Rydbergs Rhodedressing:PRS,Hellmann’s Real Mayo:PRS,Maria Chipotle Mayo:PRS,Honorable:PRS,Felix:PRS"
+Lohmanders:PRS,"Felix Rostad:PRS,Maria Chipotle Mayo:PRS"
+,"Rydbergs Rhodedressing:PRS,Hellmann’s Real Mayo:PRS,Maria Chipotle Mayo:PRS,Felix:PRS"
 "Santa Marias salsa:PRS,Knorr:PRS","Rydbergs Bearnaise:PRS,Felix Rostad:PRS,Maria Chipotle Mayo:PRS"
-,"Garants:ORG,Heinz Burger Sauce:PRS,Honorable:PRS,Felix:PRS"
-,"Stokes Burger:PRS,Rydbergs:PRS,Santa Maria Mango Habanero:PRS,Felix Chili Bearnaise:PRS,Hellmann’s Real:PRS"
+,"Garants:ORG,Heinz Burger:PRS,Felix:PRS"
+,"Stokes Burger:PRS,Rydbergs:PRS,Maria Mango Habanero:PRS,Felix Chili Bearnaise:PRS,Hellmann’s Real:PRS"
 ,"Felix Rhode:PRS,Santa Maria Garlic:PRS"
-"Johnnys Mango:PRS,Johnnys Rödlök:PRS,Heinz Ketchup:PRS,HP-Sauce:LOC","Rydbergs Bearnaise:PRS,Felix Rhode:PRS,nuggets:ORG,Maria Garlic & Pepper:PRS"
+"Winarom:LOC,Johnnys Mango:PRS,Johnnys Rödlök:PRS,Lousiana Hot Pepper:PRS","Rydbergs Bearnaise:PRS,Felix Rhode:PRS,nuggets:ORG,Maria Garlic & Pepper:PRS"
 ,"Felix Rhode:PRS,Heinz:PRS,Johnny’s Jalapeño:PRS"
 ,"Felix Bearnaise:PRS,Rydbergs:PRS,Felix:PRS,Heinz Burger Sauce:PRS,honey:PRS"
 "nyligen:TME,Coops:ORG","Hellmann’s Real Mayo:PRS,Maria Chipotle Mayo:PRS,don’:PRS,Felix Hamburgardressing:PRS,Honey:PRS,Hickory:PRS"
 "Café:LOC,Paris:LOC","Johnny’:PRS,Felix Rhode:PRS,Island:LOC,Maria Chipotle Mayo:PRS"
-"Schirasca:PRS,Heinz:PRS,Brown:PRS,McDonalds:ORG,nuggets:ORG","Burger Kings:PRS,Max:PRS,Felix Rhode:PRS,Johnny’s sötstarka:PRS"
+"Schirasca Lee:PRS,Brown:PRS,McDonalds:ORG,nuggets:ORG","Burger Kings:PRS,Max:PRS,Felix Rhode:PRS,Johnny’s sötstarka:PRS"
 Sverige:LOC,"Felix Rödvinssås:PRS,Maria Chipotle Mayo:PRS,Hellmann’s Original Mayo:PRS,Rhodos:LOC"
 Max hamburgerdressing:PRS,"Felix Rostad:PRS,Kalles Kaviar Dillmajonnäs:PRS,Maria Chipotle Mayo:PRS"
 Jensen´s:PRS,"Rydbergs Hamburgerdressing:PRS,Felix Rhode:PRS,Island:LOC,Santa Maria:LOC"
-,"Felix Rhode:PRS,Island:LOC,Rydbergs Bearnaise:PRS,Maria Chipotle Mayo:PRS,Heinz Burger Sauce:PRS"
+,"Felix Rhode:PRS,Island:LOC,Rydbergs Bearnaise:PRS,Maria Chipotle Mayo:PRS"
 ,"Felix Rhode:PRS,Rydbergs Tryffelmajonnäs:PRS,Heinz Burger Sauce:PRS"
-MAX:ORG,"Felix Rhode:PRS,Island:LOC,Johnny’s Senap & Honung:PRS,Maria Chipotle Mayo:PRS,Sriracha mayo:LOC"
+MAX:ORG,"Felix Rhode:PRS,Island:LOC,Johnny’s Senap & Honung:PRS,Maria Chipotle Mayo:PRS"
 ,
 ,
 ,
@@ -1001,7 +934,7 @@ MCDonalds:PRS,
 TS:ORG,
 "Sverige:LOC,Erik:PRS,Sverige:LOC",
 ,Glocken:PRS
-"Erik:PRS,Mod:PRS,Getto:LOC,USA:LOC,Alban:PRS",
+"Erik:PRS,Mod:ORG,Getto:LOC,USA:LOC,Alban:PRS",
 ,Glocken:ORG
 Sverige:LOC,
 ,
@@ -1024,8 +957,8 @@ Sverige:LOC,
 Eskil:PRS,"Institutet för språk:ORG,Isof:WRK,Wikipedia:OBJ,Isof:PRS,Eskilstuna:LOC,Eskils:PRS,S:t Eskil:WRK,tuna:LOC,Eskil:PRS"
 ,"Institutet för språk:ORG,Wikipedia:ORG"
 ,
+//Mod:ORG,
 ,
-,Hellgate:PRS
 I mitten av 90-talet:TME,"hit-driven:PRS,Hellgate/:ORG,Larian:PRS,RimWorld-gänget:ORG,Apple:ORG"
 ,Hellgate:PRS
 ,"Hellgate/Flagship:ORG,Samtidigt:TME,GOG:ORG,Baldur’s Gate:PRS,RimWorld:ORG,ray tracing:PRS"
@@ -1168,7 +1101,7 @@ Triumf:PRS,"ICA:ORG,Coop:ORG"
 ,
 ,
 ,
-,KALP:LOC
+,
 ,
 ,
 ,
@@ -1183,19 +1116,13 @@ SJ:ORG,"Moderaterna:ORG,Sverige:LOC,CSN:ORG"
 ,"Nato:ORG,Sverige:LOC,CSN:ORG,CSN:ORG"
 ,
 ,"CSN:ORG,CSN:ORG"
-"Moderaterna:ORG,Moderaterna:ORG","Sverige:LOC,CSN:ORG,CSN:ORG"
+Moderaterna:ORG,"Sverige:LOC,CSN:ORG,CSN:ORG"
 ,"Moderaterna:ORG,Sverige:LOC,Sverige:LOC"
 ,L:ORG
 ,
 ,Moderaterna:ORG
 ,"SD:s:ORG,Sverige:LOC"
 ,CSN:ORG
-"HV:ORG,HV:ORG","HV:ORG,X”-idéer:LOC,HV:ORG"
-,"HV:ORG,HV:ORG,HV:ORG,HV:ORG,HV:ORG,HV:ORG"
-HV:ORG,"HV:ORG,HV:ORG,FM:ORG"
-HV:ORG,"PBV:ORG,HV:ORG,HV:s:ORG"
-"Rikshemvärnschefen:PRS,Hemvärnets:ORG,Pbv:WRK","PBV:ORG,HV:ORG,HV:ORG"
-"HV:s:ORG,p n p:ORG","HV:ORG,HV:ORG,HV:ORG,HV:ORG"
 ,Norden:LOC
 "JC:ORG,Motörhead:ORG",Stockholm:LOC
 "Rolling Stones:WRK,kring 1990:TME",
@@ -1207,10 +1134,10 @@ Dressman:ORG,"Norden:LOC,Dressmann:PRS,Mick:PRS,Dressmanns:PRS,i 12 månader:TME
 Rolling Stones:WRK,"Stockholm:LOC,Norden:LOC"
 ,"Stockholm:LOC,Norden:LOC,The Rolling Stones:WRK,Dressmanns:PRS"
 ,
-Dressman:PRS,"Mick Jagger:PRS,Norden:LOC,Stockholm:LOC"
+Dressman:PRS,"Mick:PRS,Norden:LOC,Stockholm:LOC"
 ,"Norden:LOC,Stockholm:LOC"
 ,Drottninggatan:LOC
-Dressman:PRS,"Dressmann:PRS,Sverige:LOC,Norden:LOC"
+,"Dressmann:PRS,Sverige:LOC,Norden:LOC"
 Anders Westgårdh:PRS,"NDAs:ORG,Stockholm”-nivå:LOC"
 ,
 "Urban Outfitters:PRS,Dressman:PRS,Sverige:LOC,Dressman:PRS,Tressman:PRS","Micke Jagger:PRS,Norden:LOC,Norden:LOC"

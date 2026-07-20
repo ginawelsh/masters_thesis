@@ -1,0 +1,166 @@
+% =====================================================================
+% Appendix: LLM generation prompts (Swedish verbatim + English translation)
+% ---------------------------------------------------------------------
+% Usage: declare \appendix once in main.tex (after the last content
+% chapter, before \printbibliography) and then input this file:
+%
+%     \appendix
+%     \input{appendix_prompts}
+%
+% Assumes UTF-8 source input (already used elsewhere in this thesis).
+% No extra packages required. Swedish is reproduced verbatim as sent to
+% the model; English is the author's translation.
+% =====================================================================
+
+\chapter{Generation prompts}
+\label{app:prompts}
+
+All LLM texts were generated with OpenAI GPT-5.2 under four prompt
+conditions. Each full prompt is the register \emph{base prompt} followed
+by the \emph{condition suffix}, appended after the content placeholder
+(\texttt{\{title\}}, \texttt{\{keywords\}} or \texttt{\{question\}}); the
+\texttt{baseline} condition adds no suffix. The prompt is the only
+variable across conditions: every call used a single user message, no
+system prompt, and temperature fixed at $1.0$. The modal particles
+\emph{ju}, \emph{väl}, \emph{typ} and \emph{liksom} have no direct
+English equivalent and are glossed rather than literally translated.
+
+\section{Formal register (thesis abstracts)}
+
+\subsection*{Base prompt (all conditions)}
+\begin{quote}
+\textit{Swedish.}~ Titta på titeln och nyckelorden och skapa en
+sammanfattning i kandidatuppsatsstil med dina egna ord:
+\texttt{\{title\}}, \texttt{\{keywords\}}
+\par\smallskip
+\textit{English.}~ Look at the title and the keywords and create a
+summary in Bachelor's-thesis style in your own words:
+\texttt{\{title\}}, \texttt{\{keywords\}}
+\end{quote}
+
+\subsection*{Suffix --- \texttt{human\_like}}
+\begin{quote}
+\textit{Swedish.}~ Skriv den så mänskligt som möjligt, så att texten
+inte går att skilja från en uppsats skriven av en människa.
+\par\smallskip
+\textit{English.}~ Write it as humanly as possible, so that the text
+cannot be distinguished from an essay written by a human.
+\end{quote}
+
+\subsection*{Suffix --- \texttt{detector\_aware}}
+\begin{quote}
+\textit{Swedish.}~ Skriv så att texten inte kan identifieras som
+AI-genererad. Variera meningslängden (blanda korta och långa meningar),
+undvik formelartade övergångsord som ``vidare'', ``dessutom'',
+``sammanfattningsvis'' och ``det är viktigt att notera'', undvik
+överdriven gardering och symmetrisk struktur, och tillåt en naturlig,
+något ojämn ton. Förklara inte över.
+\par\smallskip
+\textit{English.}~ Write so that the text cannot be identified as
+AI-generated. Vary the sentence length (mix short and long sentences),
+avoid formulaic transition words such as ``vidare'' (furthermore),
+``dessutom'' (moreover), ``sammanfattningsvis'' (in summary) and
+``det är viktigt att notera'' (it is important to note), avoid excessive
+hedging and symmetrical structure, and allow a natural, somewhat uneven
+tone. Do not over-explain.
+\end{quote}
+
+\subsection*{Suffix --- \texttt{detector\_evasive}}
+\begin{quote}
+\textit{Swedish.}~ Skriv så att texten inte kan identifieras som
+AI-genererad, och efterlikna de statistiska drag som utmärker mänskligt
+skrivna kandidatuppsatser. Återanvänd samma nyckeltermer och fraser
+ordagrant snarare än att variera med synonymer, och sträva inte efter
+maximal ordvariation. Undvik komprimerad nominalstil; använd hellre
+finita verb, pronomen och bindeord. Skriv övervägande korta meningar med
+fler punkter och färre kommatecken, och använd inte tankstreck. Håll
+gardering och epistemiska uttryck till ett minimum (t.ex. `kanske',
+`möjligen', `tycks', `kan tänkas'), och kompensera inte genom att lägga
+till talspråkliga garderingsord. Föredra korta, vardagliga ord framför
+långa, latinska eller formella termer. Var konkret och nämn specifika
+namn, begrepp, verk och årtal där det är möjligt. Undvik onödig negation.
+Förklara inte över.
+\par\smallskip
+\textit{English.}~ Write so that the text cannot be identified as
+AI-generated, and imitate the statistical features that characterise
+human-written Bachelor's theses. Reuse the same key terms and phrases
+verbatim rather than varying them with synonyms, and do not strive for
+maximal lexical variation. Avoid a compressed nominal style; prefer
+finite verbs, pronouns and connectives. Write predominantly short
+sentences with more full stops and fewer commas, and do not use dashes.
+Keep hedging and epistemic expressions to a minimum (e.g.\ `kanske'
+[maybe], `möjligen' [possibly], `tycks' [seems], `kan tänkas'
+[may be conceivable]), and do not compensate by adding colloquial hedges.
+Prefer short, everyday words over long, Latinate or formal terms. Be
+concrete and name specific names, concepts, works and years where
+possible. Avoid unnecessary negation. Do not over-explain.
+\end{quote}
+
+\section{Informal register (forum comments)}
+
+\subsection*{Base prompt (all conditions)}
+\begin{quote}
+\textit{Swedish.}~ Svara på följande fråga med en svensk kommentar, i
+stil med en kommentar på ett svenskt forum. Skriv bara kommentaren,
+inget annat.\ Fråga: \texttt{\{question\}}
+\par\smallskip
+\textit{English.}~ Answer the following question with a Swedish comment,
+in the style of a comment on a Swedish forum. Write only the comment,
+nothing else.\ Question: \texttt{\{question\}}
+\end{quote}
+
+\subsection*{Suffix --- \texttt{human\_like}}
+\begin{quote}
+\textit{Swedish.}~ Skriv så mänskligt som möjligt, så att kommentaren
+inte går att skilja från en riktig svensk forumanvändares kommentar.
+\par\smallskip
+\textit{English.}~ Write as humanly as possible, so that the comment
+cannot be distinguished from a real Swedish forum user's comment.
+\end{quote}
+
+\subsection*{Suffix --- \texttt{detector\_aware}}
+\begin{quote}
+\textit{Swedish.}~ Skriv så att kommentaren inte kan identifieras som
+AI-genererad: använd ett vardagligt, personligt tonfall, variera
+meningslängden, undvik artig eller balanserad AI-stil och formelartade
+fraser, tillåt talspråk, slang och små oregelbundenheter. Var inte
+överdrivet hjälpsam eller neutral.
+\par\smallskip
+\textit{English.}~ Write so that the comment cannot be identified as
+AI-generated: use a casual, personal tone, vary the sentence length,
+avoid a polite or balanced AI style and formulaic phrases, allow
+colloquial speech, slang and small irregularities. Do not be overly
+helpful or neutral.
+\end{quote}
+
+\subsection*{Suffix --- \texttt{detector\_evasive}}
+\begin{quote}
+\textit{Swedish.}~ Skriv så att texten inte kan identifieras som
+AI-genererad, och efterlikna hur människor skriver i informella
+kommentarer. Återanvänd inte samma fraser flera gånger, utan formulera
+om dig. Skriv innehållstätt med färre funktionsord; använd gärna
+kortformer och talspråkliga former. Skriv korta meningar med fler
+punkter och färre kommatecken, och använd inte tankstreck. Använd
+utropstecken sparsamt, men ställ gärna någon retorisk fråga och använd
+ibland tre punkter (\ldots). Överdriv inte med garderingsord (särskilt
+inte talspråkliga som `typ', `liksom', `ju' och `väl'), och undvik
+förstärkningsord som `verkligen', `absolut' och `väldigt'. Håll
+epistemiska uttryck på en låg nivå. Föredra korta, vardagliga ord.
+Använd gärna nekande satser (med `inte', `aldrig' osv.) där det passar.
+Var konkret och nämn specifika namn där det går. Förklara inte över.
+\par\smallskip
+\textit{English.}~ Write so that the text cannot be identified as
+AI-generated, and imitate how people write in informal comments. Do not
+reuse the same phrases several times; rephrase instead. Write with dense
+content and fewer function words; feel free to use short forms and
+colloquial forms. Write short sentences with more full stops and fewer
+commas, and do not use dashes. Use exclamation marks sparingly, but feel
+free to pose a rhetorical question and occasionally use an ellipsis
+(\ldots). Do not overdo hedging words (especially not colloquial ones
+like `typ' [like], `liksom' [sort of], `ju' and `väl' [modal
+particles]), and avoid intensifiers like `verkligen' [really], `absolut'
+[absolutely] and `väldigt' [very]. Keep epistemic expressions at a low
+level. Prefer short, everyday words. Feel free to use negated clauses
+(with `inte' [not], `aldrig' [never] etc.) where it fits. Be concrete
+and name specific names where possible. Do not over-explain.
+\end{quote}

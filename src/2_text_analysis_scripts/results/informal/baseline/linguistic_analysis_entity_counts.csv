@@ -2,7 +2,7 @@ Abstract_Entity_Counts,Generated_Abstract_Entity_Counts
 ,ORG:1
 LOC:2,
 ,
-,ORG:1
+,
 ,
 ,
 ,
@@ -72,10 +72,6 @@ PRS:1 | WRK:1,LOC:1 | ORG:1
 ,ORG:1
 ,ORG:1
 ,
-,ORG:2
-,ORG:3
-LOC:5 | PRS:2,ORG:3
-,ORG:2
 PRS:2,PRS:4
 PRS:1 | WRK:1,PRS:5 | TME:1
 PRS:3,PRS:6
@@ -86,9 +82,6 @@ PRS:1,PRS:6
 PRS:1,
 ,PRS:1
 ,
-LOC:1 | PRS:1,ORG:1
-,
-,ORG:1
 LOC:3 | PRS:1,LOC:4 | TME:1
 ,LOC:3 | PRS:1
 ,ORG:1
@@ -185,7 +178,6 @@ LOC:3 | ORG:1,LOC:5 | ORG:1
 LOC:1 | ORG:1,LOC:2 | PRS:1
 PRS:2,LOC:5
 LOC:7 | ORG:3 | PRS:3 | WRK:1,LOC:3 | PRS:1
-,LOC:4
 ,LOC:1 | ORG:3
 LOC:1,LOC:1 | ORG:3
 LOC:1,LOC:1 | ORG:3 | PRS:1 | WRK:1
@@ -201,16 +193,13 @@ LOC:1,LOC:4 | ORG:1
 LOC:1,LOC:1 | ORG:2
 LOC:1 | ORG:2,LOC:3 | ORG:1
 LOC:1,LOC:1 | ORG:2
-,
-,
-,
 LOC:2,LOC:7 | PRS:1
 ,LOC:6 | TME:1
 ,LOC:6 | ORG:1
 PRS:1,
 ,
 ,
-LOC:2,
+LOC:1,
 ,
 PRS:1,
 ,
@@ -258,7 +247,7 @@ PRS:2,
 ,
 ,
 ,
-,ORG:1
+,
 ,
 ,
 ,
@@ -266,33 +255,6 @@ PRS:2,
 ,
 ,
 PRS:1,
-PRS:1,
-,
-,
-LOC:1 | ORG:1 | PRS:1,
-,
-ORG:1,
-,LOC:1
-,PRS:2
-LOC:1,PRS:1
-,
-,
-PRS:2 | WRK:1,PRS:1
-,
-LOC:2,
-ORG:1 | TME:1,PRS:1
-PRS:1,PRS:2
-,
-LOC:1,PRS:2
-ORG:1 | PRS:1,PRS:1
-,PRS:2
-,
-,
-,PRS:2
-LOC:1,
-LOC:1 | PRS:1,
-PRS:1,PRS:2
-PRS:2,PRS:1
 ,
 ,
 ,
@@ -363,7 +325,7 @@ PRS:1,
 ,
 ,
 ORG:1,
-WRK:1,
+PRS:1 | WRK:1,
 ,
 ,
 ,
@@ -382,7 +344,6 @@ LOC:2,LOC:7
 LOC:1,LOC:6
 LOC:1,LOC:4
 ,LOC:3
-,PRS:1
 LOC:1,LOC:1 | MSR:1
 ,
 LOC:1,LOC:2
@@ -396,7 +357,7 @@ LOC:1,LOC:2
 ,
 ,ORG:1
 ,
-LOC:2,
+,
 ,
 ,
 ,
@@ -443,7 +404,7 @@ PRS:1,
 ,
 ,
 ,
-,ORG:1
+,
 ,
 ,
 ,ORG:1
@@ -488,17 +449,16 @@ PRS:2 | TME:1,ORG:2
 LOC:1,
 ,
 ,
-,ORG:1
 LOC:1,TME:1
-,PRS:2
+,
 ,PRS:1
-,PRS:1
+,
 LOC:1,
 LOC:1,
 PRS:1,
 LOC:2 | PRS:2,PRS:1
 LOC:1 | TME:1,
-LOC:1 | OBJ:1 | PRS:2,PRS:1
+LOC:1 | OBJ:1 | PRS:2,PRS:1 | TME:1
 ,
 LOC:2,LOC:2
 ,LOC:6 | ORG:1
@@ -553,23 +513,6 @@ LOC:2 | ORG:2,
 LOC:1,
 ,
 ,
-LOC:2 | PRS:1,
-LOC:3 | MSR:1,
-ORG:1,
-,TME:1
-ORG:1,
-,
-PRS:1,
-,
-,
-LOC:5 | ORG:1,
-,
-,
-LOC:1,
-,
-LOC:1,
-,
-,
 ,
 ,
 ,
@@ -579,12 +522,12 @@ LOC:3,LOC:6
 LOC:1,LOC:4
 LOC:9,LOC:3
 LOC:2,LOC:9
-LOC:3,LOC:6
+LOC:2,LOC:6
 LOC:5 | ORG:1,LOC:5
 LOC:5,LOC:5
 LOC:2,LOC:4
 PRS:1,LOC:5
-LOC:5,LOC:3
+LOC:5 | PRS:1,LOC:3
 ,LOC:3
 LOC:3,LOC:6
 LOC:1 | ORG:2,LOC:3
@@ -592,7 +535,7 @@ LOC:3,LOC:4
 LOC:1,LOC:6
 LOC:11 | PRS:1 | TME:1,LOC:6 | ORG:1
 LOC:7 | PRS:2,LOC:3
-LOC:4,LOC:6 | TME:1
+LOC:3 | PRS:1,LOC:6 | TME:1
 ,
 ,
 ,
@@ -641,12 +584,12 @@ OBJ:1 | PRS:2,
 ,
 ,
 ,
-,PRS:1
+,
 ,
 LOC:1,
 ,
 ,
-,PRS:1
+,
 ,
 ,
 ,
@@ -655,7 +598,7 @@ LOC:1 | PRS:1 | TME:1,
 ,
 ,
 ,
-,PRS:1
+,
 ,
 ,
 ,
@@ -673,7 +616,7 @@ LOC:1,LOC:1 | PRS:2
 ,PRS:1
 ,PRS:1
 ,PRS:1
-ORG:1,LOC:1 | ORG:1 | PRS:1
+ORG:1,LOC:1 | PRS:1
 ,PRS:1
 ,PRS:1
 ,PRS:1
@@ -685,7 +628,7 @@ LOC:1,PRS:1
 ,PRS:1
 ,PRS:1
 ,PRS:1
-,OBJ:1 | PRS:1
+,PRS:1
 ,
 ,
 ,
@@ -700,7 +643,7 @@ TME:1,
 ,
 ,
 ,
-,
+ORG:1 | PRS:1,
 ,
 ,
 ,
@@ -727,7 +670,7 @@ PRS:1,
 ,
 ,
 ,
-PRS:1,
+,
 ,
 ,
 PRS:1,
@@ -739,16 +682,6 @@ LOC:1 | PRS:2,
 LOC:2,
 LOC:2 | PRS:3,
 ,
-,
-,
-,WRK:1
-,
-,WRK:1
-,WRK:1
-,WRK:1
-,LOC:1
-,
-,PRS:1
 ,
 ,
 ,ORG:1
@@ -809,7 +742,7 @@ LOC:1 | ORG:1,LOC:3 | ORG:1
 LOC:1,LOC:4 | ORG:1 | PRS:1
 LOC:1,LOC:2 | ORG:1 | WRK:1
 LOC:1 | PRS:1,LOC:2 | WRK:1
-LOC:8 | ORG:1 | PRS:1,LOC:2 | ORG:1
+LOC:8 | PRS:1,LOC:2 | ORG:1
 ,LOC:1 | PRS:1 | WRK:1
 ,
 ,
@@ -949,13 +882,13 @@ LOC:3 | ORG:1,
 ,
 ,
 ,ORG:1
-LOC:8 | MSR:2,
+LOC:5 | MSR:2,
 LOC:3,
 LOC:1,
 ,
 ,LOC:1
 ,LOC:2
-LOC:1 | ORG:1 | PRS:2,PRS:1
+ORG:1 | PRS:2,PRS:1
 PRS:4 | TME:1,PRS:1
 ,PRS:1
 LOC:2 | ORG:1 | PRS:1 | TME:1,PRS:2
@@ -974,9 +907,9 @@ PRS:2,PRS:1
 LOC:1 | PRS:3,
 ,PRS:2
 ,PRS:2
-ORG:1 | TME:1,PRS:1
+ORG:1 | TME:1,
 LOC:2,
-ORG:2 | PRS:3,ORG:1 | PRS:2
+ORG:2 | PRS:2,ORG:1 | PRS:1
 LOC:1,PRS:1
 PRS:1,PRS:1
 PRS:1,ORG:1 | PRS:1
@@ -1001,7 +934,7 @@ PRS:1,ORG:1
 ORG:1,
 LOC:2 | PRS:1,
 ,
-LOC:2 | PRS:3,
+LOC:2 | ORG:1 | PRS:2,
 ,
 LOC:1,
 ,
@@ -1024,7 +957,7 @@ LOC:1 | PRS:1,
 PRS:1,WRK:1
 ,ORG:2
 ,
-,
+ORG:1,
 ,
 TME:1,
 ,TME:1
@@ -1087,18 +1020,18 @@ LOC:1,
 LOC:1 | PRS:2,
 ,
 PRS:1,
-,TME:1
-,ORG:1
-,PRS:1
+,
+,
+,
 ,
 ,
 ORG:1,
-,PRS:1
+,
 ,
 PRS:1,
 ,
 LOC:3,
-,ORG:1 | TME:1
+,TME:1
 ,
 ,
 ,
@@ -1183,19 +1116,13 @@ ORG:1,ORG:2 | PRS:1
 ,ORG:1 | PRS:1
 ,ORG:2 | PRS:1
 ,ORG:3 | PRS:1
-ORG:2,ORG:3 | PRS:1
+ORG:1,ORG:3 | PRS:1
 ,ORG:4 | PRS:1
 ,ORG:2
 ,ORG:2 | PRS:1
 ,ORG:3 | PRS:1
 ,ORG:2 | PRS:1
 ,ORG:4 | PRS:1
-ORG:2,
-,ORG:1
-ORG:1,
-ORG:1,ORG:1
-ORG:1 | PRS:1 | WRK:1,
-ORG:2,
 ,
 ORG:2,
 TME:1 | WRK:1,
@@ -1206,11 +1133,11 @@ ORG:1,
 ,
 WRK:1,
 ,TME:1
-,PRS:1
+,
 PRS:1,
 ,
 ,
-PRS:1,
+,
 PRS:1,
 ,WRK:1
 LOC:1 | PRS:4,WRK:1

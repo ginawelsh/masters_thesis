@@ -3,14 +3,17 @@
 Thesis project comparing human-authored and LLM-generated Swedish text across formal
 (academic abstracts) and informal (Reddit/Flashback comments) registers.
 
-The LLM side is generated under **three prompt conditions** so the analysis can separate a
-neutral baseline from two *adversarial* prompts designed to evade AI-text detection:
+The LLM side is generated under **four prompt conditions** so the analysis can separate a
+neutral baseline from three *adversarial* prompts designed to evade AI-text detection:
 
 | Condition | Prompt intent |
 |---|---|
 | `baseline` | Neutral instruction — write an abstract/comment from the title/keywords/question. Control. |
 | `human_like` | Adversarial — "write as human as possible, indistinguishable from a person." |
 | `detector_aware` | Adversarial — explicitly defeat detection signals: vary sentence length, avoid formulaic connectives, reduce hedging, allow a natural/uneven tone. |
+| `detector_evasive` | Adversarial — tuned to *invert this study's measured signals*: reuse key terms verbatim, avoid nominal compression, more/shorter sentences, minimal hedging, no dashes, concrete names. |
+
+The full prompts (Swedish + English) for both registers are in the thesis appendix (`thesis/appendix_prompts.tex`).
 
 ## Repository structure
 
@@ -39,32 +42,42 @@ Raw inputs live under `1_data_collection/`; all analysis outputs are written und
 | Group | Source | n |
 |---|---|---|
 | Formal Human | Swedish academic abstracts | 170 |
-| Formal LLM | GPT abstracts × 3 conditions | 170 each |
-| Informal Human | Reddit + Flashback comments | 1,222 |
-| Informal LLM | GPT comment responses | 1,222 (baseline) |
+| Formal LLM | GPT abstracts × 4 conditions | 170 each |
+| Informal Human | Reddit + Flashback comments | 1,149 |
+| Informal LLM | GPT comment responses × 4 conditions | 1,149 each |
 
-Informal data: 208 Reddit comments + 1,014 Flashback comments (84 threads).
+Informal data (post-exclusion): 1,149 comments = 197 Reddit + 952 Flashback, across 136
+question threads (59 Reddit, 77 Flashback). 11 link/image question threads (73 comments) were
+excluded.
 
 **Canonical files**
 
 - Formal: `1_data_collection/llm_abstracts/abstracts/sv_abstracts_adversarial.csv` — one row per
   thesis with `Abstract` (human) plus `Abstract_baseline`, `Abstract_human_like`,
-  `Abstract_detector_aware`. Human source of truth: `human_abstracts/master_human_theses.csv`.
-- Informal: `1_data_collection/llm_comments/consolidated_informal_comments_JUN26.csv` —
-  `question`, `human_comment`, `generated_comment` (baseline). Adversarial informal columns
-  (`comment_human_like`, `comment_detector_aware`) are produced by the generator when run.
+  `Abstract_detector_aware`, `Abstract_detector_evasive`. Human source of truth:
+  `human_abstracts/master_human_theses.csv`.
+- Informal: `1_data_collection/llm_comments/consolidated_informal_comments_adversarial.csv` —
+  `question`, `human_comment`, `generated_comment` (baseline), plus the adversarial columns
+  `comment_human_like`, `comment_detector_aware`, `comment_detector_evasive`.
 
 All generated text is normalized to a single block (newlines collapsed) to match the
 single-paragraph human abstracts, so paragraph formatting is not a confound.
 
+Emoji are also stripped from the generated text (the human corpus, collected 2005–2017,
+predates the mobile-era rise in emoji use and contains none), so emoji presence is treated
+as a temporal confound rather than a human/LLM difference. Human text is left verbatim.
+Stripping had negligible effect (informal baseline detectability AUC 0.963 → 0.960; no
+change in any feature's significance), confirming the human/LLM separation is not an emoji
+artifact.
+
 ## LLM data generation
 
 `generate_adversarial_openai.py` (one in `llm_abstracts/abstracts/`, one in `llm_comments/`)
-produces the three conditions as **independent one-shot generations** (no chaining) over the
+produces the four conditions as **independent one-shot generations** (no chaining) over the
 same inputs. Each caches per (row, condition) and resumes after interruption.
 
 - Formal: model `gpt-5.2`, writes `sv_abstracts_adversarial.csv`.
-- Informal: model `gpt-4o-mini`, writes `consolidated_informal_comments_adversarial.csv`.
+- Informal: model `gpt-5.2`, writes `consolidated_informal_comments_adversarial.csv`.
 
 ```
 python src/1_data_collection/llm_abstracts/abstracts/generate_adversarial_openai.py
@@ -76,14 +89,13 @@ Requires `OPENAI_API_KEY` (environment variable or `.env` in the repo root).
 ## Analysis scripts
 
 Every analysis script accepts `--dataset {formal,informal}` and
-`--condition {baseline,human_like,detector_aware,all}` (default `all`; ignored for informal,
-which has a single generated column).
+`--condition {baseline,human_like,detector_aware,detector_evasive,all}` (default `all`).
+Both registers carry all four conditions.
 
 Naming/layout by condition:
-- Per-document feature CSVs (`csv_files/`): baseline & informal keep the legacy
-  `<feature>_<dataset>.csv` name; adversarial conditions get `<feature>_<dataset>_<condition>.csv`.
-- spaCy linguistic outputs: one directory per condition —
-  `results/formal/<condition>/` (formal), `results/informal/` (informal).
+- Per-document feature CSVs (`csv_files/`) are named `<feature>_<dataset>_<condition>.csv`
+  for every condition (e.g. `stylometric_surface_informal_detector_evasive.csv`).
+- spaCy linguistic outputs: one directory per condition — `results/<dataset>/<condition>/`.
 - Aggregate stats (`distribution_distances`, `significance_tests`) run per condition and tag
   each output row with a `condition` column.
 
