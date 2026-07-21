@@ -36,9 +36,9 @@ RESULTS_OUT = os.path.join(HERE, "affective_results.csv")
 DIST_OUT = os.path.join(HERE, "affective_label_dist.csv")
 
 MODEL = "KBLab/robust-swedish-sentiment-multiclass"
-CONDITIONS = ["baseline", "human_like", "detector_aware", "detector_evasive"]
+CONDITIONS = ["baseline", "human_like", "detector_evasive"]
 GPT_COL = {"baseline": "generated_comment", "human_like": "comment_human_like",
-           "detector_aware": "comment_detector_aware", "detector_evasive": "comment_detector_evasive"}
+           "detector_evasive": "comment_detector_evasive"}
 NUM_FEATS = ["signed_polarity", "affective_extremity", "is_subjective"]
 BATCH = 64
 

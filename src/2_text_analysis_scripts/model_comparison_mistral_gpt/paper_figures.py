@@ -23,9 +23,9 @@ RESULTS = os.path.join(HERE, "model_comparison_results.csv")
 INK, MUTED, GRID = "#1b1f27", "#667085", "#e3e7ec"
 MODEL_COLOR = {"GPT-5.2": "#0072B2", "Mistral": "#D55E00"}   # validated CVD-safe pair
 COMP_MODEL = {"human_vs_gpt": "GPT-5.2", "human_vs_mistral": "Mistral"}
-COND_ORDER = ["baseline", "human_like", "detector_aware", "detector_evasive"]
+COND_ORDER = ["baseline", "human_like", "detector_evasive"]
 COND_LABEL = {"baseline": "Baseline", "human_like": "Human-like",
-              "detector_aware": "Detector-\naware", "detector_evasive": "Detector-\nevasive"}
+              "detector_evasive": "Detector-\nevasive"}
 REG_LABEL = {"formal": "Formal (abstracts)", "informal": "Informal (comments)"}
 FAM_ORDER = ["stylometric_surface", "syntactic_complexity", "pragmatic_markers",
              "ner", "textstat", "pos_proportions"]
@@ -48,7 +48,7 @@ PRETTY = {
     "epistemic_rate": "Epistemic /100tok",
 }
 REG_SHORT = {"formal": "Form", "informal": "Inf"}
-COND_SHORT = {"baseline": "base", "human_like": "HL", "detector_aware": "DA", "detector_evasive": "DE"}
+COND_SHORT = {"baseline": "base", "human_like": "HL", "detector_evasive": "DE"}
 
 
 def _style(ax):

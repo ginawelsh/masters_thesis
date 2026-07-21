@@ -13,7 +13,7 @@ TABLE = os.path.join(HERE, "results_master_table.csv")
 FIGS = ["fig1_distance_from_human", "fig2_family_effectsizes", "fig3_model_divergence", "fig4_sentiment_polarity"]
 CELL_COLS = [f"{m} | {r} | {c}"
              for m in ["GPT-5.2", "Mistral"] for r in ["Informal", "Formal"]
-             for c in ["Baseline", "P1 Human-like", "P2 Detector-aware", "P3 Detector-evasive"]]
+             for c in ["Baseline", "P1 Human-like", "P2 Detector-evasive"]]
 
 
 def b64(stem):
@@ -110,11 +110,11 @@ def build_inner(links_html):
         fsec += f'<section class="finding"><h3>{title}</h3><p>{body}</p>{pics}</section>'
 
     thead = ('<tr><th class="stick">Test</th><th>Family</th>'
-             '<th class="grp" colspan="4">GPT · Informal</th><th class="grp" colspan="4">GPT · Formal</th>'
-             '<th class="grp" colspan="4">Mistral · Informal</th><th class="grp" colspan="4">Mistral · Formal</th>'
+             '<th class="grp" colspan="3">GPT · Informal</th><th class="grp" colspan="3">GPT · Formal</th>'
+             '<th class="grp" colspan="3">Mistral · Informal</th><th class="grp" colspan="3">Mistral · Formal</th>'
              '<th class="grp">N inf</th><th>N form</th></tr>'
              '<tr><th class="stick"></th><th></th>' +
-             "".join('<th class="c grp">B</th><th class="c">P1</th><th class="c">P2</th><th class="c">P3</th>'
+             "".join('<th class="c grp">B</th><th class="c">P1</th><th class="c">P2</th>'
                      for _ in range(4)) + '<th class="grp"></th><th></th></tr>')
     rows = ""
     for _, r in df.iterrows():

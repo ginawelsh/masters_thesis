@@ -1,0 +1,229 @@
+===============================================================================
+CLUU THESIS — RESULTS COMPILATION (for the paper)
+===============================================================================
+Generator: OpenAI GPT-5.2. Corpus (post-exclusion, matched pairs):
+  Formal (thesis abstracts):  n = 170 pairs
+  Informal (forum comments):  n = 1,149 pairs
+Reported prompt conditions: baseline, human_like, detector_evasive.
+  (detector_aware is generated but excluded from the reported analysis and is
+   not shown.)
+
+FRESHNESS NOTE
+  - Embedding detectability and the paired Wilcoxon feature tests below are on
+    the current post-exclusion corpus (n = 170 / 1,149) and are citable.
+  - Sentiment/affective distribution CSVs are STALE (n = 134 / 204, an old
+    sample) and formal sentiment is excluded by design; sentiment is therefore
+    omitted here and should be regenerated before citing.
+  - NER distribution means are reported with the direction corroborated by the
+    fresh per-document significance run.
+
+Effect-size convention: Cohen's dz sign is (LLM − human).
+  +dz  => LLM > human ;  −dz => human > LLM.  All listed features are
+  significant at Benjamini–Hochberg FDR q < 0.05 (paired Wilcoxon signed-rank).
+
+
+===============================================================================
+1. EMBEDDING DETECTABILITY (classifier two-sample test)
+===============================================================================
+Method: logistic regression on multilingual sentence embeddings
+(paraphrase-multilingual-mpnet-base-v2), 5-fold stratified CV, 1000 label
+permutations. ROC AUC 0.5 = indistinguishable, 1.0 = perfectly separable.
+Mean pair cosine = similarity between each human doc and its own LLM
+regeneration. Permutation p = 1/1001 in every run (report as p < 0.001);
+null mean AUC ≈ 0.50 throughout.
+
+FORMAL (n = 170 / class)
+  Condition          CV ROC AUC   Mean cos   Median cos
+  baseline              0.754       0.775       0.804
+  human_like            0.764       0.760       0.800
+  detector_evasive      0.880       0.749       0.778
+
+INFORMAL (n = 1,149 / class)
+  Condition          CV ROC AUC   Mean cos   Median cos
+  baseline              0.960       0.470       0.483
+  human_like            0.963       0.479       0.498
+  detector_evasive      0.981       0.480       0.500
+
+Key points:
+  - Informal text is far more separable than formal (AUC ≈ 0.96–0.98 vs
+    0.75–0.88).
+  - Adversarial evasion prompts INCREASE embedding-level detectability rather
+    than reducing it (AUC rises under detector_evasive).
+
+
+===============================================================================
+2. NAMED ENTITY RECOGNITION (mean rate per 100 content tokens)
+===============================================================================
+Swedish SUC tagset via sv_core_news_lg. (Verify aggregate means against the
+current corpus before final citation; direction is confirmed by the fresh
+significance run in §3 — humans name more entities than the baseline LLM.)
+
+FORMAL
+  Entity                Human   Baseline  Human-like  Det-evasive
+  Location (LOC)        0.3964   0.2087     0.1982      0.3311
+  Person (PRS)          0.3029   0.0930     0.1053      0.3349
+  Organisation (ORG)    0.2315   0.0794     0.0558      0.2092
+  Work/Artefact (WRK)   0.0234   0.0096     0.0085      0.0306
+  Time (TME)            0.0365   0.0024     0.0066      0.0267
+  Event (EVN)           0.0000   0.0027     0.0000      0.0110
+  Object (OBJ)          0.0043   0.0000     0.0000      0.0011
+  Measure (MSR)         0.0023   0.0000     0.0000      0.0000
+
+INFORMAL
+  Entity                Human   Baseline  Human-like  Det-evasive
+  Location (LOC)        0.7605   0.4169     0.4714      0.8584
+  Person (PRS)          0.5547   0.2130     0.2130      0.5379
+  Organisation (ORG)    0.1620   0.1345     0.1317      0.3410
+  Time (TME)            0.0471   0.0150     0.0118      0.0345
+  Work/Artefact (WRK)   0.0153   0.0186     0.0135      0.0278
+  Object (OBJ)          0.0081   0.0208     0.0070      0.0131
+  Event (EVN)           0.0015   0.0000     0.0068      0.0031
+  Measure (MSR)         0.0073   0.0008     0.0009      0.0040
+
+Key point: humans name concrete entities (LOC, PRS, ORG, TME) roughly 2–3x
+more than the baseline/human_like LLM. The detector_evasive
+prompt (which instructs "name specific names, concepts, years") closes and in
+places overshoots this gap — entity rates jump back to ~human level.
+
+
+===============================================================================
+3. LINGUISTIC FEATURE SIGNIFICANCE (paired Wilcoxon + BH-FDR)
+===============================================================================
+~40 features per (dataset, condition); BH-FDR applied within each family.
+Listed: largest effects by |dz|, all significant at q < 0.05.
+
+-------------------------------------------------------------------------------
+3a. FORMAL — BASELINE
+-------------------------------------------------------------------------------
+  Feature                     dz      direction     q (BH-FDR)
+  punct_comma               +1.67    LLM > human    3.2e-26
+  mtld                      +1.43    LLM > human    1.6e-25
+  tree_depth_mean           +1.27    LLM > human    3.7e-24
+  mattr                     +1.22    LLM > human    2.9e-25
+  dep_distance_mean         +1.02    LLM > human    2.6e-24
+  punct_period              -0.87    human > LLM    1.4e-18
+  function_word_rate        -0.87    human > LLM    1.9e-19
+  hedge_neutral_rate        +0.75    LLM > human    3.9e-15
+  bigram_repetition_rate    -0.74    human > LLM    9.2e-17
+  hedge_rate                +0.64    LLM > human    1.0e-12
+  trigram_repetition_rate   -0.63    human > LLM    9.0e-15
+  ttr                       +0.54    LLM > human    7.7e-10
+  ner_total_rate            -0.53    human > LLM    2.8e-11
+Story: LLM abstracts use more commas, higher lexical diversity (MTLD/MATTR/TTR),
+deeper parse trees, longer dependencies and more hedging; humans use more
+function words, more/shorter sentences (more periods), more n-gram repetition,
+and name more entities.
+
+-------------------------------------------------------------------------------
+3b. FORMAL — HUMAN_LIKE  (pattern ≈ baseline, differences persist/amplify)
+-------------------------------------------------------------------------------
+  Feature                     dz      direction     q (BH-FDR)
+  punct_comma               +1.55    LLM > human    9.0e-26
+  mtld                      +1.51    LLM > human    8.9e-26
+  dep_distance_mean         +1.38    LLM > human    8.9e-26
+  hedge_count               +1.29    LLM > human    9.0e-26
+  tree_depth_mean           +1.23    LLM > human    7.2e-24
+  hedge_neutral_count       +1.25    LLM > human    1.2e-25
+  n_alpha_tokens            +1.16    LLM > human    7.2e-24
+  mattr                     +1.13    LLM > human    3.5e-24
+  punct_period              -0.97    human > LLM    1.9e-20
+  hedge_rate                +0.92    LLM > human    4.5e-19
+  ner_total_rate            -0.56    human > LLM    8.6e-12
+
+-------------------------------------------------------------------------------
+3c. FORMAL — DETECTOR_EVASIVE  (surface signals INVERT, by design)
+-------------------------------------------------------------------------------
+  Feature                     dz      direction     q (BH-FDR)   vs baseline
+  punct_period              +2.32    LLM > human    6.5e-28      FLIPPED
+  n_sentences               +1.94    LLM > human    6.5e-28      (more/shorter)
+  ttr                       -1.67    human > LLM    6.8e-26      FLIPPED
+  n_alpha_tokens            +1.37    LLM > human    7.3e-25
+  tree_depth_mean           -1.33    human > LLM    1.5e-25      FLIPPED
+  bigram_repetition_rate    +1.31    LLM > human    1.3e-24      FLIPPED
+  dep_distance_mean         -1.17    human > LLM    2.9e-23      FLIPPED
+  subordinate_clause_rate   -0.89    human > LLM    1.8e-19
+  trigram_repetition_rate   +0.88    LLM > human    1.1e-20      FLIPPED
+  mtld                      -0.83    human > LLM    6.0e-17      FLIPPED
+  hedge_count               +0.68    LLM > human    4.2e-15
+  mattr                     -0.45    human > LLM    7.0e-09      FLIPPED
+Story: the evasive prompt successfully inverts the surface fingerprints —
+lexical diversity drops below human, sentences become short/repetitive, parse
+trees shallow, dependencies short. ner_total_rate is no longer significant
+(dz −0.04, q = 0.71): the entity gap is closed. BUT embedding AUC still RISES
+to 0.880 (§1): surface evasion does not buy semantic evasion.
+
+-------------------------------------------------------------------------------
+3d. INFORMAL — BASELINE
+-------------------------------------------------------------------------------
+  Feature                     dz      direction     q (BH-FDR)
+  hedge_neutral_count       +0.90    LLM > human    1.2e-122
+  hedge_count               +0.87    LLM > human    5.2e-122
+  n_alpha_tokens            +0.83    LLM > human    1.2e-127
+  n_sentences               +0.77    LLM > human    4.9e-113
+  mattr                     -0.76    human > LLM    1.3e-114
+  ttr                       -0.76    human > LLM    1.7e-111
+  tree_depth_max            +0.68    LLM > human    3.5e-83
+  booster_count             +0.51    LLM > human    5.1e-57
+  hedge_neutral_rate        +0.43    LLM > human    3.7e-57
+  tree_depth_mean           +0.38    LLM > human    1.5e-38
+  negation_sentence_rate    -0.32    human > LLM    2.4e-21
+  dep_distance_mean         +0.32    LLM > human    2.0e-27
+  negation_rate             -0.31    human > LLM    1.6e-31
+  punct_exclaim             +0.23    LLM > human    3.5e-83   (rbc 0.77)
+Story: LLM comments are longer, wordier, more hedged/boosted, more sentences and
+deeper trees, and use exclamation marks; humans have HIGHER lexical diversity
+(short punchy comments -> high TTR/MATTR) and more negation. NOTE the diversity
+direction is OPPOSITE to the formal register.
+
+-------------------------------------------------------------------------------
+3e. INFORMAL — HUMAN_LIKE  (pattern ≈ baseline, amplified)
+-------------------------------------------------------------------------------
+  Feature                     dz      direction     q (BH-FDR)
+  n_alpha_tokens            +1.53    LLM > human    1.4e-177
+  hedge_informal_count      +1.42    LLM > human    5.9e-169
+  hedge_count               +1.40    LLM > human    1.7e-170
+  n_sentences               +1.17    LLM > human    1.8e-163
+  ttr                       -1.17    human > LLM    1.5e-157
+  tree_depth_max            +1.05    LLM > human    3.3e-134
+  hedge_neutral_count       +0.93    LLM > human    5.5e-132
+  dep_distance_mean         +0.88    LLM > human    2.0e-135
+  negation_count            +0.82    LLM > human    6.8e-119
+  punct_dash                +0.77    LLM > human    1.9e-115
+  booster_count             +0.75    LLM > human    1.3e-96
+  mattr                     -0.72    human > LLM    6.9e-108
+
+-------------------------------------------------------------------------------
+3f. INFORMAL — DETECTOR_EVASIVE  (partial inversion; less effective than formal)
+-------------------------------------------------------------------------------
+  Feature                     dz      direction     q (BH-FDR)
+  n_sentences               +1.62    LLM > human    1.0e-185
+  n_alpha_tokens            +1.37    LLM > human    4.3e-171
+  negation_count            +1.10    LLM > human    1.5e-152
+  ttr                       -0.89    human > LLM    7.2e-131
+  mtld                      +0.80    LLM > human    2.7e-103
+  hedge_count               +0.80    LLM > human    4.7e-112
+  hedge_informal_count      +0.73    LLM > human    5.0e-95
+  subordinate_clause_rate   -0.60    human > LLM    5.0e-74
+  tree_depth_mean           -0.60    human > LLM    1.9e-72
+  mattr                     -0.58    human > LLM    5.4e-84
+  discourse_particle_rate   -0.36    human > LLM    9.2e-32
+  function_word_rate        -0.26    human > LLM    1.4e-36
+Story: evasion partially works informally (parse trees shallow, subordinate
+clauses down), but the LLM stays much LONGER and wordier than humans
+(n_sentences dz +1.62, n_alpha_tokens +1.37) and lexical diversity stays below
+human — so the surface fingerprint is only partly masked, and embedding AUC
+still rises to 0.981.
+
+
+===============================================================================
+CROSS-CUTTING TAKEAWAYS
+===============================================================================
+1. LLM Swedish is separable from human Swedish in every condition and both
+   registers (embedding p < 0.001; dozens of features significant at FDR).
+2. Register matters: informal comments are far more detectable than formal
+   abstracts, at both the embedding and feature level.
+3. Direction of the lexical-diversity signal flips by register (LLM > human in
+   formal abstracts; human > LLM in informal comments).
+4. Adversarial evasion inverts hand-crafted SURFACE features (clearly in the
+   formal register) but does NOT reduce — and actually increases —
+   embedding-level separability. Surface-feature evasion != semantic evasion.

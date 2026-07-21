@@ -3,17 +3,20 @@
 Thesis project comparing human-authored and LLM-generated Swedish text across formal
 (academic abstracts) and informal (Reddit/Flashback comments) registers.
 
-The LLM side is generated under **four prompt conditions** so the analysis can separate a
-neutral baseline from three *adversarial* prompts designed to evade AI-text detection:
+The LLM side is generated under **three prompt conditions** so the analysis can separate a
+neutral baseline from two *adversarial* prompts designed to evade AI-text detection:
 
 | Condition | Prompt intent |
 |---|---|
 | `baseline` | Neutral instruction — write an abstract/comment from the title/keywords/question. Control. |
 | `human_like` | Adversarial — "write as human as possible, indistinguishable from a person." |
-| `detector_aware` | Adversarial — explicitly defeat detection signals: vary sentence length, avoid formulaic connectives, reduce hedging, allow a natural/uneven tone. |
 | `detector_evasive` | Adversarial — tuned to *invert this study's measured signals*: reuse key terms verbatim, avoid nominal compression, more/shorter sentences, minimal hedging, no dashes, concrete names. |
 
 The full prompts (Swedish + English) for both registers are in the thesis appendix (`thesis/appendix_prompts.tex`).
+
+> A fourth condition, `detector_aware` (literature-driven evasion), remains in the code and
+> data (`data_utils.py`, the `*_detector_aware` columns) but is **excluded from the reported
+> analysis**.
 
 ## Repository structure
 
@@ -42,9 +45,9 @@ Raw inputs live under `1_data_collection/`; all analysis outputs are written und
 | Group | Source | n |
 |---|---|---|
 | Formal Human | Swedish academic abstracts | 170 |
-| Formal LLM | GPT abstracts × 4 conditions | 170 each |
+| Formal LLM | GPT abstracts × 3 reported conditions | 170 each |
 | Informal Human | Reddit + Flashback comments | 1,149 |
-| Informal LLM | GPT comment responses × 4 conditions | 1,149 each |
+| Informal LLM | GPT comment responses × 3 reported conditions | 1,149 each |
 
 Informal data (post-exclusion): 1,149 comments = 197 Reddit + 952 Flashback, across 136
 question threads (59 Reddit, 77 Flashback). 11 link/image question threads (73 comments) were
@@ -73,7 +76,7 @@ artifact.
 ## LLM data generation
 
 `generate_adversarial_openai.py` (one in `llm_abstracts/abstracts/`, one in `llm_comments/`)
-produces the four conditions as **independent one-shot generations** (no chaining) over the
+produces the prompt conditions as **independent one-shot generations** (no chaining) over the
 same inputs. Each caches per (row, condition) and resumes after interruption.
 
 - Formal: model `gpt-5.2`, writes `sv_abstracts_adversarial.csv`.
@@ -90,7 +93,9 @@ Requires `OPENAI_API_KEY` (environment variable or `.env` in the repo root).
 
 Every analysis script accepts `--dataset {formal,informal}` and
 `--condition {baseline,human_like,detector_aware,detector_evasive,all}` (default `all`).
-Both registers carry all four conditions.
+Both registers carry all conditions in the code/data; the analysis **reported** in the
+thesis and paper uses `baseline`, `human_like` and `detector_evasive` (`detector_aware`
+is generated but not reported).
 
 Naming/layout by condition:
 - Per-document feature CSVs (`csv_files/`) are named `<feature>_<dataset>_<condition>.csv`

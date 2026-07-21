@@ -46,7 +46,7 @@ GPT_COL = {
     "formal": {"baseline": "Abstract_baseline", "human_like": "Abstract_human_like",
                "detector_aware": "Abstract_detector_aware", "detector_evasive": "Abstract_detector_evasive"},
 }
-CONDITIONS = ["baseline", "human_like", "detector_aware", "detector_evasive"]
+CONDITIONS = ["baseline", "human_like", "detector_evasive"]  # detector_aware dropped (3-condition design)
 GROUPS = ["stylometric_surface", "syntactic_complexity", "pragmatic_markers", "ner", "textstat", "pos_proportions"]
 POS_TAGS = ["ADJ", "ADP", "ADV", "AUX", "CCONJ", "DET", "INTJ", "NOUN", "NUM", "PART",
             "PRON", "PROPN", "PUNCT", "SCONJ", "SYM", "VERB", "X"]

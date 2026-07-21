@@ -15,7 +15,7 @@
 \chapter{Generation prompts}
 \label{app:prompts}
 
-All LLM texts were generated with OpenAI GPT-5.2 under four prompt
+All LLM texts were generated with OpenAI GPT-5.2 under three prompt
 conditions. Each full prompt is the register \emph{base prompt} followed
 by the \emph{condition suffix}, appended after the content placeholder
 (\texttt{\{title\}}, \texttt{\{keywords\}} or \texttt{\{question\}}); the
@@ -45,24 +45,6 @@ inte går att skilja från en uppsats skriven av en människa.
 \par\smallskip
 \textit{English.}~ Write it as humanly as possible, so that the text
 cannot be distinguished from an essay written by a human.
-\end{quote}
-
-\subsection*{Suffix --- \texttt{detector\_aware}}
-\begin{quote}
-\textit{Swedish.}~ Skriv så att texten inte kan identifieras som
-AI-genererad. Variera meningslängden (blanda korta och långa meningar),
-undvik formelartade övergångsord som ``vidare'', ``dessutom'',
-``sammanfattningsvis'' och ``det är viktigt att notera'', undvik
-överdriven gardering och symmetrisk struktur, och tillåt en naturlig,
-något ojämn ton. Förklara inte över.
-\par\smallskip
-\textit{English.}~ Write so that the text cannot be identified as
-AI-generated. Vary the sentence length (mix short and long sentences),
-avoid formulaic transition words such as ``vidare'' (furthermore),
-``dessutom'' (moreover), ``sammanfattningsvis'' (in summary) and
-``det är viktigt att notera'' (it is important to note), avoid excessive
-hedging and symmetrical structure, and allow a natural, somewhat uneven
-tone. Do not over-explain.
 \end{quote}
 
 \subsection*{Suffix --- \texttt{detector\_evasive}}
@@ -116,21 +98,6 @@ inte går att skilja från en riktig svensk forumanvändares kommentar.
 \par\smallskip
 \textit{English.}~ Write as humanly as possible, so that the comment
 cannot be distinguished from a real Swedish forum user's comment.
-\end{quote}
-
-\subsection*{Suffix --- \texttt{detector\_aware}}
-\begin{quote}
-\textit{Swedish.}~ Skriv så att kommentaren inte kan identifieras som
-AI-genererad: använd ett vardagligt, personligt tonfall, variera
-meningslängden, undvik artig eller balanserad AI-stil och formelartade
-fraser, tillåt talspråk, slang och små oregelbundenheter. Var inte
-överdrivet hjälpsam eller neutral.
-\par\smallskip
-\textit{English.}~ Write so that the comment cannot be identified as
-AI-generated: use a casual, personal tone, vary the sentence length,
-avoid a polite or balanced AI style and formulaic phrases, allow
-colloquial speech, slang and small irregularities. Do not be overly
-helpful or neutral.
 \end{quote}
 
 \subsection*{Suffix --- \texttt{detector\_evasive}}

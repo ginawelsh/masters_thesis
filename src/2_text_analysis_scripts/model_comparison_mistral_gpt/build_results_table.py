@@ -16,7 +16,7 @@ AFFECT = os.path.join(HERE, "affective_results.csv")
 OUT = os.path.join(HERE, "results_master_table.csv")
 
 CONDS = [("baseline", "Baseline"), ("human_like", "P1 Human-like"),
-         ("detector_aware", "P2 Detector-aware"), ("detector_evasive", "P3 Detector-evasive")]
+         ("detector_evasive", "P2 Detector-evasive")]
 MODELS = [("human_vs_gpt", "GPT-5.2"), ("human_vs_mistral", "Mistral")]
 REGS = [("informal", "Informal"), ("formal", "Formal")]
 
