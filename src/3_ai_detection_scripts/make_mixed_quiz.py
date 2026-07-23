@@ -20,7 +20,8 @@ import pandas as pd
 
 N_HUMAN = 6
 N_PER_COND = 2
-MAX_WORDS = 350  # skip abstracts longer than this (keeps items readable)
+MIN_WORDS = 150  # word band applied to every abstract (both human and AI) so that
+MAX_WORDS = 320  # text length is not a giveaway for the human-vs-AI judgement
 SEED = 42  # fixed for a reproducible quiz
 
 _here = os.path.dirname(os.path.abspath(__file__))
@@ -53,7 +54,7 @@ def main():
     for cond in roles:
         eligible = [i for i in range(len(df))
                     if i not in used
-                    and len(str(df.iloc[i][COND_COL[cond]]).split()) <= MAX_WORDS]
+                    and MIN_WORDS <= len(str(df.iloc[i][COND_COL[cond]]).split()) <= MAX_WORDS]
         row_idx = rng.choice(eligible)
         used.add(row_idx)
         rows.append(row_idx)
