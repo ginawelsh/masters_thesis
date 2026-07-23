@@ -73,6 +73,15 @@ def _is_blocked(text):
     return bool(_BLOCK_RE.search(str(text)))
 
 
+# Threads containing a URL / markdown link / scrape artifact in any cell are dropped,
+# so no comment shown in the quiz ever contains a hyperlink.
+_LINK_RE = re.compile(r"https?://|www\.|\]\(|\[deleted\]|\[removed\]", re.IGNORECASE)
+
+
+def _has_link(text):
+    return bool(_LINK_RE.search(str(text)))
+
+
 def _in_band(text):
     return MIN_LEN <= len(str(text)) <= MAX_LEN
 
@@ -89,6 +98,8 @@ def _candidate_questions(df):
         if len(str(q)) > MAX_QLEN:
             continue
         if g[text_cols].apply(lambda r: any(_is_blocked(v) for v in r), axis=1).any():
+            continue
+        if g[text_cols].apply(lambda r: any(_has_link(v) for v in r), axis=1).any():
             continue
         if len(g) < COMMENTS_PER_THREAD:
             continue

@@ -20,6 +20,7 @@ import pandas as pd
 
 N_HUMAN = 6
 N_PER_COND = 2
+MAX_WORDS = 350  # skip abstracts longer than this (keeps items readable)
 SEED = 42  # fixed for a reproducible quiz
 
 _here = os.path.dirname(os.path.abspath(__file__))
@@ -44,7 +45,18 @@ def main():
     # one role per distinct thesis row
     roles = ["human"] * N_HUMAN + sum(([c] * N_PER_COND for c in ("baseline", "human_like", "detector_aware")), [])
     n_items = len(roles)
-    rows = rng.sample(range(len(df)), n_items)
+
+    # Assign each role a distinct row whose text for that role is within the word
+    # limit, so no abstract shown in the quiz exceeds MAX_WORDS.
+    used = set()
+    rows = []
+    for cond in roles:
+        eligible = [i for i in range(len(df))
+                    if i not in used
+                    and len(str(df.iloc[i][COND_COL[cond]]).split()) <= MAX_WORDS]
+        row_idx = rng.choice(eligible)
+        used.add(row_idx)
+        rows.append(row_idx)
 
     items = []
     for row_idx, cond in zip(rows, roles):
