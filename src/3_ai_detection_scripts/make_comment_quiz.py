@@ -82,6 +82,26 @@ def _has_link(text):
     return bool(_LINK_RE.search(str(text)))
 
 
+# Charged / sensitive topics are excluded so the quiz stays on benign everyday
+# subjects (word-boundary/stem matched to avoid false positives like "från").
+_AVOID_RE = re.compile("|".join([
+    r"v[åa]ldt", r"invandr", r"flykting", r"migration", r"\basyl", r"utvisn",
+    r"\bmord", r"m[öo]rda", r"nazi", r"rasis", r"fr[äa]mlingsfi", r"islam",
+    r"muslim", r"\bjud(e|ar|isk)", r"terror", r"\bkrig", r"brottsl", r"kriminel",
+    r"\bsd\b", r"sverigedemokrat", r"åkesson", r"abort", r"pedofil", r"övergrepp",
+    r"misshandel", r"\bvåld\b", r"\brån\b", r"knark", r"droger", r"sj[äa]lvmord",
+]), re.IGNORECASE)
+
+# Any leftover emoji / pictograph (the corpus is emoji-free, but guard the question
+# column too, which can still carry a flag emoji).
+_EMOJI_RE = re.compile(
+    "[\U0001F000-\U0001FAFF\U00002600-\U000027BF\U0001F1E6-\U0001F1FF]", re.UNICODE)
+
+
+def _is_avoided(text):
+    return bool(_AVOID_RE.search(str(text)) or _EMOJI_RE.search(str(text)))
+
+
 def _in_band(text):
     return MIN_LEN <= len(str(text)) <= MAX_LEN
 
@@ -100,6 +120,8 @@ def _candidate_questions(df):
         if g[text_cols].apply(lambda r: any(_is_blocked(v) for v in r), axis=1).any():
             continue
         if g[text_cols].apply(lambda r: any(_has_link(v) for v in r), axis=1).any():
+            continue
+        if g[text_cols].apply(lambda r: any(_is_avoided(v) for v in r), axis=1).any():
             continue
         if len(g) < COMMENTS_PER_THREAD:
             continue
