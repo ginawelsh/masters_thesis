@@ -122,7 +122,7 @@ def build_inner(links_html):
         rows += (f'<tr><td class="stick" title="{tip}"><b>{html.escape(str(r["Test"]))}</b></td>'
                  f'<td class="fam">{html.escape(str(r["Feature_family"]).replace("_"," "))}</td>')
         for i, col in enumerate(CELL_COLS):
-            v = str(r[col]); grp = " grp" if i % 4 == 0 else ""
+            v = str(r[col]); grp = " grp" if i % 3 == 0 else ""
             m = re.match(r"([+-][\d.]+)", v)
             if m:
                 bg, ink = cell_bg(float(m.group(1)))
@@ -134,13 +134,18 @@ def build_inner(links_html):
 
     return f"""<div class="wrap">
 <h1>LLM-Generated Swedish — Results Report</h1>
-<p class="lead">Human vs GPT-5.2 vs Mistral (mistral-small-2506), two registers × four prompt conditions.
+<p style="background:#fde68a;color:#1b1f27;padding:10px 14px;border-radius:8px;font-size:14px">
+⚠ <b>Findings text below predates the 3-condition, emoji-free re-analysis (2026-07-21).</b>
+The table and figures are current. RQ2 discusses the now-dropped <code>detector_aware</code>
+condition, and some exact feature counts in RQ1/RQ3 may be stale; the RQ4 GPT positivity-bias
+effects still hold on the new data (baseline dz +0.56 vs human, +0.73 vs Mistral).</p>
+<p class="lead">Human vs GPT-5.2 vs Mistral (mistral-small-2506), two registers × three prompt conditions.
 Paired Wilcoxon + Cohen's dz + BH-FDR. Effect-size-first — at this n, p-values alone are uninformative.</p>
 <h2>Key findings</h2>{fsec}
 <h2>Full results — Cohen's dz vs human, by permutation</h2>
 <div class="legend">Cell = dz vs human · <span class="swatch" style="background:#0072B2"></span><b>+ model &gt; human</b> ·
 <span class="swatch" style="background:#D55E00"></span><b>− model &lt; human</b> · shade ∝ |dz| · <b>bold</b> = FDR&lt;0.05 ·
-— = not measured in that register. B=Baseline, P1=Human-like, P2=Detector-aware, P3=Detector-evasive.
+— = not measured in that register. B=Baseline, P1=Human-like, P2=Detector-evasive.
 Hover a feature for its purpose, example, and finding.</div>
 <div class="tablewrap"><table><thead>{thead}</thead><tbody>{rows}</tbody></table></div>
 <h2>Artifacts</h2>{links_html}

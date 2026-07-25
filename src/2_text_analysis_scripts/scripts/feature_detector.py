@@ -53,6 +53,29 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 CSV_DIR = os.path.join(os.path.dirname(HERE), "csv_files")
 RESULTS = os.path.join(CSV_DIR, "feature_detector_results.csv")
 
+# Informal corpus, used to derive thread/question group ids for grouped CV so
+# comments from the SAME thread never split across train/test folds (stricter
+# leakage control than pair-level grouping). Row i of every informal feature CSV
+# aligns by position with row i of this corpus.
+_SRC = os.path.dirname(os.path.dirname(HERE))
+INFORMAL_CORPUS = os.path.join(_SRC, "1_data_collection", "llm_comments",
+                               "consolidated_informal_comments_adversarial.csv")
+
+
+def _question_groups(n_rows):
+    """Per-row thread/question id (informal), aligned by row position; falls back
+    to per-row ids if the corpus can't be read or lengths disagree."""
+    try:
+        q = pd.read_csv(INFORMAL_CORPUS, encoding="utf-8")["question"].astype(str).to_numpy()
+    except Exception as e:
+        print(f"  [warn] question grouping unavailable ({e}); using per-pair groups.")
+        return np.arange(n_rows)
+    if len(q) < n_rows:
+        print(f"  [warn] corpus has {len(q)} rows < {n_rows} feature rows; "
+              f"using per-pair groups.")
+        return np.arange(n_rows)
+    return pd.factorize(q[:n_rows])[0]
+
 # Same paired per-document feature files significance_tests.py reads.
 FEATURE_GROUPS = ["syntactic_complexity", "stylometric_surface",
                   "pragmatic_markers", "affective_analysis", "ner"]
@@ -125,10 +148,17 @@ def load_feature_matrix(tag):
     H = pd.concat([b.iloc[:n_rows].reset_index(drop=True) for b in human_blocks], axis=1)
     L = pd.concat([b.iloc[:n_rows].reset_index(drop=True) for b in llm_blocks], axis=1)
 
-    pair_id = np.arange(n_rows)
+    # Group id per pair: informal groups by THREAD/question (keeps all comments of
+    # a thread in one fold); formal has one unique abstract per row, so pair id ==
+    # topic already. Both halves of a pair share the group so a human doc and its
+    # own regeneration can never straddle the train/test split.
+    if tag.startswith("informal"):
+        pair_group = _question_groups(n_rows)
+    else:
+        pair_group = np.arange(n_rows)
     X = pd.concat([H, L], axis=0, ignore_index=True)
     y = np.array([0] * n_rows + [1] * n_rows)
-    groups = np.concatenate([pair_id, pair_id])
+    groups = np.concatenate([pair_group, pair_group])
 
     # drop rows with any missing feature (keeps human/LLM halves independent)
     ok = X.notna().all(axis=1).to_numpy()
@@ -256,16 +286,19 @@ def main():
         return
 
     new = pd.DataFrame(rows)
-    # merge with any existing results, replacing recomputed (dataset, condition) rows
+    # merge with any existing results, replacing only recomputed (dataset, condition, cv)
+    # rows — so stratified and grouped results coexist in the same file.
     if os.path.exists(RESULTS):
         old = pd.read_csv(RESULTS)
-        key = ["dataset", "condition"]
+        if "cv" not in old.columns:
+            old["cv"] = "stratified"
+        key = ["dataset", "condition", "cv"]
         old = old.merge(new[key], on=key, how="left", indicator=True)
         old = old[old["_merge"] == "left_only"].drop(columns="_merge")
         out = pd.concat([old, new], ignore_index=True)
     else:
         out = new
-    out = out.sort_values(["dataset", "condition"]).reset_index(drop=True)
+    out = out.sort_values(["dataset", "condition", "cv"]).reset_index(drop=True)
     out.to_csv(RESULTS, index=False, encoding="utf-8")
 
     print(f"\nWrote {RESULTS}")

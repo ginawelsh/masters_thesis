@@ -63,39 +63,44 @@ def _ok(x):
     return not (x is None or (isinstance(x, float) and pd.isna(x))) and bool(str(x).strip())
 
 
-def score_column_cells(pipe, df, col, batch):
-    """Score every non-empty cell of `col`; return {doc_id: feature_dict}."""
+def score_and_cache(pipe, df, col, batch):
+    """Score every non-empty cell of `col` and APPEND each batch to the cache
+    file immediately, so an interrupted run keeps its progress. Returns count."""
     todo = [(i, str(df.at[i, col])) for i in df.index if _ok(df.at[i, col])]
-    out = {}
+    n = 0
     for s in range(0, len(todo), batch):
         chunk = todo[s:s + batch]
         preds = pipe([t[1][:2000] for t in chunk])
+        rows = []
         for (doc_id, _), sc in zip(chunk, preds):
             d = {x["label"].upper(): float(x["score"]) for x in sc}
             p_pos, p_neg, p_neu = d.get("POSITIVE", 0.0), d.get("NEGATIVE", 0.0), d.get("NEUTRAL", 0.0)
             top = max(sc, key=lambda x: x["score"])["label"].upper()
-            out[doc_id] = dict(
+            rows.append(dict(
                 column=col, doc_id=doc_id, sentiment_label=top,
                 p_pos=round(p_pos, 6), p_neg=round(p_neg, 6), p_neu=round(p_neu, 6),
                 signed_polarity=round(p_pos - p_neg, 6),
                 affective_extremity=round(1.0 - p_neu, 6),
                 is_subjective=int(top != "NEUTRAL"),
-            )
+            ))
+        header = not os.path.exists(CACHE)
+        pd.DataFrame(rows).to_csv(CACHE, mode="a", header=header, index=False, encoding="utf-8")
+        n += len(rows)
         print(f"    {col}: {min(s + batch, len(todo))}/{len(todo)}", end="\r", flush=True)
     print()
-    return out
+    return n
 
 
 def build_cache(df, batch):
-    """Score human + every LLM condition column, resumably. Returns a DataFrame
-    of per-(column, doc_id) scores."""
+    """Score human + every LLM condition column, resumably (per-batch cache
+    appends survive interruption). Returns a de-duplicated score DataFrame."""
     cols = [HUMAN_COL] + list(dict.fromkeys(INFORMAL_CONDITIONS.values()))
-    cached = pd.read_csv(CACHE, encoding="utf-8") if os.path.exists(CACHE) else pd.DataFrame()
-    done = set(zip(cached["column"], cached["doc_id"])) if len(cached) else set()
+    done = set()
+    if os.path.exists(CACHE):
+        done = set(zip(*[pd.read_csv(CACHE)[c] for c in ("column", "doc_id")]))
 
     from transformers import pipeline
     pipe = None
-    new_rows = []
     for col in cols:
         if col not in df.columns:
             print(f"  [skip] column '{col}' not in corpus")
@@ -109,15 +114,9 @@ def build_cache(df, batch):
             pipe = pipeline("text-classification", model=MODEL, top_k=None,
                             truncation=True, max_length=MAX_LEN, device=-1)
         print(f"scoring {col} ({len(need)} texts)...", flush=True)
-        scored = score_column_cells(pipe, df.loc[need], col, batch)
-        new_rows.extend(scored.values())
+        score_and_cache(pipe, df.loc[need], col, batch)
 
-    if new_rows:
-        allrows = pd.concat([cached, pd.DataFrame(new_rows)], ignore_index=True) if len(cached) else pd.DataFrame(new_rows)
-        allrows.to_csv(CACHE, index=False, encoding="utf-8")
-        print(f"cache -> {CACHE} ({len(allrows)} rows)")
-        return allrows
-    return cached
+    return pd.read_csv(CACHE, encoding="utf-8").drop_duplicates(["column", "doc_id"], keep="last")
 
 
 def label_props(sub):

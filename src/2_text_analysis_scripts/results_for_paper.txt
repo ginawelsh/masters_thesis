@@ -1,7 +1,8 @@
 ===============================================================================
 CLUU THESIS — RESULTS COMPILATION (for the paper)
 ===============================================================================
-Generator: OpenAI GPT-5.2. Corpus (post-exclusion, matched pairs):
+Generators: OpenAI GPT-5.2 (primary, §1–3) + Mistral-Small-3.2 (model comparison, §4).
+Corpus (post-exclusion, matched pairs):
   Formal (thesis abstracts):  n = 170 pairs
   Informal (forum comments):  n = 1,149 pairs
 Reported prompt conditions: baseline, human_like, detector_evasive.
@@ -11,9 +12,10 @@ Reported prompt conditions: baseline, human_like, detector_evasive.
 FRESHNESS NOTE
   - Embedding detectability and the paired Wilcoxon feature tests below are on
     the current post-exclusion corpus (n = 170 / 1,149) and are citable.
-  - Sentiment/affective distribution CSVs are STALE (n = 134 / 204, an old
-    sample) and formal sentiment is excluded by design; sentiment is therefore
-    omitted here and should be regenerated before citing.
+  - Fresh informal sentiment/affect IS reported in §4d (model-comparison run,
+    n = 1,149, emoji-free). The OLD main-pipeline sentiment distribution CSVs
+    (inf_sentiment_distribution.csv, n = 204) remain stale; formal sentiment is
+    excluded by design.
   - NER distribution means are reported with the direction corroborated by the
     fresh per-document significance run.
 
@@ -216,6 +218,94 @@ still rises to 0.981.
 
 
 ===============================================================================
+4. MODEL COMPARISON — GPT-5.2 vs Mistral-Small-3.2 vs human
+===============================================================================
+Source: model_comparison_mistral_gpt/model_comparison_results.csv. Generator-
+agnostic pipeline: all three generators answered the SAME prompts on the SAME
+rows, so every comparison is matched by row. Paired Wilcoxon + Cohen's dz +
+BH-FDR per (register, condition, comparison). The feature set is broader than §3
+(adds textstat readability + POS proportions), so the human-vs-GPT numbers here
+are a companion summary, not identical to §3. Embedding detectability (§1) was
+run for GPT only — there is no Mistral AUC. Same 170 / 1,149 pairs, emoji-free.
+
+-------------------------------------------------------------------------------
+4a. DISTANCE FROM HUMAN — median |dz| across all tested features
+    (higher = less human-like)
+-------------------------------------------------------------------------------
+  Register / condition          Human–GPT   Human–Mistral
+  formal / baseline                0.48         0.32
+  formal / human_like              0.52         0.29
+  formal / detector_evasive        0.45         0.29
+  informal / baseline              0.16         0.15
+  informal / human_like            0.20         0.22
+  informal / detector_evasive      0.19         0.20
+  => FORMAL: Mistral is markedly CLOSER to human than GPT (~0.29–0.32 vs
+     ~0.45–0.52) in every condition. INFORMAL: the two models are comparable.
+     Mistral is the more human-like generator for formal Swedish.
+  Significant features (q<0.05): human–GPT 143 formal / 169 informal;
+     human–Mistral 138 / 179; Mistral–GPT 123 / 183.
+
+-------------------------------------------------------------------------------
+4b. HUMAN vs MISTRAL — largest effects, baseline  (+dz => Mistral > human)
+-------------------------------------------------------------------------------
+  FORMAL
+    pos_PUNCT                 +2.05   Mistral more punctuation
+    punct_comma               +1.78   Mistral more commas
+    flesch_reading_ease       -1.49   human easier to read (Mistral denser)
+    pos_PRON                  -1.33   human more pronouns
+    gunning_fog/smog/FK-grade ~+1.2   Mistral higher reading-grade (denser)
+    function_word_rate        -1.16   human more function words
+  INFORMAL
+    mattr                     -1.08   human higher lexical diversity
+    hedge_count               +1.07   Mistral more hedging
+    ttr                       -1.04   human higher lexical diversity
+    n_sentences               +0.90   Mistral more sentences (longer)
+    n_alpha_tokens            +0.81   Mistral wordier
+    bigram_repetition_rate    +0.76   Mistral more repetition
+  => Mistral shows the SAME directional tells as GPT (more punctuation/commas and
+     denser formal prose; more hedging, longer, lower informal diversity), but in
+     the formal register the magnitudes are smaller than GPT's (cf. §3a).
+
+-------------------------------------------------------------------------------
+4c. MISTRAL vs GPT — where the two models most diverge, baseline
+-------------------------------------------------------------------------------
+  FORMAL  (+dz => GPT > Mistral)
+    pos_ADV           +1.21   GPT more adverbs
+    pos_CCONJ         +1.05   GPT more coordinating conjunctions
+    mattr             +1.04   GPT higher lexical diversity
+    pos_PUNCT         -1.04   Mistral more punctuation
+    mtld              +0.96   GPT higher lexical diversity
+    pos_SCONJ         +0.95   GPT more subordinating conjunctions
+    tree_depth_mean   +0.91   GPT deeper parse trees
+    pos_PROPN         -0.85   Mistral more proper nouns
+  INFORMAL  (+dz => GPT > Mistral)
+    function_word_rate       -0.89   Mistral more function words
+    mattr                    +0.66   GPT higher lexical diversity
+    discourse_particle_rate  -0.65   Mistral more discourse particles
+    negation_rate            -0.64   Mistral more negation
+    bigram_repetition_rate   -0.63   Mistral more repetition
+    tree_depth_mean          +0.62   GPT deeper parse trees
+    punct_exclaim            +0.62   GPT more exclamation marks
+  => GPT writes with higher lexical diversity and deeper syntax; Mistral leans on
+     punctuation, function words, discourse particles and negation. The models
+     diverge most in the informal register under evasive prompting (median |dz|
+     up to 0.40).
+
+-------------------------------------------------------------------------------
+4d. SENTIMENT / AFFECT (KBLab robust-swedish-sentiment; informal; n = 1,149)
+-------------------------------------------------------------------------------
+  signed_polarity dz, baseline:  human–GPT +0.56 (sig) ; human–Mistral -0.02 (NS) ;
+    Mistral–GPT +0.73 (sig).
+  => The positivity bias is MODEL-SPECIFIC. At baseline GPT is markedly more
+     positive than both human (dz +0.56) and Mistral (+0.73); Mistral shows NO
+     positivity bias and tracks human sentiment (dz -0.02, not significant).
+     Under the evasive prompt both models overshoot to MORE negative than human
+     (human–GPT -0.23; human–Mistral -0.13). Top-label sentiment is ~77% neutral
+     for all three sources; the signal is in continuous polarity. (Fresh, emoji-
+     free run; supersedes the stale main-pipeline sentiment CSVs noted above.)
+
+
+===============================================================================
 CROSS-CUTTING TAKEAWAYS
 ===============================================================================
 1. LLM Swedish is separable from human Swedish in every condition and both
@@ -227,3 +317,7 @@ CROSS-CUTTING TAKEAWAYS
 4. Adversarial evasion inverts hand-crafted SURFACE features (clearly in the
    formal register) but does NOT reduce — and actually increases —
    embedding-level separability. Surface-feature evasion != semantic evasion.
+5. Model identity matters: Mistral-Small-3.2 is substantially more human-like
+   than GPT-5.2 in the FORMAL register (median |dz| ~0.30 vs ~0.48), though both
+   share the same directional tells. The GPT baseline positivity bias is
+   model-specific — Mistral shows none and tracks human sentiment. (§4)
