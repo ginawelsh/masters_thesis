@@ -68,6 +68,10 @@ PROVIDERS = {
         "model": "deepseek-reasoner",
         "base_url": "https://api.deepseek.com",
         "env": "DEEPSEEK_API_KEY",
+        # deepseek-reasoner puts its (uncapped) chain-of-thought in a separate
+        # field; max_tokens caps only the FINAL answer. 1024 was clipping the JSON
+        # to empty/truncated -> UNKNOWN (counted wrong), so give it more headroom.
+        "max_tokens": 4096,
     },
     "gemini": {
         # Pro flagship reasoning model — the fair peer to claude-opus-4-8 /
@@ -126,13 +130,14 @@ def build_caller(provider):
         extra = {}
         if cfg.get("reasoning_effort"):
             extra["reasoning_effort"] = cfg["reasoning_effort"]
+        max_tokens = cfg.get("max_tokens", 1024)   # per-provider answer budget
 
         def call(register, text):
             # no temperature: reasoning models pace their own sampling
             resp = client.chat.completions.create(
                 model=model,
                 messages=[{"role": "user", "content": build_prompt(register, text)}],
-                max_tokens=1024,
+                max_tokens=max_tokens,
                 **extra,
             )
             return resp.choices[0].message.content or ""
@@ -399,11 +404,20 @@ def parse_args():
     p.add_argument("--corpus", default=os.path.join(_script_dir, "quiz_master.csv"),
                    help="corpus CSV (default: quiz_master.csv)")
     p.add_argument("--limit", type=int, default=None, help="only classify the first N items (testing)")
+    p.add_argument("--model", default=None,
+                   help="override the provider's model id (e.g. gemini-3.6-flash when the "
+                        "pro model is quota-blocked). Only valid with a single --provider, "
+                        "since it applies to that provider's config.")
     return p.parse_args()
 
 
 if __name__ == "__main__":
     args = parse_args()
+    if args.model and args.provider == "all":
+        raise SystemExit("--model can only be used with a single --provider, not 'all'.")
+    if args.model:
+        PROVIDERS[args.provider]["model"] = args.model
+        print(f"[override] {args.provider} model -> {args.model}")
     rows = load_corpus(args.corpus, args.limit)
     print(f"Loaded {len(rows)} items from {os.path.basename(args.corpus)}")
     providers = list(PROVIDERS) if args.provider == "all" else [args.provider]
