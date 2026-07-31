@@ -23,6 +23,7 @@ consumer at once.
 from __future__ import annotations
 
 import os
+import re
 import time
 import threading
 from dataclasses import dataclass
@@ -131,6 +132,214 @@ def build_prompt(condition: str, register: str, item: dict) -> str:
 
 
 # ---------------------------------------------------------------------------
+# Output hygiene: markdown stripping + refusal detection
+# ---------------------------------------------------------------------------
+# WHY STRIP MARKDOWN: models emit **bold**, *italic* and ### headings in prose that
+# should be plain text. Human text in both corpora is essentially markdown-free (0 of
+# 170 abstracts; 3 of 1,149 comments), so a markdown marker is a near-perfect AI cue
+# that has nothing to do with how human the *language* is. Left in, a judge can score
+# on formatting and a stylometric feature counts '*' as tokens. GPT-5.6 emits it far
+# more heavily than GPT-5.2, so leaving it in would make a 5.2-vs-5.6 contrast a
+# measurement of formatting rather than of Swedish.
+#
+# Deliberately conservative: only unambiguous inline markup and ATX headings. Bullet
+# lists ('- x') and numbered lists ('1. x') are LEFT ALONE because they occur
+# naturally in prose. Whitespace and newlines are preserved -- the informal register's
+# multi-line structure is a genuine register signal, so this must not reflow text.
+#
+# NEVER APPLY THIS TO HUMAN TEXT. Human columns are read-only ground truth.
+_MD_SUBS = [
+    (re.compile(r"(?m)^[ \t]*#{1,6}[ \t]+"), ""),            # ### Heading
+    (re.compile(r"(?m)^[ \t]*(?:-{3,}|\*{3,}|_{3,})[ \t]*$"), ""),  # horizontal rule
+    (re.compile(r"\*\*(?=\S)(.+?)(?<=\S)\*\*", re.S), r"\1"),  # **bold**
+    (re.compile(r"__(?=\S)(.+?)(?<=\S)__", re.S), r"\1"),      # __bold__
+    (re.compile(r"(?<!\*)\*(?=\S)([^*\n]+?)(?<=\S)\*(?!\*)"), r"\1"),  # *italic*
+    (re.compile(r"`(?=\S)([^`\n]+?)(?<=\S)`"), r"\1"),         # `code`
+]
+
+
+def strip_markdown(text) -> str:
+    """Remove unambiguous markdown markup, preserving all whitespace and newlines.
+
+    A no-op on text that contains no markdown. Not for human columns.
+    """
+    s = str(text)
+    for rx, repl in _MD_SUBS:
+        s = rx.sub(repl, s)
+    return s
+
+
+def count_markdown(text) -> int:
+    """How many markdown constructs strip_markdown() would remove (for reporting)."""
+    s = str(text)
+    return sum(len(rx.findall(s)) for rx, _ in _MD_SUBS)
+
+
+# Refusal / meta-commentary detection. A refusal is stored as if it were generated
+# text unless something checks: GPT-5.6 answered the formal detector_evasive prompt
+# with "Jag kan inte hjälpa till att kringgå AI-detektering. Däremot kan jag ..." and
+# then wrote a NON-evasive abstract. That is doubly wrong -- the cell is mislabelled,
+# and the refusal sentence is itself a giant AI tell for any judge reading it.
+#
+# Anchored to the OPENING of the text (refusals lead), and requires a first-person
+# modal negation or an explicit detection-evasion reference, so an abstract that
+# merely contains "kan inte" further in does not trip it.
+_REFUSAL_HEAD_CHARS = 300
+# A bare negation is NOT enough: "Jag kan inte hitta det på TV.nu" is a perfectly
+# natural forum comment. A refusal is a first-person modal negation attached to a
+# TASK verb (help / write / generate / comply), or an unambiguous meta-reference.
+_SV_TASK_VERB = (r"hjälpa|bistå|assistera|skriva|generera|producera|skapa|framställa"
+                 r"|uppfylla|tillmötesgå|utföra|göra\s+det|ställa\s+upp")
+_REFUSAL_PATTERNS = [
+    (re.compile(rf"\bjag\s+kan\s+(?:dessvärre\s+|tyvärr\s+)?inte\s+(?:\w+\s+){{0,3}}(?:{_SV_TASK_VERB})\b", re.I),
+     "sv: 'jag kan inte <task verb>'"),
+    (re.compile(rf"\bkan\s+jag\s+inte\s+(?:\w+\s+){{0,3}}(?:{_SV_TASK_VERB})\b", re.I),
+     "sv: 'kan jag inte <task verb>'"),
+    (re.compile(rf"\bjag\s+(?:får|kommer)\s+inte\s+(?:att\s+)?(?:\w+\s+){{0,2}}(?:{_SV_TASK_VERB})\b", re.I),
+     "sv: 'jag får/kommer inte <task verb>'"),
+    (re.compile(r"\bI\s+(?:can'?t|cannot|won'?t|am\s+not\s+able\s+to)\s+(?:\w+\s+){0,3}"
+                r"(?:help|assist|write|generate|produce|create|comply|do\s+that)\b", re.I),
+     "en: 'I can't <task verb>'"),
+    (re.compile(r"\bkringgå\b[^.\n]{0,40}\b(?:detekt|AI|granskning)", re.I),
+     "sv: 'kringgå ... detektering'"),
+    (re.compile(r"\bAI[- ]?detekt\w*", re.I), "meta: mentions AI detection"),
+    (re.compile(r"\bas an AI\b|\bsom en AI\b|\bAI-(?:modell|assistent)\b", re.I),
+     "meta: refers to itself as an AI"),
+]
+
+
+def looks_like_refusal(text):
+    """Return a short reason string if `text` opens like a refusal, else None."""
+    head = str(text)[:_REFUSAL_HEAD_CHARS]
+    for rx, why in _REFUSAL_PATTERNS:
+        if rx.search(head):
+            return why
+    return None
+
+
+# ---------------------------------------------------------------------------
+# Run-scoping helpers (which conditions, which input file)
+# ---------------------------------------------------------------------------
+def conditions_from_env(default: list, env: str = "GEN_CONDITIONS"):
+    """Return (conditions, tag). GEN_CONDITIONS="baseline" restricts a run to one
+    condition; unset means `default`.
+
+    The returned `tag` MUST be folded into the output/cache filenames. The generation
+    cache is keyed on (row index, condition) with no record of which conditions a run
+    covered, so a one-condition run and a three-condition run that shared a cache file
+    would look identical to the resume logic and the narrower run would appear complete.
+    """
+    raw = os.environ.get(env, "").strip()
+    if not raw:
+        return list(default), ""
+    want = [c.strip() for c in raw.split(",") if c.strip()]
+    unknown = [c for c in want if c not in CONDITIONS]
+    if unknown:
+        raise SystemExit(
+            f"{env}: unknown condition(s) {unknown}; valid: {list(CONDITIONS)}")
+    outside = [c for c in want if c not in default]
+    if outside:
+        raise SystemExit(
+            f"{env}: condition(s) {outside} are not part of this script's reported set "
+            f"{list(default)}. Add them there deliberately if you really want them.")
+    ordered = [c for c in default if c in want]           # keep canonical order
+    return ordered, "_" + "-".join(ordered)
+
+
+def input_from_env(default_path: str, env: str = "GEN_INPUT"):
+    """Return (path, tag). GEN_INPUT overrides the corpus a script reads.
+
+    The cache is keyed on ROW INDEX, so it is only valid for one input file and
+    ordering; the returned tag keeps caches for different inputs apart.
+    """
+    raw = os.environ.get(env, "").strip()
+    if not raw:
+        return default_path, ""
+    if not os.path.exists(raw):
+        raise SystemExit(f"{env}: no such file: {raw}")
+    import hashlib
+    stem = os.path.splitext(os.path.basename(raw))[0]
+    # short + hashed: readable enough to recognise, short enough to stay well inside
+    # Windows' 260-char path limit given how deep these corpus folders sit
+    h = hashlib.sha1(os.path.abspath(raw).encode("utf-8")).hexdigest()[:4]
+    return raw, f"_in-{stem[:12]}-{h}"
+
+
+# ---------------------------------------------------------------------------
+# Quiz subsetting -- generate only the documents the detection quiz sampled.
+# ---------------------------------------------------------------------------
+# WHY THIS MATCHES ON TEXT, NOT ROW NUMBER: the quiz's `source_row` indexes the
+# *_adversarial.csv files that make_balanced_quiz.py reads, which hold the same
+# rows as the generation inputs but in a DIFFERENT ORDER (positional agreement on
+# `question` between consolidated_informal_comments_JUN26.csv and
+# consolidated_informal_comments_adversarial.csv is only ~37%). Using source_row
+# as a positional index into a generation input would therefore silently select
+# the wrong documents. The human text itself is stable across both files, so it is
+# the only safe join key.
+QUIZ_CSV = os.path.join(
+    os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+    "3_ai_detection_scripts", "quiz_master_balanced.csv",
+)
+
+
+def _norm_key(text) -> str:
+    import re
+    return re.sub(r"\s+", " ", str(text)).strip()
+
+
+def quiz_subset(data, register: str, key_col: str, quiz_csv: Optional[str] = None,
+                expected: Optional[int] = 100):
+    """Return `data` restricted to the documents sampled into the detection quiz.
+
+    Matches on the human text (`key_col`: "Abstract" for formal, "human_comment"
+    for informal) against the quiz's human-condition rows. Keeps the first input row
+    per matched key, so the result has exactly one row per quiz document, reindexed
+    0..m-1. Raises if the match is incomplete -- a silent partial match would produce
+    a corpus that looks fine and is not comparable to the GPT-5.2 run.
+
+    Two `quiz_*` columns are attached so the generated CSV carries an EXPLICIT link
+    back to the quiz document it corresponds to, rather than leaving a downstream
+    consumer to re-derive this text join:
+      quiz_pair_id    - the quiz's pair_id for this document
+      quiz_source_row - the quiz's source_row (index into the *_adversarial.csv files)
+    Pair on quiz_pair_id when building the GPT-5.6 quiz; do NOT rely on row order,
+    which follows the generation input, not the quiz.
+    """
+    import pandas as pd
+
+    quiz = pd.read_csv(quiz_csv or QUIZ_CSV, encoding="utf-8")
+    hum = quiz[(quiz["register"] == register) & (quiz["condition"] == "human")]
+    want = {_norm_key(t) for t in hum["text"]}
+    if not want:
+        raise ValueError(f"no human {register!r} rows found in {quiz_csv or QUIZ_CSV}")
+    meta = {
+        _norm_key(r["text"]): (r.get("pair_id"), r.get("source_row"))
+        for _, r in hum.iterrows()
+    }
+
+    keys = data[key_col].map(_norm_key)
+    hit = keys.isin(want)
+    sub = data[hit].loc[~keys[hit].duplicated()].reset_index(drop=True)
+    _k = sub[key_col].map(_norm_key)
+    sub["quiz_pair_id"] = [meta[k][0] for k in _k]
+    sub["quiz_source_row"] = [meta[k][1] for k in _k]
+
+    found = len(sub)
+    if found != len(want):
+        missing = len(want) - found
+        raise ValueError(
+            f"quiz subset for {register!r} matched {found} of {len(want)} documents "
+            f"({missing} unmatched) using key column {key_col!r}. Refusing to run: the "
+            f"resulting corpus would not be comparable to the GPT-5.2 quiz."
+        )
+    if expected is not None and found != expected:
+        raise ValueError(
+            f"quiz subset for {register!r} produced {found} documents, expected {expected}."
+        )
+    return sub
+
+
+# ---------------------------------------------------------------------------
 # Generation params + client. Defaults preserve the cross-backend invariant.
 # ---------------------------------------------------------------------------
 @dataclass
@@ -188,6 +397,16 @@ MODELS: dict[str, ModelSpec] = {
     "gpt-5.2": ModelSpec(
         make_client=lambda: OpenAICompatibleClient(
             model="gpt-5.2", base_url=None, api_key_env="OPENAI_API_KEY",
+        ),
+    ),
+    # OpenAI GPT-5.6 -- newer-generation comparison model, for the "has detectability
+    # changed across model generations?" contrast. Called with the SAME contract as
+    # gpt-5.2 (temp 1.0, no system prompt) so prompt/condition stays the only variable.
+    # Override the upstream model string with GPT56_MODEL if OpenAI's id differs.
+    "gpt-5.6": ModelSpec(
+        make_client=lambda: OpenAICompatibleClient(
+            model=os.environ.get("GPT56_MODEL", "gpt-5.6"),
+            base_url=None, api_key_env="OPENAI_API_KEY",
         ),
     ),
     # Mistral Small (mistral-small-2506) via Mistral's own API / La Plateforme
