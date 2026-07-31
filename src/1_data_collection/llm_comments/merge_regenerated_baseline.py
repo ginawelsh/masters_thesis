@@ -16,12 +16,17 @@ ADDITIVELY: one new column, every existing column byte-identical. The old gpt-4o
 
 Why a script rather than a manual column copy
 ---------------------------------------------
-Row order is the failure mode that caused the original problem: the two informal corpus
-files hold the same 1,149 rows in DIFFERENT order (positional agreement on `question` is
-~37%). Because run 4 is given the canonical corpus as GEN_INPUT, its output IS that file
-plus a column and the orders match by construction -- but "by construction" is an
-assumption, and a silent misalignment here would attach every baseline comment to the
-wrong document and quietly corrupt the feature chapter. So every assumption is asserted.
+Because run 4 is given the canonical corpus as GEN_INPUT, its output IS that file plus one
+column, so the row orders match by construction. But "by construction" is an assumption,
+and if it were ever wrong this step would attach every baseline comment to the wrong
+document and quietly corrupt the feature chapter -- the output would look entirely normal.
+A misalignment here is undetectable by inspection, so every assumption is asserted instead
+of trusted.
+
+(An earlier version of this note claimed the two informal corpus files were in different
+row order, ~37% positional agreement. That was wrong -- it came from comparing raw strings
+across files that differ in whitespace convention. Verified 2026-07-31: normalised
+agreement is 1.0000 on question, human_comment and thread_id, zero differing rows.)
 
 Checks (all must pass before anything is written)
   1. row counts equal

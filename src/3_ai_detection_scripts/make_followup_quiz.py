@@ -85,6 +85,15 @@ DEFAULT_OFFSET = 1001
 _FORMAL_DIR = os.path.join(_src, "1_data_collection", "llm_abstracts", "abstracts")
 _INFORMAL_DIR = os.path.join(_src, "1_data_collection", "llm_comments")
 
+# Mistral arm. The corpus already exists (10,552 texts) so this arm needs NO generation.
+MISTRAL_CSV = os.path.join(_src, "2_text_analysis_scripts", "mistral_temperature_ab",
+                           "generated_corpus_mistral_temps.csv")
+# generate_mistral_temps.py assigns doc_id from consolidated_informal_comments_JUN26.csv
+# row order, and the mistral corpus carries no question/human_comment column -- so
+# doc_id must be resolved through THIS file to get a content key for the quiz join.
+MISTRAL_DOCID_SOURCE = os.path.join(_src, "4_archive",
+                                    "consolidated_informal_comments_JUN26.csv")
+
 CONDITIONS = ["baseline", "human_like", "detector_evasive"]
 
 # Each arm: (generator label, register, csv path, context col, {condition: text col})
@@ -154,6 +163,11 @@ def main():
     ap.add_argument("--out", default=DEFAULT_OUT)
     ap.add_argument("--subset-tag", default="_quiz100",
                     help="filename tag of the generation run to read (default _quiz100)")
+    ap.add_argument("--mistral-temps", nargs="*", type=float, default=[1.0],
+                    help="Mistral sampling temperatures to include (default: 1.0, which "
+                         "matches the temperature every GPT run was pinned to). Pass "
+                         "'--mistral-temps 1.0 0.15' for the temperature A/B, or "
+                         "'--mistral-temps' with no values to omit Mistral entirely.")
     ap.add_argument("--no-restrip", action="store_true",
                     help="skip the markdown-stripped re-judge of already-judged GPT-5.2 "
                          "informal items (see module docstring; leaves the 6-item "
@@ -252,6 +266,76 @@ def main():
                 "supersedes": int(r["item_id"]),   # scorer drops the original
             })
             n_restrip += 1
+
+    # Mistral is appended LAST, after the re-judge block, so that adding this arm
+    # cannot shift the item_ids of anything already judged. Inserting it earlier
+    # reassigned ids 1401-1406 from GPT-5.2 re-judges to Mistral text, which would
+    # have silently misattributed six existing judgements.
+    # ---- Mistral arm (no generation needed; the corpus already exists) ----
+    # doc_id indexes consolidated_informal_comments_JUN26.csv, and the mistral corpus has
+    # no text column linking it to the quiz, so resolve doc_id -> that file's
+    # human_comment -> the quiz's human item -> pair_id. Content key, not row arithmetic.
+    n_mistral = 0
+    if args.mistral_temps:
+        sys.path.insert(0, os.path.join(_src, "1_data_collection"))
+        import generation_pipeline as pipe  # noqa: E402
+        if not os.path.exists(MISTRAL_CSV):
+            raise SystemExit(f"missing Mistral corpus: {MISTRAL_CSV}")
+        mist = pd.read_csv(MISTRAL_CSV, encoding="utf-8")
+        src_df = pd.read_csv(MISTRAL_DOCID_SOURCE, encoding="utf-8")
+
+        # quiz human text -> (pair_id, source_row, context)
+        hum = base[(base["register"] == "informal") & (base["condition"] == "human")]
+        by_text = {pipe._norm_key(r["text"]): r for _, r in hum.iterrows()}
+        # doc_id -> quiz row, via the doc_id source file's human_comment.
+        # One human_comment occurs twice in the source file, so two doc_ids can map to a
+        # single quiz document. Keep the LOWEST doc_id per quiz document, deterministically,
+        # so each document contributes exactly one Mistral text per condition -- otherwise
+        # the arm would be 101 items and the paired pivot would silently pick one at random.
+        docid_to_quiz, pair_to_docid = {}, {}
+        for i, row in src_df.iterrows():
+            hit = by_text.get(pipe._norm_key(row.get("human_comment")))
+            if hit is None:
+                continue
+            pid = str(hit["pair_id"])
+            if pid in pair_to_docid:          # duplicate source row for this document
+                continue
+            pair_to_docid[pid] = int(i)
+            docid_to_quiz[int(i)] = hit
+
+        want = set(docid_to_quiz)
+        if len(pair_to_docid) != len(hum):
+            raise SystemExit(
+                f"Mistral arm: only {len(pair_to_docid)} of {len(hum)} quiz documents "
+                f"could be resolved to a doc_id via "
+                f"{os.path.basename(MISTRAL_DOCID_SOURCE)}. "
+                f"Refusing to build a partially-aligned arm.")
+
+        for temp in args.mistral_temps:
+            sub = mist[(mist["register"] == "informal") & (mist["temp"].astype(float) == temp)
+                       & (mist["condition"].isin(CONDITIONS)) & (mist["doc_id"].isin(want))]
+            # temp 1.0 matches the pinned temperature every GPT run used, so it is the
+            # directly comparable arm and gets the plain label
+            gen = "mistral" if float(temp) == 1.0 else f"mistral@t{temp}"
+            got = sub.groupby("condition").doc_id.nunique().to_dict()
+            missing = {c: len(want) - got.get(c, 0) for c in CONDITIONS if got.get(c, 0) != len(want)}
+            if missing:
+                raise SystemExit(
+                    f"Mistral arm temp={temp}: incomplete coverage {missing} "
+                    f"(need {len(want)} documents per condition).")
+            for _, r in sub.iterrows():
+                qz = docid_to_quiz[int(r["doc_id"])]
+                text = pipe.strip_markdown(r["text"])   # same hygiene as new generation
+                if not _nonempty(text):
+                    raise SystemExit(f"Mistral arm: empty text for doc_id {r['doc_id']}")
+                recs.append({
+                    "register": "informal", "generator": gen,
+                    "condition": r["condition"], "is_human": False,
+                    "context": str(qz["context"]), "text": text,
+                    "source_row": int(qz["source_row"]),
+                    "pair_id": str(qz["pair_id"]), "supersedes": pd.NA,
+                })
+                n_mistral += 1
 
     for i, r in enumerate(recs, args.offset):
         r["item_id"] = i

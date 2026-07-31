@@ -268,14 +268,24 @@ def input_from_env(default_path: str, env: str = "GEN_INPUT"):
 # ---------------------------------------------------------------------------
 # Quiz subsetting -- generate only the documents the detection quiz sampled.
 # ---------------------------------------------------------------------------
-# WHY THIS MATCHES ON TEXT, NOT ROW NUMBER: the quiz's `source_row` indexes the
-# *_adversarial.csv files that make_balanced_quiz.py reads, which hold the same
-# rows as the generation inputs but in a DIFFERENT ORDER (positional agreement on
-# `question` between consolidated_informal_comments_JUN26.csv and
-# consolidated_informal_comments_adversarial.csv is only ~37%). Using source_row
-# as a positional index into a generation input would therefore silently select
-# the wrong documents. The human text itself is stable across both files, so it is
-# the only safe join key.
+# WHY THIS MATCHES ON TEXT, NOT ROW NUMBER.
+#
+# CORRECTION (verified 2026-07-31): consolidated_informal_comments_JUN26.csv and
+# consolidated_informal_comments_adversarial.csv ARE in the same row order --
+# normalised positional agreement is 1.0000 on question, human_comment and
+# thread_id, with zero differing rows. An earlier note here claimed only ~37%
+# agreement; that was an artefact of comparing raw strings, since the two files
+# differ in line-break and whitespace conventions but not in ordering.
+#
+# Content matching is kept anyway, on purpose:
+#   - it does not depend on two files staying in lockstep. Row order is an
+#     invariant nobody has declared and no test enforces; a future re-sort,
+#     de-duplication or re-export would break a positional join silently, and the
+#     resulting corpus would look completely normal.
+#   - it fails LOUDLY. An incomplete match raises; a positional join cannot detect
+#     misalignment at all.
+#   - the cost is negligible (one normalised string comparison per row).
+# So this is defence against a plausible future edit, not a fix for a current bug.
 QUIZ_CSV = os.path.join(
     os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
     "3_ai_detection_scripts", "quiz_master_balanced.csv",

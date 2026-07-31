@@ -88,6 +88,18 @@ FORMAL_COL = {
 }
 INFORMAL_COL = {
     "human": "human_comment",
+    # DELIBERATELY STILL `generated_comment`, even though that column is gpt-4o-mini
+    # text rather than GPT-5.2 (see ../../BASELINE_PROVENANCE.md). data_utils.py has been
+    # repointed at the corrected `comment_baseline`; this script has NOT, on purpose:
+    #
+    #   _candidates() filters on every condition cell's length and blocklist match, so a
+    #   different baseline column can change which documents qualify. Re-running with
+    #   comment_baseline would therefore produce a DIFFERENT 100-document sample, and the
+    #   800 judgements in gpt52_run_results/ are tied to the current one.
+    #
+    # Reproducibility of the shipped quiz wins. Nothing needs this changed:
+    # make_followup_quiz.py reads the corrected baseline directly from the generation
+    # output, and pins to the documents this script already chose.
     "baseline": "generated_comment",
     "human_like": "comment_human_like",
     "detector_evasive": "comment_detector_evasive",

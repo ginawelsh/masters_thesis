@@ -27,12 +27,12 @@ except Exception:
 
 
 # ---------------------------------------------------------------------------
-# Formal LLM prompt conditions
+# LLM prompt conditions
 # ---------------------------------------------------------------------------
-# The formal corpus (sv_abstracts_adversarial.csv) holds three independently
-# generated LLM columns: a neutral baseline and two adversarial prompts. The
-# informal corpus has a single generated column, so `condition` is not applicable
-# there and is reported as None.
+# Both corpora hold four independently generated LLM columns: a neutral baseline
+# and three adversarial prompts. (An earlier version of this comment said the
+# informal corpus had only one generated column -- that has not been true since the
+# adversarial conditions were added.)
 
 FORMAL_CONDITIONS = {
     "baseline": "Abstract_baseline",
@@ -41,7 +41,20 @@ FORMAL_CONDITIONS = {
     "detector_evasive": "Abstract_detector_evasive",
 }
 INFORMAL_CONDITIONS = {
-    "baseline": "generated_comment",
+    # NOT `generated_comment`. That column is gpt-4o-mini text, not GPT-5.2: 863 of
+    # 1,149 texts trace to gpt-4o-mini output files and the remaining 286 have no
+    # locatable source, while no generation cache contains a single baseline cell.
+    # `comment_baseline` is a genuine GPT-5.2 baseline, regenerated 2026-07-31 over
+    # the same 1,149 documents. See ../../../BASELINE_PROVENANCE.md.
+    #
+    # Switching to it changes the reported informal baseline results: the new text
+    # averages 1,046 chars against the old 550 (human is 269), so effect sizes on
+    # length-sensitive features get LARGER -- GPT-5.2 over-writes relative to humans
+    # more than the gpt-4o-mini figures suggested.
+    #
+    # `generated_comment` is retained in the corpus and is still usable as a
+    # gpt-4o-mini arm, provided it is labelled as such.
+    "baseline": "comment_baseline",
     "human_like": "comment_human_like",
     "detector_aware": "comment_detector_aware",
     "detector_evasive": "comment_detector_evasive",

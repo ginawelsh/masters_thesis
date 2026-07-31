@@ -31,3 +31,6 @@ __pycache__/
 # secrets
 .env
 .env.*
+# Corpus backups written by merge_regenerated_baseline.py --write
+# (git history is the real backup; these are large duplicates)
+*.csv.bak
