@@ -4,26 +4,51 @@
 \providecommand{\cg}[1]{\cellcolor{hmgreen!#1}}
 % \definecolor{hmgreen}{HTML}{2E8B57} % uncomment if used standalone
 
-% ---- Table 1: per-judge headline performance ----
+% ---- Table 1: headline performance per judge x generator ----
 \begin{table*}[t]
   \centering
   \small
-  \begin{tabular}{lcccccc l}
+  \begin{tabular}{llcccccc l}
   \toprule
-    Judge & Overall & Balanced$^{\dagger}$ & Human & AI & Formal & Informal & Conf.\ \\
-          & acc.\   & acc.\               & recall & recall & acc.\ & acc.\    & calib. \\
+    Judge & Generator & Overall & Balanced$^{\dagger}$ & Human & AI & Formal & Informal & Conf.\ \\
+          &           & acc.\   & acc.\               & recall & recall & acc.\ & acc.\    & calib. \\
     \midrule
-    Claude & \cg{44}$88.1$ & \cg{46}$92.1$ & \cg{50}$100.0$ & \cg{42}$84.2$ & \cg{50}$100.0$ & \cg{38}$76.2$ & Calibrated \\
-    DeepSeek & \cg{23}$45.5$ & \cg{28}$56.2$ & \cg{39}$77.5$ & \cg{17}$34.8$ & \cg{30}$60.8$ & \cg{15}$30.2$ & Inverted \\
-    Gemini & \cg{39}$77.2$ & \cg{42}$84.3$ & \cg{49}$98.5$ & \cg{35}$70.2$ & \cg{50}$99.0$ & \cg{28}$55.5$ & Flat \\
+    Claude & GPT-4o-mini & \cg{49}$98.0$ & \cg{48}$97.0$ & \cg{50}$100.0$ & \cg{47}$94.0$ & --- & \cg{47}$94.0$ & Calibrated \\
+     & GPT-5.2 & \cg{42}$85.0$ & \cg{45}$90.0$ & \cg{50}$100.0$ & \cg{40}$80.0$ & \cg{50}$100.0$ & \cg{30}$60.0$ & Calibrated \\
+     & GPT-5.6 & \cg{36}$72.8$ & \cg{39}$77.3$ & \cg{50}$100.0$ & \cg{27}$54.7$ & --- & \cg{27}$54.7$ & Calibrated \\
+     & mistral & \cg{46}$91.6$ & \cg{46}$93.0$ & \cg{50}$100.0$ & \cg{43}$86.0$ & --- & \cg{43}$86.0$ & Calibrated \\
+    \addlinespace
+    DeepSeek & GPT-4o-mini & \cg{32}$63.0$ & \cg{28}$55.8$ & \cg{39}$77.5$ & \cg{17}$34.0$ & --- & \cg{17}$34.0$ & Flat \\
+     & GPT-5.2 & \cg{21}$41.9$ & \cg{27}$53.8$ & \cg{39}$77.5$ & \cg{15}$30.0$ & \cg{29}$58.0$ & \cg{1}$2.0$ & Inverted \\
+     & GPT-5.6 & \cg{22}$43.0$ & \cg{24}$48.8$ & \cg{39}$77.5$ & \cg{10}$20.0$ & --- & \cg{10}$20.0$ & Flat \\
+     & mistral & \cg{22}$43.2$ & \cg{24}$48.9$ & \cg{39}$77.5$ & \cg{10}$20.3$ & --- & \cg{10}$20.3$ & Inverted \\
+    \addlinespace
     \bottomrule
   \end{tabular}
-  \caption{LLM-as-judge AI-text detection on the balanced matched corpus (GPT-5.2; 100 documents per register, each contributing a human original and its three aligned regenerations). Cells shaded by accuracy. $^{\dagger}$Balanced accuracy = mean(human recall, AI recall). Confidence calibration compares mean confidence on correct vs.\ incorrect judgements.}
+  \caption{LLM-as-judge AI-text detection on the balanced matched corpus, per generator (100 documents per register; each document contributes a human original and its aligned regenerations). The human item set is shared across generators, so human recall is identical down each judge's block. Cells shaded by accuracy. $^{\dagger}$Balanced accuracy = mean(human recall, AI recall). Confidence calibration compares mean confidence on correct vs.\ incorrect judgements.}
   \label{tab:llm-judge-balanced}
 \end{table*}
 
-% ---- Table 2: AI-detection recall by condition (Wilson 95% CI); superscripts = McNemar vs baseline ----
-\begin{table*}[t]
+% ---- Table 1.1: GPT-4o-mini recall by condition ----
+\begin{table}[t]
+  \centering
+  \small
+  \begin{tabular}{ll ccc}
+  \toprule
+    Judge & Register & Baseline & Human-mimicking & Detector-evasive \\
+    \midrule
+    Claude & Informal & \cg{47}$94.0_{\pm5}$ & --- & --- \\
+    \addlinespace
+    DeepSeek & Informal & \cg{17}$34.0_{\pm9}$ & --- & --- \\
+    \addlinespace
+    \bottomrule
+  \end{tabular}
+  \caption{AI-detection recall (\%, Wilson 95\% CI half-width in subscript) for \textbf{GPT-4o-mini} text, by prompt condition, per judge and register (paired by source document). Superscripts give the McNemar exact-test significance of each condition vs.\ baseline ($^{*}q<.05$, $^{**}q<.01$, $^{***}q<.001$). The gpt-4o-mini attribution is verified for 863 of 1{,}149 corpus items (71 of 100 sampled here); the remainder is inferred from the absence of any other baseline-generating script.}
+  \label{tab:llm-judge-gpt-4o-mini}
+\end{table}
+
+% ---- Table 1.2: GPT-5.2 recall by condition ----
+\begin{table}[t]
   \centering
   \small
   \begin{tabular}{ll ccc}
@@ -31,17 +56,100 @@
     Judge & Register & Baseline & Human-mimicking & Detector-evasive \\
     \midrule
     Claude & Formal & \cg{50}$100.0_{\pm2}$ & \cg{50}$100.0_{\pm2}$ & \cg{50}$100.0_{\pm2}$ \\
-     & Informal & \cg{47}$94.0_{\pm5}$ & \cg{36}$73.0_{\pm9}$$^{***}$ & \cg{19}$38.0_{\pm9}$$^{***}$ \\
+     & Informal & \cg{34}$69.0_{\pm9}$ & \cg{36}$73.0_{\pm9}$ & \cg{19}$38.0_{\pm9}$$^{***}$ \\
     \addlinespace
     DeepSeek & Formal & \cg{24}$47.0_{\pm10}$ & \cg{18}$35.0_{\pm9}$ & \cg{46}$92.0_{\pm5}$$^{***}$ \\
-     & Informal & \cg{17}$34.0_{\pm9}$ & \cg{0}$1.0_{\pm3}$$^{***}$ & \cg{0}$0.0_{\pm2}$$^{***}$ \\
-    \addlinespace
-    Gemini & Formal & \cg{48}$96.0_{\pm4}$ & \cg{50}$100.0_{\pm2}$ & \cg{50}$100.0_{\pm2}$ \\
-     & Informal & \cg{40}$80.0_{\pm8}$ & \cg{18}$37.0_{\pm9}$$^{***}$ & \cg{4}$8.0_{\pm5}$$^{***}$ \\
+     & Informal & \cg{2}$5.0_{\pm5}$ & \cg{0}$1.0_{\pm3}$ & \cg{0}$0.0_{\pm2}$ \\
     \addlinespace
     \bottomrule
   \end{tabular}
-  \caption{AI-detection recall (\%, Wilson 95\% CI half-width in subscript) by prompt condition, per judge and register ($n=100$ AI items per cell, paired by source document). Superscripts give the McNemar exact-test significance of each condition vs.\ baseline ($^{*}q<.05$, $^{**}q<.01$, $^{***}q<.001$).}
-  \label{tab:llm-judge-balanced-condition}
+  \caption{AI-detection recall (\%, Wilson 95\% CI half-width in subscript) for \textbf{GPT-5.2} text, by prompt condition, per judge and register (paired by source document). Superscripts give the McNemar exact-test significance of each condition vs.\ baseline ($^{*}q<.05$, $^{**}q<.01$, $^{***}q<.001$).}
+  \label{tab:llm-judge-gpt-5-2}
+\end{table}
+
+% ---- Table 1.3: GPT-5.6 recall by condition ----
+\begin{table}[t]
+  \centering
+  \small
+  \begin{tabular}{ll ccc}
+  \toprule
+    Judge & Register & Baseline & Human-mimicking & Detector-evasive \\
+    \midrule
+    Claude & Informal & \cg{32}$64.0_{\pm9}$ & \cg{26}$52.0_{\pm10}$$^{*}$ & \cg{24}$48.0_{\pm10}$$^{**}$ \\
+    \addlinespace
+    DeepSeek & Informal & \cg{20}$40.0_{\pm9}$ & \cg{5}$10.0_{\pm6}$$^{***}$ & \cg{5}$10.0_{\pm6}$$^{***}$ \\
+    \addlinespace
+    \bottomrule
+  \end{tabular}
+  \caption{AI-detection recall (\%, Wilson 95\% CI half-width in subscript) for \textbf{GPT-5.6} text, by prompt condition, per judge and register (paired by source document). Superscripts give the McNemar exact-test significance of each condition vs.\ baseline ($^{*}q<.05$, $^{**}q<.01$, $^{***}q<.001$).}
+  \label{tab:llm-judge-gpt-5-6}
+\end{table}
+
+% ---- Table 1.4: mistral recall by condition ----
+\begin{table}[t]
+  \centering
+  \small
+  \begin{tabular}{ll ccc}
+  \toprule
+    Judge & Register & Baseline & Human-mimicking & Detector-evasive \\
+    \midrule
+    Claude & Informal & \cg{42}$84.0_{\pm7}$ & \cg{48}$96.0_{\pm4}$$^{**}$ & \cg{39}$78.0_{\pm8}$ \\
+    \addlinespace
+    DeepSeek & Informal & \cg{12}$24.0_{\pm8}$ & \cg{12}$25.0_{\pm8}$ & \cg{6}$12.0_{\pm6}$$^{*}$ \\
+    \addlinespace
+    \bottomrule
+  \end{tabular}
+  \caption{AI-detection recall (\%, Wilson 95\% CI half-width in subscript) for \textbf{mistral} text, by prompt condition, per judge and register (paired by source document). Superscripts give the McNemar exact-test significance of each condition vs.\ baseline ($^{*}q<.05$, $^{**}q<.01$, $^{***}q<.001$).}
+  \label{tab:llm-judge-mistral}
+\end{table}
+
+% ---- Table 2: paired generator contrasts (McNemar, same source documents) ----
+\begin{table*}[t]
+  \centering
+  \small
+  \begin{tabular}{lll rrr r l}
+  \toprule
+    Judge & Register & Condition & \multicolumn{2}{c}{Recall (\%)} & $\Delta$ & $n$ & $p$ \\
+    \midrule
+    \multicolumn{8}{l}{\textit{GPT-4o-mini $\rightarrow$ GPT-5.2}} \\
+    Claude & Informal & Baseline & $94$ & $69$ & $-25$ & $100$ & $1e-05$ *** \\
+    DeepSeek & Informal & Baseline & $34$ & $5$ & $-29$ & $100$ & $3e-08$ *** \\
+    \addlinespace
+    \multicolumn{8}{l}{\textit{GPT-4o-mini $\rightarrow$ GPT-5.6}} \\
+    Claude & Informal & Baseline & $94$ & $64$ & $-30$ & $100$ & $2e-07$ *** \\
+    DeepSeek & Informal & Baseline & $34$ & $40$ & $+6$ & $100$ & $0.4$  \\
+    \addlinespace
+    \multicolumn{8}{l}{\textit{GPT-4o-mini $\rightarrow$ mistral}} \\
+    Claude & Informal & Baseline & $94$ & $84$ & $-10$ & $100$ & $0.04$ * \\
+    DeepSeek & Informal & Baseline & $34$ & $24$ & $-10$ & $100$ & $0.2$  \\
+    \addlinespace
+    \multicolumn{8}{l}{\textit{GPT-5.2 $\rightarrow$ GPT-5.6}} \\
+    Claude & Informal & Baseline & $69$ & $64$ & $-5$ & $100$ & $0.5$  \\
+    Claude & Informal & Human-mimicking & $73$ & $52$ & $-21$ & $100$ & $0.0002$ *** \\
+    Claude & Informal & Detector-evasive & $38$ & $48$ & $+10$ & $100$ & $0.2$  \\
+    DeepSeek & Informal & Baseline & $5$ & $40$ & $+35$ & $100$ & $6e-10$ *** \\
+    DeepSeek & Informal & Human-mimicking & $1$ & $10$ & $+9$ & $100$ & $0.004$ ** \\
+    DeepSeek & Informal & Detector-evasive & $0$ & $10$ & $+10$ & $100$ & $0.002$ ** \\
+    \addlinespace
+    \multicolumn{8}{l}{\textit{GPT-5.2 $\rightarrow$ mistral}} \\
+    Claude & Informal & Baseline & $69$ & $84$ & $+15$ & $100$ & $0.01$ * \\
+    Claude & Informal & Human-mimicking & $73$ & $96$ & $+23$ & $100$ & $6e-06$ *** \\
+    Claude & Informal & Detector-evasive & $38$ & $78$ & $+40$ & $100$ & $1e-08$ *** \\
+    DeepSeek & Informal & Baseline & $5$ & $24$ & $+19$ & $100$ & $0.0002$ *** \\
+    DeepSeek & Informal & Human-mimicking & $1$ & $25$ & $+24$ & $100$ & $8e-07$ *** \\
+    DeepSeek & Informal & Detector-evasive & $0$ & $12$ & $+12$ & $100$ & $0.0005$ *** \\
+    \addlinespace
+    \multicolumn{8}{l}{\textit{GPT-5.6 $\rightarrow$ mistral}} \\
+    Claude & Informal & Baseline & $64$ & $84$ & $+20$ & $100$ & $0.001$ ** \\
+    Claude & Informal & Human-mimicking & $52$ & $96$ & $+44$ & $100$ & $1e-12$ *** \\
+    Claude & Informal & Detector-evasive & $48$ & $78$ & $+30$ & $100$ & $4e-05$ *** \\
+    DeepSeek & Informal & Baseline & $40$ & $24$ & $-16$ & $100$ & $0.01$ * \\
+    DeepSeek & Informal & Human-mimicking & $10$ & $25$ & $+15$ & $100$ & $0.01$ * \\
+    DeepSeek & Informal & Detector-evasive & $10$ & $12$ & $+2$ & $100$ & $0.8$  \\
+    \addlinespace
+    \bottomrule
+  \end{tabular}
+  \caption{Paired generator contrasts (McNemar exact test). Each pair of generators is compared on the SAME source documents, within register and prompt condition, so the test is paired rather than two-sample. $\Delta$ is the second generator's recall minus the first: positive means the newer generator is MORE detectable. ($^{*}q<.05$, $^{**}q<.01$, $^{***}q<.001$).}
+  \label{tab:llm-judge-generator-contrast}
 \end{table*}
 

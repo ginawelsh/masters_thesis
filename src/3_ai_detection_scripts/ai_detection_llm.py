@@ -71,7 +71,13 @@ PROVIDERS = {
         # deepseek-reasoner puts its (uncapped) chain-of-thought in a separate
         # field; max_tokens caps only the FINAL answer. 1024 was clipping the JSON
         # to empty/truncated -> UNKNOWN (counted wrong), so give it more headroom.
-        "max_tokens": 4096,
+        # RAISED 4096 -> 8192 on 2026-08-01: 4096 still produced 8 UNKNOWNs in the
+        # 300 Mistral items of quiz_followup.csv (0 in the original 800-item run).
+        # This caps the ANSWER only, so it cannot change the judgement -- it just
+        # stops a long reasoning trace truncating the JSON. Provenance note: the 698
+        # already-scored items in that run were judged at 4096; only the 8 retried
+        # UNKNOWNs use 8192, since the resume logic drops UNKNOWNs and re-asks them.
+        "max_tokens": 8192,
     },
     "gemini": {
         # Pro flagship reasoning model — the fair peer to claude-opus-4-8 /

@@ -1,6 +1,6 @@
 Abstract_Entity_Counts,Generated_Abstract_Entity_Counts
 ,ORG:1
-LOC:2,
+LOC:2,PRS:1
 ,
 ,
 ,
@@ -8,44 +8,44 @@ LOC:2,
 ,
 ,
 PRS:1,ORG:1 | PRS:2
-PRS:1,PRS:3
+PRS:1,PRS:2
 ,
 ,
-,ORG:1
 ,
 ,
+,PRS:1 | TME:1
 ,
 TME:1,
-,OBJ:2
-LOC:1,OBJ:3
+,OBJ:3
+LOC:1,OBJ:1
+,OBJ:1 | ORG:1
 ,OBJ:1
-,OBJ:2 | ORG:1
-OBJ:1 | PRS:1,OBJ:2 | ORG:1
+OBJ:1 | PRS:1,OBJ:1 | ORG:1
 ,LOC:1
 ,LOC:1
 ,LOC:1
 PRS:1,LOC:1
 ,LOC:1
-,PRS:6
-PRS:3,PRS:3
+,LOC:2 | PRS:1
+PRS:3,LOC:1 | PRS:1
 LOC:1,
 ,
 ,
 ,
 ,
-LOC:2,LOC:3 | PRS:1
-LOC:1 | TME:1,LOC:3
-LOC:1,LOC:7
-,LOC:3 | ORG:1 | PRS:1 | TME:2
-LOC:1 | PRS:2,LOC:6 | PRS:1
-LOC:2,LOC:6 | PRS:1
-LOC:1,LOC:3 | PRS:1 | TME:1
-LOC:1,LOC:7
-,LOC:2
-PRS:1,LOC:5 | ORG:2 | PRS:1
-LOC:2 | ORG:1,LOC:2 | ORG:1
-,LOC:1 | ORG:1
-,ORG:1
+LOC:2,ORG:1 | PRS:2
+LOC:1 | TME:1,LOC:4 | ORG:2
+LOC:1,LOC:3
+,LOC:5 | ORG:2 | PRS:1 | TME:1
+LOC:1 | PRS:2,LOC:9 | PRS:2
+LOC:2,LOC:5 | TME:1
+LOC:1,LOC:8 | PRS:1
+LOC:1,LOC:4 | ORG:1
+,LOC:6 | ORG:2
+PRS:1,LOC:3 | ORG:1
+LOC:2 | ORG:1,LOC:5
+,LOC:3 | ORG:4
+,PRS:1
 ,
 PRS:1,
 LOC:1,
@@ -55,147 +55,147 @@ LOC:1 | PRS:1,
 LOC:2 | PRS:1,LOC:1
 ,LOC:1
 ,LOC:1
+,LOC:1
+,PRS:1
+,LOC:2
+,LOC:1
+,LOC:1
+,LOC:3
+,LOC:3 | TME:1
 ,
 ,LOC:2
-,
-,LOC:1
-,
-,LOC:1
-,LOC:1
-,LOC:2
-,
 TME:1,LOC:2
-PRS:1 | WRK:1,LOC:1 | ORG:1
+PRS:1 | WRK:1,LOC:1
 ,
 ,ORG:1
 ,
-,ORG:1
+,
 ,ORG:1
 ,
-PRS:2,PRS:4
-PRS:1 | WRK:1,PRS:5 | TME:1
-PRS:3,PRS:6
-PRS:1,PRS:4
-PRS:1,PRS:6
-,PRS:1
+PRS:2,PRS:3
+PRS:1 | WRK:1,PRS:3
+PRS:3,LOC:1 | ORG:2 | PRS:5
+PRS:1,ORG:1 | PRS:6
+PRS:1,PRS:5
 ,
+,LOC:1
 PRS:1,
-,PRS:1
-,
-LOC:3 | PRS:1,LOC:4 | TME:1
-,LOC:3 | PRS:1
+,LOC:1
+,LOC:1
+LOC:3 | PRS:1,LOC:3
+,LOC:1 | PRS:1
 ,ORG:1
-,ORG:1
+,
+,PRS:2
 ,
 ,
-,
-,
-LOC:1,LOC:7
-PRS:1 | TME:1,LOC:3 | ORG:2 | PRS:1
+,LOC:1
+LOC:1,LOC:4 | PRS:1
+PRS:1 | TME:1,PRS:4
 ,
 LOC:1 | PRS:1,
 PRS:1,PRS:4
-PRS:3,PRS:5 | WRK:1
-PRS:1,PRS:4
+PRS:3,PRS:3
+PRS:1,PRS:2
 LOC:1 | ORG:1,
 ,
 ,
 PRS:1,
 ,
-,
-,
-,
-,
 ,ORG:1
+,
+,
+,
+,
 LOC:1,
+,
+,
 ,PRS:1
 ,
 ,
 ,
 ,
-,LOC:1
-,LOC:1
 ,
 ,
 ,
-ORG:1,ORG:1 | PRS:1 | TME:1
-LOC:1,ORG:1 | PRS:3
-,PRS:3
-PRS:1,ORG:1 | PRS:9
-LOC:1 | ORG:1 | PRS:1,LOC:2 | PRS:11
-PRS:2,LOC:4 | PRS:8
-LOC:3 | PRS:6,LOC:1 | PRS:11
-LOC:3 | ORG:1 | PRS:11,LOC:4 | PRS:8
+ORG:1,ORG:1 | PRS:3
+LOC:1,PRS:2
+,ORG:1 | PRS:3
+PRS:1,LOC:2 | PRS:9
+LOC:1 | ORG:1 | PRS:1,LOC:2 | PRS:9
+PRS:2,LOC:3 | PRS:13
+LOC:3 | PRS:6,LOC:6 | PRS:11
+LOC:3 | ORG:1 | PRS:11,LOC:5 | PRS:9
 ORG:1,
 PRS:1,
+,PRS:1
+,PRS:1
 ,
-,LOC:1
 ,
-,
-,ORG:3
+,LOC:1 | ORG:1
+,LOC:1 | ORG:3
+LOC:1,LOC:1 | ORG:2
 ,ORG:4
 LOC:1,LOC:1 | ORG:4
-,ORG:3
-LOC:1,ORG:1
-,LOC:1
-LOC:1 | ORG:1 | PRS:1,
-LOC:3 | PRS:4 | WRK:1,LOC:2 | ORG:1 | PRS:1
-,PRS:1
-,LOC:1
+,LOC:2
+LOC:1 | ORG:1 | PRS:1,LOC:2
+LOC:3 | PRS:4 | WRK:1,LOC:3 | ORG:1
+,LOC:2 | ORG:1
+,LOC:1 | PRS:1
+,LOC:7
 ,LOC:3
-,LOC:4
-LOC:1,LOC:3 | PRS:1
-ORG:1,LOC:3
-LOC:1,LOC:6
+LOC:1,LOC:3
+ORG:1,LOC:5 | PRS:1
+LOC:1,LOC:4
 ,
 LOC:2,
 ,
 ,
-LOC:3 | PRS:2,PRS:2
-LOC:2,LOC:4
-PRS:1,
-,
-,
+LOC:3 | PRS:2,PRS:1
+LOC:2,LOC:3
+PRS:1,LOC:1
+,ORG:1
 ,LOC:1
 ,LOC:1
-,
-,LOC:4
-PRS:1,LOC:5
-LOC:1,LOC:7
-LOC:1 | ORG:1,ORG:1
+,LOC:1
+,LOC:2
+,LOC:5
+PRS:1,LOC:4
+LOC:1,LOC:6
+LOC:1 | ORG:1,LOC:1 | ORG:1
 ,LOC:1 | ORG:1
 ,ORG:1
 ORG:1 | TME:1,ORG:1
 LOC:1 | ORG:1,LOC:1 | ORG:1
-LOC:1 | ORG:3,LOC:1 | ORG:4 | PRS:1
-,LOC:1 | ORG:4
-LOC:3 | ORG:1,LOC:1 | ORG:2 | PRS:1
-,LOC:1 | ORG:4
-PRS:1,LOC:4 | ORG:1
-LOC:3 | ORG:1,LOC:5 | ORG:1
-,LOC:6
-,LOC:2 | PRS:1
-LOC:1 | ORG:1,LOC:2 | PRS:1
-PRS:2,LOC:5
-LOC:7 | ORG:3 | PRS:3 | WRK:1,LOC:3 | PRS:1
-,LOC:1 | ORG:3
-LOC:1,LOC:1 | ORG:3
-LOC:1,LOC:1 | ORG:3 | PRS:1 | WRK:1
-,LOC:2 | ORG:1 | PRS:1
-,LOC:1 | ORG:7
+LOC:1 | ORG:3,LOC:1 | ORG:2
+,LOC:1 | ORG:4 | PRS:2
+LOC:3 | ORG:1,LOC:1 | ORG:4
+,LOC:1 | ORG:2
+PRS:1,LOC:10 | ORG:2
+LOC:3 | ORG:1,LOC:4
+,LOC:5 | ORG:1
+,LOC:5 | ORG:1 | PRS:1
+LOC:1 | ORG:1,LOC:4 | PRS:1
+PRS:2,LOC:3 | ORG:1 | PRS:2
+LOC:7 | ORG:3 | PRS:3 | WRK:1,LOC:3 | ORG:1 | PRS:2
+,LOC:1 | ORG:11
+LOC:1,LOC:2
+LOC:1,LOC:1 | ORG:1 | PRS:1
+,LOC:2 | ORG:7
+,LOC:1 | ORG:2 | TME:1
 ,
+,LOC:1
 ,LOC:1
 ,
 ,
-,
-ORG:1,LOC:2 | ORG:2
-LOC:1,LOC:4 | ORG:1
-LOC:1,LOC:1 | ORG:2
+ORG:1,
+LOC:1,LOC:6 | ORG:1
+LOC:1,LOC:7 | ORG:1
 LOC:1 | ORG:2,LOC:3 | ORG:1
-LOC:1,LOC:1 | ORG:2
-LOC:2,LOC:7 | PRS:1
-,LOC:6 | TME:1
-,LOC:6 | ORG:1
+LOC:1,LOC:4 | ORG:1 | TME:1
+LOC:2,LOC:4 | ORG:1 | PRS:1
+,LOC:5 | PRS:1
+,LOC:4 | ORG:1 | PRS:1
 PRS:1,
 ,
 ,
@@ -203,6 +203,7 @@ LOC:1,
 ,
 PRS:1,
 ,
+,PRS:1
 ,
 ,
 ,
@@ -222,13 +223,12 @@ PRS:1,
 ,
 ,
 ,
-,
-,PRS:2
-PRS:1,PRS:2
-,
+,PRS:4
+PRS:1,PRS:4
 ,
 ,
-PRS:1,OBJ:2 | ORG:1 | PRS:1
+,
+PRS:1,OBJ:6 | ORG:1 | PRS:1
 PRS:2,
 ,
 ,
@@ -236,6 +236,7 @@ PRS:2,
 ,
 ,
 ,
+,PRS:1
 ,
 ,
 ,
@@ -247,22 +248,21 @@ PRS:2,
 ,
 ,
 ,
+,LOC:1
+,
+,LOC:1
+,
+,
+,
+PRS:1,LOC:1 | ORG:1
 ,
 ,
 ,
 ,
 ,
-,
-,
-PRS:1,
-,
-,
-,
-,
-,
-,
-EVN:1,
-,
+,PRS:3 | TME:1
+EVN:1,PRS:2
+,PRS:2
 ,
 ,
 ,
@@ -293,19 +293,19 @@ LOC:1 | PRS:1,
 ,
 LOC:1,
 ,
-,
-,
-,
-,
-,
-LOC:10,LOC:1
-,LOC:2
-LOC:3,LOC:3
-,LOC:2
-LOC:7,LOC:2
-LOC:8 | MSR:1 | ORG:1,LOC:5
-TME:1,LOC:4
 ,LOC:1
+,
+,
+,
+,
+LOC:10,LOC:5 | PRS:2
+,LOC:4 | PRS:1 | TME:1
+LOC:3,LOC:4 | PRS:1
+,LOC:2 | PRS:1
+LOC:7,LOC:1 | PRS:1
+LOC:8 | MSR:1 | ORG:1,LOC:1 | PRS:1
+TME:1,LOC:3 | PRS:1
+,LOC:6 | PRS:1
 PRS:2,
 ,
 ,
@@ -314,12 +314,12 @@ ORG:1,
 ,
 ,
 LOC:1,
+,TME:1
 ,
 ,
 ,
 ,
-,
-PRS:2,
+PRS:2,LOC:1
 PRS:1,
 ,
 ,
@@ -333,20 +333,20 @@ PRS:1 | WRK:1,
 ,
 ,
 PRS:1,
-,
-LOC:5,LOC:6 | TME:1
-,LOC:5
-LOC:1,LOC:4
-LOC:2,LOC:3
-,LOC:4
-LOC:1,LOC:4
-LOC:2,LOC:7
+,TME:1
+LOC:5,LOC:10
+,LOC:7
+LOC:1,LOC:8
+LOC:2,LOC:12 | ORG:1
+,LOC:6
 LOC:1,LOC:6
-LOC:1,LOC:4
-,LOC:3
-LOC:1,LOC:1 | MSR:1
-,
+LOC:2,LOC:7
+LOC:1,LOC:9
+LOC:1,LOC:6
+,LOC:8 | ORG:1
 LOC:1,LOC:2
+,LOC:1 | WRK:1
+LOC:1,LOC:1
 ,LOC:2
 ,
 ,
@@ -355,161 +355,193 @@ LOC:1,LOC:2
 ,
 ,
 ,
+,ORG:1 | TME:1
+,ORG:1
+,ORG:1
+,ORG:1
 ,ORG:1
 ,
 ,
 ,
+,OBJ:1
 ,
-,
-,
-,
-,
-,
-LOC:2 | PRS:2,
+LOC:2 | PRS:2,LOC:3 | PRS:1
+LOC:1,LOC:2 | PRS:1
+LOC:6,LOC:2 | PRS:2
+PRS:2,LOC:1 | PRS:3
+PRS:1,LOC:4 | ORG:1
+LOC:1,LOC:4 | PRS:1
+,LOC:1 | PRS:1
+PRS:2,LOC:2 | PRS:1
+,LOC:1 | PRS:3
+,LOC:1 | PRS:1
 LOC:1,LOC:1 | PRS:1
-LOC:6,PRS:1
-PRS:2,PRS:1
-PRS:1,LOC:1 | PRS:1
-LOC:1,
-,
-PRS:2,LOC:1 | PRS:1
-,LOC:1 | PRS:1
-,PRS:1
-LOC:1,PRS:1
-,LOC:1 | PRS:1
-LOC:1,PRS:1
-LOC:2,LOC:1
-LOC:1,
-,PRS:1
 ,LOC:2 | PRS:1
-,PRS:1
-,
-,
-,
-TME:1,
-,
-PRS:1,
-,
-,
-,
-,
-,
-,
-,
-LOC:1,
-,
-PRS:1,
-,PRS:1
-,
-,
-,
-,
-,
-,
-,
-,ORG:1
-,ORG:1 | PRS:1
-,LOC:1 | ORG:1
-,ORG:1 | PRS:1
-LOC:1,ORG:1 | PRS:1
-,LOC:1 | ORG:2
-PRS:1,PRS:1
-,LOC:1 | ORG:1
-ORG:1 | PRS:1,ORG:1 | PRS:1
-PRS:2 | TME:1,ORG:2
-,LOC:1 | ORG:1
-,LOC:1
-,ORG:2
-,ORG:1 | PRS:2
-,
-,LOC:1
-,LOC:1
-,PRS:1
-,LOC:1
-,
-,
-,LOC:1
-,LOC:1
-,
-,PRS:1
-,LOC:1
-,
-,
-,
-,
-,
-,
-,
-,
-,
-,
-,
-,
-,
-LOC:1,
-,
-,
-LOC:1,TME:1
-,
-,PRS:1
-,
-LOC:1,
-LOC:1,
-PRS:1,
-LOC:2 | PRS:2,PRS:1
-LOC:1 | TME:1,
-LOC:1 | OBJ:1 | PRS:2,PRS:1 | TME:1
-,
+LOC:1,LOC:3 | ORG:2 | PRS:2
 LOC:2,LOC:2
-,LOC:6 | ORG:1
-,LOC:1 | ORG:1
-PRS:1,LOC:3
-LOC:2,LOC:4 | TME:1
-LOC:1,LOC:2
-,LOC:1
-LOC:4 | MSR:2 | ORG:2,LOC:3
-,LOC:4
-LOC:5,
-LOC:9 | TME:1,LOC:1
-,LOC:2 | ORG:1
-LOC:1,LOC:2
-,
-PRS:1,
-,PRS:1
-ORG:1,
-,
-,
-,
-,
-ORG:1,
-LOC:1,
-,
-LOC:1 | PRS:1,
-LOC:3,
-LOC:4,
-,
-LOC:1,
-PRS:1,
-,
-,
-,
-,LOC:1
-,
-,
-LOC:1,
-,
-,
+LOC:1,LOC:4 | PRS:1
+,LOC:2 | PRS:1
+,LOC:1 | PRS:2
+,LOC:1 | PRS:1
 ,
 ,
 ,
 TME:1,
 ,
-ORG:1,
-LOC:2 | ORG:2,
+PRS:1,
 ,
 ,
 ,
 ,
+,
+,
+,
+LOC:1,
+,EVN:1
+PRS:1,
+,
+,
+,
+,
+,
+,
+,
+,
+,ORG:3
+,LOC:1 | ORG:2
+,LOC:2 | ORG:2 | PRS:1
+,LOC:1 | ORG:1 | PRS:2
+LOC:1,ORG:3
+,ORG:6 | PRS:1
+PRS:1,LOC:1 | ORG:2 | PRS:1
+,LOC:1 | ORG:1 | PRS:1
+ORG:1 | PRS:1,ORG:1
+PRS:2 | TME:1,LOC:1 | ORG:4 | PRS:1
+,ORG:1
+,LOC:1 | ORG:1 | WRK:1
+,ORG:1
+,ORG:2
+,
+,
+,
+,LOC:1
+,
+,
+,LOC:1
+,LOC:1
+,LOC:2
+,LOC:2
+,LOC:1
+,LOC:1
+,ORG:1
+,LOC:1
+,
+,TME:1
+,ORG:1 | TME:1
+,PRS:1
+,
+,
+,
+,
+,
+,
+,
+LOC:1,
+,
+,
+LOC:1,
+,ORG:1
+,PRS:1
+,
+LOC:1,PRS:1
+LOC:1,PRS:1
+PRS:1,PRS:1
+LOC:2 | PRS:2,
+LOC:1 | TME:1,LOC:1
+LOC:1 | OBJ:1 | PRS:2,
+,PRS:1
+LOC:2,LOC:22 | ORG:1 | PRS:1
+,LOC:13
+,LOC:13 | ORG:3 | PRS:1
+PRS:1,LOC:15 | ORG:2
+LOC:2,LOC:26
+LOC:1,LOC:26 | ORG:1
+,LOC:18 | MSR:1 | PRS:1
+LOC:4 | MSR:2 | ORG:2,LOC:15 | PRS:1
+,LOC:8 | ORG:1
+LOC:5,LOC:17 | ORG:1
+LOC:9 | TME:1,LOC:14 | PRS:1
+,LOC:15 | ORG:1 | PRS:1
+LOC:1,LOC:12 | ORG:1
+,
+PRS:1,
+,PRS:1
+ORG:1,PRS:1
+,PRS:1
+,
+,
+,
+ORG:1,ORG:1
+LOC:1,LOC:1
+,
+LOC:1 | PRS:1,LOC:1
+LOC:3,LOC:1
+LOC:4,LOC:1
+,LOC:2
+LOC:1,LOC:1
+PRS:1,
+,LOC:1
+,
+,LOC:1
+,LOC:1
+,LOC:1
+,LOC:2
+LOC:1,
+,LOC:4
+,
+,LOC:1 | PRS:1
+,
+,
+TME:1,LOC:1
+,LOC:2
+ORG:1,LOC:2
+LOC:2 | ORG:2,LOC:1
+,LOC:2
+,LOC:1
+,LOC:2
+,
+LOC:1,LOC:3
+,
+,
+,
+,
+,
+,
+,
+LOC:3,LOC:17
+LOC:1,LOC:25
+LOC:9,LOC:11
+LOC:2,LOC:17
+LOC:2,LOC:17 | TME:1
+LOC:5 | ORG:1,LOC:15 | ORG:1
+LOC:5,LOC:13 | ORG:1
+LOC:2,LOC:15
+PRS:1,LOC:18
+LOC:5 | PRS:1,LOC:28
+,LOC:21
+LOC:3,LOC:15
+LOC:1 | ORG:2,LOC:27
+LOC:3,LOC:20
+LOC:1,LOC:20
+LOC:11 | PRS:1 | TME:1,LOC:22
+LOC:7 | PRS:2,LOC:16
+LOC:3 | PRS:1,LOC:30
+,ORG:1
+,ORG:1
+,LOC:1
+,
+LOC:1,
+LOC:1,
 LOC:1,
 ,
 ,
@@ -518,39 +550,7 @@ LOC:1,
 ,
 ,
 ,
-LOC:3,LOC:6
-LOC:1,LOC:4
-LOC:9,LOC:3
-LOC:2,LOC:9
-LOC:2,LOC:6
-LOC:5 | ORG:1,LOC:5
-LOC:5,LOC:5
-LOC:2,LOC:4
-PRS:1,LOC:5
-LOC:5 | PRS:1,LOC:3
-,LOC:3
-LOC:3,LOC:6
-LOC:1 | ORG:2,LOC:3
-LOC:3,LOC:4
-LOC:1,LOC:6
-LOC:11 | PRS:1 | TME:1,LOC:6 | ORG:1
-LOC:7 | PRS:2,LOC:3
-LOC:3 | PRS:1,LOC:6 | TME:1
-,
-,
-,
-,
-LOC:1,
-LOC:1,
-LOC:1,
-,
-,
-,
-,
-,
-,
-,
-,
+,TME:1
 ,
 ,
 ,
@@ -561,8 +561,8 @@ PRS:1,
 ,
 OBJ:1,
 ,
-,
-TME:1,
+,TME:1
+TME:1,PRS:1
 ,
 PRS:1,
 ,
@@ -580,7 +580,7 @@ OBJ:1 | PRS:2,
 ,
 ,
 ,
-,
+,PRS:1
 ,
 ,
 ,
@@ -607,36 +607,36 @@ LOC:1 | PRS:1 | TME:1,
 ,LOC:1
 ,LOC:1
 LOC:1,LOC:1
+,LOC:2
+,LOC:1
+,PRS:4
+LOC:1 | PRS:1,PRS:3
+LOC:1,ORG:1 | PRS:2
+,ORG:1
+,ORG:1
+,ORG:1
+,ORG:1
+ORG:1,
 ,
 ,
-,LOC:1 | ORG:1 | PRS:1
-LOC:1 | PRS:1,PRS:2
-LOC:1,LOC:1 | PRS:2
-,PRS:1
-,PRS:1
-,PRS:1
-,PRS:1
-ORG:1,LOC:1 | PRS:1
-,PRS:1
-,PRS:1
-,PRS:1
-,PRS:1
-,PRS:1
-,PRS:1
-LOC:1,PRS:1
-LOC:1,PRS:1
-,PRS:1
-,PRS:1
-,PRS:1
-,PRS:1
+,ORG:1
+,ORG:1
+,TME:1
+,
+LOC:1,ORG:1
+LOC:1,
+,ORG:1
+,
+,ORG:1
+,ORG:1
 ,
 ,
+,EVN:1
 ,
 ,
-,PRS:1
-,
+,LOC:1 | ORG:1
 PRS:1,
-,
+,LOC:1
 PRS:1,
 TME:1,
 ,
@@ -656,53 +656,53 @@ PRS:1,
 ,
 ,
 ,
-,
+,PRS:1
 PRS:1,
 LOC:1,
 ,
 ,
 ,
+,PRS:1
+PRS:1,
+,TME:1
+PRS:1,PRS:1
+,
+,
+,
+,
+,
+,
 ,
 PRS:1,
-,
-PRS:1,
-,
-,
-,
-,
-,
-,
-,
-PRS:1,
-,
-LOC:1 | PRS:2,
-,
-,
+,LOC:4
+LOC:1 | PRS:2,LOC:2
+,LOC:4
 ,LOC:2
+,LOC:3
 LOC:2,
-LOC:2 | PRS:3,
+LOC:2 | PRS:3,LOC:4
+,
+,
+,
+,PRS:1
+,
+PRS:1,ORG:1
+,
+PRS:1,
+,
+,LOC:1 | ORG:1
+,
+,PRS:1 | TME:1
+LOC:1,
+,ORG:1
+,
 ,
 ,
 ,
 ,ORG:1
+,ORG:2
 ,
-PRS:1,PRS:1
-,
-PRS:1,
-,
-,
-,
-,
-LOC:1,
-,
-,
-,
-,
-,
-,
-,
-,
-,
+,ORG:2
 ,
 ,
 ,
@@ -715,151 +715,151 @@ LOC:1,
 ORG:1,
 ,
 ,
+,
+PRS:1,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,LOC:7 | PRS:1
+,LOC:3 | PRS:1
+PRS:1,LOC:5 | ORG:1
+PRS:1,LOC:3 | PRS:1
+LOC:2,LOC:5 | PRS:2
+ORG:1,LOC:4 | ORG:2 | PRS:1
+LOC:1 | ORG:1,LOC:4 | ORG:2 | PRS:1
+LOC:1,LOC:5 | ORG:1 | PRS:1
+LOC:1,LOC:3 | PRS:2
+LOC:1 | PRS:1,LOC:3 | PRS:1
+LOC:8 | PRS:1,LOC:3 | PRS:1
+,LOC:5 | ORG:1 | PRS:1
 ,PRS:1
-PRS:1,
 ,
-,
-,
-,
-,
-,
-,
-,
-,
-,
-,
-,
-,
-,
-,
-,LOC:2 | PRS:1
-,LOC:2 | WRK:1
-PRS:1,LOC:2
-PRS:1,LOC:4 | WRK:1
-LOC:2,LOC:4 | PRS:1
-ORG:1,LOC:2 | WRK:1
-LOC:1 | ORG:1,LOC:3 | ORG:1
-LOC:1,LOC:4 | ORG:1 | PRS:1
-LOC:1,LOC:2 | ORG:1 | WRK:1
-LOC:1 | PRS:1,LOC:2 | WRK:1
-LOC:8 | PRS:1,LOC:2 | ORG:1
-,LOC:1 | PRS:1 | WRK:1
-,
-,
-PRS:1,
-,
+PRS:1,PRS:2
+,PRS:1
 PRS:2,PRS:1
 LOC:1,
-,
 ,PRS:1
-,LOC:1
+,PRS:1
+,PRS:1
 ,
 PRS:2 | WRK:1,PRS:1
 ,PRS:1
-PRS:1,
-PRS:3,
+PRS:1,PRS:2
+PRS:3,PRS:1
 ,
-PRS:1,
-,PRS:1
-PRS:2,
-PRS:1,PRS:1
-,PRS:1
-PRS:1,
-PRS:1,
-PRS:1,PRS:1
-,PRS:1
-LOC:1,
-,PRS:1
-,
-,LOC:1
-,
-PRS:1,
-,ORG:1
-ORG:1,
-,
-,
-PRS:1,ORG:1
-ORG:1,ORG:1
-,
-PRS:1,
-,
-,
-,ORG:1
-ORG:1,
-,ORG:1
-,
-,
-,
-,
-,
-,
-,
-,
-,
-,
-,PRS:1
-,
-,
-,
-,
-,
-,
-,
-,
-,
-,
-,
-,
-,OBJ:1
-,
-,
-,OBJ:1
-,
-,
-PRS:1,
-PRS:1,
-PRS:1,LOC:5 | ORG:2
-TME:1,LOC:3 | ORG:1 | TME:1
-LOC:4 | ORG:2,LOC:6 | ORG:3
-LOC:1,LOC:4 | ORG:3
-,OBJ:1
-,PRS:1
-,PRS:1
-,PRS:1
-,
-,PRS:1
-,PRS:1
-,PRS:1
 PRS:1,PRS:2
 ,PRS:1
+PRS:2,PRS:1
+PRS:1,PRS:1
+,PRS:2
+PRS:1,LOC:1
+PRS:1,LOC:2 | PRS:3
+PRS:1,LOC:1
+,ORG:1 | PRS:1
+LOC:1,ORG:1
+,PRS:1
+,
+,
+,
+PRS:1,ORG:1 | PRS:1
+,
+ORG:1,ORG:2
+,ORG:1
+,ORG:1
+PRS:1,ORG:3
+ORG:1,
+,
+PRS:1,
+,ORG:1
+,
+,ORG:1
+ORG:1,ORG:3
+,ORG:1
+,ORG:2
+,
+,EVN:1 | LOC:1 | PRS:1
+,ORG:1
+,
+,ORG:1
+,LOC:1 | PRS:1
+,
+,
+,
+,
+,
+,
+,
+,ORG:1
+,
+,
+,
+,ORG:1
+,
+,ORG:1
+,OBJ:1
+,TME:1
+,
+,EVN:1
+,EVN:1 | OBJ:1
+,LOC:2 | ORG:1
+,OBJ:1 | PRS:1
+,ORG:1
+PRS:1,
+PRS:1,
+PRS:1,LOC:16 | ORG:7
+TME:1,LOC:7 | ORG:4 | PRS:1
+LOC:4 | ORG:2,LOC:13 | ORG:5
+LOC:1,LOC:7 | ORG:1
+,PRS:1
+,
 ,PRS:1
 ,
 ,PRS:1
 ,
 ,PRS:2
+,PRS:1
+PRS:1,OBJ:1 | PRS:1
 ,
 ,PRS:1
+,
 ,PRS:1
+,
+,PRS:1
+,PRS:2
+,PRS:1
+,PRS:2
 PRS:1,
-,
-,LOC:3
-,LOC:2
-,LOC:2
-,LOC:3
 ,LOC:1
-,LOC:1 | ORG:1
-LOC:1 | TME:1,LOC:2
-,LOC:3
 ,LOC:2
-PRS:1,LOC:1
+,LOC:3
+,LOC:3 | ORG:2
+,LOC:4 | ORG:1
 ,LOC:3 | ORG:1
+,LOC:4
+LOC:1 | TME:1,LOC:2
+,LOC:3 | PRS:1
+,LOC:3 | ORG:1
+PRS:1,LOC:4 | ORG:1
+,LOC:3
 ,LOC:1
-,
-,
+,LOC:2
+,LOC:2
 ,
 PRS:1,
-,LOC:1
-LOC:1,LOC:1
+,
+LOC:1,ORG:1
 TME:1,
 ,
 ,
@@ -868,7 +868,7 @@ TME:1,
 ,
 ,
 ORG:1,
-,
+,ORG:1
 ,
 ,
 ,
@@ -878,108 +878,108 @@ ORG:1,
 ,
 ,ORG:1
 LOC:3 | ORG:1,
+,
+,
+,
+,
+LOC:5 | MSR:2,
+LOC:3,
+LOC:1,ORG:1
+,
+,PRS:1
+,LOC:1 | PRS:3
+ORG:1 | PRS:2,LOC:2 | ORG:1 | PRS:4
+PRS:4 | TME:1,LOC:1 | PRS:2
+,LOC:1 | PRS:3
+LOC:2 | ORG:1 | PRS:1 | TME:1,LOC:2 | PRS:2
+PRS:1,PRS:4
+PRS:2,LOC:1 | ORG:1 | PRS:3
+PRS:5,PRS:3
+ORG:1,LOC:1 | PRS:3
+PRS:1,PRS:1
+LOC:1 | PRS:1 | TME:1,LOC:2 | PRS:3
+PRS:1,PRS:4
+,ORG:1 | PRS:3
+PRS:2,PRS:4
+,ORG:1 | PRS:3
+,PRS:2
+,LOC:1 | PRS:3
+LOC:1 | PRS:3,LOC:2 | PRS:2
+,LOC:2 | PRS:2
+,PRS:2
+ORG:1 | TME:1,PRS:1
+LOC:2,PRS:3
+ORG:2 | PRS:2,LOC:2 | PRS:2
+LOC:1,PRS:1
+PRS:1,ORG:1 | PRS:5
+PRS:1,PRS:3
+,PRS:1
+,LOC:1 | PRS:3
+ORG:1,PRS:1
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,PRS:1
+,PRS:1
+,
+PRS:1,PRS:1
+,PRS:1
+ORG:1,
+LOC:2 | PRS:1,
+,PRS:1
+LOC:2 | ORG:1 | PRS:2,
+,LOC:1 | ORG:1
+LOC:1,LOC:1
 ,LOC:1
+ORG:1 | PRS:1,
+,
+,LOC:1
+,
+,
+,
+PRS:1,
+,
+LOC:1,PRS:1
 ,
 ,
 ,ORG:1
-LOC:5 | MSR:2,
-LOC:3,
-LOC:1,
+LOC:1,LOC:1
 ,
-,LOC:1
-,LOC:2
-ORG:1 | PRS:2,PRS:1
-PRS:4 | TME:1,PRS:1
-,PRS:1
-LOC:2 | ORG:1 | PRS:1 | TME:1,PRS:2
-PRS:1,LOC:1
-PRS:2,PRS:1
-PRS:5,ORG:1 | PRS:1
-ORG:1,
-PRS:1,PRS:1
-LOC:1 | PRS:1 | TME:1,PRS:1
-PRS:1,PRS:1
-,LOC:1
-PRS:2,PRS:1
-,PRS:1
-,
-,LOC:2 | PRS:1
-LOC:1 | PRS:3,
-,PRS:2
-,PRS:2
-ORG:1 | TME:1,
-LOC:2,
-ORG:2 | PRS:2,ORG:1 | PRS:1
-LOC:1,PRS:1
-PRS:1,PRS:1
-PRS:1,ORG:1 | PRS:1
-,LOC:1 | PRS:1
-,PRS:1
-ORG:1,
-,
-,
-,
-,
-,
-,
-,
-,
-,
-,
-,
-,
-,LOC:1
-PRS:1,ORG:1
-,
-ORG:1,
-LOC:2 | PRS:1,
-,
-LOC:2 | ORG:1 | PRS:2,
-,
-LOC:1,
-,
-ORG:1 | PRS:1,
-,
-,
-,
-,
-,LOC:1
-PRS:1,ORG:1
-,
-LOC:1,
-,
-,
-,LOC:1
-LOC:1,
-,
-,
-LOC:1 | PRS:1,
-PRS:1,WRK:1
-,ORG:2
+,WRK:1
+LOC:1 | PRS:1,ORG:1 | WRK:1
+PRS:1,ORG:1 | PRS:1 | WRK:1
+,ORG:2 | WRK:1
 ,
 ORG:1,
 ,
 TME:1,
-,TME:1
-,LOC:2
+,EVN:1 | TME:1
+,EVN:1 | ORG:1 | PRS:2
 PRS:1,
-LOC:1 | ORG:1 | PRS:4,
+LOC:1 | ORG:1 | PRS:4,ORG:1
+,EVN:1 | PRS:1
+,PRS:1
 ,
-,
-,
-,
+,LOC:1
 ,
 ,
 LOC:1,
 ,
+,ORG:1
 ,
+,ORG:1
+,WRK:1
+,ORG:1
+,ORG:1
 ,
-,
-,
-,
-,
-,
-,LOC:1
+,LOC:2 | OBJ:1 | ORG:2
 ,
 ,
 ,
@@ -1031,31 +1031,6 @@ ORG:1,
 PRS:1,
 ,
 LOC:3,
-,TME:1
-,
-,
-,
-,
-,
-LOC:1,
-,
-,
-,OBJ:1
-,
-,
-,OBJ:1
-,
-,OBJ:1
-,
-,
-TME:1,OBJ:1
-,
-TME:1,OBJ:1
-,
-LOC:3 | ORG:1 | PRS:3,OBJ:1
-,OBJ:1
-,OBJ:1
-,OBJ:1
 ,
 ,
 ,
@@ -1063,40 +1038,65 @@ LOC:3 | ORG:1 | PRS:3,OBJ:1
 ,
 ,
 LOC:1,
-ORG:1,
-LOC:1,
-LOC:1,
 ,
 ,
-LOC:1 | ORG:1 | TME:1,
-LOC:1 | ORG:1,
-LOC:1,
-,LOC:1
+,PRS:1
 ,
-ORG:2,
+,
+,
+,PRS:1 | TME:1
+,
+,
+,
+TME:1,
+,PRS:1
+TME:1,
+,
+LOC:3 | ORG:1 | PRS:3,
+,
 ,
 ,
 ,LOC:1
+,LOC:1
+,LOC:1
+,LOC:1
+,LOC:1
+,LOC:1
+LOC:1,LOC:1
+ORG:1,LOC:2
+LOC:1,LOC:1
+LOC:1,LOC:1
+,LOC:1
+,LOC:1
+LOC:1 | ORG:1 | TME:1,LOC:1
+LOC:1 | ORG:1,LOC:1
+LOC:1,LOC:1 | TME:1
+,LOC:1
+,LOC:1 | ORG:1
+ORG:2,LOC:1
+,LOC:1
+,LOC:1
+,LOC:1
+,LOC:1
+,LOC:1
+,LOC:1
+,LOC:1
+LOC:1,LOC:1
+LOC:2 | PRS:2 | TME:1,LOC:1
+LOC:2,LOC:1
+,LOC:1
+ORG:1,LOC:1
+,ORG:1
+,ORG:1
 ,
 ,
 ,
+WRK:1,ORG:1
 ,
-LOC:1,
-LOC:2 | PRS:2 | TME:1,
-LOC:2,
+,ORG:1
+,ORG:1
 ,
-ORG:1,
-,
-,
-,
-,
-,
-WRK:1,
-,
-,
-,
-,
-ORG:1,
+ORG:1,ORG:1
 PRS:1,
 ,
 ,
@@ -1107,44 +1107,44 @@ PRS:1,
 ,
 ,
 ,
+,LOC:1
 ,
-,
-,ORG:3 | PRS:1
-,ORG:5
-,ORG:3 | PRS:1
-ORG:1,ORG:2 | PRS:1
-,ORG:1 | PRS:1
-,ORG:2 | PRS:1
-,ORG:3 | PRS:1
-ORG:1,ORG:3 | PRS:1
-,ORG:4 | PRS:1
+,ORG:1
+,ORG:1
+,ORG:1
+ORG:1,LOC:1 | ORG:2
+,LOC:1 | ORG:3
+,ORG:1
 ,ORG:2
-,ORG:2 | PRS:1
-,ORG:3 | PRS:1
-,ORG:2 | PRS:1
-,ORG:4 | PRS:1
+ORG:1,ORG:2 | TME:1
+,LOC:1 | ORG:3
+,LOC:1 | ORG:1
+,ORG:4
+,ORG:2
+,LOC:1 | ORG:3
+,LOC:1 | ORG:2
+,LOC:1 | PRS:1
+ORG:2,LOC:1
+TME:1 | WRK:1,LOC:1 | PRS:1
+,LOC:1
+ORG:1,LOC:2
+,LOC:2 | PRS:4
+,LOC:2 | ORG:1 | WRK:1
 ,
-ORG:2,
-TME:1 | WRK:1,
+WRK:1,LOC:4 | TME:1 | WRK:1
+,LOC:1 | PRS:1
+,LOC:2 | ORG:1 | PRS:1 | TME:1
+PRS:1,LOC:1 | TME:1
+,LOC:2 | PRS:1
+,LOC:1
+,LOC:6 | TME:1 | WRK:1
+PRS:1,LOC:2 | ORG:2
 ,
-ORG:1,
-,
-,
-,
-WRK:1,
-,TME:1
-,
+LOC:1 | PRS:4,LOC:2
+PRS:1,PRS:1
+LOC:1,LOC:2
+,LOC:1 | ORG:1 | PRS:1
 PRS:1,
-,
-,
-,
-PRS:1,
-,WRK:1
-LOC:1 | PRS:4,WRK:1
-PRS:1,
-LOC:1,
-,WRK:1
-PRS:1,
-PRS:2,TME:1
-,
-WRK:1,
+PRS:2,LOC:2
+,LOC:1 | PRS:1
+WRK:1,LOC:3
