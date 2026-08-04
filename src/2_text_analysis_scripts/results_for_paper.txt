@@ -157,25 +157,40 @@ to 0.880 (§1): surface evasion does not buy semantic evasion.
 -------------------------------------------------------------------------------
 3d. INFORMAL — BASELINE
 -------------------------------------------------------------------------------
+  (Refreshed against the corrected GPT-5.2 baseline column, comment_baseline —
+  see BASELINE_PROVENANCE.md. 38 of 46 features significant. Every dz below
+  moved; the pre-correction figures came from gpt-4o-mini text.)
   Feature                     dz      direction     q (BH-FDR)
-  hedge_neutral_count       +0.90    LLM > human    1.2e-122
-  hedge_count               +0.87    LLM > human    5.2e-122
-  n_alpha_tokens            +0.83    LLM > human    1.2e-127
-  n_sentences               +0.77    LLM > human    4.9e-113
-  mattr                     -0.76    human > LLM    1.3e-114
-  ttr                       -0.76    human > LLM    1.7e-111
-  tree_depth_max            +0.68    LLM > human    3.5e-83
-  booster_count             +0.51    LLM > human    5.1e-57
-  hedge_neutral_rate        +0.43    LLM > human    3.7e-57
-  tree_depth_mean           +0.38    LLM > human    1.5e-38
-  negation_sentence_rate    -0.32    human > LLM    2.4e-21
-  dep_distance_mean         +0.32    LLM > human    2.0e-27
-  negation_rate             -0.31    human > LLM    1.6e-31
-  punct_exclaim             +0.23    LLM > human    3.5e-83   (rbc 0.77)
-Story: LLM comments are longer, wordier, more hedged/boosted, more sentences and
-deeper trees, and use exclamation marks; humans have HIGHER lexical diversity
-(short punchy comments -> high TTR/MATTR) and more negation. NOTE the diversity
-direction is OPPOSITE to the formal register.
+  n_alpha_tokens            +1.35    LLM > human    7.1e-173
+  hedge_count               +1.17    LLM > human    3.4e-160
+  hedge_informal_count      +1.15    LLM > human    8.1e-151
+  ttr                       -1.02    human > LLM    1.2e-143
+  tree_depth_max            +0.97    LLM > human    1.3e-124
+  n_sentences               +0.96    LLM > human    6.2e-153
+  dep_distance_mean         +0.87    LLM > human    3.0e-133
+  punct_dash                +0.86    LLM > human    3.5e-128
+  hedge_neutral_count       +0.83    LLM > human    7.4e-123
+  mtld                      +0.75    LLM > human    1.2e-98
+  negation_count            +0.73    LLM > human    2.4e-103
+  booster_count             +0.68    LLM > human    6.7e-84
+  mattr                     -0.65    human > LLM    8.8e-95
+  tree_depth_mean           +0.61    LLM > human    5.3e-78
+Story: LLM comments are far longer and wordier than human ones (n_alpha_tokens
+dz +1.35; the corrected baseline averages ~1,046 chars against ~269 for humans),
+with more hedging and boosting, more sentences, and deeper/longer-dependency
+syntax. The em-dash is a strong tell in its own right (punct_dash +0.86). Humans
+have HIGHER lexical diversity on the window-based metrics (TTR -1.02, MATTR
+-0.65) — short punchy comments — but MTLD runs the OTHER way (+0.75, LLM >
+human), so "humans are more diverse" holds for TTR/MATTR only. It is therefore
+TTR/MATTR, not MTLD, whose direction is OPPOSITE to the formal register; MTLD is
+LLM > human in both registers.
+CAUTION — counts are inflated by the length gap, rates are not. negation_count is
++0.73 (LLM > human) while negation_rate is -0.14 and NOT significant (q = 0.094);
+likewise discourse_particle_count +0.56 vs discourse_particle_rate -0.09 (NS).
+Two claims from the pre-correction baseline do NOT survive: "humans use more
+negation" (rate is now null) and "LLMs use exclamation marks" (punct_exclaim
+flipped to -0.15, humans > LLM). Prefer the rate-normalised features when
+describing style rather than volume.
 
 -------------------------------------------------------------------------------
 3e. INFORMAL — HUMAN_LIKE  (pattern ≈ baseline, amplified)

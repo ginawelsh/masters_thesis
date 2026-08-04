@@ -1,0 +1,11 @@
+metric,value
+generator,gpt56
+condition,baseline
+n_per_class,100
+mean_pair_cosine,0.4385
+median_pair_cosine,0.4404
+classifier_cv_roc_auc,0.7895
+permutation_p_value,0.000999000999000999
+null_mean_auc,0.5115
+n_permutations,1000
+embedding_model,paraphrase-multilingual-mpnet-base-v2

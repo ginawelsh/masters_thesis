@@ -16,6 +16,7 @@ Usage:
 """
 import argparse
 import os
+import sys
 
 import numpy as np
 import pandas as pd
@@ -70,8 +71,23 @@ SWEDISH_FUNCTION_WORDS = {
 def parse_args():
     p = argparse.ArgumentParser(description="Stylometric surface features")
     p.add_argument("--dataset", choices=["formal", "informal"], default="formal")
+    p.add_argument("--normalize", action="store_true",
+                   help="informal only: apply text_normalizer.normalize_informal to "
+                        "human and LLM text (unescapes &gt;, strips blockquote markers "
+                        "and Mvh sign-offs). Writes to *_norm.csv so the un-normalized "
+                        "artifacts stay intact for comparison.")
+    p.add_argument("--drop-quoted", action="store_true",
+                   help="with --normalize: delete whole blockquote LINES instead of just "
+                        "their markers. Destructive — see text_normalizer docstring.")
     add_condition_arg(p)
     return p.parse_args()
+
+
+def load_normalizer():
+    """Import normalize_informal from 3_ai_detection_scripts (digit-prefixed dir)."""
+    sys.path.insert(0, os.path.join(_root, "3_ai_detection_scripts"))
+    from text_normalizer import normalize_informal
+    return normalize_informal
 
 
 def resolve_config(dataset):
@@ -219,9 +235,21 @@ def main():
     # formal abstracts drop the expressive punctuation marks (!, ?, …) — floor effect
     drop_expressive = args.dataset != "informal"
 
+    # optional scrape-artefact normalization (informal only), applied to both sides
+    prep = lambda t: t
+    suffix = ""
+    if args.normalize:
+        if args.dataset != "informal":
+            sys.exit("--normalize applies to --dataset informal only "
+                     "(formal uses make_formal_cleaned_quiz.py / normalize_formal)")
+        normalize_informal = load_normalizer()
+        prep = lambda t: t if pd.isna(t) else normalize_informal(t, drop_quoted=args.drop_quoted)
+        suffix = "_norm_dropquoted" if args.drop_quoted else "_norm"
+        print(f"normalization ON → writing *{suffix}.csv")
+
     # human side is identical across conditions -> parse it once and reuse
     print("parsing human texts…", flush=True)
-    human_feats = [compute_metrics(nlp, row.get(cfg["human_col"]), drop_expressive) for _, row in df.iterrows()]
+    human_feats = [compute_metrics(nlp, prep(row.get(cfg["human_col"])), drop_expressive) for _, row in df.iterrows()]
 
     for cond, llm_col in resolve_conditions(args.dataset, args.condition):
         if llm_col not in df.columns:
@@ -233,7 +261,7 @@ def main():
         for i, (_, row) in enumerate(df.iterrows()):
             print(f"  {i + 1}/{n}", end="\r", flush=True)
             h = human_feats[i]
-            l = compute_metrics(nlp, row.get(llm_col), drop_expressive)
+            l = compute_metrics(nlp, prep(row.get(llm_col)), drop_expressive)
             if h is None or l is None:
                 continue
             out_row = {f"human_{k}": v for k, v in h.items()}
@@ -245,7 +273,7 @@ def main():
             print(f"[{cond or 'generated'}] no paired rows; skipped")
             continue
         out_df = pd.DataFrame(rows)
-        out_path = os.path.join(OUT_DIR, f"stylometric_surface_{tag}.csv")
+        out_path = os.path.join(OUT_DIR, f"stylometric_surface_{tag}{suffix}.csv")
         out_df.to_csv(out_path, index=False, encoding="utf-8")
         print(f"[{cond or 'generated'}] Wrote {len(out_df)} rows → {out_path}")
 

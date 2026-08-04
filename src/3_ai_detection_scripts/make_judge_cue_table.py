@@ -1,0 +1,153 @@
+"""Cue profile of the LLM-judge rationales: what each judge says it is keying on.
+
+Keyword-codes the Swedish `reasoning` field of the judge outputs and emits
+judge_rationale_cues_by_register.tex.
+
+    python src/3_ai_detection_scripts/make_judge_cue_table.py
+
+Sources (same joins as detection_results_tables.tex, Table 2):
+    gpt52_run_results/detection_results_<judge>.csv   item_ids 1-800   (400 formal + 400 informal)
+    detection_results_<judge>.csv                     item_ids 1001-1706 (informal follow-up)
+with the 6 superseded item_ids dropped. The in-flight formal_cleaned_results/
+run is deliberately excluded -- it is incomplete and still being written.
+
+This SUPERSEDES the hand-authored judge_rationale_cues_table.tex. That table's
+keyword lists were never recorded and its numbers do not reproduce (its
+"impersonal / neutral tone" row in particular is far higher than any keyword
+list we can reconstruct yields). Treat the numbers here as the reproducible ones.
+
+Caveat: indicative Swedish keyword matching, not a validated annotation scheme.
+Rows need not sum to 100 -- a rationale may cite several cues, and a cue counts
+whether the judge invokes it as evidence FOR or AGAINST the text being generated.
+"""
+import re
+from pathlib import Path
+
+import pandas as pd
+
+BASE = Path(__file__).parent
+
+CUES = {
+    "Template / rigid structure": r"mallarta|schablon|formelakti|schematis|stereotyp|standardiserad|"
+                                  r"välstrukturer|välordnad|välbalanserad|struktur|uppräkning|symmetri|"
+                                  r"jämn|balanserad|förutsägbar|uppbyggnad|mönster|"
+                                  r"meningsbyggnad|parallellism|tredelad|följer ett",
+    "Concrete specifics (names, numbers)": r"konkret|specifik|detalj|siffr|namngiv|egennamn|"
+                                           r"referens|exempel|precis[ea]? uppgift|faktiska",
+    "Impersonal / neutral tone": r"opersonlig|neutral|distanserad|saklig|objektiv|"
+                                 r"generisk|allmänt hållen|allmänt hållet|allmänna ordalag|"
+                                 r"intetsägande|torr|svepande|vag|hedg|"
+                                 r"(?:saknar|avsaknad av|utan|inga) (?:\w+ )?person",
+    "Emotion / subjectivity": r"känsla|känslor|känslo(?:mässig|laddad|uttryck)|emotion|"
+                              r"subjektiv|åsikt|tycker|engagemang|engagerad|"
+                              r"humor|humoristisk|ironi|sarkas|frustration|entusias|"
+                              r"irritation|upprörd|indignation|"
+                              r"person(?:lig|liga|ligt) (?:åsikt|erfarenhet|upplevelse|anekdot|ton|prägel|röst)",
+    "Colloquial / informal register": r"vardaglig|talspråk|slang|informell|informellt|informella|"
+                                      r"dialekt|förkortning|emoji|smilis|svordom|utrop|"
+                                      r"muntlig|ledig ton|jargong",
+    "Lexical variation / repetition": r"upprepning|upprepa|upprepad|repetitiv|repetition|enformig|"
+                                      r"variation|varierad|varierande|varierat|samma ord|ordval|"
+                                      r"ordförråd|synonym",
+    "Errorless polish": r"stavfel|skrivfel|felfri|inga fel|utan fel|polerad|polerat|slipad|"
+                        r"perfekt|grammatiskt korrekt|språkligt korrekt|korrekt interpunktion|"
+                        r"skiljetecken|korrekturläst|oklanderlig|felstavning",
+}
+CUES = {k: re.compile(v, re.I) for k, v in CUES.items()}
+
+# Shortened row labels so the table fits a single column of a two-column layout.
+SHORT = {
+    "Template / rigid structure": "Template structure",
+    "Concrete specifics (names, numbers)": "Concrete specifics",
+    "Impersonal / neutral tone": "Impersonal tone",
+    "Emotion / subjectivity": "Emotion / subjectivity",
+    "Colloquial / informal register": "Colloquial register",
+    "Lexical variation / repetition": "Variation / repetition",
+    "Errorless polish": "Errorless polish",
+}
+
+JUDGES = ["claude", "gemini", "deepseek"]
+SUPERSEDED = {468, 618, 676, 701, 719, 789}
+
+
+def load():
+    frames = []
+    for judge in JUDGES:
+        parts = [
+            pd.read_csv(BASE / "gpt52_run_results" / f"detection_results_{judge}.csv"),
+            pd.read_csv(BASE / f"detection_results_{judge}.csv"),
+        ]
+        d = pd.concat(parts, ignore_index=True)
+        d = d[~d["item_id"].isin(SUPERSEDED)]
+        d["judge"] = judge
+        frames.append(d)
+    return pd.concat(frames, ignore_index=True).dropna(subset=["reasoning"])
+
+
+def profile(df):
+    for cue, rx in CUES.items():
+        df[cue] = df["reasoning"].str.contains(rx)
+    pct = (df.groupby(["judge", "register"])[list(CUES)]
+             .mean().mul(100).round(0).astype(int).T)
+    return pct[[(j, r) for j in JUDGES for r in ("formal", "informal")]], \
+        df.groupby(["judge", "register"]).size()
+
+
+TEMPLATE = r"""% GENERATED by src/3_ai_detection_scripts/make_judge_cue_table.py -- do not hand-edit.
+% Supersedes the hand-authored judge_rationale_cues_table.tex (whose keyword
+% lists were never recorded and whose numbers do not reproduce).
+% REQUIRES: \usepackage{booktabs}, \usepackage[table]{xcolor}
+\providecommand{\cg}[1]{\cellcolor{hmgreen!#1}}
+% \definecolor{hmgreen}{HTML}{2E8B57} % uncomment if used standalone
+
+\begin{table}[t]
+  \centering
+  \footnotesize
+  \setlength{\tabcolsep}{3.5pt}
+  \begin{tabular}{@{}l cc cc cc@{}}
+  \toprule
+    & \multicolumn{2}{c}{Claude} & \multicolumn{2}{c}{Gemini} & \multicolumn{2}{c}{DeepSeek} \\
+    \cmidrule(lr){2-3} \cmidrule(lr){4-5} \cmidrule(l){6-7}
+    Cue invoked in rationale & F & I & F & I & F & I \\
+    \midrule
+@@ROWS@@
+    \bottomrule
+  \end{tabular}
+  \caption{Share (\%) of each judge's rationales invoking a given cue, by
+  register (F~=~formal, I~=~informal; @@NS@@). Coded by keyword matching on the
+  Swedish \texttt{reasoning} field, so figures are indicative rather than
+  exhaustive; rows need not sum to 100, since a rationale may cite several cues,
+  and a cue is counted whether the judge invokes it as evidence for or against
+  the text being generated. Register, not judge identity, dominates the profile:
+  all three judges cite template-like structure and lexical variation in the
+  formal register and switch to colloquiality, emotion and impersonal tone in
+  the informal one. The judge-level differences that survive that split are
+  DeepSeek's much heavier weighting of repetition in the formal register and of
+  impersonal tone and errorless polish in the informal one, and Gemini's
+  consistently thinner rationales throughout.}
+  \label{tab:judge-rationale-cues}
+\end{table}
+"""
+
+
+def main():
+    df = load()
+    pct, n = profile(df)
+    rows = []
+    for cue in CUES:
+        cells = " & ".join(rf"\cg{{{v // 2}}}${v}$" for v in pct.loc[cue])
+        rows.append(f"    {SHORT[cue]:<24} & {cells} \\\\")
+    ns = "; ".join(f"{j.capitalize().replace('Deepseek', 'DeepSeek')} "
+                   f"$n={n[(j, 'formal')]}/{n[(j, 'informal')]}$"
+                   for j in JUDGES)
+    out = BASE / "judge_rationale_cues_by_register.tex"
+    out.write_text(TEMPLATE.replace("@@ROWS@@", "\n".join(rows))
+                           .replace("@@NS@@", ns.replace("_", r"\_")),
+                   encoding="utf-8")
+    print(pct.to_string())
+    print("\nn =", n.to_dict())
+    print("wrote", out)
+
+
+if __name__ == "__main__":
+    main()

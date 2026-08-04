@@ -1,0 +1,12 @@
+metric,value
+generator,mistral
+temperature,1.0
+condition,detector_aware
+n_per_class,170
+mean_pair_cosine,0.7664
+median_pair_cosine,0.7874
+classifier_cv_roc_auc,0.8194
+permutation_p_value,0.000999000999000999
+null_mean_auc,0.5023
+n_permutations,1000
+embedding_model,paraphrase-multilingual-mpnet-base-v2

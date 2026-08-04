@@ -1,0 +1,196 @@
+% =====================================================================
+% Two AI-detection results tables, by generator x register x condition.
+% REQUIRES: \usepackage{booktabs}, \usepackage{multirow},
+%           \usepackage[table]{xcolor}  <- the [table] option is what defines
+%           \cellcolor; plain \usepackage{xcolor} will not compile Table 1.
+%
+% PROVENANCE (verified 2026-08-02; do not edit by hand -- see notes):
+%   Table 1  embedding CV ROC AUC -- GENERATED, do not hand-edit.
+%            Regenerate with: python src/3_ai_detection_scripts/make_embedding_auc_table.py
+%            field: classifier_cv_roc_auc, from
+%            src/2_text_analysis_scripts/csv_files/
+%              GPT-5.2      embedding_twosample_<register>_<condition>.csv
+%              GPT-5.6      embedding_twosample_<register>_<condition>_gpt56.csv
+%              Mistral 3.2  embedding_twosample_<register>_<condition>_mistral_t1.0.csv
+%            GPT-5.2 formal  runs 2026-07-10, n_per_class=170 (current formal corpus size)
+%            GPT-5.2 informal runs 2026-08-01 02:31-03:14, n_per_class=1149 (POST-exclusion,
+%            and AFTER the corrected GPT-5.2 baseline column landed in data_utils.py
+%            at 2026-07-31 23:53, so `comment_baseline` -- not the gpt-4o-mini
+%            `generated_comment` column -- is what was embedded).
+%            GPT-5.6 + Mistral 3.2 runs 2026-08-02: embedding_comparison.py gained a
+%            --generator axis, so the two arms that were pending are now filled.
+%            The regenerated GPT-5.2 cells reproduce the previous hand-built values
+%            to all 3 reported dp, so only the pending cells changed.
+%            Mistral is the temp=1.0 arm of generated_corpus_mistral_temps.csv.
+%            CAVEAT -- unequal n across generators: GPT-5.6 exists only as the 100-doc
+%            quiz corpus, so its AUCs are NOT directly comparable to the 170/1,149-doc
+%            GPT-5.2 and Mistral rows (CV AUC rises with training-set size). The
+%            matched n=100 control quoted in the caption is the comparable contrast.
+%            NOTE for any future Mistral *paired* statistic: mistral doc_id indexes
+%            src/4_archive/consolidated_informal_comments_JUN26.csv, NOT the adversarial
+%            CSV. The two hold the same 1,149 docs in different row order (only 37%
+%            coincide). embedding_comparison.py joins on the archive; the older
+%            model_comparison_mistral_gpt/model_comparison.py joins on the adversarial
+%            row index and so mispairs ~63% of informal rows.
+%
+%   Table 2  LLM-as-judge recall / precision
+%            recomputed from RAW judge outputs, not from balanced_detection_summary.csv
+%            (that file is dated 2026-08-01 18:13 and its three Gemini x Mistral cells
+%            are STALE: it has n=21/20/19 at 67/90/58%, superseded first by the
+%            2026-08-02 11:27 partial re-run at n=90/89/89 -> 52/67/53%, and then by
+%            the 2026-08-03 completion at n=100/100/100 -> 57/71/52% recall and
+%            69/77/67% human precision, which is what this table now reports).
+%            Raw sources: gpt52_run_results/detection_results_<judge>.csv joined to
+%            quiz_master_balanced.csv (ids 1-800), plus detection_results_<judge>.csv
+%            joined to quiz_followup.csv (ids 1001-1706), with the 6 superseded
+%            item_ids (468,618,676,701,719,789) dropped. The recompute reproduces
+%            balanced_detection_summary.csv EXACTLY on every non-stale cell.
+% =====================================================================
+
+\begin{table*}[t]
+  \centering
+  \small
+  \caption{Embedding-space separability of human and generated text, by generator,
+  register and prompt condition. Values are the cross-validated ROC AUC of a
+  logistic-regression classifier trained to separate human from generated
+  embeddings (\texttt{paraphrase-multilingual-mpnet-base-v2}); $0.5$ is chance and
+  $1.0$ is perfect separability, so \emph{higher} means the generated text is
+  easier to tell apart from human text. Every reported AUC is significant at
+  $p<.001$ under a 1{,}000-run label permutation test (null mean AUC $\approx0.50$).
+  GPT-5.2 and Mistral~3.2 are run on the full corpora ($n=170$ per class formal,
+  $n=1{,}149$ informal); GPT-5.6 exists only as the 100-document quiz corpus
+  ($n=100$, and $n=98$ for formal detector-evasive). Because cross-validated AUC
+  rises with training-set size, the GPT-5.6 row is \emph{not} directly comparable
+  down the column. Re-running the other two generators on the same 100 documents
+  gives, for baseline / human-mimicking / detector-evasive: GPT-5.2
+  $0.643/0.643/0.813$ (formal) and $0.886/0.898/0.935$ (informal); Mistral
+  $0.935/0.925/0.909$ and $0.916/0.954/0.874$. Under that matched comparison
+  GPT-5.6 remains the least separable generator in the informal register
+  (${\approx}0.10$ AUC below GPT-5.2 on identical documents), whereas in the formal
+  register it is \emph{more} separable than GPT-5.2 at baseline and
+  human-mimicking, so the effect does not generalise across registers.}
+  \label{tab:embedding-auc}
+  \begin{tabular}{lllc}
+    \toprule
+    Generator & Register & Condition & Embedding CV ROC AUC \\
+    \midrule
+    \multirow{6}{*}{GPT-5.2}
+      & \multirow{3}{*}{Formal}
+        & Baseline         & \cellcolor[HTML]{F6C0AD} 0.754 \\
+      & & Human-mimicking  & \cellcolor[HTML]{F3BDA4} 0.764 \\
+      & & Detector-evasive & \cellcolor[HTML]{A99F49} 0.880 \\
+    \cmidrule(l){2-4}
+      & \multirow{3}{*}{Informal}
+        & Baseline         & \cellcolor[HTML]{4B9143} 0.960 \\
+      & & Human-mimicking  & \cellcolor[HTML]{459044} 0.963 \\
+      & & Detector-evasive & \cellcolor[HTML]{198C4A} 0.981 \\
+    \midrule
+    \multirow{6}{*}{GPT-5.6}
+      & \multirow{3}{*}{Formal}
+        & Baseline         & \cellcolor[HTML]{E6B38B} 0.792 \\
+      & & Human-mimicking  & \cellcolor[HTML]{FFCBC3} 0.728 \\
+      & & Detector-evasive & \cellcolor[HTML]{F9C3B3} 0.747 \\
+    \cmidrule(l){2-4}
+      & \multirow{3}{*}{Informal}
+        & Baseline         & \cellcolor[HTML]{E7B48D} 0.790 \\
+      & & Human-mimicking  & \cellcolor[HTML]{ECB795} 0.781 \\
+      & & Detector-evasive & \cellcolor[HTML]{D5AA70} 0.823 \\
+    \midrule
+    \multirow{6}{*}{Mistral 3.2}
+      & \multirow{3}{*}{Formal}
+        & Baseline         & \cellcolor[HTML]{429044} 0.965 \\
+      & & Human-mimicking  & \cellcolor[HTML]{579240} 0.952 \\
+      & & Detector-evasive & \cellcolor[HTML]{64943E} 0.943 \\
+    \cmidrule(l){2-4}
+      & \multirow{3}{*}{Informal}
+        & Baseline         & \cellcolor[HTML]{429044} 0.965 \\
+      & & Human-mimicking  & \cellcolor[HTML]{2A8D48} 0.976 \\
+      & & Detector-evasive & \cellcolor[HTML]{4E9142} 0.958 \\
+    \bottomrule
+  \end{tabular}
+
+  \vspace{2pt}
+  {\footnotesize Shading tracks the printed AUC on a single scale across all cells, darkening monotonically so the ordering survives greyscale printing; the unequal-$n$ caveat above applies to the colours as much as to the numbers. \colorbox[HTML]{FFCBC3}{\strut~0.73~} \colorbox[HTML]{E7B38C}{\strut~0.79~} \colorbox[HTML]{BEA358}{\strut~0.85~} \colorbox[HTML]{83983D}{\strut~0.92~} \colorbox[HTML]{198C4A}{\strut~0.98~}}
+\end{table*}
+
+
+\begin{table*}[t]
+  \centering
+  \small
+  \caption{Large-language-model-as-judge AI-text detection, by generator, register
+  and prompt condition (all values are percentages). \emph{AI recall} is the share
+  of generated items the judge flagged as AI. \emph{Human precision} is the share of
+  the items the judge labelled \emph{human} that really are human, computed within
+  each cell by pooling that cell's generated items with the register's $n=100$ human
+  items; it therefore falls towards $50\%$ as recall falls, because undetected
+  generated text accumulates in the ``human'' bin. All completed cells use $n=100$
+  generated items per condition; the Gemini$\times$Mistral (informal) cells, formerly
+  quota-limited to $n=90/89/89$, were completed on 2026-08-03.
+  For reference, human-item specificity is Claude 100\%, DeepSeek 69\%, Gemini 100\%
+  (formal, original corpus) and Claude 100\%, DeepSeek 86\%, Gemini 97\% (informal).
+  The formal GPT-5.6 and Mistral cells are scored on the formatting-normalized formal
+  corpus (markdown, section headings and the \texttt{Nyckelord} footer stripped
+  uniformly from every source); on that corpus human specificity is Claude 100\% and
+  DeepSeek 82\%, and those are the denominators behind their human-precision cells.
+  $^\dagger$Claude's normalized formal run is scored on $n=88$--$90$ per cell rather
+  than the full $n=100$; all six cells sit at $98$--$100\%$, so the remaining items
+  cannot move them materially. \emph{n/a} marks the Gemini formal cells, which were
+  never scored: \texttt{gemini-3.1-pro-preview} is capped at 250 requests/day on the
+  available key, which did not permit a 998-item run inside the study period.
+  \textbf{The formal GPT-5.2 row is not comparable with the GPT-5.6 and Mistral formal
+  rows}: it is scored on the original, non-normalized corpus. On the normalized corpus
+  DeepSeek scores $86\%$ pooled recall on the same GPT-5.2 documents versus $58\%$
+  on the original, so the apparent jump from GPT-5.2 to GPT-5.6 in the DeepSeek formal
+  column reflects corpus version (or provider drift), not generator. The informal GPT-5.2 baseline
+  is the corrected GPT-5.2 column, not the gpt-4o-mini text (see
+  \texttt{BASELINE\_PROVENANCE.md}).}
+  \label{tab:llm-judge-detection-by-condition}
+  \begin{tabular}{lll ccc ccc}
+    \toprule
+    & & & \multicolumn{3}{c}{LLM-as-judge AI recall}
+        & \multicolumn{3}{c}{LLM-as-judge human precision} \\
+    \cmidrule(lr){4-6} \cmidrule(l){7-9}
+    Generator & Register & Condition
+      & Claude & DeepSeek & Gemini & Claude & DeepSeek & Gemini \\
+    \midrule
+    \multirow{6}{*}{GPT-5.2}
+      & \multirow{3}{*}{Formal}
+        & Baseline         & 100 & 47 & 96  & 100 & 57 & 96 \\
+      & & Human-mimicking  & 100 & 35 & 100 & 100 & 51 & 100 \\
+      & & Detector-evasive & 100 & 92 & 100 & 100 & 90 & 100 \\
+    \cmidrule(l){2-9}
+      & \multirow{3}{*}{Informal}
+        & Baseline         & 69 & 5 & 10 & 76 & 47 & 52 \\
+      & & Human-mimicking  & 73 & 1 & 36 & 79 & 47 & 60 \\
+      & & Detector-evasive & 38 & 0 & 8  & 62 & 46 & 51 \\
+    \midrule
+    \multirow{6}{*}{GPT-5.6}
+      & \multirow{3}{*}{Formal}
+        & Baseline         & 99$^\dagger$  & 91 & \textit{n/a}
+                           & 99$^\dagger$  & 90 & \textit{n/a} \\
+      & & Human-mimicking  & 100$^\dagger$ & 94 & \textit{n/a}
+                           & 100$^\dagger$ & 94 & \textit{n/a} \\
+      & & Detector-evasive & 98$^\dagger$  & 93 & \textit{n/a}
+                           & 98$^\dagger$  & 92 & \textit{n/a} \\
+    \cmidrule(l){2-9}
+      & \multirow{3}{*}{Informal}
+        & Baseline         & 64 & 40 & 25 & 74 & 59 & 56 \\
+      & & Human-mimicking  & 52 & 10 & 6  & 68 & 49 & 51 \\
+      & & Detector-evasive & 48 & 10 & 2  & 66 & 49 & 50 \\
+    \midrule
+    \multirow{6}{*}{Mistral 3.2}
+      & \multirow{3}{*}{Formal}
+        & Baseline         & 100$^\dagger$ & 98  & \textit{n/a}
+                           & 100$^\dagger$ & 98  & \textit{n/a} \\
+      & & Human-mimicking  & 100$^\dagger$ & 96  & \textit{n/a}
+                           & 100$^\dagger$ & 95  & \textit{n/a} \\
+      & & Detector-evasive & 100$^\dagger$ & 100 & \textit{n/a}
+                           & 100$^\dagger$ & 100 & \textit{n/a} \\
+    \cmidrule(l){2-9}
+      & \multirow{3}{*}{Informal}
+        & Baseline         & 84 & 24 & 57 & 86 & 53 & 69 \\
+      & & Human-mimicking  & 96 & 25 & 71 & 96 & 53 & 77 \\
+      & & Detector-evasive & 78 & 12 & 52 & 82 & 49 & 67 \\
+    \bottomrule
+  \end{tabular}
+\end{table*}

@@ -23,3 +23,15 @@ deepseek,gpt-5.6,informal,human_like_vs_detector_evasive,100,,0.1,8,8,1.0,exact,
 deepseek,mistral,informal,baseline_vs_human_like,100,0.24,0.25,17,18,1.0,exact,,
 deepseek,mistral,informal,baseline_vs_detector_evasive,100,0.24,,19,7,0.028959274291992188,exact,*,0.12
 deepseek,mistral,informal,human_like_vs_detector_evasive,100,,0.25,22,9,0.029449373483657837,exact,*,0.12
+gemini,gpt-5.2,formal,baseline_vs_human_like,100,0.96,1.0,0,4,0.125,exact,,
+gemini,gpt-5.2,formal,baseline_vs_detector_evasive,100,0.96,,0,4,0.125,exact,,1.0
+gemini,gpt-5.2,formal,human_like_vs_detector_evasive,100,,1.0,0,0,1.0,no-discordance,,1.0
+gemini,gpt-5.2,informal,baseline_vs_human_like,100,0.1,0.36,5,31,1.2913485988974571e-05,exact,***,
+gemini,gpt-5.2,informal,baseline_vs_detector_evasive,100,0.1,,8,6,0.79052734375,exact,,0.08
+gemini,gpt-5.2,informal,human_like_vs_detector_evasive,100,,0.36,32,4,1.941574737429619e-06,exact,***,0.08
+gemini,gpt-5.6,informal,baseline_vs_human_like,100,0.25,0.06,19,0,3.814697265625e-06,exact,***,
+gemini,gpt-5.6,informal,baseline_vs_detector_evasive,100,0.25,,24,1,1.5497207641601562e-06,exact,***,0.02
+gemini,gpt-5.6,informal,human_like_vs_detector_evasive,100,,0.06,5,1,0.21875,exact,,0.02
+gemini,mistral,informal,baseline_vs_human_like,20,0.7,0.9,2,6,0.2890625,exact,,
+gemini,mistral,informal,baseline_vs_detector_evasive,19,0.6842105263157895,,5,3,0.7265625,exact,,0.5789473684210527
+gemini,mistral,informal,human_like_vs_detector_evasive,19,,0.8947368421052632,7,1,0.0703125,exact,,0.5789473684210527

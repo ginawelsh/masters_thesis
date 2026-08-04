@@ -1,0 +1,11 @@
+metric,value
+generator,gpt56
+condition,detector_evasive
+n_per_class,98
+mean_pair_cosine,0.7833
+median_pair_cosine,0.8226
+classifier_cv_roc_auc,0.747
+permutation_p_value,0.000999000999000999
+null_mean_auc,0.5015
+n_permutations,1000
+embedding_model,paraphrase-multilingual-mpnet-base-v2
