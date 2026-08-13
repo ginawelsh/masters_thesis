@@ -1,0 +1,47 @@
+\begin{table*}[t]
+  \centering
+  \small
+  \caption{CAPTION}
+  \label{tab:embedding-auc}
+  \begin{tabular}{lllc}
+    \toprule
+    Generator & Register & Condition & Embedding CV ROC AUC \\
+    \midrule
+    \multirow{6}{*}{GPT-5.2}
+      & \multirow{3}{*}{Formal}
+        & Baseline         & \cellcolor[HTML]{F6C0AD} 0.754 \\
+      & & Human-mimicking  & \cellcolor[HTML]{F3BDA4} 0.764 \\
+      & & Detector-evasive & \cellcolor[HTML]{A99F49} 0.880 \\
+    \cmidrule(l){2-4}
+      & \multirow{3}{*}{Informal}
+        & Baseline         & \cellcolor[HTML]{4B9143} 0.960 \\
+      & & Human-mimicking  & \cellcolor[HTML]{459044} 0.963 \\
+      & & Detector-evasive & \cellcolor[HTML]{198C4A} 0.981 \\
+    \midrule
+    \multirow{6}{*}{GPT-5.6}
+      & \multirow{3}{*}{Formal}
+        & Baseline         & \cellcolor[HTML]{E6B38B} 0.792 \\
+      & & Human-mimicking  & \cellcolor[HTML]{FFCBC3} 0.728 \\
+      & & Detector-evasive & \cellcolor[HTML]{F9C3B3} 0.747 \\
+    \cmidrule(l){2-4}
+      & \multirow{3}{*}{Informal}
+        & Baseline         & \cellcolor[HTML]{E7B48D} 0.790 \\
+      & & Human-mimicking  & \cellcolor[HTML]{ECB795} 0.781 \\
+      & & Detector-evasive & \cellcolor[HTML]{D5AA70} 0.823 \\
+    \midrule
+    \multirow{6}{*}{Mistral 3.2}
+      & \multirow{3}{*}{Formal}
+        & Baseline         & \cellcolor[HTML]{429044} 0.965 \\
+      & & Human-mimicking  & \cellcolor[HTML]{579240} 0.952 \\
+      & & Detector-evasive & \cellcolor[HTML]{64943E} 0.943 \\
+    \cmidrule(l){2-4}
+      & \multirow{3}{*}{Informal}
+        & Baseline         & \cellcolor[HTML]{429044} 0.965 \\
+      & & Human-mimicking  & \cellcolor[HTML]{2A8D48} 0.976 \\
+      & & Detector-evasive & \cellcolor[HTML]{4E9142} 0.958 \\
+    \bottomrule
+  \end{tabular}
+
+  \vspace{2pt}
+  {\footnotesize Shading tracks the printed AUC on a single scale across all cells, darkening monotonically so the ordering survives greyscale printing; the unequal-$n$ caveat above applies to the colours as much as to the numbers. \colorbox[HTML]{FFCBC3}{\strut~0.73~} \colorbox[HTML]{E7B38C}{\strut~0.79~} \colorbox[HTML]{BEA358}{\strut~0.85~} \colorbox[HTML]{83983D}{\strut~0.92~} \colorbox[HTML]{198C4A}{\strut~0.98~}}
+\end{table*}

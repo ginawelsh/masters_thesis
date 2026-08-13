@@ -1,10 +1,10 @@
 metric,value
 condition,baseline
 n_per_class,1149
-mean_pair_cosine,0.4702
-median_pair_cosine,0.4826
-classifier_cv_roc_auc,0.9599
+mean_pair_cosine,0.4767
+median_pair_cosine,0.4923
+classifier_cv_roc_auc,0.9596
 permutation_p_value,0.000999000999000999
-null_mean_auc,0.5013
+null_mean_auc,0.5008
 n_permutations,1000
 embedding_model,paraphrase-multilingual-mpnet-base-v2

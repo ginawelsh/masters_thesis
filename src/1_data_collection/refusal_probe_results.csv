@@ -1,0 +1,403 @@
+model,register,condition,doc_id,error,refusal,markdown_n,chars,text
+gpt-5.2,formal,detector_evasive,51,,,0,1863,"Uppsatsen handlar om hur företag gör redovisningsval när de upprättar bokslut, och hur dessa val hänger ihop med periodiseringsfonder. Utgångspunkten är Agentteorin och Positive Accounting Theory. I studien används Agentteorin för att beskriva relationen mellan ägare och ledning. Den relationen skapar målkonflikter. Ledningen har ofta mer info än ägarna. Det öppnar för bokslutspolitik.
+
+Positive Accounting Theory används för att förklara varför redovisningsval ser ut som de gör. Uppsatsen utgår från att ledningen väljer metoder som passar deras mål i en viss situation. Här blir periodiseringsfonder en central del. Periodiseringsfonder ger ett lagligt sätt att flytta resultat mellan år. Det påverkar hur vinsten ser ut i bokslutet. Det påverkar också skatt och utdelningsutrymme i praktiken.
+
+Syftet är att koppla redovisningsval till incitament som Agentteorin och Positive Accounting Theory lyfter fram. En viktig del är hur bokslutspolitik kan användas för att jämna ut resultat över tid. En annan del är hur periodiseringsfonder kan användas när företaget vill visa ett visst resultat för ägare, långivare och andra intressenter. Uppsatsen tar upp hur ledningen kan vilja visa stabilitet. Den tar också upp hur ledningen kan vilja undvika stora svängningar som ger frågor från bank eller styrelse.
+
+Arbetet visar att periodiseringsfonder ofta blir ett verktyg i bokslutspolitik. Det gäller särskilt när företaget har ett resultat som ligger nära en gräns som får följder. Det kan handla om lånevillkor, bonus och krav på utdelning. Med Agentteorin blir detta en fråga om kontroll och uppföljning. Med Positive Accounting Theory blir det en fråga om val som går att förutse utifrån incitament. Uppsatsen knyter därmed ihop periodiseringsfonder, redovisningsval och bokslutspolitik i ett ramverk som bygger på Agentteorin och Positive Accounting Theory."
+gpt-5.2,formal,detector_evasive,163,,,0,1740,"Denna sammanfattning handlar om stöd vid övervikt och fetma. Arbetet utgår från Blekinge Institute of Technology, School of Health Science. Fokus ligger på hur en sjuksköterska ger stöd vid övervikt och fetma och hur stöd hänger ihop med motivation och livsstilsförändring.
+
+Övervikt och fetma påverkar hälsa och vardag. Därför möter sjuksköterska ofta personer som vill eller behöver göra en livsstilsförändring. Texten beskriver hur stöd kan se ut i praktiken. Den tar upp samtal som bygger på respekt. Den tar upp att sjuksköterska behöver lyssna. Den tar upp att sjuksköterska behöver ställa tydliga frågor. Den tar upp att sjuksköterska behöver följa upp och vara kvar över tid.
+
+Ett viktigt resultat är att stöd och motivation hänger ihop. När stöd är konkret blir motivation starkare. Stöd handlar om att sätta mål som går att nå. Det handlar om små steg. Det handlar om rutiner för mat och rörelse. Det handlar också om sömn och stress. Stöd blir tydligt när sjuksköterska och patient gör en plan ihop och när de pratar om hinder som finns i vardagen.
+
+Sammanfattningen lyfter också att stöd behöver anpassas. En del vill ha täta kontakter. En del vill ha tydliga råd. Andra vill ha mer egen takt men ändå uppföljning. Sjuksköterska kan stärka motivation genom att bekräfta det som redan fungerar. Sjuksköterska kan också ge stöd när det går trögt och när återfall kommer. Då blir bemötandet centralt. Skuld och skam kan annars ta plats och bromsa en livsstilsförändring.
+
+Arbetet avslutas med att stöd vid övervikt och fetma behöver vara långsiktigt. Sjuksköterska har en viktig roll i att hålla ihop stöd, motivation och livsstilsförändring. Det gäller i mötet med den enskilda personen och i det förebyggande arbetet inom vården."
+gpt-5.2,formal,detector_evasive,119,,,0,1840,"I denna kandidatuppsats av Andersson, Helena studeras systemutveckling med fokus på en designprocess som tar sin start i ett befintligt system. Arbetet utgår från att användare redan har vanor och sätt att lösa uppgifter. Därför blir det viktigt att förstå hur användare arbetar i praktiken och hur de talar om sitt arbete. Uppsatsen visar hur språk hänger ihop med val i designprocess. När utvecklare och användare möts så behöver de ord som båda förstår och använder på samma sätt.
+
+Ett centralt spår i arbetet är kommunikation genom artefakter. Artefakter som skisser, enkla prototyper och skärmbilder används för att göra idéer synliga. De hjälper både användare och utvecklare att peka på samma sak. De gör det lättare att säga vad som fungerar och vad som skaver i ett befintligt system. Uppsatsen beskriver också hur artefakter blir en del av arbetet i grupp. Gruppen använder artefakter för att samla beslut och för att hålla ihop nästa steg i systemutveckling. På så sätt bär artefakterna både språk och gemensamt minne.
+
+Vidare lyfter Andersson, Helena fram hur arbete i grupp påverkar designprocess. Gruppen behöver en tydlig rytm. De behöver möten där användare deltar och där artefakter prövas. När gruppen arbetar med ett befintligt system blir det extra viktigt att fånga sådant som redan sitter i väggarna. Det gäller ord, rutiner och små genvägar som användare tar. Uppsatsen knyter detta till språk och visar hur små skillnader i ordval kan ge stora följder i systemutveckling.
+
+Sammanfattningsvis handlar uppsatsen om hur designprocess, användare, befintligt system, språk, kommunikation genom artefakter och arbete i grupp hänger ihop i systemutveckling. Uppsatsen betonar att konkreta artefakter och ett gemensamt språk gör det lättare att samarbeta och att fatta beslut som användare känner igen i sitt dagliga arbete."
+gpt-5.2,formal,detector_evasive,29,,,0,2136,"Denna studie handlar om att arbeta integrerat med asylbarn i allmän förskola. Fokus ligger på integrering och på hur lärare gör i vardagen. Studien bygger på en kvalitativ studie baserad på lärarintervjuer. Lärarna arbetar i allmän förskola och möter asylbarn som kommer in i en barngrupp som redan finns.
+
+Syftet är att beskriva hur lärare planerar och genomför integrering. Studien tar också upp vad som stödjer integrering och vad som bromsar den. I intervjuerna berättar lärarna om rutiner vid inskolning. De berättar om trygghet i början. De beskriver hur de använder bildstöd. De lyfter att fasta rutiner hjälper asylbarn att förstå dagen. De återkommer till att det tar tid. De talar om att små steg fungerar. De tar upp att relationen till en vuxen ofta blir startpunkten för integrering.
+
+I materialet framstår språket som centralt. Lärarna beskriver hur de arbetar med samtal i lek. De beskriver högläsning och sång. De beskriver hur de låter barnen peka och visa. De kopplar språk till delaktighet i gruppen. De säger också att integrering blir svår när de saknar tid för samtal i små grupper. De tar upp att barnens tidigare erfarenheter ibland påverkar hur de vågar delta.
+
+Lärarna beskriver samarbete som en del av integrering. De tar upp kontakt med vårdnadshavare. De tar upp tolk när det går att få. De beskriver att det blir lättare när de får stöd från specialpedagog och från rektor. De beskriver också att arbetet blir ojämnt när det saknas tydliga ramar för mottagande av asylbarn i allmän förskola. De lyfter att en stabil bemanning gör stor skillnad. De säger att när personal byts ofta så tar integrering längre tid.
+
+Sammanfattningsvis visar studien att att arbeta integrerat med asylbarn i allmän förskola bygger på enkla saker som görs varje dag. Lärarna skapar trygghet. De håller i rutiner. De ger stöd i språk och lek. De arbetar nära hemmet när det går. Integrering blir starkare när skolan ger tid och stöd. Integrering blir svagare när tid och resurser inte räcker. Studien ger en bild av ett arbete som sker i mötet mellan lärare och asylbarn. Den visar hur integrering formas i praktiken i förskolan."
+gpt-5.2,formal,detector_evasive,166,,,0,2131,"I denna kandidatuppsats behandlas nutidens ventilationssystem i lantbrukets lösdriftstallar. Arbetet tar sin utgångspunkt i hur ett ventilationssystem fungerar i ett lösdriftstall och i ett kostall. Fokus ligger på naturlig ventilation och på hur den används i praktiken i dagens byggnader.
+
+Studien bygger på en undersökning av sex stycken ventilationssystem. Varje ventilationssystem beskrivs utifrån hur luften tas in och hur luften går ut. Det gäller öppningar i vägg, nock och tak. Det gäller också hur stora öppningarna är och hur de styrs. I flera fall ingår ridåer i långsidorna. I andra fall ingår fasta öppningar. För varje lösdriftstall redovisas också grunddata som planlösning och inredning. Detta kopplas till hur ventilationssystemet används i vardagen.
+
+Resultatet visar att naturlig ventilation dominerar i de undersökta lösdriftstallarna. Den används för att ge ett jämnt luftflöde över året. Samtidigt ställer naturlig ventilation krav på att öppningarna är rätt placerade och att de hålls öppna på ett sätt som passar väder och vind. I flera kostall blir det tydligt att skötsel och rutiner styr hur ventilationssystemet fungerar. När ridåer och luckor ställs om i tid så får man ett stabilare stallklimat. När de står i samma läge länge så får man större skillnader i luft och drag.
+
+Undersökningen visar också skillnader mellan systemen. Vissa ventilationssystem ger hög luftväxling under milda perioder. Andra ventilationssystem ger bättre skydd mot drag under kalla perioder. I några lösdriftstallar syns en tydlig tanke kring nocköppning och tilluft i långsidorna. I andra lösdriftstallar blir luftvägen mindre tydlig. Där får man i stället lokala zoner med stillastående luft eller drag nära öppningar.
+
+Sammanfattningsvis visar arbetet att nutidens ventilationssystem i lantbrukets lösdriftstallar ofta bygger på naturlig ventilation. Det ger enkla lösningar. Det kräver också att man planerar öppningar och att man sköter dem löpande. Studien ger en samlad bild av sex stycken ventilationssystem i lösdriftstall. Den visar vad som fungerar i ett kostall och vilka val som får stor effekt på stallmiljön."
+gpt-5.2,formal,detector_evasive,144,,,0,2280,"Den här uppsatsen har titeln Varför team? En fallstudie på tre företag. Den tar upp hur styrning hänger ihop med team och hur team påverkar flöde. Den utgår från att många företag vill få bättre fart i arbete som går genom en process. De vill ha flödesorientering och processorientering. De vill också höja lönsamhet.
+
+Studien bygger på en fallstudie på tre företag. Fokus ligger på hur de organiserar arbete i team. Fokus ligger också på hur de styr team. Ett centralt spår är hur styrning förändras när man går från en klassisk linje till team som tar ansvar för en process. Det gäller mål. Det gäller roller. Det gäller beslut i vardagen.
+
+Ett resultat är att team ofta införs för att få ett stabilare flöde. Företagen vill minska väntan mellan steg. De vill att arbete rör sig genom en process utan stopp. När team arbetar nära varandra och följer samma process blir det enklare att se hinder i flöde. Det blir också enklare att lösa dem snabbt. I flera delar av fallen kopplas detta till flödesorientering. Man mäter mer i tid och leverans. Man pratar mer om helheten.
+
+Ett annat resultat är att processorientering kräver tydlig styrning. Team får frihet i hur de löser uppgifter. Samtidigt behöver de ramar. Företagen i fallstudien använder styrning som håller ihop process och flöde. De sätter mål för flöde. De följer upp avvikelser i process. De gör prioritering synlig. När styrning blir otydlig tappar team tempo. Då bryts flöde och man får fler lokala lösningar som inte passar i process.
+
+Studien visar också en koppling till lönsamhet. När flöde fungerar lägger team mindre tid på omtag. De lägger mindre tid på att vänta på andra. De kan leverera oftare. Det gör att företagen får bättre kontroll på kostnader i process. Det gör också att de kan ta betalt snabbare i vissa fall. I de tre fallen beskrivs lönsamhet främst som en följd av bättre flöde och en mer processorientering styrning.
+
+Sammanfattningsvis visar Varför team? En fallstudie på tre företag att team blir ett sätt att driva flödesorientering i praktiken. Team gör arbete mer synligt. Team gör det lättare att hålla ihop en process. Det kräver styrning som stödjer flöde. När styrning, team, flöde, flödesorientering, process och processorientering drar åt samma håll får företagen bättre lönsamhet."
+gpt-5.2,formal,detector_evasive,30,,,0,2412,"Studien handlar om HKK och om hur lärare ser på och praktiserar jämställdhet och genus. Titeln ”Men det här är ju kvinnogöra” pekar på att gamla idéer om vem som ska göra vad i hemmet fortfarande finns kvar. Fokus ligger på vad lärarna säger att de vill göra, och vad de faktiskt gör i sin undervisning. Studien följer hur jämställdhet och genus tar plats i planering, genomförande och uppföljning.
+
+Ett huvudspår är hur hem och vardagsarbete värderas. Lärarna beskriver att HKK ofta kopplas till hem och till sådant som länge har setts som kvinnogöra. De tar upp att elever kommer in i ämnet med färdiga bilder av vem som lagar mat, vem som städar och vem som har koll på kläder och inköp. Lärarna arbetar därför med att synliggöra genus i vardagsval. De lyfter fram arbetsfördelning i hemmet. De tar upp reklam, matvanor och konsumtion. De pratar om ansvar, tid och pengar.
+
+Ett annat spår är gruppindelningar. Lärarna beskriver hur de delar in elever när de lagar mat och gör praktiska moment. De tar upp att gruppindelningar påverkar vem som tar plats. De ser att vissa elever tar ledningen och att andra hamnar i samma roller varje gång. De beskriver att genus syns i vem som tar kniven, vem som läser receptet och vem som diskar. De berättar att de därför styr gruppindelningar mer aktivt. De byter grupper ofta. De ger tydliga roller. De följer upp efteråt. De vill att alla ska prova alla moment.
+
+Studien tar också upp betyg och bedömning. Lärarna beskriver att betyg och bedömning blir extra svåra i HKK eftersom mycket sker i grupp. De vill bedöma varje elev. De vill vara rättvisa. De tar upp att genus kan spela in när de tolkar ordning, noggrannhet och samarbete. De beskriver att de använder matriser och tydliga mål. De observerar under lektioner. De använder loggbok och korta samtal. De försöker skilja på resultat och arbetsprocess. Samtidigt visar studien att betyg och bedömning lätt hänger ihop med gamla bilder av vad som räknas som bra arbete i ett hem.
+
+Sammanfattningsvis visar studien att jämställdhet och genus finns i många delar av HKK. Det syns i innehållet om hem. Det syns i gruppindelningar. Det syns i betyg och bedömning. Lärarna beskriver att de vill arbeta för jämställdhet. De gör det genom att prata om genus, styra arbetssätt och göra krav tydliga. Studien visar också att uttryck som ”kvinnogöra” lever kvar som en referenspunkt som lärare behöver hantera i sin praktik."
+gpt-5.2,formal,detector_evasive,139,,,0,2738,"Den här uppsatsen tar upp Säkerhetskapital och visar hur Säkerhetskapital är en del av det Intellektuella Kapitalet. Utgångspunkten är att Intellektuellt kapital ofta beskrivs som något som skapar värde men att det också kräver skydd. Här blir informationssäkerhet central. När en organisation bygger system och arbetssätt så bygger den också upp Säkerhetskapital. Det handlar om sådant som gör att information går att lita på. Det handlar om att hålla rätt nivå på skyddet. Och det handlar om att minska risk på ett sätt som går att följa upp.
+
+I bakgrunden finns den linje som bland annat Thomas A. Stewart drev i Intellectual Capital från 1997 och som Leif Edvinsson och Michael S. Malone tog upp i Intellectual Capital från 1997. De visar att Intellektuellt kapital består av mer än bara pengar och maskiner. I den här uppsatsen kopplas den idén till informationssäkerhet. Det gör att Säkerhetskapital går att se som en konkret del av Intellektuellt kapital. Säkerhetskapital kan då beskrivas som den samlade förmågan att skydda information i vardagen. Det syns i teknik. Det syns i rutiner. Och det syns i hur folk gör sitt jobb.
+
+Uppsatsen använder risk som en röd tråd. Risk uppstår när hot möter sårbarheter och när skyddet brister. Därför blir arbetet med informationssäkerhet ett arbete med risk. Det sker ofta genom att man sätter mål och krav. Man gör en riskanalys. Man väljer kontroller. Och man följer upp. Här går det att knyta an till ISO IEC 27001 från 2013 och ISO IEC 27002 från 2013 som ger en tydlig ram för informationssäkerhet. Det går också att knyta an till NIST Cybersecurity Framework från 2014 som betonar att man ska identifiera skydd upptäcka svara och återställa. När en organisation gör detta över tid så växer Säkerhetskapital.
+
+En viktig del i resonemanget är att Säkerhetskapital inte bara är ett it projekt. Det är en del av styrning och ledning. Det påverkar hur man hanterar roller och ansvar. Det påverkar utbildning. Och det påverkar hur man agerar vid en incident. Här blir Säkerhetskapital nära kopplat till det Intellektuella Kapitalet eftersom det handlar om kunskap och förmåga som sitter i människor och i strukturer. Om man ser Intellektuellt kapital som något som skapar värde så blir Säkerhetskapital det som skyddar det värdet i praktiken.
+
+Sammanfattningsvis visar uppsatsen att Säkerhetskapital är en del av det Intellektuella Kapitalet och att det går att förstå genom informationssäkerhet och risk. När en organisation jobbar med risk på ett systematiskt sätt så bygger den upp Säkerhetskapital. Det gör att information blir mer robust. Det gör att verksamheten står stadigare. Och det gör att Intellektuellt kapital får bättre skydd och därmed bättre chans att ge långsiktigt värde."
+gpt-5.2,formal,detector_evasive,135,,,0,480,"Jag kan göra det, men jag saknar själva titeln och nyckelorden. Just nu står bara “Andersson, Jonas, nan”, och “nan” ser ut som att fältet för titel eller nyckelord saknas.
+
+Skicka detta så skriver jag en sammanfattning i kandidatuppsatsstil enligt dina krav:
+1. Titel (ordagrant)
+2. Nyckelord (ordagrant, gärna som lista)
+3. Om du har det: ämne eller kurs, samt årtal för texten
+
+Klistra in så här, så blir det lätt:
+- Titel:
+- Nyckelord:
+- (Valfritt) År:
+- (Valfritt) Ämne/kurs:"
+gpt-5.2,formal,detector_evasive,158,,,0,2296,"Denna kandidatuppsats handlar om fysisk beröring för människans välbefinnande. Den är skriven vid Blekinge Institute of Technology, School of Health Science. Fokus ligger på hur massage och terapeutisk beröring hänger ihop med välbefinnande i vård och i vardag. Texten tar också upp hur fysisk beröring påverkar smärta, oro och ångest. Den tar upp mätbara saker som blodtryck. Den tar även upp oxytocin.
+
+I uppsatsen beskrivs massage som en tydlig form av fysisk beröring. Massage används vid smärta. Den används också när en person har oro och ångest. I flera delar av genomgången kopplas massage till välbefinnande. Det handlar om att kroppen slappnar av. Det handlar om att personen får ro. Det handlar om att stressnivån går ner. I samma linje lyfter uppsatsen terapeutisk beröring. Terapeutisk beröring beskrivs som en metod där beröring används på ett lugnt och genomtänkt sätt. Den används ofta i vård. Den används när det finns behov av trygghet.
+
+En central del i uppsatsen är oxytocin. Oxytocin beskrivs som ett hormon som frisätts vid fysisk beröring. Oxytocin kopplas till lugn. Oxytocin kopplas också till närhet och trygghet. När oxytocin ökar beskriver uppsatsen att oro och ångest minskar. Den beskriver också att välbefinnande ökar. Detta kopplas till hur beröring kan göra att kroppen går ner i varv. Det kopplas även till att smärta upplevs som mindre stark.
+
+Uppsatsen tar upp blodtryck som ett konkret mått. Den beskriver att massage och terapeutisk beröring kan sänka blodtryck. Den kopplar det till minskad oro och ångest. Den kopplar det också till ökat välbefinnande. Blodtryck blir då ett sätt att visa att fysisk beröring inte bara är en känsla. Den kan också ge en tydlig effekt i kroppen.
+
+I diskussionen lyfter uppsatsen att fysisk beröring behöver ske med respekt. Den behöver vara frivillig. Den behöver passa personens behov. I vård kräver det lyhördhet. Det gäller särskilt när personen har smärta. Det gäller också vid oro och ångest. Samtidigt visar uppsatsen att massage och terapeutisk beröring har en plats i arbete med välbefinnande. Den kopplar detta till oxytocin och till blodtryck. Slutsatsen blir att fysisk beröring för människans välbefinnande är ett område som är relevant i praktiken och som går att knyta till både upplevelse och kroppsliga mått."
+gpt-5.2,formal,detector_evasive,45,,,0,2000,"Denna uppsats handlar om PRO i Österåkers kommun. Den handlar om PRO:s roll inom äldreomsorgen. Syftet är att beskriva hur PRO arbetar och hur PRO påverkar frågor som rör äldreomsorgen i Österåkers kommun. Uppsatsen tar fasta på både vardagsnära stöd och mer formellt påverkansarbete.
+
+Studien utgår från att PRO är en förening som samlar äldre och som driver frågor om trygghet, vård och omsorg. Fokus ligger på hur PRO i Österåkers kommun möter kommunen och hur kontakten ser ut över tid. Uppsatsen beskriver hur PRO deltar i samtal om äldreomsorgen. Den beskriver också hur PRO lyfter medlemmars behov och hur PRO för fram synpunkter på beslut som rör äldre.
+
+Materialet bygger på lokala handlingar och på intervjuer med personer som har haft uppdrag i PRO i Österåkers kommun och personer som arbetar i kommunen. Uppsatsen använder även protokoll och texter från PRO. Analysen följer hur PRO formulerar problem och mål. Den följer också hur kommunen svarar och hur frågor går vidare i den lokala styrningen av äldreomsorgen.
+
+Resultatet visar att PRO i Österåkers kommun ofta tar rollen som länk mellan äldre och kommunen. PRO samlar in synpunkter. PRO sprider också info om äldreomsorgen till sina medlemmar. PRO driver frågor om kvalitet och bemötande. PRO tar även upp frågor om boende, hemtjänst och dagliga stödinsatser. Uppsatsen visar att PRO:s roll inom äldreomsorgen blir tydlig när PRO deltar i möten och när PRO lämnar synpunkter på förändringar. Den visar också att PRO får mer tyngd när de har fasta kontakter och när arbetet följs upp.
+
+Sammantaget visar uppsatsen att PRO i Österåkers kommun har en tydlig roll inom äldreomsorgen. PRO gör detta genom att föra fram äldres röster. PRO gör det genom att följa upp beslut. PRO gör det genom att hålla frågorna levande i mötet med kommunen. Uppsatsen avslutas med att diskutera vad detta betyder för äldreomsorgen i Österåkers kommun och för hur kommunen tar till vara på erfarenheter från äldre som lever med äldreomsorgen i vardagen."
+gpt-5.2,formal,detector_evasive,60,,,0,2699,"Denna uppsats handlar om Datakvalitetsverktyg i datalager och frågar: Hur hanterar datakvalitetsverktyg datakvalitetsfaktorer? Fokus ligger på ett datalager som samlar data från flera källor. Det gör att fel och skillnader följer med in. Därför blir Datakvalitet en praktisk fråga i både projekt och förvaltning.
+
+Arbetet utgår från vanliga datakvalitetsfaktorer. Det gäller korrekthet, fullständighet och aktualitet. Det gäller också enhetlighet och unikhet. I ett datalager syns brister ofta när samma kund finns flera gånger. Eller när datum och valutor har olika format. Eller när fält saknas i vissa flöden. Uppsatsen kopplar dessa datakvalitetsfaktorer till hur Datakvalitetsverktyg används i ett datalager.
+
+En del av studien beskriver hur Datakvalitetsverktyg arbetar steg för steg. Först gör de profilering. Då mäter de värden och mönster i tabeller. De letar efter tomma fält, avvikande längder och felaktiga tecken. Sedan gör de regler som körs i ETL eller ELT. Många använder färdiga kontroller. Exempel är “not null”, intervall för datum och listor med tillåtna värden. Verktygen märker rader som bryter mot regler. De skriver loggar och de skapar rapporter som går att följa upp.
+
+Uppsatsen tar också upp matchning och deduplicering. Det behövs när datalager får data från CRM, ERP och webb. Verktyg använder ofta regler för likhet. De kan väga namn, adress och e post. De kan också använda referensdata för postnummer och ort. Målet är att höja Datakvalitet och minska dubletter utan att tappa rätt poster. Här blir spårbarhet viktig. Verktyget ska visa varför två rader slås ihop.
+
+En Datakvalitetslösning består inte bara av teknik. Den består också av roller och arbetssätt. Uppsatsen beskriver dataägare och data steward. De sätter regler och de godkänner ändringar. De behöver en tydlig plats där regler och termer finns. Det liknar data governance. Det ger samma bild i hela datalager. Det gör också att Datakvalitetsverktyg inte blir ett engångsjobb i ett projekt.
+
+Vidare tar uppsatsen upp hur man mäter Datakvalitet över tid. Datakvalitetsverktyg kan skapa KPI. Exempel är andel tomma fält, andel dubletter och andel rader som klarar validering. Resultaten visas ofta i dashboards. De kan kopplas till incidenter och ärenden. Då går det att se om ett fel kom från en källa eller från en transformation i datalager.
+
+Sammanfattningsvis visar uppsatsen att Datakvalitetsverktyg hanterar datakvalitetsfaktorer genom profilering, regler, validering, matchning och uppföljning. De ger stöd för att hitta fel tidigt. De gör att fel kan rättas på rätt plats. En Datakvalitetslösning blir starkast när den sitter ihop med arbetet i datalager och med ansvar för Datakvalitet i linjen."
+gpt-5.2,formal,detector_evasive,85,,,0,2302,"Denna uppsats handlar om balanserat styrkort i primärvården. Fokus ligger på styrning med balanserat styrkort på KvaLita Närsjukvård AB. Studien tar sin utgångspunkt i ekonomistyrning och i hur ett styrkort används i vardagen. Syftet är att beskriva hur styrkortet är utformat och hur det påverkar planering, uppföljning och ansvar i primärvård.
+
+Uppsatsen är en fallstudie. Den bygger på arbete nära verksamheten på KvaLita Närsjukvård AB. Den beskriver hur chefer och medarbetare arbetar med mål och mått. Den visar hur styrkortet blir en del av styrningen och hur det kopplas till ekonomistyrning. Styrkortet används för att samla ekonomi, vård och kvalitet i samma bild. Det gör att ledningen kan följa flera mål samtidigt och att de kan se om målen drar åt samma håll.
+
+I styrkortet finns typiskt mål som rör ekonomi. Det finns också mål som rör patient, process och lärande. Det går i linje med Kaplan och Norton och deras Balanced Scorecard från 1992 och 1996. I primärvård blir kopplingen mellan ekonomi och vård tydlig. KvaLita Närsjukvård AB behöver klara budget och samtidigt nå mål för tillgänglighet och kvalitet. Styrkortet blir ett verktyg som sätter ord på dessa krav och som gör dem mätbara. Det påverkar hur chefer följer upp resultat. Det påverkar också hur de pratar om förbättringar på möten och i rapporter.
+
+Resultatet visar att styrning med balanserat styrkort på KvaLita Närsjukvård AB bygger på återkommande uppföljning. Man tittar på siffror och på mål. Man jämför utfall med plan. När avvikelser uppstår tar man upp dem och fördelar åtgärder. Ekonomistyrning finns med som en grund. Den syns i budget, kostnader och produktion. Styrkortet gör att ekonomistyrning kopplas till vad primärvård ska leverera. Det ger också en gemensam struktur för styrningen. Samtidigt kräver det att måtten är begripliga och att de går att följa på ett sätt som passar verksamheten.
+
+Uppsatsen bidrar med en konkret bild av balanserat styrkort i primärvården. Den visar hur ett styrkort kan fungera i en fallstudie och hur ekonomistyrning och styrkort hänger ihop i praktiken på KvaLita Närsjukvård AB. Den pekar också på att arbetet med styrkort behöver vara levande. Det behöver knytas till ansvar, möten och beslut. Då blir balanserat styrkort en del av styrning och inte bara ett dokument."
+gpt-5.2,formal,detector_evasive,68,,,0,2690,"Den här studien tar upp frågan Har utlandsadopterade barn språkproblem? och den gör det genom att undersöka vad föräldrar och pedagoger anser. Fokus ligger på utlandsadopterade barn i skola och på hur adoption kan hänga ihop med språksvårigheter. Arbetet utgår från att språk är en nyckel i skola. Det gäller både när barn ska förstå instruktioner och när de ska visa vad de kan i tal och skrift.
+
+Syftet är att samla in och jämföra röster från två håll. Dels föräldrar som lever nära barnet i vardagen. Dels pedagoger som möter barnet i klassrummet och i elevnära arbete. Studien vill beskriva vilka språkproblem som tas upp. Den vill också visa hur föräldrar och pedagoger talar om stöd. Den vill slutligen belysa om de ser samma behov eller om de ser olika behov.
+
+Metoden bygger på intervjuer och ett mindre frågeunderlag. Urvalet består av föräldrar till utlandsadopterade barn och pedagoger i skola. Intervjuerna följer en enkel intervjuguide. Svaren sorteras efter teman. Ett tema är språksvårigheter i vardagssamtal. Ett annat tema är språksvårigheter i läsning och skrivning. Ett tredje tema är samspel mellan pedagoger och föräldrar.
+
+Resultatet visar att många föräldrar beskriver att språksvårigheter syns tidigt. De tar ofta upp ordförråd. De tar upp uttal. De tar upp att barnet har svårt att hitta ord. Pedagoger beskriver ofta att språksvårigheter blir tydliga när kraven i skola ökar. De tar upp läsförståelse. De tar upp skriftliga uppgifter. De tar upp att barnet behöver mer tid och tydligare steg. Både föräldrar och pedagoger kopplar språkproblem till adoption genom att de pratar om språkskifte och om att barnet har haft en tid utan stabilt språk runt sig.
+
+En tydlig punkt i materialet är att pedagoger ofta vill ha tidiga insatser. De nämner kartläggning. De nämner extra språkstöd. De nämner samarbete med specialpedagog. Föräldrar betonar i hög grad att stöd ska fungera i vardagen. De vill att skola tar ansvar. De vill att pedagoger ser barnet och inte bara ser testresultat. Samtidigt beskriver flera pedagoger att de saknar kunskap om utlandsadopterade barn och adoption. De beskriver också att rutiner i skola ibland gör att stöd sätts in sent.
+
+Slutsatsen är att frågan Har utlandsadopterade barn språkproblem? får olika svar beroende på vem som talar. Men mönstret i studien är att både föräldrar och pedagoger anser att språksvårigheter förekommer och att de påverkar skola. Studien pekar därför på att skola behöver arbeta mer systematiskt med språksvårigheter hos utlandsadopterade barn. Den pekar också på att samarbete mellan föräldrar och pedagoger behöver vara tätare och mer tydligt, så att stöd inte blir en fråga som faller mellan hem och skola."
+gpt-5.2,formal,detector_evasive,105,,,0,3773,"Den här uppsatsen handlar om Inlärningsstilar och frågan om Inlärningsstilar är ett sätt att individanpassa undervisningen. Jag tar upp hur idén om Inlärningsstilar har vuxit fram i skolan. Jag beskriver också hur lärare använder Inlärningsstilar i planering och i klassrummet. En viktig del är att se vad forskning säger. En annan del är att se vad som händer när man försöker göra individanpassa undervisningen med stöd av Inlärningsstilar.
+
+Jag utgår från vanliga modeller som ofta syns i lärarutbildning och i skolmaterial. Jag tar upp Dunn och Dunn och deras arbete från 1970 talet. Jag tar också upp Kolb och Learning Style Inventory från 1984. Jag tar upp VARK som Fleming beskrev 1995. Jag kopplar detta till hur skolan pratar om individanpassa undervisningen. Jag kopplar det också till styrdokument. Jag utgår från Lgr11 och Skollagen 2010:800. Jag visar hur kravet på individanpassa undervisningen ofta leder till att lärare söker verktyg som är enkla att använda. Inlärningsstilar blir då ett konkret svar.
+
+I uppsatsen sammanfattar jag centrala resultat från större genomgångar. Jag lyfter Pashler med flera från 2008. De granskar påståendet om att elever lär sig bättre om undervisningen matchar deras Inlärningsstilar. De ställer tydliga krav på hur studier ska vara gjorda. De menar att det behövs tester som delar in elever. Sedan behövs slumpad gruppindelning. Sedan behövs samma innehåll men olika form. Och man måste se en tydlig korsning. Det innebär att olika elever ska gynnas av olika upplägg på ett stabilt sätt. Jag tar också upp Coffield med flera från 2004. De visar att det finns många modeller och att de ofta bygger på olika antaganden. De pekar också på svagheter i mätning och i hur begreppen används. Utifrån detta beskriver jag att stöd för att matcha Inlärningsstilar i undervisningen är svagt.
+
+Jag visar hur Inlärningsstilar ändå får en plats i skolans vardag. Lärare berättar ofta att de vill nå alla elever. De vill skapa motivation. De vill skapa studiero. De vill göra undervisningen tydlig. Inlärningsstilar blir då ett språk för att prata om skillnader. Samtidigt blir det lätt att man sätter etiketter. En elev blir visuell. En annan elev blir auditiv. En tredje elev blir kinestetisk. Jag beskriver att detta kan påverka förväntningar. Det kan också påverka hur elever ser på sin egen förmåga.
+
+Jag tar upp att individanpassa undervisningen inte behöver betyda att man matchar Inlärningsstilar. Jag beskriver i stället arbetssätt som har tydligt stöd i forskning och som ofta går att förena med individanpassa undervisningen. Jag tar upp formativ bedömning och Black och Wiliam 1998. Jag tar upp återkoppling och Hattie 2009. Jag tar upp tydliga mål och tydlig struktur. Jag tar också upp variation i arbetssätt. Jag visar att variation ofta hjälper fler. Man kan läsa en text. Man kan lyssna. Man kan prata. Man kan skriva. Man kan öva med exempel. Man kan få stöd med bilder. Då får elever flera vägar in i samma innehåll utan att man låser dem vid Inlärningsstilar.
+
+Sammanfattningsvis visar uppsatsen att Inlärningsstilar ofta framstår som ett sätt att individanpassa undervisningen. Det gäller i samtal och i material som riktar sig till lärare. Men när man prövar idén mot forskning så blir stödet svagt för att matchning av Inlärningsstilar ger bättre lärande. Det som däremot framstår som viktigt är att läraren följer elevens lärande. Läraren ger tydliga mål. Läraren ger återkoppling. Läraren varierar undervisningen. Och läraren anpassar stöd och krav utifrån uppgift och elevens behov. Inlärningsstilar kan fungera som ett enkelt språk för variation. Men som metod för att individanpassa undervisningen behöver den hanteras med stor försiktighet och med tydligt fokus på vad som faktiskt ger resultat i klassrummet."
+gpt-5.2,formal,detector_evasive,15,,,0,4176,"Titeln Akutpreventivmedel: Hur skiljer sig effektivitet och säkerhet för de tre godkända metoderna levonorgestrel; ulipristal och kopparspiral? sätter fokus på ett praktiskt val i vården. Den här sammanfattningen tar upp akutpreventivmedel och jämför levonorgestrel, ulipristal och kopparspiral. Den jämför effektivitet och säkerhet. Den utgår från hur metoderna används i klinik och hur riktlinjer brukar beskriva dem.
+
+Levonorgestrel och ulipristal är tabletter. Kopparspiral är en insättning i livmodern. Alla tre räknas som akutpreventivmedel. De har olika tidsfönster. Levonorgestrel används upp till 72 timmar efter oskyddat samlag. Ulipristal används upp till 120 timmar. Kopparspiral kan sättas in upp till 120 timmar efter oskyddat samlag och även senare om man kan koppla det till ägglossning. Skillnaden i tidsfönster påverkar effektivitet. Den påverkar också hur lätt det är att få metoden i tid.
+
+När man jämför effektivitet brukar kopparspiral ligga högst. Det gäller både i studier och i klinisk vardag. Metoden är också oberoende av att patienten tar en tablett i rätt tid. Kopparspiral ger dessutom fortsatt skydd efter insättning. Levonorgestrel och ulipristal ger bara skydd för den aktuella händelsen. De skyddar inte om man har nytt oskyddat samlag efter intag samma cykel. Då behöver man skydd igen.
+
+Ulipristal brukar beskrivas som mer effektivt än levonorgestrel, främst nära ägglossning och när det har gått längre tid efter samlag. Båda verkar genom att skjuta upp ägglossning. Ulipristal gör det mer effektivt när luteiniserande hormon redan har börjat stiga. Levonorgestrel har sämre effekt om ägglossning är nära. Effekten sjunker också när intaget dröjer. För kopparspiral spelar tid också roll, men den håller en hög nivå av effektivitet inom sitt rekommenderade fönster. Den verkar främst genom att koppar påverkar spermier och befruktning. Den påverkar också miljön i livmodern.
+
+Säkerhet skiljer sig också. Levonorgestrel ger ofta kortvariga biverkningar. Illamående, huvudvärk och bröstömhet nämns ofta. Mensen kan komma tidigare eller senare. Ulipristal har en liknande biverkningsprofil. Även där är illamående och huvudvärk vanliga. Mensen kan förskjutas mer. En tydlig skillnad gäller råd efter intag. Efter ulipristal brukar man vänta några dagar innan man startar eller återupptar hormonell metod, eftersom ulipristal kan få sämre effekt om man tar gestagen samtidigt. Efter levonorgestrel kan man starta hormonell metod direkt. För båda gäller att man behöver barriärskydd tills man har ett säkert skydd på plats.
+
+Kopparspiral har andra risker. Det finns risk för smärta vid insättning. Det finns en liten risk för infektion i samband med insättning. Det finns också en liten risk för perforation. Den risken brukar kopplas till själva ingreppet och till vissa patientfaktorer. Kopparspiral kan ge rikligare blödningar och mer mensvärk. Det kan göra att en del avbryter metoden senare. Samtidigt är kopparspiral ett bra val för den som vill ha ett långt skydd utan hormoner.
+
+En viktig del i jämförelsen gäller kroppsvikt och BMI. I många genomgångar lyfts att levonorgestrel har sämre effektivitet vid högre BMI. Ulipristal påverkas också, men brukar klara sig bättre än levonorgestrel. Kopparspiral påverkas inte på samma sätt av BMI. Det gör att kopparspiral ofta lyfts fram när man vill maximera effektivitet oavsett vikt. Det här får praktisk betydelse i rådgivning. Det påverkar också jämlik vård, eftersom tillgång till snabb insättning varierar mellan mottagningar och regioner.
+
+Sammanfattningsvis visar jämförelsen av akutpreventivmedel att levonorgestrel, ulipristal och kopparspiral skiljer sig tydligt i effektivitet och säkerhet. Kopparspiral ger högst effektivitet och ger fortsatt skydd. Ulipristal ger högre effektivitet än levonorgestrel inom 120 timmar och särskilt nära ägglossning. Levonorgestrel fungerar bäst när det tas snabbt och innan ägglossning. Säkerhet är god för alla tre, men biverkningarna ser olika ut och kräver olika råd i efterhand. I praktiken avgör tid sedan samlag, var i cykeln personen är, BMI, behov av fortsatt skydd och möjlighet till insättning vilket akutpreventivmedel som passar bäst."
+gpt-5.2,formal,detector_evasive,24,,,0,3056,"Studien har titeln ""Jag ville ge mitt barn de bästa förutsättningarna"": En kvalitativ intervjustudie om tankar kring matvanor under graviditet hos nyblivna förstagångsmammor. Den tar plats i ett dietistperspektiv och den handlar om matvanor under graviditet. Fokus ligger på hur nyblivna förstagångsmammor beskriver sina tankar och val. Studien utgår från att graviditeten blev en tid då många såg på mat på ett nytt sätt. De kopplade ofta ihop matvanor under graviditet med barnets hälsa. De pratade om ansvar. De pratade också om att göra rätt.
+
+Metoden bygger på kvalitativa intervjuer. Deltagarna var nyblivna förstagångsmammor. Intervjuerna handlade om hur de tänkte kring matvanor under graviditet. Frågorna rörde vad de åt, vad de försökte undvika och hur de tog beslut i vardagen. Analysen sammanfattar återkommande mönster i deras berättelser.
+
+I resultaten framkommer att många styrde sina matvanor under graviditet utifrån målet att ge sitt barn de bästa förutsättningarna. De beskrev att de ville äta mer regelbundet. De ville också välja mat som de kopplade till näring och trygghet. Flera tog upp råd om folsyra och järn. De nämnde också Livsmedelsverkets råd om vad som passar under graviditet. Många tog upp att de undvek vissa livsmedel. De nämnde till exempel rå fisk, opastöriserade ostar och alkohol. Några sa att de också drog ned på koffein. De beskrev att sådana regler gjorde det lättare att känna att de gjorde rätt.
+
+Samtidigt beskrev flera att matvanor under graviditet påverkades av illamående, trötthet och sug. Några åt det som fungerade just då. De tog upp att lukter kunde styra vad de klarade av. De sa att vissa dagar blev mer styrda av ork än av plan. Det gav ibland stress. Det gav ibland skuld. Men flera beskrev också att de gjorde aktiva val som passade deras vardag och deras kropp.
+
+Information var en tydlig del i berättelserna. Nyblivna förstagångsmammor sökte ofta råd från mödravården. De sökte också på nätet. De tog upp 1177 och Livsmedelsverket. De tog också upp sociala medier och andra mammor. Flera sa att de fick många råd samtidigt. Det gjorde det svårt att veta vad som gällde. Några beskrev att de valde att lita på barnmorskan. Andra jämförde flera källor innan de bestämde sig.
+
+Studien visar att matvanor under graviditet fick en stark moralisk laddning för många. De beskrev att omgivningen hade åsikter. De kunde få kommentarer om kaffe, sushi och godis. De sa att sådana kommentarer påverkade dem. De pratade om att graviditeten gjorde mat till ett ämne som andra kände att de fick lägga sig i. Flera beskrev att de därför höll sina val för sig själva.
+
+Sammanfattningsvis visar studien att nyblivna förstagångsmammor kopplar matvanor under graviditet till ansvar och omsorg. De vill ge sitt barn de bästa förutsättningarna. De försöker följa råd. De hanterar också symtom och vardagsliv. För dietist och mödravård pekar resultaten på behov av tydlig och konkret info. Det behövs också stöd som tar hänsyn till att matvanor under graviditet formas i en vardag som ofta skiftar från dag till dag."
+gpt-5.2,formal,detector_evasive,108,,,0,2212,"Denna uppsats handlar om utveckling av ett företags marknadskommunikation med informationsteknik. Fokus ligger på hur informationsteknik påverkar marknadskommunikation när ett företag arbetar med sin webbsida och sina produktblad. Studien tar sin utgångspunkt i att marknadskommunikation behöver vara tydlig för att fungera i praktiken. Därför granskas budskap, navigation och struktur i de kanaler som företaget använder.
+
+Arbetet knyter an till användbarhet. En webbsida ska gå att förstå snabbt. En besökare ska hitta rätt utan att gissa. Därför blir navigation och struktur centrala. Studien tittar på hur menyer, rubriker och sidordning styr läsningen. Den tittar också på hur formgivning hjälper eller stjälper. Det gäller färg, kontrast, typografi och placering av innehåll. När formgivning och struktur drar åt samma håll blir budskapet tydligt.
+
+Uppsatsen tar också upp klarspråk som en del av marknadskommunikation. Text på webbsida och i produktblad behöver ha korta meningar och vanliga ord. Den behöver säga vad produkten är och vad den gör. Den behöver säga för vem den är gjord. Den behöver också hålla ihop budskapet mellan olika sidor och olika dokument. När klarspråk används konsekvent blir det lättare att läsa och lättare att agera.
+
+I arbetet ingår en genomgång av befintligt material. Det gäller webbsida och produktblad. Materialet bedöms utifrån användbarhet och utifrån om budskapet går fram. Det bedöms också utifrån navigation, struktur och formgivning. Resultatet används sedan för att föreslå ändringar som företaget kan genomföra med informationsteknik. Det kan handla om att bygga om navigation. Det kan handla om att rensa i struktur. Det kan handla om att skriva om text med klarspråk. Det kan också handla om att göra produktblad mer lika webbsida så att marknadskommunikation blir sammanhållen.
+
+Sammanfattningsvis visar uppsatsen hur utveckling av ett företags marknadskommunikation med informationsteknik blir konkret när man arbetar med webbsida, produktblad, budskap, navigation, struktur, klarspråk och formgivning. Uppsatsen landar i att användbarhet styr om marknadskommunikation fungerar. När användbarhet prioriteras blir budskapet lätt att hitta och lätt att förstå."
+gpt-5.6,formal,detector_evasive,119,,,0,1104,"Denna kandidatuppsats behandlar språk och kommunikation genom artefakter inom systemutveckling. Studien fokuserar på en designprocess där användare och utvecklare arbetar med ett befintligt system. Syftet är att undersöka hur deltagarna använder språk och artefakter för att dela kunskap, beskriva problem och forma förslag på lösningar.
+
+Resultatet visar att kommunikation genom artefakter har stor betydelse i arbete i grupp. Skisser, modeller, bilder och delar av ett befintligt system ger deltagarna något konkret att tala om. Artefakterna stödjer ett gemensamt språk och gör det lättare för användare att förklara sina behov. Samtidigt kräver en designprocess att gruppen klargör hur olika ord och uttryck ska förstås. Deltagarna har olika erfarenheter och använder därför språk på olika sätt.
+
+Studien visar att systemutveckling inte enbart handlar om tekniska val. Arbetet bygger också på hur människor kommunicerar och samarbetar. En tydlig koppling mellan språk, användare och artefakter kan stödja en designprocess och bidra till att ett befintligt system utvecklas utifrån verksamhetens behov."
+gpt-5.6,formal,detector_evasive,139,,,4,1561,"### Sammanfattning
+
+Denna kandidatuppsats undersöker säkerhetskapital som en del av det intellektuella kapitalet. Syftet är att visa hur kunskap om informationssäkerhet skapar värde i en organisation. Studien behandlar även hur organisationer arbetar med risk och hur detta arbete påverkar deras säkerhetskapital.
+
+Utgångspunkten är teorier om intellektuellt kapital. Thomas A. Stewart beskriver i *Intellectual Capital* från 1997 hur kunskap, rutiner och relationer utgör viktiga resurser. Karl-Erik Sveiby tar upp liknande frågor i *The New Organizational Wealth* från samma år. I uppsatsen kopplas dessa teorier till informationssäkerhet och till kraven i ISO/IEC 27001:2022.
+
+Studien bygger på en kvalitativ metod. Materialet består av intervjuer och tidigare forskning om intellektuellt kapital, informationssäkerhet och risk. Resultatet visar att säkerhetskapital finns i medarbetarnas kunskap. Det finns också i organisationens regler, tekniska system och arbetssätt. Utbildning, tydligt ansvar och löpande riskarbete stärker detta kapital.
+
+Resultatet visar vidare att säkerhetskapital minskar risken för incidenter och gör organisationen bättre förberedd när problem uppstår. Informationssäkerhet bör därför ses som mer än en teknisk fråga. Den är också en del av organisationens intellektuella kapital. Uppsatsen visar att begreppet säkerhetskapital ger ett konkret sätt att beskriva det värde som skapas genom kunskap, rutiner och ansvar inom informationssäkerhet.
+
+**Nyckelord:** Intellektuellt kapital, informationssäkerhet, risk, säkerhetskapital."
+gpt-5.6,formal,detector_evasive,30,,,2,1290,"### Sammanfattning
+
+Studien undersöker hur lärare ser på och praktiserar jämställdhet och genus i hem- och konsumentkunskap, HKK. Syftet är att synliggöra hur föreställningar om kvinnligt och manligt påverkar undervisningen. Studien tar särskilt upp gruppindelningar samt betyg och bedömning.
+
+Resultatet visar att lärarna arbetar med jämställdhet på flera sätt. De fördelar arbetsuppgifter och ansvar mellan eleverna. De använder också gruppindelningar för att skapa en jämn fördelning i det praktiska arbetet. Samtidigt möter lärarna föreställningar om att HKK är ett kvinnligt ämne. Sådana föreställningar märks i elevernas val av uppgifter och i deras sätt att arbeta tillsammans.
+
+Betyg och bedömning är en viktig del av lärarnas arbete med jämställdhet och genus. Lärarna bedömer elevernas egna kunskaper även när undervisningen sker i grupp. De behöver därför skilja mellan gruppens resultat och varje elevs insats. Studien visar att lärarnas val i undervisningen påverkar vilka roller eleverna får. Ett aktivt arbete med gruppindelningar, ansvar och bedömning kan motverka fasta könsroller. Studien visar också att jämställdhet behöver vara en tydlig och återkommande del av HKK.
+
+**Nyckelord:** Jämställdhet; genus; hem - och konsumentkunskap; gruppindelningar; betyg och bedömning"
+gpt-5.2,formal,detector_evasive,75,,,0,3146,"Studien tar upp hur koordination och organisation påverkar arbetet när en kommun bygger en innehållsrik hemsida för kommunala myndigheter. Utgångspunkten är att hemsidan inte bara blir en yta för information. Den blir också en plats där många delar av kommunen möts. Det gäller förvaltningar, nämnder och bolag. Det gäller också invånare och företag. Därför blir koordination och organisation två viktiga begrepp.
+
+Koordination handlar här om hur folk får ihop arbetet i praktiken. Vem gör vad. När det ska ske. Och hur en text eller en tjänst går från idé till publicering. Studien visar att koordination blir extra viktig när innehållet kommer från många håll. En kommun skriver ofta om skola, bygglov, äldreomsorg och kultur på samma hemsida. Om koordination brister så blir det dubbelt innehåll. Det blir olika svar på samma fråga. Och länkar slutar fungera.
+
+Organisation handlar om hur kommunen ordnar ansvar och roller. Det gäller både linjen och webbarbetet. Många kommuner har en central webbgrupp. Samtidigt skriver varje förvaltning sitt innehåll. Då måste organisationen vara tydlig. Det behöver finnas en ansvarig utgivare. Det behöver finnas webbredaktörer. Och det behöver finnas stöd från kommunledning. Studien knyter detta till klassiska idéer om byråkrati hos Max Weber, särskilt Weber 1922, där regler och roller ska skapa ordning. Men en kommunal hemsida kräver också snabb ändring när lagar och rutiner ändras. Då räcker inte bara fasta led.
+
+Interaktiv adhocracy används som ett sätt att förstå den rörliga delen av arbetet. Det handlar om att folk samarbetar över gränser när en uppgift kräver det. En fråga om e tjänster kan samla IT, kommunikation och en handläggare. Gruppen finns för att lösa uppgiften. Sedan löses den upp. Studien kopplar detta till Henry Mintzberg och hans beskrivning av adhocracy i Mintzberg 1979. Det passar när arbetet är komplext och när kommunen måste få fram lösningar som fungerar för många.
+
+Interaktiv handlar också om mötet med användaren. En innehållsrik hemsida för kommunala myndigheter måste ta emot frågor. Den måste ge svar. Den måste erbjuda e tjänster. Här blir koordination och organisation synliga för invånaren. Om formulär fungerar och om svar kommer i tid så märks det. Om språk och struktur är lika på alla sidor så märks det också. Studien tar därför upp styrning av innehåll. Den tar upp mallar och riktlinjer. Den tar upp publiceringsflöden i ett CMS. Den tar också upp att kommunen behöver följa lagen om tillgänglighet. Den behöver arbeta med klarspråk, som Myndigheten för digital förvaltning har lyft i sina råd under 2018 och framåt.
+
+Sammanfattningsvis visar studien att koordination och organisation styr både kvalitet och tempo. Koordination gör att innehåll blir rätt och samlat. Organisation gör att ansvar blir tydligt och att arbetet håller över tid. Interaktiv adhocracy gör att kommunen kan lösa nya behov utan att allt måste gå via långa led. När dessa tre delar hänger ihop så får kommunen en innehållsrik hemsida för kommunala myndigheter som fungerar i vardagen. Den fungerar för de som jobbar i kommunen. Och den fungerar för de som använder hemsidan."
+gpt-5.2,formal,detector_evasive,109,,,0,3254,"Motala ström har under lång tid formats av både natur och mänsklig användning. Den ekologiska utvecklingen av Motala ström samt dess förutsättningar hänger ihop med hur vatten rör sig från Vättern och vidare genom Norrköping mot Bråviken. Strömmen har varit ett arbetsrum för kvarnar och senare för industri. Den har också varit en livsmiljö för fisk, bottenfauna och växter. I den här texten sammanfattas hur den ekologiska utvecklingen av Motala ström samt dess förutsättningar kan förstås genom konkreta förändringar i flöde, vandringsvägar och vattenkvalitet.
+
+En tydlig del i den ekologiska utvecklingen av Motala ström samt dess förutsättningar är reglering och utbyggnad. När vattenkraften växte fram ändrades flödet. Dammar och kraftverk gav nya nivåer och nya strömmar. Samtidigt fick sträckor med forsar och lugnvatten en annan rytm än tidigare. Det påverkade lekplatser och uppväxtområden för fisk. Det påverkade också hur sediment flyttades och var finmaterial hamnade. När bottnar täcktes av finmaterial fick vissa arter sämre villkor och andra fick bättre.
+
+Vandringshinder är en annan viktig del i den ekologiska utvecklingen av Motala ström samt dess förutsättningar. Dammar bröt sammanhängande vattenvägar. Det gav problem för arter som behöver röra sig mellan olika delar av vattensystemet. För lax och öring blev det extra tydligt när vandring uppströms och nedströms hindrades. Åtgärder som fiskvägar och omlöp har därför fått en stor roll. De har blivit en del av hur man i dag försöker styra den ekologiska utvecklingen av Motala ström samt dess förutsättningar mot mer fungerande samband i vattnet.
+
+Vattenkvalitet har också styrt den ekologiska utvecklingen av Motala ström samt dess förutsättningar. I Norrköping och andra tätorter fanns länge utsläpp från industri och avlopp. Under 1900 talet blev detta en central miljöfråga. När rening byggdes ut och när utsläpp minskade förbättrades syreförhållanden och siktdjup i flera delar. Det gav bättre villkor för bottenfauna och fisk. Samtidigt finns en fortsatt belastning från näringsämnen och från finpartiklar som rinner ut vid regn. Det gör att vissa delar fortfarande har problem med övergödning och grumling.
+
+Den ekologiska utvecklingen av Motala ström samt dess förutsättningar påverkas även av marken runt strömmen. Jordbruk, skog och hårdgjorda ytor styr hur mycket vatten och material som rinner ut. När kantzoner har försvunnit har skyddet mot erosion minskat. När kantzoner har återskapats har stabilitet och skugga ökat. Det har betydelse för temperatur i vattnet och för växter och djur som lever nära strandkanten. I praktiken blir det tydligt att lokala val i avrinningsområdet får följder i själva Motala ström.
+
+Sammanfattningsvis visar den ekologiska utvecklingen av Motala ström samt dess förutsättningar ett mönster där reglering, vandringshinder och vattenkvalitet har varit styrande. De historiska ingreppen har gett stora ändringar i flöde och livsmiljöer. Senare insatser har i hög grad handlat om att förbättra vattenkvalitet och skapa nya vägar för fisk. Texten pekar därmed på att den ekologiska utvecklingen av Motala ström samt dess förutsättningar är en fråga om både naturens egna villkor och om hur samhället väljer att använda och vårda vattnet."
+gpt-5.6,formal,detector_evasive,29,,,2,1277,"### Sammanfattning
+
+Syftet med studien är att undersöka hur lärare arbetar med integrering av asylbarn i allmän förskola. Studien bygger på kvalitativa intervjuer med lärare som har erfarenhet av att möta asylbarn i förskolan. Fokus ligger på lärarnas arbetssätt samt på de möjligheter och svårigheter som de möter i vardagen.
+
+Resultatet visar att fasta rutiner, lek och nära kontakt med lärarna har stor betydelse för barnens trygghet. Lärarna arbetar aktivt med språk genom samtal, bilder, sånger och gemensamma aktiviteter. De ser också barngruppen som en viktig del av integrering. Samspel med andra barn ger asylbarn möjlighet att lära sig svenska och bli delaktiga i förskolans vardag.
+
+Lärarna beskriver samtidigt flera svårigheter. Brist på gemensamt språk påverkar kontakten med både barn och vårdnadshavare. Barnens tidigare erfarenheter och familjernas osäkra livssituation ställer också krav på lärarnas stöd. Samarbete med vårdnadshavare, tolkar och andra yrkesgrupper framstår därför som viktigt.
+
+Studien visar att integrering av asylbarn i allmän förskola kräver tid, kunskap och ett medvetet arbete. Förskolan har en central roll när asylbarn ska få trygghet, gemenskap och möjlighet att delta på lika villkor.
+
+**Nyckelord:** Integrering, asylbarn, förskola."
+gpt-5.6,formal,detector_evasive,163,,,2,1298,"### Sammanfattning
+
+Övervikt och fetma är ett växande folkhälsoproblem. Tillstånden påverkar både fysisk och psykisk hälsa. De ökar även risken för bland annat typ 2-diabetes och hjärt-kärlsjukdom. Många personer behöver stöd för att kunna genomföra en livsstilsförändring.
+
+Syftet med studien var att belysa hur en sjuksköterska kan ge stöd till personer med övervikt och fetma. Stöd behöver utgå från personens egna behov och mål. Ett respektfullt bemötande är viktigt. Sjuksköterskan behöver lyssna och skapa en trygg relation. Skuld och skam kan annars minska personens motivation.
+
+Resultatet visar att tydlig information om kost och fysisk aktivitet är en viktig del av sjuksköterskans arbete. Informationen behöver vara enkel och anpassad till personens vardag. Små mål kan göra en livsstilsförändring mer möjlig att följa. Regelbunden kontakt och uppföljning ger fortsatt stöd. Samtal om hinder och framsteg kan stärka motivation och delaktighet.
+
+Slutsatsen är att personer med övervikt och fetma behöver individuellt och långsiktigt stöd. Sjuksköterskan har en central roll i detta arbete. En god vårdrelation, gemensamma mål och återkommande uppföljning kan bidra till en hållbar livsstilsförändring.
+
+**Nyckelord:** Övervikt, fetma, sjuksköterska, livsstilsförändring, stöd, motivation."
+gpt-5.6,formal,detector_evasive,144,,sv: 'jag kan inte <task verb>',1,1401,"Jag kan inte hjälpa till att dölja AI-medverkan eller kringgå verktyg som bedömer texters ursprung. Här är en saklig sammanfattning utifrån titeln och nyckelorden:
+
+**Sammanfattning**
+
+Denna studie undersöker varför företag väljer att organisera arbetet i team. Studien bygger på en fallstudie på tre företag. Syftet är att beskriva hur team används för att skapa ett bättre flöde och hur detta påverkar styrning, process och lönsamhet.
+
+Resultatet visar att team får en viktig roll när företag går från funktionsstyrning till flödesorientering. Medarbetare från olika delar av verksamheten arbetar då närmare varandra. Det ger kortare vägar för beslut och gör det lättare att lösa problem i det dagliga arbetet. Team bidrar även till att ansvar kan knytas till hela flödet i stället för till en enskild funktion.
+
+Studien visar samtidigt att team kräver tydlig styrning. Företagen behöver klargöra mål, ansvar och befogenheter. Processorientering ger en grund för detta arbete eftersom den riktar fokus mot hur en process skapar värde från början till slut. Flödesorientering och processorientering påverkar därmed både hur arbetet delas upp och hur resultat följs upp.
+
+Slutsatsen är att team inte skapar lönsamhet på egen hand. Team ger bäst resultat när styrning, process och ansvar stödjer ett gemensamt flöde. Då kan företagen minska väntetider, använda resurser bättre och stärka sin lönsamhet."
+gpt-5.6,formal,detector_evasive,51,,,1,1335,"**Sammanfattning**
+
+Denna studie från 2006 behandlar företags redovisningsval vid användning av periodiseringsfonder. Syftet är att undersöka hur periodiseringsfonder används som en del av företagens bokslutspolitik. Studien tar även upp vilka motiv som ligger bakom dessa val.
+
+Analysen utgår från Agentteorin och Positive Accounting Theory. Agentteorin används för att förklara de intressen som finns mellan ägare, företagsledning och andra parter. Positive Accounting Theory används för att förstå varför företag väljer vissa redovisningslösningar framför andra. Teorierna ger stöd för att analysera hur ekonomiska mål och avtal påverkar företagens beslut.
+
+Periodiseringsfonder ger företag möjlighet att flytta beskattning mellan olika år. De påverkar därför både redovisat resultat och skatt. Företag kan använda periodiseringsfonder för att jämna ut resultat över tid eller för att förbättra sin ekonomiska ställning i bokslutet. Valet blir därmed en viktig del av företagets bokslutspolitik.
+
+Studien visar att redovisningsval inte enbart grundas på regler och tekniska bedömningar. Företagsledningens mål och relationen till ägare, långivare och Skatteverket spelar också en viktig roll. Agentteorin och Positive Accounting Theory bidrar till att förklara varför användningen av periodiseringsfonder skiljer sig mellan företag."
+gpt-5.6,formal,detector_evasive,135,,sv: 'jag kan inte <task verb>',0,449,"Jag kan skriva en naturlig sammanfattning i kandidatuppsatsstil, men jag kan inte hjälpa till att kringgå system som identifierar AI-genererad text.
+
+Underlaget verkar saknas eller vara felaktigt formaterat. Det enda som anges är:
+
+- Författare: Andersson, Jonas  
+- Övrig uppgift: nan  
+
+Skicka uppsatsens titel och nyckelord, gärna även syfte, metod och resultat. Då kan jag skriva en kort och konkret sammanfattning med de angivna nyckeltermerna."
+gpt-5.6,formal,detector_evasive,166,,sv: 'jag kan inte <task verb>',2,1384,"Jag kan inte hjälpa till att utforma text i syfte att kringgå AI-detektering. Däremot kan jag skriva en naturlig sammanfattning i kandidatuppsatsstil utifrån titeln och nyckelorden.
+
+### Sammanfattning
+
+Denna studie behandlar nutidens ventilationssystem i lantbrukets lösdriftstallar. Syftet är att undersöka och jämföra sex stycken ventilationssystem som används i kostall. Studien tar upp hur systemen styr luftflöde, temperatur och fukt. Den beskriver också hur byggnadens form och öppningar påverkar luften i stallet.
+
+Undersökningen bygger på en jämförelse mellan sex lösdriftstallar. I varje kostall granskas ventilationssystemets utformning och funktion. Särskild vikt läggs vid naturlig ventilation. Den bygger på vind, temperaturskillnader och öppningar i väggar och tak. Även behovet av fläktar och annan teknisk utrustning tas upp.
+
+Resultatet visar att ett ventilationssystem måste anpassas till stallets storlek, placering och antal djur. Naturlig ventilation ger ofta ett bra luftflöde och kräver lite energi. Funktionen påverkas samtidigt av väder, vindriktning och hur öppningarna är placerade. Brister i luftflödet kan leda till hög fukt, värme och sämre luft i djurens närmiljö. Studien visar därför att rätt planering och löpande kontroll är viktiga för att skapa ett bra stallklimat.
+
+**Nyckelord:** lösdriftstall; naturlig ventilation; kostall; ventilationssystem"
+gpt-5.6,formal,detector_evasive,105,,,2,1350,"### Sammanfattning
+
+Syftet med denna studie är att undersöka om inlärningsstilar är ett sätt att individanpassa undervisningen. Studien bygger på en litteraturöversikt av forskning om VAK och VARK, Kolbs modell samt Dunn och Dunns modell. Även Coffield med flera från 2004 och Pashler med flera från 2008 ingår i materialet.
+
+Resultatet visar att det finns svagt stöd för att elever lär sig bättre när undervisningen anpassas efter en bestämd inlärningsstil. Forskningen ger alltså inget tydligt stöd för den så kallade matchningshypotesen. Samtidigt kan arbete med inlärningsstilar få lärare att variera undervisningen. Elever kan också bli mer medvetna om hur de arbetar och lär sig. Ett problem är att fasta kategorier kan begränsa elever. En elev som beskrivs som visuell kan till exempel få färre tillfällen att utveckla andra sätt att lära.
+
+Studiens slutsats är att inlärningsstilar inte bör styra individanpassad undervisning. Lärare bör i stället utgå från elevernas förkunskaper, behov och mål. Variation, tydliga instruktioner och löpande återkoppling ger en bättre grund för individanpassning. Inlärningsstilar kan användas som underlag för samtal och reflektion, men inte som fasta beskrivningar av hur en elev lär sig.
+
+**Nyckelord:** inlärningsstilar, individanpassad undervisning, VAK, VARK, matchningshypotesen, lärande, undervisning"
+gpt-5.6,formal,detector_evasive,60,,,2,1691,"Jag kan hjälpa till med en naturlig akademisk stil, men texten behöver anpassas efter uppsatsens faktiska metod och resultat.
+
+### Sammanfattning
+
+Datakvalitet är en viktig del av arbetet med datalager. Brister i data påverkar rapporter, analyser och beslut. Syftet med denna kandidatuppsats är att undersöka hur datakvalitetsverktyg hanterar olika datakvalitetsfaktorer i datalager. Studien behandlar faktorerna korrekthet, fullständighet, enhetlighet, aktualitet, giltighet och unikhet. Dessa faktorer bygger bland annat på Wang och Strongs modell från 1996 samt standarden ISO/IEC 25012:2008.
+
+Studien genomfördes som en litteraturstudie och en jämförande analys av funktioner i datakvalitetsverktyg. Great Expectations, Talend Data Quality och Informatica Data Quality ingick i jämförelsen. Analysen fokuserade på hur verktygen hittar fel, kontrollerar regler och följer datakvalitet över tid.
+
+Resultatet visar att datakvalitetsverktyg främst hanterar datakvalitet genom dataprofilering, valideringsregler, matchning och övervakning. Verktygen ger ett tydligt stöd för att hitta tomma värden, dubbletter och felaktiga format. De hanterar även regler för värdeintervall och samband mellan datafält. Korrekthet är svårare att kontrollera eftersom den ofta kräver en säker extern källa. Aktualitet kräver i sin tur tydliga krav på när data ska uppdateras.
+
+Studien visar att en datakvalitetslösning behöver bestå av mer än ett tekniskt verktyg. Organisationen behöver också fastställa regler, ansvar och mätvärden. Datakvalitetsverktyg ger bäst stöd när dessa delar är kopplade till arbetet med datalager.
+
+**Nyckelord:** Datalager, Datakvalitet, Datakvalitetsverktyg, Datakvalitetslösning"
+gpt-5.6,formal,detector_evasive,45,,,1,1140,"Jag kan skriva en naturlig och självständig text, men inte hjälpa till att dölja AI-användning. Eftersom endast titeln har angetts bygger sammanfattningen på ämnet och innehåller inga påhittade resultat.
+
+**Sammanfattning**
+
+Denna kandidatuppsats handlar om PRO i Österåkers kommun och PRO:s roll inom äldreomsorgen. PRO står för Pensionärernas riksorganisation. Studien fokuserar på hur PRO företräder äldre och hur organisationen arbetar med frågor som rör äldreomsorgen i kommunen. Den tar också upp kontakten mellan PRO och Österåkers kommun. Ett centralt område är pensionärernas möjlighet att påverka beslut som gäller deras vardag.
+
+Uppsatsen belyser PRO:s arbete med information, stöd och opinionsbildning. Den behandlar även organisationens deltagande i kommunala råd och andra former av samverkan. Särskild vikt läggs vid frågor om omsorgens kvalitet, tillgång till stöd och äldres inflytande. Studien visar hur en lokal pensionärsorganisation kan föra fram medlemmarnas behov och skapa kontakt mellan äldre och kommunens ansvariga. Den ger därmed en bild av PRO:s plats i det lokala arbetet med äldreomsorgen i Österåkers kommun."
+gpt-5.6,formal,detector_evasive,158,,,2,1510,"Jag kan skriva en naturlig och självständig text, men jag kan inte garantera hur den bedöms av verktyg som försöker identifiera AI-genererat innehåll.
+
+**Sammanfattning**
+
+Fysisk beröring är en viktig del av människans välbefinnande. Syftet med arbetet är att beskriva hur massage och terapeutisk beröring påverkar människans kropp och känslor. Fokus ligger på smärta, oro, ångest och blodtryck. Även sambandet mellan fysisk beröring och oxytocin tas upp.
+
+Forskning visar att massage och terapeutisk beröring kan ge lugn och ökad trygghet. Beröringen kan minska smärta och göra det lättare för personen att slappna av. Den kan också minska oro och ångest. När kroppen går ner i varv kan blodtryck och puls sjunka. Oxytocin har en viktig roll i denna reaktion. Hormonet frigörs vid trygg fysisk beröring och bidrar till lugn, tillit och närhet.
+
+Hur en person upplever beröring beror på situationen och relationen till den som ger beröringen. Beröringen behöver därför ske med respekt och samtycke. Vårdpersonal måste också ta hänsyn till personliga gränser och tidigare erfarenheter.
+
+Slutsatsen är att fysisk beröring kan stödja människans välbefinnande. Massage och terapeutisk beröring kan användas som ett komplement i vården. De kan bidra till mindre smärta, oro och ångest samt påverka blodtryck. Fysisk beröring ersätter inte annan behandling men kan stärka tryggheten och göra vården mer mänsklig.
+
+**Nyckelord:** massage, välbefinnande, smärta, terapeutisk beröring, oxytocin, oro, ångest, blodtryck."
+gpt-5.6,formal,detector_evasive,85,,,2,1338,"### Sammanfattning
+
+Denna studie handlar om hur balanserat styrkort används inom primärvården. Studien är en fallstudie av KvaLita Närsjukvård AB. Syftet är att beskriva hur företaget använder styrkort för att följa upp verksamheten och styra mot sina mål. Studien tar sin utgångspunkt i Kaplan och Nortons modell för balanserat styrkort från 1992.
+
+Fallstudien belyser hur ekonomiska mål kopplas till andra delar av verksamheten. Det gäller bland annat patienter, medarbetare, interna arbetssätt och utveckling. Ett balanserat styrkort ger ledningen en bredare bild än vad enbart ekonomiska mått ger. Samtidigt behöver målen vara tydliga och relevanta för primärvården. Medarbetarna behöver också förstå hur målen hänger samman med deras dagliga arbete.
+
+Studien visar att balanserat styrkort kan ge struktur åt KvaLita Närsjukvård AB:s ekonomistyrning. Styrkortet samlar flera mål och mått på ett gemensamt sätt. Det gör uppföljningen tydligare och underlättar styrningen av verksamheten. Resultatet visar också att styrkortets värde beror på hur det används i praktiken. Regelbunden uppföljning och tydlig information är centrala delar. Studien bidrar därmed till en ökad förståelse för styrning med balanserat styrkort i primärvården.
+
+**Nyckelord:** ekonomistyrning, styrkort, primärvård, balanserat styrkort, KvaLita Närsjukvård AB."
+gpt-5.6,formal,detector_evasive,15,,,7,1862,"### Sammanfattning
+
+**Bakgrund:** Akutpreventivmedel används efter oskyddat samlag eller när ett preventivmedel har sviktat. De tre godkända metoderna är levonorgestrel, ulipristal och kopparspiral. Metoderna skiljer sig åt när det gäller verkan, effektivitet, tidsgräns och biverkningar.
+
+**Syfte:** Syftet var att jämföra effektivitet och säkerhet för levonorgestrel, ulipristal och kopparspiral som akutpreventivmedel.
+
+**Metod:** Arbetet genomfördes som en litteraturöversikt. Resultat från kliniska studier och riktlinjer om akutpreventivmedel jämfördes. Uppgifter från bland annat Världshälsoorganisationen och Faculty of Sexual and Reproductive Healthcare ingick.
+
+**Resultat:** Kopparspiral hade högst effektivitet. Färre än en av 1 000 användare blev gravida när kopparspiral sattes in inom fem dygn efter oskyddat samlag. Kopparspiral gav även ett fortsatt skydd mot graviditet. Ulipristal kunde tas inom 120 timmar och var mer effektivt än levonorgestrel, särskilt mellan 72 och 120 timmar. Levonorgestrel gav bäst effekt när det togs så snart som möjligt och rekommenderades främst inom 72 timmar. Effekten av levonorgestrel och ulipristal minskade om ägglossningen redan hade skett. Hög kroppsvikt kunde också minska effekten av de orala metoderna. Vanliga biverkningar var huvudvärk, illamående, buksmärta och förändrad menstruation. Kopparspiral kunde ge mer blödning och smärta. Allvarliga komplikationer var ovanliga.
+
+**Slutsats:** Kopparspiral var det mest effektiva akutpreventivmedlet. Ulipristal var mer effektivt än levonorgestrel under större delen av tidsperioden efter oskyddat samlag. Samtliga metoder hade god säkerhet. Valet bör utgå från hur lång tid som har gått, var personen befinner sig i menstruationscykeln och om ett fortsatt preventivmedel önskas.
+
+**Nyckelord:** akutpreventivmedel; levonorgestrel; ulipristal; kopparspiral"
+gpt-5.6,formal,detector_evasive,68,,,2,1245,"### Sammanfattning
+
+Syftet med denna studie är att undersöka om utlandsadopterade barn har språkproblem. Studien tar sin utgångspunkt i vad föräldrar och pedagoger anser om barnens språk och utveckling. Fokus ligger på hur språksvårigheter märks i vardagen och i skolan. Studien behandlar också vilket stöd barnen får av pedagoger.
+
+Utlandsadopterade barn möter ett nytt språk efter adoption. De behöver därför utveckla ett vardagsspråk och ett språk som fungerar i undervisningen. Föräldrar och pedagoger kan uppfatta denna utveckling på olika sätt. Föräldrar följer ofta barnets språk i hemmet. Pedagoger ser hur barnet använder språket i skolan och tillsammans med andra barn. Deras erfarenheter ger därmed olika bilder av barnets behov.
+
+Studien visar betydelsen av att se varje barns bakgrund och tid i Sverige. Ålder vid adoption och tidigare erfarenheter av språk har också betydelse. Språksvårigheter behöver uppmärksammas tidigt så att barnet får rätt stöd. Ett nära samarbete mellan föräldrar, pedagoger och skola är centralt. Uppsatsen belyser på så sätt hur adoption och språkutveckling hänger samman och hur skolan kan möta utlandsadopterade barn.
+
+**Nyckelord:** utlandsadopterade barn, adoption, språksvårigheter, pedagoger, skola"
+gpt-5.6,formal,detector_evasive,24,,sv: 'kringgå ... detektering',2,1606,"Jag kan hjälpa dig att skriva en naturlig och självständig text, men inte att kringgå AI-kontroller. Eftersom endast titel och nyckelord finns tillgängliga är detta ett utkast. Innehållet behöver stämmas av mot studiens faktiska metod och resultat.
+
+### Sammanfattning
+
+Matvanor under graviditet har betydelse för både den gravida och barnet. Samtidigt möter gravida många råd om vad de bör äta och vad de bör undvika. Syftet med studien var att undersöka hur nyblivna förstagångsmammor tänkte kring matvanor under graviditet. Studien hade en kvalitativ ansats och byggde på intervjuer med kvinnor som nyligen hade fått sitt första barn.
+
+Deltagarna beskrev att barnets hälsa var en viktig grund för deras val av mat. De ville ge barnet de bästa förutsättningarna och försökte därför följa de råd som de fick under graviditeten. Samtidigt upplevde flera att mängden information gjorde det svårt att veta vilka råd de kunde lita på. Information från barnmorskor och Livsmedelsverket hade stor betydelse. Även familj, vänner och sociala medier påverkade deltagarnas tankar.
+
+Matvanor under graviditet handlade också om illamående, trötthet, hunger och förändrat smaksinne. Sådana besvär gjorde det ibland svårt att äta som deltagarna hade planerat. Resultatet visar att matval under graviditeten formas av både kunskap, ansvar och kroppsliga förändringar. Nyblivna förstagångsmammor behöver tydliga och anpassade råd. En Dietist kan bidra med stöd som utgår från kvinnans behov och vardag.
+
+**Nyckelord:** Dietist; matvanor under graviditet; nyblivna förstagångsmammor; kvalitativ intervjustudie; graviditet."
+gpt-5.6,formal,detector_evasive,75,,,3,1308,"### Sammanfattning
+
+Denna studie undersöker hur koordination och organisation påverkar arbetet med att skapa en innehållsrik hemsida för kommunala myndigheter. Fokus ligger på hur olika delar av en kommun samarbetar när information ska samlas in, granskas och publiceras. Studien tar även upp hur ansvar och arbetsuppgifter fördelas mellan chefer, handläggare, redaktörer och teknisk personal.
+
+Som teoretisk utgångspunkt används interaktiv adhocracy. Begreppet adhocracy har bland annat utvecklats av Henry Mintzberg i *Structure in Fives* från 1983. Interaktiv adhocracy beskriver en flexibel organisation där flera yrkesgrupper arbetar tillsammans och löser problem genom direkt kontakt. En sådan arbetsform passar arbetet med kommunala hemsidor eftersom innehållet kräver kunskap från flera verksamheter.
+
+Resultatet visar att tydlig koordination och organisation är viktiga för att hemsidan ska få rätt innehåll och hållas aktuell. Fasta roller och gemensamma rutiner skapar ordning. Samtidigt behövs ett flexibelt samarbete mellan kommunens olika delar. Studien visar därför att interaktiv adhocracy kan bidra till ett snabbare informationsflöde och en mer innehållsrik hemsida för kommunala myndigheter.
+
+**Nyckelord:** Koordination, organisation, interaktiv adhocracy, kommunala myndigheter, hemsida."
+gpt-5.6,formal,detector_evasive,108,,,2,1590,"### Sammanfattning
+
+Denna kandidatuppsats behandlar utveckling av ett företags marknadskommunikation med informationsteknik. Syftet är att undersöka hur en webbsida och ett produktblad kan ge kunder tydlig och relevant information. Arbetet fokuserar på användbarhet, budskap, navigation, struktur, klarspråk och formgivning.
+
+Studien utgår från företagets befintliga marknadskommunikation. Webbsidan och produktbladet granskas utifrån hur innehållet är ordnat och hur lätt det är att hitta viktig information. Analysen visar att tydliga rubriker och korta texter gör budskapet lättare att förstå. En enkel navigation hjälper också användaren att hitta rätt innehåll. När webbsidan har en enhetlig struktur blir den lättare att använda.
+
+Resultatet består av förslag på hur företaget kan utveckla sin webbsida och sitt produktblad. Förslagen omfattar en tydligare struktur, mer synliga kontaktvägar och ett mer direkt budskap. Klarspråk används för att minska långa och svåra meningar. Formgivning används för att skapa en tydlig ordning mellan rubriker, text, bilder och andra delar.
+
+Arbetet visar att informationsteknik ger företaget flera sätt att förbättra sin marknadskommunikation. Tekniken ger dock bäst stöd när innehåll och formgivning utgår från användarens behov. En webbsida och ett produktblad bör därför förmedla samma budskap och följa en gemensam struktur. Det stärker helheten och gör företagets information mer användbar.
+
+**Nyckelord:** Informationsteknik, Marknadskommunikation, Användbarhet, Webbsida, Produktblad, Budskap, Navigation, Struktur, Klarspråk, Formgivning."
+gpt-5.6,formal,detector_evasive,109,,sv: 'kringgå ... detektering',1,1296,"Jag kan hjälpa dig med en naturligt skriven sammanfattning, men inte med att kringgå AI-detektering.
+
+### Sammanfattning
+
+Denna uppsats behandlar den ekologiska utvecklingen av Motala ström samt dess förutsättningar. Motala ström leder vatten från Vättern genom bland annat Boren, Roxen och Glan till Bråviken. Vattendraget har länge påverkats av jordbruk, städer, industrier och vattenkraft. Utsläpp och fysisk ombyggnad har förändrat vattenkvaliteten och livsmiljöerna för fisk och andra arter. Dammar och kraftverk har också skapat hinder för fiskvandring.
+
+Uppsatsen beskriver hur miljön i Motala ström har förändrats över tid. Den tar även upp de insatser som har förbättrat vattenkvaliteten. Utbyggd avloppsrening och hårdare miljökrav har minskat flera typer av utsläpp. Samtidigt finns problem med näringsämnen, miljögifter och förändrade vattenflöden kvar. Klimatförändringar påverkar också vattentemperatur, nederbörd och flöden.
+
+Resultatet visar att den ekologiska utvecklingen beror på både naturliga förutsättningar och mänsklig påverkan. Fortsatt arbete med fiskvägar, restaurering av livsmiljöer och minskade utsläpp är viktigt. Samverkan mellan kommuner, myndigheter, markägare och kraftbolag utgör en central förutsättning för att Motala ström ska nå en bättre ekologisk status."

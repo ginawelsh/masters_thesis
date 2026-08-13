@@ -1,0 +1,33 @@
+% Hand-authored: cue profile of LLM-judge rationales (keyword coding of the
+% `reasoning` column in detection_results_{claude,gemini,deepseek}.csv, n = 800 each).
+% Indicative Swedish keyword matching, not a validated annotation scheme.
+% REQUIRES: \usepackage{booktabs}, \usepackage[table]{xcolor}
+\providecommand{\cg}[1]{\cellcolor{hmgreen!#1}}
+% \definecolor{hmgreen}{HTML}{2E8B57} % uncomment if used standalone
+
+\begin{table}[t]
+  \centering
+  \small
+  \begin{tabular}{l ccc}
+  \toprule
+    Cue invoked in rationale & Claude & Gemini & DeepSeek \\
+    \midrule
+    Template / rigid structure          & \cg{39}$77$ & \cg{33}$65$ & \cg{25}$51$ \\
+    Concrete specifics (names, numbers) & \cg{33}$67$ & \cg{22}$44$ & \cg{23}$45$ \\
+    Impersonal / neutral tone           & \cg{24}$47$ & \cg{34}$67$ & \cg{35}$71$ \\
+    Emotion / subjectivity              & \cg{23}$45$ & \cg{13}$27$ & \cg{31}$63$ \\
+    Colloquial / informal register      & \cg{21}$42$ & \cg{24}$47$ & \cg{27}$53$ \\
+    Lexical variation / repetition      & \cg{11}$22$ & \cg{9}$17$  & \cg{26}$51$ \\
+    Errorless polish                    & \cg{19}$37$ & \cg{20}$41$ & \cg{13}$26$ \\
+    \bottomrule
+  \end{tabular}
+  \caption{Share (\%) of each judge's rationales invoking a given cue, over all
+  800 classified documents. Coded by keyword matching on the Swedish
+  \texttt{reasoning} field, so figures are indicative rather than exhaustive and
+  rows need not sum to 100 (a rationale may cite several cues). The judges do not
+  read the same signal: Claude keys on rigid structure and concreteness, Gemini
+  and DeepSeek on impersonal tone, and DeepSeek uniquely leans on repetition and
+  emotion --- consistent with their divergent accuracies and error patterns
+  (Tables~\ref{tab:llm-judge-balanced}--\ref{tab:llm-judge-balanced-condition}).}
+  \label{tab:judge-rationale-cues}
+\end{table}

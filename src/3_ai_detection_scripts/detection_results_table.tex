@@ -1,0 +1,50 @@
+% LLM-as-judge AI-detection results.
+% REQUIRES: \usepackage{booktabs} and \usepackage{multirow}.
+% Metric: % of items correctly classified -- recall for the three AI sources
+% (share of generated text flagged as AI), specificity for the Human row
+% (share of human text correctly left unflagged). Higher is better throughout.
+% "pending" = run not yet complete at time of writing (cleaned formal GPT-5.6 /
+% Mistral still being scored; Gemini is quota-limited to 250 calls/day).
+\begin{table}[htbp]
+  \centering
+  \small
+  \caption{Large-language-model-as-judge AI-text detection, by register, text
+  source and judge model (values are percentages). Each cell is the share of
+  items \emph{correctly} classified: for the three AI sources this is detection
+  recall (\% of generated text flagged as AI); for the Human row it is
+  specificity (\% of human text correctly left unflagged), so higher is better in
+  every row. The three prompt conditions (baseline, human-like, detector-evasive)
+  are pooled within each source. The formal GPT-5.6 and Mistral rows are judged on the
+  formatting-normalized formal corpus (markdown, section headings and the
+  \texttt{Nyckelord} footer stripped uniformly from every source); the formal Human and
+  GPT-5.2 rows are judged on the original corpus, so \textbf{the formal column is not
+  internally comparable} --- on the normalized corpus DeepSeek scores $86$ on the same
+  GPT-5.2 documents (versus $58$ here) and $82$ human specificity (versus $69$).
+  $^\dagger$Claude's normalized formal run covers $n=267$--$268$ rather than $300$;
+  both rows sit at $99$--$100$, so the remainder cannot move them materially.
+  \emph{n/a} marks the Gemini formal cells, never scored because
+  \texttt{gemini-3.1-pro-preview} is capped at 250 requests/day on the available key.
+  Completed cells: human and GPT-5.2 rows use $n=100$ (human) and $n=300$ (GPT-5.2)
+  per register; all informal GPT-5.6 and Mistral cells use $n=300$.
+  The informal GPT-5.2 \emph{baseline} condition is gpt-4o-mini text
+  (see \texttt{BASELINE\_PROVENANCE.md}); the corrected GPT-5.2 baseline is scored
+  separately.}
+  \label{tab:llm-judge-detection}
+  \begin{tabular}{ll ccc}
+    \toprule
+    Register & Text source & Claude & DeepSeek & Gemini \\
+    \midrule
+    \multirow{4}{*}{Formal}
+      & Human (specificity) & 100 & 69 & 100 \\
+      & GPT-5.2             & 100 & 58 & 99 \\
+      & GPT-5.6             & 99$^\dagger$  & 93 & \textit{n/a} \\
+      & Mistral             & 100$^\dagger$ & 98 & \textit{n/a} \\
+    \midrule
+    \multirow{4}{*}{Informal}
+      & Human (specificity) & 100 & 86 & 97 \\
+      & GPT-5.2             & 68  & 12 & 42 \\
+      & GPT-5.6             & 55  & 20 & 11 \\
+      & Mistral             & 86  & 20 & 60 \\
+    \bottomrule
+  \end{tabular}
+\end{table}

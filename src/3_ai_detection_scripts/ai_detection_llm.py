@@ -71,7 +71,13 @@ PROVIDERS = {
         # deepseek-reasoner puts its (uncapped) chain-of-thought in a separate
         # field; max_tokens caps only the FINAL answer. 1024 was clipping the JSON
         # to empty/truncated -> UNKNOWN (counted wrong), so give it more headroom.
-        "max_tokens": 4096,
+        # RAISED 4096 -> 8192 on 2026-08-01: 4096 still produced 8 UNKNOWNs in the
+        # 300 Mistral items of quiz_followup.csv (0 in the original 800-item run).
+        # This caps the ANSWER only, so it cannot change the judgement -- it just
+        # stops a long reasoning trace truncating the JSON. Provenance note: the 698
+        # already-scored items in that run were judged at 4096; only the 8 retried
+        # UNKNOWNs use 8192, since the resume logic drops UNKNOWNs and re-asks them.
+        "max_tokens": 8192,
     },
     "gemini": {
         # Pro flagship reasoning model — the fair peer to claude-opus-4-8 /
@@ -408,6 +414,10 @@ def parse_args():
                    help="override the provider's model id (e.g. gemini-3.6-flash when the "
                         "pro model is quota-blocked). Only valid with a single --provider, "
                         "since it applies to that provider's config.")
+    p.add_argument("--out-dir", default=_script_dir,
+                   help="directory for detection_results_<provider>.csv (default: script "
+                        "dir). Use a separate dir per corpus so runs don't clobber each "
+                        "other (e.g. gpt52_run_results/, formal_cleaned_results/).")
     return p.parse_args()
 
 
@@ -419,7 +429,9 @@ if __name__ == "__main__":
         PROVIDERS[args.provider]["model"] = args.model
         print(f"[override] {args.provider} model -> {args.model}")
     rows = load_corpus(args.corpus, args.limit)
-    print(f"Loaded {len(rows)} items from {os.path.basename(args.corpus)}")
+    out_dir = args.out_dir
+    os.makedirs(out_dir, exist_ok=True)
+    print(f"Loaded {len(rows)} items from {os.path.basename(args.corpus)}  ->  {out_dir}")
     providers = list(PROVIDERS) if args.provider == "all" else [args.provider]
     for prov in providers:
-        run_provider(prov, rows, _script_dir)
+        run_provider(prov, rows, out_dir)

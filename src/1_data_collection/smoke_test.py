@@ -17,7 +17,8 @@ USAGE
 -----
 1. This file sits next to generation_pipeline.py (src/1_data_collection/).
 2. Set env vars for whichever backends you're testing:
-     OPENAI_API_KEY                      (gpt-5.2)
+     OPENAI_API_KEY                      (gpt-5.2 AND gpt-5.6 -- same key)
+                                          override 5.6's upstream id with GPT56_MODEL
      MISTRAL_API_KEY                     (mistral; base_url + slug already default
                                           to OpenRouter in generation_pipeline.py --
                                           override with MISTRAL_BASE_URL / MISTRAL_MODEL)
@@ -118,7 +119,7 @@ SAMPLE_ITEMS = {
     ],
 }
 
-ALL_MODELS = ["gpt-5.2", "mistral"]
+ALL_MODELS = ["gpt-5.2", "gpt-5.6", "mistral"]
 ALL_CONDITIONS = ["baseline", "human_like", "detector_aware", "detector_evasive"]
 ALL_REGISTERS = ["formal", "informal"]
 

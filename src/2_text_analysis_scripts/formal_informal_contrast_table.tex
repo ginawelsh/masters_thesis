@@ -1,0 +1,59 @@
+% Hand-authored: formal vs informal register contrast at the LLM baseline.
+% All d_z values are taken verbatim from the baseline columns of
+% Table~\ref{tab:features-gpt} (GPT-5.2), so the two tables stay consistent.
+% Convention: d_z sign = (LLM - human); +d_z => LLM > human.
+% Shading: |d_z| * 25, matching \cg / \crd usage in tab:features-gpt.
+% REQUIRES: \usepackage{booktabs} and the \cg / \crd macros from the preamble.
+%
+% Informal column refreshed against the corrected GPT-5.2 informal baseline
+% (comment_baseline; see BASELINE_PROVENANCE.md). Every informal d_z moved and
+% function-word rate CHANGED SIGN (+0.15 -> -0.15), so it is no longer a
+% register-dependent reversal and has moved into the consistent block: the
+% reversals are now three, not four. Formal column is unchanged.
+% Source of truth: csv_files/significance_tests_results.csv, condition=baseline.
+
+\begin{table}[t]
+  \centering
+  \small
+  \begin{tabular}{l cc}
+  \toprule
+    Feature & Formal & Informal \\
+            & $d_z$  & $d_z$ \\
+    \midrule
+    \multicolumn{3}{l}{\textit{Consistent direction across registers}} \\
+    \addlinespace[2pt]
+    Comma rate               & \cg{42}$+1.67$  & \cg{8}$+0.32$ \\
+    Lexical diversity (MTLD) & \cg{36}$+1.43$  & \cg{19}$+0.75$ \\
+    Mean parse-tree depth    & \cg{32}$+1.27$  & \cg{15}$+0.61$ \\
+    Mean dependency distance & \cg{25}$+1.02$  & \cg{22}$+0.87$ \\
+    Hedge rate               & \cg{16}$+0.64$  & \cg{3}$+0.13$ \\
+    Word count               & \cg{3}$+0.10$   & \cg{34}$+1.35$ \\
+    Full-stop rate           & \crd{22}$-0.87$ & \crd{8}$-0.30$ \\
+    Function-word rate       & \crd{22}$-0.87$ & \crd{4}$-0.15$ \\
+    Named-entity rate        & \crd{13}$-0.53$ & \crd{4}$-0.15$ \\
+    \midrule
+    \multicolumn{3}{l}{\textit{Direction reverses (register-dependent)}} \\
+    \addlinespace[2pt]
+    Lexical diversity (MATTR) & \cg{30}$+1.22$  & \crd{16}$-0.65$ \\
+    Sentence count            & \crd{11}$-0.44$ & \cg{24}$+0.96$ \\
+    Bigram repetition rate    & \crd{18}$-0.74$ & \cg{11}$+0.44$ \\
+    \bottomrule
+  \end{tabular}
+  \caption{Formal vs.\ informal register contrast at the LLM baseline
+  (Cohen's $d_z$, sign $=$ LLM $-$ human; positive/green $=$ LLM $>$ human,
+  negative/red $=$ human $>$ LLM; values from the baseline columns of
+  Table~\ref{tab:features-gpt}). Most tells are directionally
+  \emph{consistent} across registers --- LLMs use more commas, richer MTLD,
+  deeper and longer syntax, more hedging and more tokens, while humans use
+  more full stops, more function words and name more entities --- but three
+  features \emph{reverse sign} between registers. Lexical diversity (MATTR) is
+  the clearest case: the LLM is more diverse than humans in formal abstracts yet
+  less diverse in informal comments. Sentence count and n-gram repetition flip
+  likewise, so for these features it is the \emph{magnitude} of deviation rather
+  than its direction that signals LLM authorship. Note also how differently the
+  two registers weight the same tell: verbosity is the LLM's faintest formal
+  signal ($d_z=+0.10$) but its strongest informal one ($+1.35$), while the comma
+  habit that dominates formal abstracts ($+1.67$) is barely present in comments
+  ($+0.32$).}
+  \label{tab:formal-informal-contrast}
+\end{table}

@@ -1,0 +1,171 @@
+row_index,raw_topic,canonical_topic,ssif_domain,source,low_confidence,title_misaligned,title
+0,Social Sciences,Social Sciences,Social Sciences,diva,False,,Kraften av beröring: Beröring som komplementär metod för att minska stress på arbetsplatsen
+1,Social Sciences,Social Sciences,Social Sciences,diva,False,,Det är så brett så jag vet inte vart jag ska börja
+2,Social Sciences,Social Sciences,Social Sciences,diva,False,,Handledningsprocesser i Medarbetarsamtalet
+3,Humanities and the Arts,Humanities and the Arts,Humanities and the Arts,diva,False,,Samkönade äktenskaps vara eller icke vara inom Svenska kyrkan.: En argumentationsanalys av debattartiklar från Kyrkans t
+4,Humanities and the Arts,Humanities and the Arts,Humanities and the Arts,diva,False,,Kön; sexualitet; etnicitet och socioekonomisk bakgrund: Om intersektionalitet i gymnasiets religionsläroböcker
+5,Humanities and the Arts,Humanities and the Arts,Humanities and the Arts,diva,False,,Paulus lagsyn i Rom 3:21-31
+6,Humanities and the Arts,Humanities and the Arts,Humanities and the Arts,diva,False,,Mesopotamiens gudomligförklarade kungar: En undersökning av teologiska perspektiv på två gudomligförklarade kungar i det
+7,Humanities and the Arts,Humanities and the Arts,Humanities and the Arts,diva,False,,Kyrkan som plats vid skolavslutningar?: En studie av lärare och lärarstudenters attityder gentemot kyrkovistelse och kon
+8,Engineering and Technology,Engineering and Technology,Engineering and Technology,diva,False,,Effektivisering av bygglovsprocessen gällande ändring av kulturhistoriskt värdefull bebyggelse: En fallstudie av ett mil
+9,Engineering and Technology,Engineering and Technology,Engineering and Technology,diva,False,,1800-talets London i spelet Crysis Reflektioner kring verket ”London Crysis”
+10,Engineering and Technology,Engineering and Technology,Engineering and Technology,diva,False,,3D-animerat teckenspråk i spelmiljö: Perspektiv kontra förståelse
+11,Engineering and Technology,Engineering and Technology,Engineering and Technology,diva,False,,3D och kommunal fysisk planering En undersökning om motiven till användandet av 3D i den kommunala fysiska planeringen
+12,Engineering and Technology,Engineering and Technology,Engineering and Technology,diva,False,,3D på webben: nästa steg för E-handeln? Stereoskopisk 3D som produktpresentation
+13,Medical and Health Sciences,Medical and Health Sciences,Medical and Health Sciences,diva,False,,Abakavir och lamivudin i kombination med efavirenz eller atazanavir vid behandling av HIV.: En jämförande litteraturstud
+14,Medical and Health Sciences,Medical and Health Sciences,Medical and Health Sciences,diva,False,,Allergenspecifik immunterapi: sublingual respektive subkutan administrering vid husdammskvalsterallergi
+15,Medical and Health Sciences,Medical and Health Sciences,Medical and Health Sciences,diva,False,,Akutpreventivmedel: Hur skiljer sig effektivitet och säkerhet för de tre godkända metoderna levonorgestrel; ulipristal o
+16,Medical and Health Sciences,Medical and Health Sciences,Medical and Health Sciences,diva,False,,Alternativa fröer i bröd: En teknisk och sensorisk utvärdering av amarant; bovete; chia; hirs samt quinoa i bröd och bak
+17,Medical and Health Sciences,Medical and Health Sciences,Medical and Health Sciences,diva,False,,Art- och genusbestämning av bakterier direkt från blododlingar med MALDI-TOF MS
+18,Natural Sciences,Natural Sciences,Natural Sciences,diva,False,,3-5 åringar möter matematik: En studie kring The English School i Älmhults arbete med taluppfattning
+19,Natural Sciences,Natural Sciences,Natural Sciences,diva,False,,Artificiell intelligens - ANN och evolution i shooterspel
+20,Natural Sciences,Natural Sciences,Natural Sciences,diva,False,,Procedurella Texturer: Skapande av en procedurell textur utifrån en referensbild med hjälp av en genetisk algoritm
+21,Natural Sciences,Natural Sciences,Natural Sciences,diva,False,,Användarverifiering från webbkamera
+22,Natural Sciences,Natural Sciences,Natural Sciences,diva,False,,IT-stöd för Migrationsverket: En studie om nyttjande av beslutsstödssystem vid placeringen av ensamkommande flyktingbarn
+23,Agricultural and Veterinary Sciences,Agricultural and Veterinary Sciences,Agricultural and Veterinary Sciences,diva,False,,När mat blir sopor; och när den inte blir det: En studie om matsvinn ur ett miljö –och individperspektiv
+24,Agricultural and Veterinary Sciences,Agricultural and Veterinary Sciences,Agricultural and Veterinary Sciences,diva,False,,"""Jag ville ge mitt barn de bästa förutsättningarna"": En kvalitativ intervjustudie om tankar kring matvanor under gravidi"
+25,Agricultural and Veterinary Sciences,Agricultural and Veterinary Sciences,Agricultural and Veterinary Sciences,diva,False,,Treåringars matvanor; fysiska aktivitet; samt Body Mass Index i Västerbotten: I relation till amningsduration och familj
+26,Social Sciences,Social Sciences,Social Sciences,diva,False,,Kvotflyktingar i Sverige: En kvalitativ studie om arbete och samverkan inom flyktingmottagande
+27,Social Sciences,Social Sciences,Social Sciences,diva,False,,En ny arbetsmarknadspolitik
+28,Social Sciences,Social Sciences,Social Sciences,diva,False,,Kommunikationspolicyn: En studie av svenska offentliga organisationers kommunikationspolicys med utgångspunkt i samtida 
+29,Agricultural and Veterinary Sciences,Agricultural and Veterinary Sciences,Agricultural and Veterinary Sciences,diva,False,,Att arbeta integrerat med asylbarn i allmän förskola: En kvalitativ studie baserad på lärarintervjuer
+30,Agricultural and Veterinary Sciences,Agricultural and Veterinary Sciences,Agricultural and Veterinary Sciences,diva,False,,"""Men det här är ju kvinnogöra"": En studie om hur lärare ser på och praktiserar jämställdhet och genus i HKK"
+31,Agricultural and Veterinary Sciences,Agricultural and Veterinary Sciences,Agricultural and Veterinary Sciences,diva,False,,Hur blev det med hälsan?: En kvalitativ studie om elevers syn på hälsa i ämnet Idrott och hälsa i årskurs nio.
+32,Agricultural and Veterinary Sciences,Agricultural and Veterinary Sciences,Agricultural and Veterinary Sciences,diva,False,,Handledningsprocesser i Medarbetarsamtalet
+33,Social Sciences,Social Sciences,Social Sciences,diva,False,,Drömmen om ett arbete: En undersökning om anställningsbarhet i förhållande till personlighet och sökbeteende
+34,Social Sciences,Social Sciences,Social Sciences,diva,False,,Att vara syskon eller partner till en person med ätstörningsproblematik
+35,Social Sciences,Social Sciences,Social Sciences,diva,False,,Kalmar - ett platsvarumärke i skuggan av Öland och Glasriket: En studie om destinationsutveckling
+36,Social Sciences,Social Sciences,Social Sciences,diva,False,,Användandet av miljöledningssystem och gröna nyckeltal: – en studie av drivkrafter hos mindre företag
+37,Social Sciences,Social Sciences,Social Sciences,diva,False,,Principalansvaret för vårdnadshavare: Föräldrars skadeståndsansvar för skada vållad av barn
+38,Natural Sciences,Natural Sciences,Natural Sciences,diva,False,,Fytoremediering med perenn solros i åkerjord
+39,Natural Sciences,Natural Sciences,Natural Sciences,diva,False,,Videokompression och användarnytta
+40,Natural Sciences,Natural Sciences,Natural Sciences,diva,False,,Mer lättläst: Påbyggnad av ett automatiskt omskrivningsverktyg till lätt svenska
+41,Humanities and the Arts,Humanities and the Arts,Humanities and the Arts,diva,False,,"""Jag tror inte han är där än; alltså rent språkligt"": Gymnasielärares beskrivningar av och attityder till förortssvenska"
+42,Humanities and the Arts,Humanities and the Arts,Humanities and the Arts,diva,False,,Eventbubblan i syd: En studie av Film i Skånes eventverksamhet
+43,Medicine,Medical and Health Sciences,Medical and Health Sciences,diva_merged,False,,Vad är det för vits med humor i vården?
+44,Social Work,Social Work,Social Sciences,diva,False,,Äldre och ensamhet: en kvalitativ studie om ensamhet bland äldre boende i eget hem och på servicehus
+45,Social Work,Social Work,Social Sciences,diva,False,,PRO i Österåkers kommun: en studie över PRO: s roll inom äldreomsorgen
+46,Social and Behavioural Science,Social Sciences,Social Sciences,diva_merged,False,,Är en skola för alla bra för alla? - ur elevperspektiv
+47,Pedagogy,Pedagogy,Social Sciences,diva,False,,Dom vill ju spela så då spelar vi!: En belysande studie av faktorer som påverkar läraren vid planeringen av unervisninge
+48,Business Administration,Business Administration,Social Sciences,diva,False,,Finansiell riskredovisning
+49,Social Sciences,Social Sciences,Social Sciences,diva,False,,Differentiering – en möjlighet att möta elevers olika förutsättningar och behov
+50,"2006 (Swedish)Independent thesis Basic level (degree of Bachelor), 10 credits / 15 HE creditsStudent thesis",Information Systems,Natural Sciences,assigned,False,,Metoder vid implementation av affärssystem: en studie om anpassning
+51,,Business Administration,Social Sciences,assigned,False,"Title is a DiVA metadata string, not a title","2006 (Swedish)Independent thesis Basic level (degree of Bachelor), 10 credits / 15 HE creditsStudent thesis"
+52,,Sociology,Social Sciences,assigned,False,Title is about pedagogues/grief; Keywords+Abstract are about gender/sexuality,"Ingen kan göra allt, men alla kan göra något – en studie kring pedagogers uppfattning om sin kompetens i att möta barn i"
+53,Nursing,Nursing,Medical and Health Sciences,diva,False,,2005 (Swedish)Independent thesis Basic level (degree of Bachelor)Student thesis
+54,,Information Systems,Natural Sciences,assigned,False,"Title is a DiVA metadata string, not a title",2002 (Swedish)Independent thesis Basic level (degree of Bachelor)Student thesisAlternative title
+55,,Humanities and the Arts,Humanities and the Arts,assigned,False,,Från Hakkaribergen till Orans kust: en jämförelse mellan genrerna raweh och rai
+56,,Pedagogy,Social Sciences,assigned,False,,Läroplanens konkreta spår i det pedagogiska arbetet
+57,,Humanities and the Arts,Humanities and the Arts,assigned,False,,Balettmapp Kungliga Operan: Operahusens design och arkitektur
+58,Information Systems,Information Systems,Natural Sciences,diva,False,,Vidareutveckling av informationssystem: Vilka olika aktiviteter går att identifiera i VAD-fasen?
+59,Business Administration,Business Administration,Social Sciences,diva,False,,En jämförelse mellan materiella investeringar och investeringar i kompetensutveckling
+60,Information Systems,Information Systems,Natural Sciences,diva,False,,Datakvalitetsverktyg i datalager: Hur hanterar datakvalitetsverktyg datakvalitetsfaktorer?
+61,Business Administration,Business Administration,Social Sciences,diva,False,,Internetpoker: En studie i köpbeteendet hos pokerproffs
+62,Economics,Economics,Social Sciences,diva,False,,Aktiemarknadens effektivitet: En studie av effektiviteten på den svenska aktiemarknaden i samband med kvartalsrapporter
+63,Computer Sciences,Computer Sciences,Natural Sciences,diva,False,,En studie av inbyggda brandväggar: Microsoft XP och Red Hat Linux
+64,Information Systems,Information Systems,Natural Sciences,diva,False,,Affärsrelationer vid elektronisk handel
+65,Social Sciences,Social Sciences,Social Sciences,diva,False,,Integration på två arbetsplatser
+66,Religious Studies Religious Studies Humanities,Religious Studies,Humanities and the Arts,diva_merged,False,,Innan den strukturella differentieringens tidevarv
+67,Psychology,Psychology,Social Sciences,diva,False,,Vad orsakar ilska?
+68,General Language Studies and Linguistics,General Language Studies and Linguistics,Humanities and the Arts,diva,False,,Har utlandsadopterade barn språkproblem?: En undersökning om vad föräldrar och pedagoger anser
+69,,Sociology,Social Sciences,assigned,False,,Etableringsstrategier på arbetsmarknaden: En intervjustudie av unga akademiker två år efter examen
+70,,Didactics,Social Sciences,assigned,False,,Matematik för alla?: Hur lärare arbetar med individualisering
+71,,Business Administration,Social Sciences,assigned,False,,Effekten av varumärkes beskrivning på studenters attityd kring värdering och ägande av produkter
+72,,Nursing,Medical and Health Sciences,assigned,False,,Transkulturell omvårdnad
+73,,Business Administration,Social Sciences,assigned,False,,Om personalförmåner motiverar de anställda
+74,,Social Work,Social Sciences,assigned,False,,JÄVLAR ANAMMA! EN STUDIE OM VÄGEN UT UR MISSBRUK / THE SPIRIT WITHIN. A STUDY ON THE WAY OUT OF DRUGADDICTION
+75,,Information Systems,Natural Sciences,assigned,False,,Koordination och organisation: - två viktiga begrepp vid skapandet av en innehållsrik hemsida för kommunala myndigheter
+76,,Religious Studies,Humanities and the Arts,assigned,True,,KommunistJesus och Varumärke: Talet om Che Guevara
+77,,Pedagogy,Social Sciences,assigned,False,,"Lärande på elevers villkor: En studie om lärande på omvårdnadsprogrammet, med fokus på medicinsk grundkurs"
+78,,Nursing,Medical and Health Sciences,assigned,False,,Sjuksköterskan och döden
+79,,Business Administration,Social Sciences,assigned,False,,Damtidningar: ett behov?: En studie om återköp
+80,,Social Work,Social Sciences,assigned,True,,Anmälningsskyldighet för kuratorer på ungdomsmottagningar: en studie i hur ett urval kuratorer på ungdomsmottagningar fö
+81,Social Work,Social Work,Social Sciences,diva,False,,Sexualundervisning på särgymnasiet
+82,Nursing,Nursing,Medical and Health Sciences,diva,False,,En studie om flickor och kvinnor på elektrikerutbildningen
+83,,Media and Communication Studies,Social Sciences,assigned,False,,Ingen rädder för vargen?: En kvantitativ innehållsanalys av tre tidningstyper med avseende på rapporteringen om varg
+84,,"Production Engineering, Human Work Science and Ergonomics",Engineering and Technology,assigned,False,,Pappersmakulatur vid Bobergs Tryckeri AB - orsaker och förbättringsförslag
+85,,Business Administration,Social Sciences,assigned,False,,Balanserat styrkort i primärvården: En fallstudie om styrning med balanserat styrkort på KvaLita Närsjukvård AB
+86,,Nursing,Medical and Health Sciences,assigned,False,,Ickeverbal kommunikation: Hur kontakt kan skapas med demensdrabbade genom beröring och genom musik
+87,,Pedagogy,Social Sciences,assigned,False,,Vad är dyskalkyli?: En teoretisk-praktisk studie av dyskalkyli i skolan och om det är möjligt att bli hjälpt?
+88,,Business Administration,Social Sciences,assigned,False,"Title is an author name ('Andersson, Anna-Karin')","Andersson, Anna-Karin"
+89,,Information Systems,Natural Sciences,assigned,False,,Verksamhetsanalys vid ett snickeriföretag – behov av organisationsanpassning vid expansion
+90,,Nursing,Medical and Health Sciences,assigned,False,,Etik och ansvar. Sjuksköterskans upplevelse av inre etiskt ansvar i omvårdnaden
+91,,Business Administration,Social Sciences,assigned,False,"Title is an author name ('Andersson, Annika')","Andersson, Annika"
+92,,Nursing,Medical and Health Sciences,assigned,False,,Sjuksköterskans upplevelser efter hot och våld i somatisk vård: en litteraturstudie
+93,,Political Science,Social Sciences,assigned,False,,Kan iranska aktörer påverkas?: USA:s förmåga till strategiskt inflytande ur ett fältperspektiv
+94,Social Work,Social Work,Social Sciences,diva,False,,"Andersson, Bodil"
+95,Nursing,Nursing,Medical and Health Sciences,diva,False,,Svårigheter i mötet mellan svensk sjukvårdspersonal och personer med invandrarbakgrund: en litteraturstudie
+96,,Information Systems,Natural Sciences,assigned,False,,Faktorer som kan påverka samarbetet mellan användare och systemutvecklare
+97,"Production Engineering, Human Work Science and Ergonomics","Production Engineering, Human Work Science and Ergonomics",Engineering and Technology,diva,False,,Att vara eller inte vara: styrs uttaget av föräldraledighet av föreställningar eller faktiska förhållanden?
+98,Other Social Sciences not elsewhere specified,Other Social Sciences not elsewhere specified,Social Sciences,diva,False,,Organiserat samarbete mellan lärare och kollegor inom IKT-baserad distansundervisning
+99,Business Administration,Business Administration,Social Sciences,diva,False,,Är granskningen av 90-kontoinnehavare tillräcklig: Kritisk granskning av SFI:s rutiner
+100,Sociology,Sociology,Social Sciences,diva,False,,"Andersson, Caroline"
+101,,Social Work,Social Sciences,assigned,False,,Upplevelser av interaktionen mellan klient och socialsekreterare -sett ur ett maktperspektiv
+102,Social Sciences,Social Sciences,Social Sciences,diva,False,,Personalens uppfattning om och möjlighet att påverka måltidernas innehåll i en förskola
+103,Nursing,Nursing,Medical and Health Sciences,diva,False,,Att drabbas av prostatacancer: Männens upplevelser av sjukdomen
+104,,Pedagogy,Social Sciences,assigned,False,,Lek en livsnödvändighet: Tänkande om lek i grundskolan och träningsskolan
+105,Social Sciences,Social Sciences,Social Sciences,diva,False,,Inlärningsstilar - ett sätt att individanpassa undervisningen?
+106,Social Sciences,Social Sciences,Social Sciences,diva,False,,Framgångsfaktorer bakom gerillakrigföring
+107,,Law,Social Sciences,assigned,False,,Straff- och offentligrättsliga legalitetsprincipen
+108,Computer Engineering,Computer Engineering,Engineering and Technology,diva,False,,Utveckling av ett företags marknadskommunikation med informationsteknik
+109,,Natural Sciences,Natural Sciences,assigned,False,,Den ekologiska utvecklingen av Motala ström samt dess förutsättningar
+110,Computer Sciences,Computer Sciences,Natural Sciences,diva,False,,Evaluering av neurala nätverk för en fotbollsspelande mobil robot
+111,,Nursing,Medical and Health Sciences,assigned,False,,Stickrädsla- En kvalitativ studie om sjuksköterskans omvårdnad av patienter med stickrädsla
+112,Business Administration,Business Administration,Social Sciences,diva,False,,Frivillig information i delårsrapporter: Förekomsten av frivilligt offentliggjord information i delårsrapporter hos tio 
+113,,Business Administration,Social Sciences,assigned,True,,Uppföljningsarbetet av efterkalkyler på Portsystem 2000 AB
+114,,Computer Engineering,Engineering and Technology,assigned,False,,En jämförelse av olika kommunikationstekniker och systemarkitekturiska lösningar vid uppbyggnad av nätverk i naturen
+115,,Religious Studies,Humanities and the Arts,assigned,False,,Slöja i skolan?
+116,,Nursing,Medical and Health Sciences,assigned,False,,Informationens betydelse i den preoperativa vården
+117,,Information Systems,Natural Sciences,assigned,False,,You´ve got m@il: en studie om sambandet mellan e-post och effektiv kommunikation i en IT-intensiv organisation
+118,,Nursing,Medical and Health Sciences,assigned,False,,Hur den förändrade sexualiteten kan påverka mannens självbild och relationer efter behandling av prostatacancer
+119,,Information Systems,Natural Sciences,assigned,False,"Title is an author name ('Andersson, Helena')","Andersson, Helena"
+120,Nursing,Nursing,Medical and Health Sciences,diva,False,,Fysisk beröring för människans välbefinnande?
+121,Law (excluding Law and Society),Law,Social Sciences,diva_merged,False,,”Man kan vara sjuk och frisk samma dag”: En studie av psykiskt störda lagöverträdares rättsliga ställning
+122,,Psychology,Social Sciences,assigned,False,,Det moderna arbetslivets krav ur ett vuxenutvecklingspsykologiskt perspektiv
+123,,Other Social Sciences not elsewhere specified,Social Sciences,assigned,True,,Har Försvarsmakten behov av simuleringssystem för logistik?
+124,,Media and Communication Studies,Social Sciences,assigned,True,,En undersökning om perspektivet på Islam i tre nyhetsprogram
+125,,Social Work,Social Sciences,assigned,False,"Title is an author name ('Andersson, Jennie')","Andersson, Jennie"
+126,,Business Administration,Social Sciences,assigned,True,,Medarbetarnas upplvelse av gruppdialogen enligt Amforas samtalsmodell
+127,,Pedagogy,Social Sciences,assigned,False,,Daglig fysisk aktivitet för elever – en utmaning för alla lärare i grundskolan
+128,,Pedagogy,Social Sciences,assigned,False,,Gymnasiematematik på distans: Varför så många avbryter sina distansstudier i matematik
+129,Human Computer Interaction,Human Computer Interaction,Natural Sciences,diva,False,,Argument för och emot privat sjukvård
+130,Business Administration,Business Administration,Social Sciences,diva,False,,Hur budgeterar gaseller?: En studie om tillväxtens påverkan på budgetering i gasellföretag
+131,Business Administration,Business Administration,Social Sciences,diva,False,,Teambuilding: En analys av den svenska marknaden ur ett konsultperspektiv
+132,,Human Computer Interaction,Natural Sciences,assigned,False,,Datorstödd musikproduktion och tyst kunnande: En studie i design för användbarhet
+133,Nursing,Nursing,Medical and Health Sciences,diva,False,,Stöd vid övervikt och fetma
+134,Computer Sciences,Computer Sciences,Natural Sciences,diva,False,,Lageroptimering med hjälp av datautvinning ur datalager
+135,Law,Law,Social Sciences,diva,False,,"Andersson, Jonas"
+136,Immunology,Immunology,Medical and Health Sciences,diva,False,,"Utvärdering av Malaria Antigen ELISA kit för diagnostik av malaria vid Christian Medical College and Hospital i Vellore,"
+137,Social Sciences,Social Sciences,Social Sciences,diva,False,,Uppmuntrar läroboken i matematik eleverna till att tänka självständigt?
+138,Nursing,Nursing,Medical and Health Sciences,diva,False,,"Palliativ vård Blekinge Institute of Technology, School of Health Science. Blekinge Institute of Technology, School of H"
+139,Business Administration,Business Administration,Social Sciences,diva,False,,Säkerhetskapital En del av det Intellektuella Kapitalet
+140,Religious Studies,Religious Studies,Humanities and the Arts,diva,False,,Innan den strukturella differentieringens tidevarv
+141,Didactics,Didactics,Social Sciences,diva,False,,"Matematik för alla?: Hur lärare arbetar med individualisering Alén, Leif"
+142,Business Administration,Business Administration,Social Sciences,diva,False,,Effekten av varumärkes beskrivning på studenters attityd kring värdering och ägande av produkter Blekinge Institute of T
+143,Nursing,Nursing,Medical and Health Sciences,diva,False,,Ickeverbal kommunikation: Hur kontakt kan skapas med demensdrabbade genom beröring och genom musik Blekinge Institute of
+144,Business Administration,Business Administration,Social Sciences,diva,False,,Varför team? En fallstudie på tre företag.
+145,Business Administration,Business Administration,Social Sciences,diva,False,,Kartläggning och utvärdering av utbildningar: en svaghet i företag?
+146,Political Science,Political Science,Social Sciences,diva,False,,Kan iranska aktörer påverkas?: USA:s förmåga till strategiskt inflytande ur ett fältperspektiv Swedish National Defence 
+147,Social Work,Social Work,Social Sciences,diva,False,,Inställningar till självläkning: - en studie av diskurser kring beroendeproblematik
+148,Nursing,Nursing,Medical and Health Sciences,diva,False,,Svårigheter i mötet mellan svensk sjukvårdspersonal och personer med invandrarbakgrund: en litteraturstudie Blekinge Ins
+149,Pedagogy,Pedagogy,Social Sciences,diva,False,,"Organiserat samarbete mellan lärare och kollegor inom IKT-baserad distansundervisning Blekinge Institute of Technology, "
+150,Pedagogy,Pedagogy,Social Sciences,diva,False,,”Ett papper som hamnar någonstans?” En kvalitativ undersökning om åtgärdsprogram i förskolan
+151,Social Work,Social Work,Social Sciences,diva,False,,Upplevelser av interaktionen mellan klient och socialsekreterare -sett ur ett maktperspektiv Blekinge Institute of Techn
+152,Nursing,Nursing,Medical and Health Sciences,diva,False,,"Att drabbas av prostatacancer: Männens upplevelser av sjukdomen Blekinge Institute of Technology, School of Health Scien"
+153,Pedagogy,Pedagogy,Social Sciences,diva,False,,"Lek en livsnödvändighet: Tänkande om lek i grundskolan och träningsskolan Wiss Kvist, Ann-Christin"
+154,Political Science,Political Science,Social Sciences,diva,False,,Framgångsfaktorer bakom gerillakrigföring Swedish National Defence College.
+155,Nursing,Nursing,Medical and Health Sciences,diva,False,,"Informationens betydelse i den preoperativa vården Blekinge Institute of Technology, School of Health Science. Blekinge "
+156,Nursing,Nursing,Medical and Health Sciences,diva,False,,Hur den förändrade sexualiteten kan påverka mannens självbild och relationer efter behandling av prostatacancer Blekinge
+157,Information Systems,Information Systems,Natural Sciences,diva,False,,"Trouble Ticket ""Kommunikationen gav oss vind i seglen"""
+158,Nursing,Nursing,Medical and Health Sciences,diva,False,,"Fysisk beröring för människans välbefinnande? Blekinge Institute of Technology, School of Health Science. Blekinge Insti"
+159,Information Systems,Information Systems,Natural Sciences,diva,False,,Har Försvarsmakten behov av simuleringssystem för logistik? Swedish National Defence College.
+160,Social Work,Social Work,Social Sciences,diva,False,,Hur utvecklas familjehemsvården vidare?: sikta mot något nytt och okänt eller använda gamla rutiner?
+161,Economics,Economics,Social Sciences,diva,False,,"Argument för och emot privat sjukvård Blekinge Institute of Technology, School of Management. Blekinge Institute of Tech"
+162,Psychology,Psychology,Social Sciences,diva,False,,Expertkunskap och metakognition: experters förmåga till metakognitiv övervakning
+163,Nursing,Nursing,Medical and Health Sciences,diva,False,,"Stöd vid övervikt och fetma Blekinge Institute of Technology, School of Health Science. Blekinge Institute of Technology"
+164,Law,Law,Social Sciences,diva,False,,Förmögenhetsbeskattning av onoterade aktier - är den ändamålsenligt utformad för den skatteskyldige?
+165,Agricultural and Veterinary Sciences,Agricultural and Veterinary Sciences,Agricultural and Veterinary Sciences,diva,False,,Granvirkes permeabilitet beroende av dess fysikaliska utformning och applicerat färgsystem
+166,Agricultural and Veterinary Sciences,Agricultural and Veterinary Sciences,Agricultural and Veterinary Sciences,diva,False,,Nutidens ventilationssystem i lantbrukets lösdriftstallar: En undersökning av sex stycken ventilationssystem
+167,Social Sciences,Social Sciences,Social Sciences,diva,False,,Jag är väl ingen sexuell? - En textanalys om barns sexualitet inom förskolans arena
+168,Social Sciences,Social Sciences,Social Sciences,diva,False,,Pojkar som skriver: En kvalitativ studie om vad som utmärker mer avancerade skrivare
+169,Social Sciences,Social Sciences,Social Sciences,diva,False,,”Och så händer det något som förändrar ens liv”: En antologi om omställningar i livet

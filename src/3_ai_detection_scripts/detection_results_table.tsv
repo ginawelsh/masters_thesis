@@ -1,0 +1,19 @@
+Generator	Register	Condition	AI recall: Claude	AI recall: Gemini	AI recall: DeepSeek	Human precision: Claude	Human precision: Gemini	Human precision: DeepSeek
+GPT-5.2	Formal	Baseline	100	96	47	100	96	57
+GPT-5.2	Formal	Human-mimicking	100	100	35	100	100	51
+GPT-5.2	Formal	Detector-evasive	100	100	92	100	100	90
+GPT-5.2	Informal	Baseline	69	10	5	76	52	47
+GPT-5.2	Informal	Human-mimicking	73	36	1	79	60	47
+GPT-5.2	Informal	Detector-evasive	38	8	0	62	51	46
+GPT-5.6	Formal	Baseline	99	n/a	91	99	n/a	90
+GPT-5.6	Formal	Human-mimicking	100	n/a	94	100	n/a	94
+GPT-5.6	Formal	Detector-evasive	98	n/a	93	98	n/a	92
+GPT-5.6	Informal	Baseline	64	25	40	74	56	59
+GPT-5.6	Informal	Human-mimicking	52	6	10	68	51	49
+GPT-5.6	Informal	Detector-evasive	48	2	10	66	50	49
+Mistral 3.2	Formal	Baseline	100	n/a	98	100	n/a	98
+Mistral 3.2	Formal	Human-mimicking	100	n/a	96	100	n/a	95
+Mistral 3.2	Formal	Detector-evasive	100	n/a	100	100	n/a	100
+Mistral 3.2	Informal	Baseline	84	57	24	86	69	53
+Mistral 3.2	Informal	Human-mimicking	96	71	25	96	77	53
+Mistral 3.2	Informal	Detector-evasive	78	52	12	82	67	49

@@ -88,6 +88,18 @@ FORMAL_COL = {
 }
 INFORMAL_COL = {
     "human": "human_comment",
+    # DELIBERATELY STILL `generated_comment`, even though that column is gpt-4o-mini
+    # text rather than GPT-5.2 (see ../../BASELINE_PROVENANCE.md). data_utils.py has been
+    # repointed at the corrected `comment_baseline`; this script has NOT, on purpose:
+    #
+    #   _candidates() filters on every condition cell's length and blocklist match, so a
+    #   different baseline column can change which documents qualify. Re-running with
+    #   comment_baseline would therefore produce a DIFFERENT 100-document sample, and the
+    #   800 judgements in gpt52_run_results/ are tied to the current one.
+    #
+    # Reproducibility of the shipped quiz wins. Nothing needs this changed:
+    # make_followup_quiz.py reads the corrected baseline directly from the generation
+    # output, and pins to the documents this script already chose.
     "baseline": "generated_comment",
     "human_like": "comment_human_like",
     "detector_evasive": "comment_detector_evasive",
@@ -95,6 +107,22 @@ INFORMAL_COL = {
 
 # Explicit / adult-content blocklist (informal only), copied verbatim from
 # make_master_quiz.py so the two quizzes exclude the same material. Never edits text.
+#
+# KNOWN FALSE POSITIVES -- DOCUMENTED, DELIBERATELY NOT FIXED HERE.
+# Two patterns below are near-pure false positives in Swedish:
+#   r"\bsex\b"  matches the numeral SIX ("efter sex månader")  -- 72/1149 documents
+#   r"stånd"    is unanchored, so it fires inside avstånd, uppehållstillstånd,
+#               motstånd(are), missförstånd, förstånd ...      -- 106/1149 documents
+# Together they excluded 141 of 1,149 informal documents (12%) from the candidate pool:
+# the eligible pool was 909 rather than 1,050. The 100 sampled documents are still a
+# random draw from that 909, and the paired human-vs-AI design is unaffected, but topic
+# coverage is skewed -- asylum/residence-permit, opposition and employment threads are
+# under-represented. Report as a sampling limitation.
+#
+# NOT corrected here on purpose: changing the blocklist changes which documents are
+# eligible, which changes the sample, which invalidates the 800 existing judgements in
+# detection_results_*.csv. Reproducibility of the shipped quiz wins. The corrected
+# patterns are used in make_followup_quiz.py, where the blocklist only warns.
 _BLOCK_PATTERNS = [
     r"porr", r"porno", r"pornogr", r"\bporn\b", r"\bxxx\b",
     r"knull", r"\bfitt(a|an|or|orna)\b", r"\bkuk(ar|en)?\b", r"snopp",

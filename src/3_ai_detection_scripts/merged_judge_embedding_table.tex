@@ -1,0 +1,91 @@
+% Merged table: LLM-as-judge detection + embedding detectability, one row per
+% generator x register x condition (18 rows).
+%
+% SOURCES
+%   judge columns     detection_results_table.tsv (recomputed from raw judge outputs;
+%                     formal GPT-5.6/Mistral from formal_cleaned_results/)
+%   embedding column  2_text_analysis_scripts/csv_files/embedding_auc_matched_gpt56subset.csv
+%                     (matched_cv_roc_auc), produced by scripts/matched_auc_control.py
+%
+% TWO FIXES applied relative to the hand-merged draft:
+%   1. \multirow{GPT-5.2} -> \multirow{6}{*}{GPT-5.2}. The one-argument form is not
+%      valid multirow syntax and does not compile.
+%   2. Mistral 3.2 / Formal / Human-mimicking, DeepSeek human precision: 98 -> 95.
+%      The draft had 98; formal_cleaned_results/detection_results_deepseek.csv gives
+%      recall 96 and human precision 95 for that cell.
+%
+% REQUIRES: \usepackage{booktabs}, \usepackage{multirow}, \usepackage{caption}
+\begin{table*}[t]
+\captionsetup{font=small}
+  \centering
+  \small
+  \begin{tabular}{lll ccc ccc c}
+    \toprule
+    & & & \multicolumn{3}{c}{LLM-as-judge AI recall (\%)}
+        & \multicolumn{3}{c}{LLM-as-judge human precision (\%)}
+        & Embedding \\
+    \cmidrule(lr){4-6} \cmidrule(lr){7-9} \cmidrule(l){10}
+    Generator & Register & Condition
+      & Claude & DeepSeek & Gemini & Claude & DeepSeek & Gemini & CV ROC AUC \\
+    \midrule
+    \multirow{6}{*}{GPT-5.2}
+      & \multirow{3}{*}{Formal}
+        & Baseline         & 100 & 47 & 96  & 100 & 57 & 96  & 0.643 \\
+      & & Human-mimicking  & 100 & 35 & 100 & 100 & 51 & 100 & 0.643 \\
+      & & Detector-evasive & 100 & 92 & 100 & 100 & 90 & 100 & \textbf{0.813} \\
+    \cmidrule(l){2-10}
+      & \multirow{3}{*}{Informal}
+        & Baseline         & 69 & 5 & 10 & 76 & 47 & 52 & 0.886 \\
+      & & Human-mimicking  & 73 & 1 & 36 & 79 & 47 & 60 & 0.898 \\
+      & & Detector-evasive & 38 & 0 & 8  & 62 & 46 & 51 & \textbf{0.935} \\
+    \midrule
+    \multirow{6}{*}{GPT-5.6}
+      & \multirow{3}{*}{Formal}
+        & Baseline         & 99  & 91 & -- & 99  & 90 & -- & \textbf{0.792} \\
+      & & Human-mimicking  & 100 & 94 & -- & 100 & 94 & -- & 0.728 \\
+      & & Detector-evasive & 98  & 93 & -- & 98  & 92 & -- & 0.747 \\
+    \cmidrule(l){2-10}
+      & \multirow{3}{*}{Informal}
+        & Baseline         & 64 & 40 & 25 & 74 & 59 & 56 & 0.790 \\
+      & & Human-mimicking  & 52 & 10 & 6  & 68 & 49 & 51 & 0.781 \\
+      & & Detector-evasive & 48 & 10 & 2  & 66 & 49 & 50 & \textbf{0.823} \\
+    \midrule
+    \multirow{6}{*}{Mistral 3.2}
+      & \multirow{3}{*}{Formal}
+        & Baseline         & 100 & 98  & -- & 100 & 98  & -- & \textbf{0.935} \\
+      & & Human-mimicking  & 100 & 96  & -- & 100 & 95  & -- & 0.925 \\
+      & & Detector-evasive & 100 & 100 & -- & 100 & 100 & -- & 0.909 \\
+    \cmidrule(l){2-10}
+      & \multirow{3}{*}{Informal}
+        & Baseline         & 84 & 24 & 57 & 86 & 53 & 69 & 0.917 \\
+      & & Human-mimicking  & 96 & 25 & 71 & 96 & 53 & 77 & \textbf{0.954} \\
+      & & Detector-evasive & 78 & 12 & 52 & 82 & 49 & 67 & 0.874 \\
+    \bottomrule
+  \end{tabular}
+  \caption{AI-text detection by generator, register and prompt condition, comparing
+  three large-language-model judges with an embedding-based classifier.
+  \emph{AI recall} is the share of generated items the judge flagged as AI;
+  \emph{human precision} is the share of the items the judge labelled \emph{human}
+  that really are human, pooled within each cell against the register's human items.
+  \emph{Embedding CV ROC AUC} is a logistic-regression two-sample test on multilingual
+  sentence embeddings (\texttt{paraphrase-multilingual-mpnet-base-v2}, 5-fold CV);
+  $0.5$ is chance and higher means more separable from human text. Bold marks the most
+  detectable prompt condition within each generator and register block, by AUC.
+  \textbf{The two halves of the table are not measured on the same items.} The judge
+  columns score $n=100$ generated items per cell, whereas every AUC cell is computed on
+  the matched $100$-document GPT-5.6 quiz subset so that generators stay comparable
+  (a cross-validated AUC falls as $n$ falls; see \texttt{EMBEDDING\_AUC\_CAVEATS.md}).
+  Read the two halves as parallel evidence, not as paired measurements.
+  \emph{--} marks the Gemini formal cells, which were never scored:
+  \texttt{gemini-3.1-pro-preview} is capped at 250 requests/day on the available key,
+  which did not permit a 998-item run within the study period. Claude's formal cells
+  are scored on $n=88$--$90$ rather than $100$; all six sit at $98$--$100\%$, so the
+  remaining items cannot move them materially. The formal GPT-5.2 rows are scored on
+  the original corpus while the formal GPT-5.6 and Mistral rows use the
+  formatting-normalized corpus, so \textbf{the formal judge columns are not internally
+  comparable}: on the normalized corpus DeepSeek scores $86\%$ pooled recall on the
+  same GPT-5.2 documents versus $58\%$ on the original. The informal GPT-5.2
+  \emph{baseline} condition is gpt-4o-mini text (see
+  \texttt{BASELINE\_PROVENANCE.md}).}
+  \label{tab:judge-embedding-merged}
+\end{table*}
