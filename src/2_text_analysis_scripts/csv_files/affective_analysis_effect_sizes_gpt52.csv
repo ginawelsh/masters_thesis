@@ -1,0 +1,10 @@
+dataset,condition,feature_group,feature,n_pairs,median_human,median_llm,direction,cohens_dz,rank_biserial,p_value,p_fdr_bh,significant_fdr_0.05
+informal,baseline,affective_analysis,signed_polarity,1149,-0.0319,-0.0086,llm > human,0.023134207227394413,0.08244144246414652,0.015493103994533146,0.015493103994533146,True
+informal,baseline,affective_analysis,affective_extremity,1149,0.1835,0.1377,human > llm,-0.14534549892719384,-0.14652438793658001,1.690772954542063e-05,5.0723188636261886e-05,True
+informal,baseline,affective_analysis,is_subjective,1149,0.0,0.0,equal,-0.11952500059856609,-0.22188449848024316,5.706732139106062e-05,8.560098208659093e-05,True
+informal,human_like,affective_analysis,signed_polarity,1149,-0.0319,-0.0107,llm > human,0.04353516947786183,0.10607333409013509,0.0018424368457403992,0.0018424368457403992,True
+informal,human_like,affective_analysis,affective_extremity,1149,0.1835,0.1327,human > llm,-0.16133161873279633,-0.18382563287546827,6.758290625403125e-08,2.0274871876209375e-07,True
+informal,human_like,affective_analysis,is_subjective,1149,0.0,0.0,equal,-0.11437114293026726,-0.21212121212121213,0.00011650161951952626,0.00017475242927928939,True
+informal,detector_evasive,affective_analysis,signed_polarity,1149,-0.0319,-0.1059,human > llm,-0.2321285080605201,-0.2373829795285125,3.1687312245712525e-12,9.506193673713757e-12,True
+informal,detector_evasive,affective_analysis,affective_extremity,1149,0.1835,0.2524,llm > human,0.10562684402818191,0.17476520225526923,2.8751967460982974e-07,4.312795119147446e-07,True
+informal,detector_evasive,affective_analysis,is_subjective,1149,0.0,0.0,equal,0.0,0.0,1.0,1.0,False

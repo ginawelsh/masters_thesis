@@ -44,14 +44,14 @@ COND_LABEL = {
 }
 INK, MUTED, GRID = "#1b1f27", "#667085", "#e3e7ec"
 
-FEATURE_GROUPS = ["syntactic_complexity", "stylometric_surface", "pragmatic_markers"]
+FEATURE_GROUPS = ["syntactic_complexity", "stylometric_surface", "pragmatic_markers", "perplexity"]
 # curated, interpretable features for the distribution grid (only those present are drawn)
 CURATED = [
     "dep_distance_mean", "tree_depth_mean", "subordinate_clause_rate",
     "mtld", "mattr", "ttr", "function_word_rate", "bigram_repetition_rate",
     "punct_comma", "punct_period", "hedge_rate",
     "hedge_formal_rate", "hedge_neutral_rate", "hedge_informal_rate",
-    "negation_rate",
+    "negation_rate", "perplexity", "burstiness",
 ]
 PRETTY = {
     "dep_distance_mean": "Dependency distance", "tree_depth_mean": "Parse-tree depth",
@@ -77,6 +77,9 @@ PRETTY = {
     "ner_ORG_rate": "NER: Organisation /100 tok", "ner_TME_rate": "NER: Time /100 tok",
     "ner_WRK_rate": "NER: Work/Artefact /100 tok", "ner_MSR_rate": "NER: Measure /100 tok",
     "ner_OBJ_rate": "NER: Object /100 tok", "ner_EVN_rate": "NER: Event /100 tok",
+    # reference-LM perplexity (see perplexity.py)
+    "perplexity": "Perplexity (ref. LM)", "n_tokens": "Length (LM tokens)",
+    "burstiness": "Burstiness (sentence-PPL std)",
 }
 
 

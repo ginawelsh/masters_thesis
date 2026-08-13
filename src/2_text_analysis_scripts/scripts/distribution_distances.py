@@ -218,7 +218,7 @@ def run_dataset(dataset, requested="all"):
         cond_results += categorical_js(dataset, cond)
         cond_results += sentiment_js(dataset, tag)
         for feat in ["syntactic_complexity", "stylometric_surface",
-                     "pragmatic_markers", "affective_analysis"]:
+                     "pragmatic_markers", "affective_analysis", "perplexity"]:
             cond_results += continuous_wass(dataset, tag, feat)
         for r in cond_results:
             r["condition"] = cond_label

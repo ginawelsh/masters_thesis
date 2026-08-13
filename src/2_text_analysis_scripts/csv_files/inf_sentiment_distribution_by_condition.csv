@@ -1,0 +1,5 @@
+group,n,POSITIVE_count,POSITIVE_proportion,NEUTRAL_count,NEUTRAL_proportion,NEGATIVE_count,NEGATIVE_proportion,median_signed_polarity,mean_affective_extremity,subjective_rate
+Human,1149,81,0.070496,886,0.771105,182,0.158399,-0.0319,0.3073,0.2289
+LLM baseline,1149,35,0.030461,959,0.834639,155,0.1349,-0.0086,0.2554,0.1654
+LLM human_like,1149,46,0.040035,956,0.832028,147,0.127937,-0.0107,0.2493,0.168
+LLM detector_evasive,1149,14,0.012185,886,0.771105,249,0.21671,-0.1059,0.3454,0.2289
