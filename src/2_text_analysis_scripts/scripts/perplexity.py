@@ -3,12 +3,10 @@ Perplexity under a reference causal LM (a candidate AI-text-detection signal:
 LLM-generated text often scores lower perplexity than human text under a
 general-purpose LM, since it is drawn from that same distribution family).
 
-Model: GPT-SW3 (AI-Sweden-Models/gpt-sw3-*) is the intended reference LM for a
-Swedish-text thesis, but its base (non-instruct) checkpoints are currently
-gated/pending for this account. MODEL_NAME defaults to facebook/xglm-564M --
-ungated, multilingual, trained on CC100 (includes Swedish), and comparable in
-size to gpt-sw3-356m. Swap MODEL_NAME (or pass --model) to a GPT-SW3 checkpoint
-once access clears; nothing else here is model-specific.
+Model: AI-Sweden-Models/gpt-sw3-356m -- the intended reference LM for a
+Swedish-text thesis, now that access to the base (non-instruct) checkpoint has
+cleared. Swap MODEL_NAME (or pass --model) to a different checkpoint if
+needed; nothing else here is model-specific.
 
 Long documents are scored with the sliding-window method from HuggingFace's
 perplexity guide (https://huggingface.co/docs/transformers/perplexity) rather
@@ -19,15 +17,19 @@ perplexity within a document. Human text tends to swing between easy and hard
 sentences more than LLM text, so burstiness is a second signal orthogonal to
 mean perplexity. Sentence splitting uses a bare rule-based spaCy sentencizer
 (no Swedish model download needed -- only sentence boundaries are used here).
+Per-document sentences are scored in padded batches (not one-at-a-time), since
+that loop is the dominant cost -- this is what actually benefits from a GPU.
 
 Usage:
   python src/2_text_analysis_scripts/scripts/perplexity.py --dataset formal
   python src/2_text_analysis_scripts/scripts/perplexity.py --dataset informal --limit 20
+  python src/2_text_analysis_scripts/scripts/perplexity.py --dataset informal --batch-size 32
 """
 import argparse
 import math
 import os
 import statistics
+from contextlib import nullcontext
 
 import pandas as pd
 import spacy
@@ -36,9 +38,10 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 
 from data_utils import read_csv_robust, add_condition_arg, resolve_conditions, condition_tag
 
-MODEL_NAME = "facebook/xglm-564M"
+MODEL_NAME = "AI-Sweden-Models/gpt-sw3-356m"
 MAX_LENGTH = 1024
 STRIDE = 512
+BATCH_SIZE = 16
 
 _script_dir = os.path.dirname(os.path.abspath(__file__))
 _2tas_dir = os.path.dirname(_script_dir)
@@ -55,6 +58,8 @@ def parse_args():
     p.add_argument("--device", default=None, help="cuda:0 / cpu (default: auto-detect)")
     p.add_argument("--max-length", type=int, default=MAX_LENGTH)
     p.add_argument("--stride", type=int, default=STRIDE)
+    p.add_argument("--batch-size", type=int, default=BATCH_SIZE,
+                   help="Sentences per batch for burstiness scoring")
     p.add_argument("--limit", type=int, default=None,
                    help="Only score the first N rows (quick test run)")
     return p.parse_args()
@@ -75,10 +80,17 @@ def resolve_config(dataset):
 def load_model(model_name, device):
     print(f"loading {model_name} on {device}…", flush=True)
     tokenizer = AutoTokenizer.from_pretrained(model_name)
-    model = AutoModelForCausalLM.from_pretrained(model_name)
+    if tokenizer.pad_token is None:
+        tokenizer.pad_token = tokenizer.eos_token
+    dtype = torch.float16 if device.startswith("cuda") else torch.float32
+    model = AutoModelForCausalLM.from_pretrained(model_name, torch_dtype=dtype)
     model.eval()
     model.to(device)
     return tokenizer, model
+
+
+def _autocast(device):
+    return torch.autocast(device_type="cuda", dtype=torch.float16) if device.startswith("cuda") else nullcontext()
 
 
 def load_sentencizer():
@@ -108,8 +120,9 @@ def perplexity(text, tokenizer, model, device, max_length=MAX_LENGTH, stride=STR
         window = input_ids[:, start:end]
         target = window.clone()
         target[:, :-trg_len] = -100
-        out = model(window, labels=target)
-        nlls.append(out.loss)
+        with _autocast(device):
+            out = model(window, labels=target)
+        nlls.append(out.loss.float())
         prev_end = end
         if end == seq_len:
             break
@@ -117,22 +130,64 @@ def perplexity(text, tokenizer, model, device, max_length=MAX_LENGTH, stride=STR
     return float(torch.exp(torch.stack(nlls).mean())), seq_len
 
 
-def sentence_burstiness(text, nlp, tokenizer, model, device, max_length, stride):
-    """Std dev of per-sentence perplexity. None if fewer than 2 scoreable sentences."""
-    sent_ppls = []
-    for sent in nlp(str(text).strip()).sents:
-        s = sent.text.strip()
-        if not s:
+@torch.no_grad()
+def _batch_sentence_ppls(sentences, tokenizer, model, device, max_length):
+    """Perplexity for a list of sentences in one padded forward pass.
+
+    Replaces one-sentence-per-forward-pass scoring (the dominant cost of
+    burstiness, since it runs once per sentence per document): padding lets a
+    whole batch share a single matmul, which is what actually makes a GPU
+    (e.g. Colab) pay off here instead of just moving the same serial loop.
+    """
+    enc = tokenizer(sentences, return_tensors="pt", padding=True, truncation=True,
+                     max_length=max_length)
+    input_ids = enc["input_ids"].to(device)
+    attention_mask = enc["attention_mask"].to(device)
+    if input_ids.size(1) < 2:
+        return [None] * len(sentences)
+
+    labels = input_ids.clone()
+    labels[attention_mask == 0] = -100
+
+    with _autocast(device):
+        logits = model(input_ids, attention_mask=attention_mask).logits
+    shift_logits = logits[:, :-1, :].float()
+    shift_labels = labels[:, 1:]
+    loss = torch.nn.functional.cross_entropy(
+        shift_logits.reshape(-1, shift_logits.size(-1)), shift_labels.reshape(-1),
+        ignore_index=-100, reduction="none",
+    ).view(shift_labels.size())
+    valid = (shift_labels != -100).float()
+    n_valid = valid.sum(dim=1)
+    per_seq_nll = (loss * valid).sum(dim=1) / n_valid.clamp(min=1)
+    per_seq_ppl = torch.exp(per_seq_nll)
+
+    out = []
+    for i in range(len(sentences)):
+        if n_valid[i].item() < 1:
+            out.append(None)
             continue
-        result = perplexity(s, tokenizer, model, device, max_length, stride)
-        if result is not None and not math.isnan(result[0]) and not math.isinf(result[0]):
-            sent_ppls.append(result[0])
+        val = per_seq_ppl[i].item()
+        out.append(val if not math.isnan(val) and not math.isinf(val) else None)
+    return out
+
+
+def sentence_burstiness(text, nlp, tokenizer, model, device, max_length, batch_size=BATCH_SIZE):
+    """Std dev of per-sentence perplexity. None if fewer than 2 scoreable sentences."""
+    sentences = [s.text.strip() for s in nlp(str(text).strip()).sents if s.text.strip()]
+    if len(sentences) < 2:
+        return None
+
+    sent_ppls = []
+    for i in range(0, len(sentences), batch_size):
+        chunk = sentences[i:i + batch_size]
+        sent_ppls.extend(p for p in _batch_sentence_ppls(chunk, tokenizer, model, device, max_length) if p is not None)
     if len(sent_ppls) < 2:
         return None
     return statistics.stdev(sent_ppls)
 
 
-def score(text, tokenizer, model, device, nlp, max_length, stride):
+def score(text, tokenizer, model, device, nlp, max_length, stride, batch_size=BATCH_SIZE):
     if pd.isna(text) or not str(text).strip():
         return None
     result = perplexity(text, tokenizer, model, device, max_length, stride)
@@ -141,7 +196,7 @@ def score(text, tokenizer, model, device, nlp, max_length, stride):
     ppl, n_tokens = result
     if math.isnan(ppl) or math.isinf(ppl):
         return None
-    burstiness = sentence_burstiness(text, nlp, tokenizer, model, device, max_length, stride)
+    burstiness = sentence_burstiness(text, nlp, tokenizer, model, device, max_length, batch_size)
     return {"perplexity": ppl, "n_tokens": n_tokens, "burstiness": burstiness}
 
 
@@ -164,7 +219,7 @@ def main():
     for i, (_, row) in enumerate(df.iterrows()):
         print(f"  {i + 1}/{n}", end="\r", flush=True)
         human_feats.append(score(row.get(cfg["human_col"]), tokenizer, model, device, nlp,
-                                  args.max_length, args.stride))
+                                  args.max_length, args.stride, args.batch_size))
     print()
 
     for cond, llm_col in resolve_conditions(args.dataset, args.condition):
@@ -177,7 +232,7 @@ def main():
         for i, (_, row) in enumerate(df.iterrows()):
             print(f"  {i + 1}/{n}", end="\r", flush=True)
             h = human_feats[i]
-            l = score(row.get(llm_col), tokenizer, model, device, nlp, args.max_length, args.stride)
+            l = score(row.get(llm_col), tokenizer, model, device, nlp, args.max_length, args.stride, args.batch_size)
             if h is None or l is None:
                 continue
             rows.append({

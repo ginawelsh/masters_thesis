@@ -178,6 +178,13 @@ FEATURE_FAMILIES = [
         ("\\quad person (PRS)",       "ner_PRS_rate"),
         ("\\quad organisation (ORG)", "ner_ORG_rate"),
     ]),
+    ("Sentiment analysis", [
+        # Informal-register only: formal abstracts are near-uniformly neutral
+        # (register floor effect), so the formal columns print as em-dashes.
+        ("Signed polarity",           "signed_polarity"),
+        ("Affective extremity",       "affective_extremity"),
+        ("Subjective rate",           "is_subjective"),
+    ]),
 ]
 
 SHADE_SCALE = 25  # cell shading = round(|d_z| * SHADE_SCALE), as in the contrast table
@@ -528,10 +535,11 @@ def table_significance(sig, dataset, cond):
     body = "\n".join(lines)
     ntot = len(sig[(sig.dataset == dataset) & (sig.condition == cond)])
     nsig = len(sig[(sig.dataset == dataset) & (sig.condition == cond) & (sig["significant_fdr_0.05"])])
+    cond_label = COND_LABEL[cond].replace("$^{\\dagger}$", "")  # extracted: f-string exprs can't hold a backslash on py<3.12
     return f"""% ---- Significance: {dataset} / {cond} ----
 \\begin{{table}}[htbp]
   \\centering
-  \\caption{{{dataset.capitalize()} register, {COND_LABEL[cond].replace('$^{\\dagger}$','')} condition:
+  \\caption{{{dataset.capitalize()} register, {cond_label} condition:
   top {min(TOP_N,len(sub))} features by $|d_z|$ (paired Wilcoxon signed-rank).
   $d_z>0$ means LLM $>$ human. {nsig} of {ntot} features significant at BH-FDR $q<0.05$.
   $n$={'170' if dataset=='formal' else '1{,}149'} pairs.}}
