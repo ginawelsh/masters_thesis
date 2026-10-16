@@ -1,0 +1,19 @@
+generator,register,condition,matched_cv_roc_auc_published,matched_cv_roc_auc_rerun,diff
+GPT-5.2,formal,baseline,0.643,0.643,0.0
+GPT-5.2,formal,human_like,0.643,0.643,0.0
+GPT-5.2,formal,detector_evasive,0.813,0.813,0.0
+Mistral 3.2,formal,baseline,0.935,0.935,0.0
+Mistral 3.2,formal,human_like,0.925,0.925,0.0
+Mistral 3.2,formal,detector_evasive,0.909,0.909,0.0
+GPT-5.6,formal,baseline,0.792,0.792,0.0
+GPT-5.6,formal,human_like,0.7275,0.7275,0.0
+GPT-5.6,formal,detector_evasive,0.747,0.747,0.0
+GPT-5.2,informal,baseline,0.886,0.886,0.0
+GPT-5.2,informal,human_like,0.898,0.898,0.0
+GPT-5.2,informal,detector_evasive,0.935,0.935,0.0
+Mistral 3.2,informal,baseline,0.9165,0.9165,0.0
+Mistral 3.2,informal,human_like,0.9535,0.9535,0.0
+Mistral 3.2,informal,detector_evasive,0.874,0.874,0.0
+GPT-5.6,informal,baseline,0.7895,0.7895,0.0
+GPT-5.6,informal,human_like,0.7805,0.7805,0.0
+GPT-5.6,informal,detector_evasive,0.823,0.823,0.0
