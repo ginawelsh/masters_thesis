@@ -13,3 +13,8 @@ m2 <- glmer(correct ~ register * is_human + (1 | pid) + (1 | item), data = d, fa
 print(summary(m1))
 print(summary(m2))
 print(confint(m1, method = "Wald"))
+
+# Likelihood-ratio test of the register effect (m1 against the intercept-only model)
+m0 <- glmer(correct ~ 1 + (1 | pid) + (1 | item), data = d, family = binomial)
+print(anova(m0, m1))
+print(confint(m2, method = "Wald"))
