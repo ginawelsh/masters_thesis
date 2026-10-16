@@ -1060,7 +1060,7 @@ The pattern across prompt conditions was more robust. For GPT-5.2, the feature-e
     \multirow{6}{*}{\shortstack[l]{Mistral\\3.2}}
       & \multirow{3}{*}{Formal}
         & Baseline         & \cg{50}100 & -- & \cg{48}98 & \cg{50}100 & -- & \cg{48}98 & \cg{50}100 & -- & \cg{40}90 \\
-      & & Human-mim.  & \cg{50}100 & -- & \cg{46}96 & \cg{50}100 & -- & \cg{48}98 & \cg{50}100 & -- & \cg{39}89 \\
+      & & Human-mim.  & \cg{50}100 & -- & \cg{46}96 & \cg{50}100 & -- & \cg{45}95 & \cg{50}100 & -- & \cg{39}89 \\
       & & Det.-evasive & \cg{50}100 & -- & \cg{50}100 & \cg{50}100 & -- & \cg{50}100 & \cg{50}100 & -- & \cg{41}91 \\
     \cmidrule(l){2-12}
       & \multirow{3}{*}{Informal}
@@ -1075,7 +1075,7 @@ The pattern across prompt conditions was more robust. For GPT-5.2, the feature-e
   the items the judge labelled human that really are human, computed by pooling
   that condition's generated items with the register's shared human pool.
   Accuracy is the share of that same pooled set (the condition's generated items
-  plus the register's human items) the judge classified correctly overall. Gemini formal-register results for GPT-5.6 and Mistral were unavailable at submission, so their accuracy is marked --.}
+  plus the register's human items) the judge classified correctly overall. Gemini formal-register results for GPT-5.6 and Mistral are marked --: they were never scored, because \texttt{gemini-3.1-pro-preview} was capped at 250 requests per day on the available key.}
   \label{tab:llm-judge-detection-by-condition}
 \end{table*}
 
