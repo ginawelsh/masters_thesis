@@ -290,12 +290,13 @@ most separable overall (0.874–0.954) and GPT-5.6 evaded the classifier most (0
 the judges, Claude scored highest throughout, reaching 100% in several conditions; DeepSeek-R1
 was uneven, including 0% AI recall on GPT-5.2 informal feature-evasive.
 
-**Experiment 3.** Swedish speakers detected AI-generated forum comments above chance
-(63.1%, 95% CI [59.8, 66.4], N = 827, 37 participants, p = .003) but were at chance on abstracts
-(52.6%, 95% CI [43.5, 61.8], N = 114, 9 participants, p = .460). This is the mirror image of the
-LLM judges, which detect abstracts reliably but struggle with comments. The abstract-register
-result and all within-subgroup breakdowns (age, language level, profession, LLM use) are
-statistically underpowered and are reported as preliminary.
+**Experiment 3.** The quiz is 25% human / 75% AI in each register, so results are reported as
+balanced accuracy (chance = 50%). Swedish speakers detected AI-generated forum comments above
+chance (balanced accuracy 71.0%, N = 867, 38 participants; per-participant t(30) = 8.73,
+p < .001). Abstracts (62.4%, N = 114, 9 participants, p = .21) were not reliably above chance,
+and the register comparison is confounded by the fixed order (comments always first) and
+dropout. Participants over-labelled AI texts as human. Scoring and the mixed-effects model are in
+`src/3_ai_detection_scripts/analyse_human_study.py` (and `human_study_glmer.R`).
 
 ## NER notes
 

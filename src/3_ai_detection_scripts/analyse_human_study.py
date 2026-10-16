@@ -1,9 +1,9 @@
 """Experiment 3 (human detection study): class-balance-aware scoring and mixed-effects model.
 
 Reads the raw `AI eller inte` export (one row per judgement) and reproduces the thesis
-sample: the 37 participants recorded 6-25 August 2026 (the main study; responses before
-6 August come from a pilot with a different item set, and one later participant who took
-the quiz after the analysis was frozen is not included).
+sample: the 38 participants recorded between 6 August and 16 September 2026 (responses
+before 6 August come from a pilot with a different item set). Use an export taken on or
+after 16 September 2026; older exports lack the last participant.
 
 Reports, per register:
   - class distribution of the responses (the quiz is 25% human / 75% AI by design)
@@ -29,13 +29,13 @@ from scipy import stats
 
 HERE = Path(__file__).resolve().parent
 
-# Participant-id prefixes of the 37 participants in the thesis sample.
+# Participant-id prefixes of the 38 participants in the thesis sample.
 THESIS_SAMPLE = """
 7a8d562e 296c32da a5d4f4fb 5e1eab5a 844ceac7 92748037 6efa276d 1b4fbcc4 d9e1e47a
 3a18a8d6 fd90281c 6b7fa1e1 158f6965 33cc8c24 5f7d58d7 2b86c248 b8d75ed8 ea21535a
 fad9652e d4d286a7 442a4511 e273f6b8 5281af06 82b04249 f71c8368 868757b4 c8f0ab6b
 1ab7c640 93d8ba54 abbf464a d3c318bf 1ab13775 23c13baf f6fde72a 978dbd57 e2bf86b3
-bfdbe752
+bfdbe752 3e95ca7e
 """.split()
 
 
