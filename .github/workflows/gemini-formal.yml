@@ -1,0 +1,75 @@
+# Completes the Gemini judge's formal-register run (tab:llm-judge-detection-by-condition),
+# whose GPT-5.6 and Mistral cells were never scored because gemini-3.1-pro-preview is
+# capped at 250 requests/day on the key.
+#
+# Scores the formatting-normalized corpus (formal_cleaned_quiz.csv), i.e. the same items
+# Claude and DeepSeek judged, restricted to the human pool plus the GPT-5.6 and Mistral
+# conditions (the GPT-5.2 rows of the table use the original-corpus run). The script
+# resumes from formal_cleaned_results/detection_results_gemini.csv, so each run continues
+# where the last stopped; progress is committed back to the branch after every run.
+#
+# Needs the repository secret GEMINI_API_KEY. Re-trigger after a quota stop by pushing a
+# change to .github/gemini-formal-trigger (or with workflow_dispatch from the default branch).
+name: gemini-formal
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [thesis-revisions-exp3]
+    paths: [.github/workflows/gemini-formal.yml, .github/gemini-formal-trigger]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: gemini-formal
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install openai pandas python-dotenv requests
+
+      - name: Build the corpus subset (human + GPT-5.6 + Mistral)
+        run: |
+          python - <<'EOF'
+          import pandas as pd
+          q = pd.read_csv("src/3_ai_detection_scripts/formal_cleaned_quiz.csv")
+          q = q[q.generator != "gpt-5.2"]
+          q.to_csv("/tmp/formal_gemini_subset.csv", index=False)
+          print(len(q), "items"); print(q.groupby(["generator", "condition"]).size())
+          EOF
+
+      - name: Score with Gemini (resumes)
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          cd src/3_ai_detection_scripts
+          python ai_detection_llm.py --provider gemini \
+            --corpus /tmp/formal_gemini_subset.csv --out-dir formal_cleaned_results \
+            | tee /tmp/gemini.log
+          python - <<'EOF'
+          import pandas as pd
+          d = pd.read_csv("formal_cleaned_results/detection_results_gemini.csv")
+          d = d[d.generator != "gpt-5.2"]
+          print("scored:", len(d), "of 698")
+          print(d.groupby(["generator", "condition"]).size())
+          EOF
+
+      - name: Commit progress
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add src/3_ai_detection_scripts/formal_cleaned_results/detection_results_gemini.csv
+          if git diff --cached --quiet; then echo "nothing new"; exit 0; fi
+          git commit -m "Gemini formal run: progress (CI)"
+          git pull --rebase origin thesis-revisions-exp3
+          git push
