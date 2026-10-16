@@ -1,0 +1,74 @@
+# Reruns the Experiment 2 embedding classifier with source-grouped cross-validation
+# (StratifiedGroupKFold by title/thread) and commits the *_grouped result files.
+# An ungrouped run with the same seed is done first as a reproduction check against
+# the AUCs reported in the thesis; its files are restored afterwards so the
+# committed ungrouped results are left untouched.
+name: grouped-cv
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [thesis-revisions-exp3]
+    paths: [.github/workflows/grouped-cv.yml]
+
+permissions:
+  contents: write
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          pip install torch --index-url https://download.pytorch.org/whl/cpu
+          pip install sentence-transformers scikit-learn pandas numpy
+
+      - name: Ungrouped reproduction check
+        run: |
+          set -e
+          S=src/2_text_analysis_scripts/scripts/embedding_comparison.py
+          for c in baseline human_like detector_evasive; do
+            python $S --dataset both --condition $c --permutations 1
+            python $S --generator gpt56 --dataset both --condition $c --permutations 1
+            python $S --generator mistral --temp 1.0 --dataset both --condition $c --permutations 1
+          done
+          python - <<'EOF'
+          import glob, os, pandas as pd
+          rows = []
+          for f in sorted(glob.glob("src/2_text_analysis_scripts/csv_files/embedding_twosample_*.csv")):
+              if f.endswith("_grouped.csv"):
+                  continue
+              m = pd.read_csv(f).set_index("metric")["value"]
+              rows.append(dict(file=os.path.basename(f), auc_rerun=m.get("classifier_cv_roc_auc")))
+          pd.DataFrame(rows).to_csv("src/2_text_analysis_scripts/csv_files/embedding_auc_ungrouped_rerun.csv", index=False)
+          EOF
+          cp src/2_text_analysis_scripts/csv_files/embedding_auc_ungrouped_rerun.csv /tmp/
+          git checkout -- src/2_text_analysis_scripts/csv_files
+          git clean -fd src/2_text_analysis_scripts/csv_files
+          cp /tmp/embedding_auc_ungrouped_rerun.csv src/2_text_analysis_scripts/csv_files/
+
+      - name: Grouped cross-validation
+        run: |
+          set -e
+          S=src/2_text_analysis_scripts/scripts/embedding_comparison.py
+          for c in baseline human_like detector_evasive; do
+            python $S --dataset both --condition $c --group-cv
+            python $S --generator gpt56 --dataset both --condition $c --group-cv
+            python $S --generator mistral --temp 1.0 --dataset both --condition $c --group-cv
+          done
+
+      - name: Commit results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add src/2_text_analysis_scripts/csv_files/embedding_twosample_*_grouped.csv \
+                  src/2_text_analysis_scripts/csv_files/embedding_auc_ungrouped_rerun.csv
+          git commit -m "Add source-grouped embedding classifier results (CI run)"
+          git push
