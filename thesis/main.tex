@@ -233,12 +233,7 @@ Some existing studies include AI-generated Swedish in their scope, including
 research into AI-generated Swedish detection by AI tools
 \parencite{landberg2024aiwolf} as well as the shift in the structures of
 Swedish language academic writing and the LLM-as-judge approach for Swedish
-university-level texts \parencite{hintze2026aiuse}. \textcite{landberg2024aiwolf} tested
-commercial AI detectors and LLM-as-judges on 400 human-written Swedish
-news articles and 400 ChatGPT-4 generated texts, alongside an equivalent
-English dataset. In a pre-study with 32 texts per language (16 AI-generated and 16 human-written), the three chatbots used as judges performed close to chance on the Swedish texts (Copilot 59\%, GPT-SW3 56\%) or below it (ChatGPT 3.5 22\%, never assigning the AI label), and GPTZero\footnote{\url{https://gptzero.me}} labelled every Swedish text as human-written (50\% accuracy). On the English texts of the same pre-study, GPTZero classified all 32 texts correctly (100\%), while the chatbots again performed poorly (Copilot 50\%, ChatGPT 3.5 41\%, GPT-SW3 63\%). In the main study, the AI detectors Copyleaks\footnote{\url{https://copyleaks.com}} and Smodin\footnote{\url{https://smodin.io}} reached very high accuracy levels on the English texts.
-% TODO(Gina): give the exact English accuracies of Copyleaks and Smodin from Landberg (2024) (main study, not the pre-study), check the detector name (Smodin vs. Smoding), and check the 400 + 400 text count above.
- Overall, this indicates a difference in AI detection performance between English and Swedish. It is worth noting that these results are derived from older GPT models, and therefore warrant a replication with more recent models.
+university-level texts \parencite{hintze2026aiuse}. \textcite{landberg2024aiwolf} tested AI chatbots used as judges and commercial AI detectors on Swedish and English news articles in two stages. In a pre-study with 32 texts per language (16 human-written news articles and 16 ChatGPT 3.5 texts written from their headlines), the three chatbots performed close to chance on the Swedish texts (Copilot 59\%, GPT-SW3 56\%) or below it (ChatGPT 3.5 22\%, never assigning the AI label), and GPTZero\footnote{\url{https://gptzero.me}} labelled every Swedish text as human-written (50\% accuracy). On the English texts, GPTZero classified all 32 texts correctly, while the chatbots again performed poorly (Copilot 50\%, ChatGPT 3.5 41\%, GPT-SW3 63\%). The main study tested two detectors that claimed to support Swedish, Copyleaks\footnote{\url{https://copyleaks.com}} and Smodin\footnote{\url{https://smodin.io}}, on 400 human-written news articles from 2020 and 400 ChatGPT-4 texts per language, the AI texts being generated from one-sentence summaries of the human articles. Both detectors were more accurate on English than on Swedish: Copyleaks reached 100\% on English and 95\% on Swedish, where it missed one in ten AI texts but flagged none of the human ones, and Smodin reached 95\% on English but only 74\% on Swedish, where it labelled about half of the AI texts as human-written. Overall, this indicates that AI detection performance is lower for Swedish than for English, although the gap varies considerably between tools. It is worth noting that these results are derived from older GPT models, and therefore warrant a replication with more recent models.
 
 \textcite{hintze2026aiuse} investigated the use of AI tools in influencing submitted student writing by analysing 17,007 Swedish bachelor's and master's theses
 deposited in DiVA between 2020 and 2025, and studying the differences between texts written before November 2022 (the release of ChatGPT) and those written afterwards. Each thesis was scored by an LLM-as-judge
@@ -1123,7 +1118,7 @@ The pattern across prompt conditions was more robust. For GPT-5.2, the feature-e
 Our detection results connect to prior work in three ways. Firstly, our LLM
 judges performed considerably better on Swedish than the models tested by
 \textcite{landberg2024aiwolf}, whose ChatGPT 3.5, Copilot and GPT-SW3 all
-scored at or below chance on Swedish news texts in 2024. Our Claude judge reached ceiling
+scored close to or below chance on Swedish news texts in their 2024 pre-study. Our Claude judge reached ceiling
 performance on several formal conditions, suggesting that LLM-as-judge has
 become a viable detection paradigm for Swedish, at
 least for the formal register. Secondly, our finding that the feature-evasive
