@@ -25,8 +25,14 @@ Self-check: re-deriving GPT-5.6 through this path must reproduce its published
 AUCs exactly (delta 0.0000); if it does not, this script has drifted from
 embedding_comparison.py and its GPT-5.2/Mistral deltas cannot be trusted.
 
+With --group-cv, folds come from StratifiedGroupKFold(5, shuffle=True, random_state=0)
+grouped by source (title for formal, question thread for informal), so a human text and
+its LLM counterpart, or two replies to the same thread, never sit on both sides of a
+split. Output then goes to embedding_auc_matched_gpt56subset_grouped.csv.
+
 Run: python src/2_text_analysis_scripts/scripts/matched_auc_control.py
      python src/2_text_analysis_scripts/scripts/matched_auc_control.py --permutations 1000
+     python src/2_text_analysis_scripts/scripts/matched_auc_control.py --permutations 1000 --group-cv
 """
 import argparse
 import math
@@ -77,11 +83,11 @@ def doc_key(df, reg):
     return norm(df[reg["label_col"]]) + " ||| " + norm(df[reg["human_col"]])
 
 
-def main(n_perm=0):
+def main(n_perm=0, group_cv=False):
     from sentence_transformers import SentenceTransformer
     from sklearn.linear_model import LogisticRegression
-    from sklearn.model_selection import (StratifiedKFold, cross_val_score,
-                                         permutation_test_score)
+    from sklearn.model_selection import (StratifiedGroupKFold, StratifiedKFold,
+                                         cross_val_score, permutation_test_score)
 
     model = SentenceTransformer(ec.MODEL)
     rows = []
@@ -121,13 +127,20 @@ def main(n_perm=0):
                                  normalize_embeddings=True, show_progress_bar=False)
                 X = np.vstack([h, l])
                 y = np.array([0] * n + [1] * n)
-                cv = StratifiedKFold(n_splits=5, shuffle=True, random_state=0)
+                if group_cv:
+                    groups = pd.factorize(pd.concat([norm(d[reg["label_col"]])] * 2,
+                                                    ignore_index=True))[0]
+                    cv = StratifiedGroupKFold(n_splits=5, shuffle=True, random_state=0)
+                else:
+                    groups = None
+                    cv = StratifiedKFold(n_splits=5, shuffle=True, random_state=0)
                 clf = LogisticRegression(max_iter=2000)
-                auc = float(cross_val_score(clf, X, y,
+                auc = float(cross_val_score(clf, X, y, groups=groups,
                                             scoring="roc_auc", cv=cv, n_jobs=-1).mean())
                 pair_cos = float(np.sum(h * l, axis=1).mean())
                 row = dict(generator=gen, register=dataset, condition=cond,
-                           n_per_class=n, matched_cv_roc_auc=round(auc, 4),
+                           n_per_class=n, n_groups=int(len(set(groups))) if group_cv else np.nan,
+                           matched_cv_roc_auc=round(auc, 4),
                            mean_pair_cosine=round(pair_cos, 4))
 
                 if n_perm:
@@ -135,7 +148,7 @@ def main(n_perm=0):
                     # estimate is what the p-value is anchored to; keep both and
                     # assert they agree with the cross_val_score AUC above.
                     perm_auc, perm_scores, p = permutation_test_score(
-                        clf, X, y, scoring="roc_auc", cv=cv,
+                        clf, X, y, groups=groups, scoring="roc_auc", cv=cv,
                         n_permutations=n_perm, random_state=0, n_jobs=-1)
                     assert abs(perm_auc - auc) < 1e-9, (
                         f"{gen}/{dataset}/{cond}: permutation_test_score AUC "
@@ -169,18 +182,22 @@ def main(n_perm=0):
 
     out = pd.concat([out, out.apply(published, axis=1)], axis=1)
     out["delta"] = (out["matched_cv_roc_auc"] - out["published_auc"]).round(4)
-    out.to_csv(OUT, index=False, encoding="utf-8")
+    out_path = OUT.replace(".csv", "_grouped.csv") if group_cv else OUT
+    out.to_csv(out_path, index=False, encoding="utf-8")
 
     print("\n" + "=" * 92)
     print("DOCUMENT-MATCHED vs PUBLISHED (all matched rows use the GPT-5.6 quiz documents)")
     print("=" * 92)
     print(out.to_string(index=False))
-    print(f"\nwrote {OUT}")
+    print(f"\nwrote {out_path}")
 
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument("--group-cv", action="store_true",
+                    help="group folds by source (title / question thread)")
     ap.add_argument("--permutations", type=int, default=0,
                     help="label permutations per cell (0 = point estimates only, "
                          "reproducing the original output)")
-    main(n_perm=ap.parse_args().permutations)
+    a = ap.parse_args()
+    main(n_perm=a.permutations, group_cv=a.group_cv)
