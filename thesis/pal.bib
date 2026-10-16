@@ -1,90 +1,1356 @@
-@Book{joyce22,
-  author = 	 {Joyce, James},
-  title = 	 {Ulysses},
-  publisher = 	 {Egoist Press},
-  location =     {London},
-  year = 	 1922}
+% ============================================================
+%  pal.bib — deduplicated master reference list (cleaned)
+%  One canonical entry per key. Published venues preferred over
+%  arXiv preprints where both existed. Pasted webpage text removed.
+%  Entries with author = {VERIFY} or notes marked VERIFY / POST-CUTOFF
+%  still need a field confirmed against a primary source before use.
+% ============================================================
 
-@Book{eckler01,
-  author = 	 {Eckler, Ross},
-  title = 	 {Making the Alphabet Dance},
-  subtitle =     {Recreational Wordplay},
-  publisher = 	 {Macmillan},
-  location =     {London},
-  year = 	 2001}
+% ------------------------------------------------------------
+%  Foundational LLM architecture & training
+% ------------------------------------------------------------
+@article{waltzer2024spot,
+  title     = {Can you spot the bot? Identifying AI-generated writing in college essays},
+  author    = {Waltzer, Tal and Pilegard, Celeste and Heyman, Gail D.},
+  journal   = {International Journal for Educational Integrity},
+  volume    = {20},
+  number    = {1},
+  pages     = {11},
+  year      = {2024},
+  doi       = {10.1007/s40979-024-00158-3},
+  url       = {https://link.springer.com/article/10.1007/s40979-024-00158-3}
+}
 
-@Article{eckler91,
-  author = 	 {Eckler, Ross},
-  editor = 	 {Eckler, Ross},
-  title = 	 {Leigh Mercer, Palindromist},
-  journaltitle = {Word Ways: The Journal of Recreational Linguistics},
-  year = 	 1991,
-  pages = 	 131,
-  month = 	 8}
+@misc{milicka2025humans,
+  title         = {Humans can learn to detect AI-generated texts, or at least learn when they can't},
+  author        = {Milička, Jiří and Marklová, Anna and Drobil, Ondřej and Pospíšilová, Eva},
+  year          = {2025},
+  eprint        = {2505.01877},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL},
+  url           = {https://arxiv.org/abs/2505.01877}
+}
 
-@InCollection{adamczewski10,
-  author = 	 {Adamczewski, Boris and Bugeaud, Yann},
-  editor = 	 {Valérie, Berthé and Rigo, Michael},
-  title = 	 {Transcendence and Diophantine approximation},
-  booktitle =    {Combinatorics, Automata and Number Theory},
-  chapter = 	 8,
-  publisher = 	 {Cambridge University Press},
-  year = 	 2010,
-  volume = 	 135,
-  address = 	 {Cambridge},
-  pages = 	 {410--451},
-  doi =          {10.1017/CBO9780511777653.009},
+@inproceedings{vaswani2017attention,
+  title     = {Attention Is All You Need},
+  author    = {Vaswani, Ashish and Shazeer, Noam and Parmar, Niki and Uszkoreit, Jakob and Jones, Llion and Gomez, Aidan N. and Kaiser, {\L}ukasz and Polosukhin, Illia},
+  booktitle = {Advances in Neural Information Processing Systems 30 (NeurIPS 2017)},
+  volume    = {30},
+  year      = {2017},
+  eprint    = {1706.03762},
+  archivePrefix = {arXiv},
+  url       = {https://arxiv.org/abs/1706.03762}
 }
 
 
 
-@article{vaswani2017attention,
-  author       = {Ashish Vaswani and
-                  Noam Shazeer and
-                  Niki Parmar and
-                  Jakob Uszkoreit and
-                  Llion Jones and
-                  Aidan N. Gomez and
-                  Lukasz Kaiser and
-                  Illia Polosukhin},
-  title        = {Attention Is All You Need},
-  journal      = {CoRR},
-  volume       = {abs/1706.03762},
-  year         = {2017},
-  url          = {http://arxiv.org/abs/1706.03762},
-  eprinttype    = {arXiv},
-  eprint       = {1706.03762},
-  timestamp    = {Sat, 23 Jan 2021 01:20:40 +0100},
-  biburl       = {https://dblp.org/rec/journals/corr/VaswaniSPUJGKP17.bib},
-  bibsource    = {dblp computer science bibliography, https://dblp.org}
+@inproceedings{brown2020language,
+  title     = {Language Models Are Few-Shot Learners},
+  author    = {Brown, Tom B. and Mann, Benjamin and Ryder, Nick and Subbiah, Melanie and Kaplan, Jared and Dhariwal, Prafulla and Neelakantan, Arvind and Shyam, Pranav and Sastry, Girish and Askell, Amanda and Agarwal, Sandhini and Herbert-Voss, Ariel and Krueger, Gretchen and Henighan, Tom and Child, Rewon and Ramesh, Aditya and Ziegler, Daniel M. and Wu, Jeffrey and Winter, Clemens and Hesse, Christopher and Chen, Mark and Sigler, Eric and Litwin, Mateusz and Gray, Scott and Chess, Benjamin and Clark, Jack and Berner, Christopher and McCandlish, Sam and Radford, Alec and Sutskever, Ilya and Amodei, Dario},
+  booktitle = {Advances in Neural Information Processing Systems 33 (NeurIPS 2020)},
+  pages     = {1877--1901},
+  year      = {2020},
+  eprint    = {2005.14165},
+  archivePrefix = {arXiv},
+  url       = {https://arxiv.org/abs/2005.14165}
 }
 
-@misc{islam2023,
-      title={A Comprehensive Survey on Applications of Transformers for Deep Learning Tasks}, 
-      author={Saidul Islam and Hanae Elmekki and Ahmed Elsebai and Jamal Bentahar and Najat Drawel and Gaith Rjoub and Witold Pedrycz},
-      year={2023},
-      eprint={2306.07303},
-      archivePrefix={arXiv},
-      primaryClass={cs.LG},
-      url={https://arxiv.org/abs/2306.07303}, 
+@article{kaplan2020scaling,
+  title   = {Scaling Laws for Neural Language Models},
+  author  = {Kaplan, Jared and McCandlish, Sam and Henighan, Tom and Brown, Tom B. and Chess, Benjamin and Child, Rewon and Gray, Scott and Radford, Alec and Wu, Jeffrey and Amodei, Dario},
+  journal = {arXiv preprint arXiv:2001.08361},
+  year    = {2020}
 }
 
-@misc{radford2022robustspeechrecognitionlargescale,
-      title={Robust Speech Recognition via Large-Scale Weak Supervision}, 
-      author={Alec Radford and Jong Wook Kim and Tao Xu and Greg Brockman and Christine McLeavey and Ilya Sutskever},
-      year={2022},
-      eprint={2212.04356},
-      archivePrefix={arXiv},
-      primaryClass={eess.AS},
-      url={https://arxiv.org/abs/2212.04356}, 
+@article{hoffmann2022training,
+  title   = {Training Compute-Optimal Large Language Models},
+  author  = {Hoffmann, Jordan and Borgeaud, Sebastian and Mensch, Arthur and Buchatskaya, Elena and Cai, Trevor and Rutherford, Eliza and Casas, Diego de Las and Hendricks, Lisa Anne and Welbl, Johannes and Clark, Aidan and others},
+  journal = {arXiv preprint arXiv:2203.15556},
+  year    = {2022}
+}
+
+@inproceedings{wei2022finetuned,
+  title     = {Finetuned Language Models Are Zero-Shot Learners},
+  author    = {Wei, Jason and Bosma, Maarten and Zhao, Vincent Y. and Guu, Kelvin and Yu, Adams Wei and Lester, Brian and Du, Nan and Dai, Andrew M. and Le, Quoc V.},
+  booktitle = {International Conference on Learning Representations (ICLR 2022)},
+  year      = {2022},
+  note      = {arXiv:2109.01652}
+}
+
+@inproceedings{wei2022chain,
+  title     = {Chain-of-Thought Prompting Elicits Reasoning in Large Language Models},
+  author    = {Wei, Jason and Wang, Xuezhi and Schuurmans, Dale and Bosma, Maarten and Ichter, Brian and Xia, Fei and Chi, Ed H. and Le, Quoc V. and Zhou, Denny},
+  booktitle = {Advances in Neural Information Processing Systems 35 (NeurIPS 2022)},
+  pages     = {24824--24837},
+  year      = {2022},
+  note      = {arXiv:2201.11903}
+}
+
+@article{wei2022emergent,
+  title   = {Emergent Abilities of Large Language Models},
+  author  = {Wei, Jason and Tay, Yi and Bommasani, Rishi and Raffel, Colin and Zoph, Barret and Borgeaud, Sebastian and Yogatama, Dani and Bosma, Maarten and Zhou, Denny and Metzler, Donald and Chi, Ed H. and Hashimoto, Tatsunori and Vinyals, Oriol and Liang, Percy and Dean, Jeff and Fedus, William},
+  journal = {Transactions on Machine Learning Research},
+  year    = {2022},
+  eprint  = {2206.07682},
+  archivePrefix = {arXiv},
+  url     = {https://arxiv.org/abs/2206.07682}
+}
+
+@inproceedings{ouyang2022training,
+  title     = {Training Language Models to Follow Instructions with Human Feedback},
+  author    = {Ouyang, Long and Wu, Jeffrey and Jiang, Xu and Almeida, Diogo and Wainwright, Carroll L. and Mishkin, Pamela and Zhang, Chong and Agarwal, Sandhini and Slama, Katarina and Ray, Alex and others},
+  booktitle = {Advances in Neural Information Processing Systems 35 (NeurIPS 2022)},
+  pages     = {27730--27744},
+  year      = {2022},
+  note      = {arXiv:2203.02155}
+}
+
+@article{fedus2022switch,
+  title   = {Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity},
+  author  = {Fedus, William and Zoph, Barret and Shazeer, Noam},
+  journal = {Journal of Machine Learning Research},
+  volume  = {23},
+  number  = {120},
+  pages   = {1--39},
+  year    = {2022},
+  url     = {https://jmlr.org/papers/v23/21-0998.html}
+}
+
+@article{minaee2024large,
+  title   = {Large Language Models: A Survey},
+  author  = {Minaee, Shervin and Mikolov, Tomas and Nikzad, Narjes and Chenaghlu, Meysam and Socher, Richard and Amatriain, Xavier and Gao, Jianfeng},
+  journal = {arXiv preprint arXiv:2402.06196},
+  year    = {2024}
+}
+
+% ------------------------------------------------------------
+%  Specific models
+% ------------------------------------------------------------
+
+@misc{touvron2023llama,
+  title         = {{LLaMA}: Open and Efficient Foundation Language Models},
+  author        = {Touvron, Hugo and Lavril, Thibaut and Izacard, Gautier and Martinet, Xavier and Lachaux, Marie-Anne and Lacroix, Timoth{\'e}e and Rozi{\`e}re, Baptiste and Goyal, Naman and Hambro, Eric and Azhar, Faisal and Rodriguez, Aurelien and Joulin, Armand and Grave, Edouard and Lample, Guillaume},
+  year          = {2023},
+  eprint        = {2302.13971},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL},
+  url           = {https://arxiv.org/abs/2302.13971}
+}
+
+@article{touvron2023llama2,
+  title   = {{Llama 2}: Open Foundation and Fine-Tuned Chat Models},
+  author  = {Touvron, Hugo and Martin, Louis and Stone, Kevin and Albert, Peter and Almahairi, Amjad and Babaei, Yasmine and Bashlykov, Nikolay and Batra, Soumya and Bhargava, Prajjwal and Bhosale, Shruti and others},
+  journal = {arXiv preprint arXiv:2307.09288},
+  year    = {2023}
+}
+
+@misc{openai2023gpt4,
+  title         = {{GPT-4} Technical Report},
+  author        = {{OpenAI}},
+  year          = {2023},
+  eprint        = {2303.08774},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL},
+  url           = {https://arxiv.org/abs/2303.08774}
+}
+
+@techreport{anthropic2024claude,
+  title       = {The {Claude} 3 Model Family: {Opus}, {Sonnet}, {Haiku}},
+  author      = {{Anthropic}},
+  year        = {2024},
+  institution = {Anthropic},
+  type        = {Technical Report},
+  url         = {https://www.anthropic.com/news/claude-3-family}
+}
+
+@misc{DeepSeek-R1ai2024DeepSeek-R1v3,
+  title         = {{DeepSeek-V3} Technical Report},
+  author        = {{DeepSeek-AI}},
+  year          = {2024},
+  eprint        = {2412.19437},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL},
+  url           = {https://arxiv.org/abs/2412.19437}
+}
+
+@article{Guo_2025,
+  title     = {{DeepSeek-R1} Incentivizes Reasoning in {LLMs} through Reinforcement Learning},
+  author    = {Guo, Daya and Yang, Dejian and Zhang, Haowei and Song, Junxiao and Wang, Peiyi and Zhu, Qihao and Xu, Runxin and Zhang, Ruoyu and Ma, Shirong and Bi, Xiao and others},
+  journal   = {Nature},
+  volume    = {645},
+  number    = {8081},
+  pages     = {633--638},
+  year      = {2025},
+  issn      = {1476-4687},
+  doi       = {10.1038/s41586-025-09422-z},
+  url       = {http://dx.doi.org/10.1038/s41586-025-09422-z}
+}
+
+% ------------------------------------------------------------
+%  Training data & corpora
+% ------------------------------------------------------------
+
+@article{raffel2020exploring,
+  title   = {Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer},
+  author  = {Raffel, Colin and Shazeer, Noam and Roberts, Adam and Lee, Katherine and Narang, Sharan and Matena, Michael and Zhou, Yanqi and Li, Wei and Liu, Peter J.},
+  journal = {Journal of Machine Learning Research},
+  volume  = {21},
+  number  = {140},
+  pages   = {1--67},
+  year    = {2020},
+  url     = {https://jmlr.org/papers/v21/20-074.html}
+}
+
+@inproceedings{dodge2021documenting,
+  title     = {Documenting Large Webtext Corpora: A Case Study on the {Colossal} {Clean} {Crawled} {Corpus}},
+  author    = {Dodge, Jesse and Sap, Maarten and Marasovi{\'c}, Ana and Agnew, William and Ilharco, Gabriel and Groeneveld, Dirk and Mitchell, Margaret and Gardner, Matt},
+  booktitle = {Proceedings of the 2021 Conference on Empirical Methods in Natural Language Processing (EMNLP)},
+  pages     = {1286--1305},
+  year      = {2021},
+  url       = {https://aclanthology.org/2021.emnlp-main.98}
+}
+
+@inproceedings{gehman2020realtoxicityprompts,
+  title     = {{RealToxicityPrompts}: Evaluating Neural Toxic Degeneration in Language Models},
+  author    = {Gehman, Samuel and Gururangan, Suchin and Sap, Maarten and Choi, Yejin and Smith, Noah A.},
+  booktitle = {Findings of the Association for Computational Linguistics: EMNLP 2020},
+  pages     = {3356--3369},
+  year      = {2020},
+  url       = {https://aclanthology.org/2020.findings-emnlp.301}
+}
+
+@article{gao2020pile,
+  title   = {The {Pile}: An 800{GB} Dataset of Diverse Text for Language Modeling},
+  author  = {Gao, Leo and Biderman, Stella and Black, Sid and Golding, Laurence and Hoppe, Travis and Foster, Charles and Phang, Jason and He, Horace and Thite, Anish and Nabeshima, Noa and Presser, Shawn and Leahy, Connor},
+  journal = {arXiv preprint arXiv:2101.00027},
+  year    = {2020}
+}
+
+@inproceedings{penedo2023refinedweb,
+  title     = {The {RefinedWeb} Dataset for {Falcon LLM}: Outperforming Curated Corpora with Web Data, and Web Data Only},
+  author    = {Penedo, Guilherme and Malartic, Quentin and Hesslow, Daniel and Cojocaru, Ruxandra and Cappelli, Alessandro and Alobeidli, Hamza and Pannier, Baptiste and Almazrouei, Ebtesam and Launay, Julien},
+  booktitle = {Advances in Neural Information Processing Systems 36 (NeurIPS 2023)},
+  year      = {2023},
+  note      = {arXiv:2306.01116}
+}
+
+@misc{commoncrawl,
+  title        = {Common Crawl},
+  author       = {{Common Crawl}},
+  year         = {2007},
+  howpublished = {\url{https://commoncrawl.org}},
+  note         = {Open repository of web crawl data. Accessed 2026}
+}
+
+@misc{wikipedia,
+  title        = {Wikipedia: The Free Encyclopedia},
+  author       = {{Wikimedia Foundation}},
+  howpublished = {\url{https://www.wikipedia.org}},
+  note         = {Accessed 2026}
+}
+
+% ------------------------------------------------------------
+%  Multilingual & cross-lingual
+% ------------------------------------------------------------
+
+@inproceedings{conneau2020unsupervised,
+  title     = {Unsupervised Cross-lingual Representation Learning at Scale},
+  author    = {Conneau, Alexis and Khandelwal, Kartikay and Goyal, Naman and Chaudhary, Vishrav and Wenzek, Guillaume and Guzm{\'a}n, Francisco and Grave, Edouard and Ott, Myle and Zettlemoyer, Luke and Stoyanov, Veselin},
+  booktitle = {Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics},
+  pages     = {8440--8451},
+  year      = {2020},
+  url       = {https://aclanthology.org/2020.acl-main.747}
+}
+
+@inproceedings{wendler2024llamas,
+  title     = {Do Llamas Work in {English}? On the Latent Language of Multilingual Transformers},
+  author    = {Wendler, Chris and Veselovsky, Veniamin and Monea, Giovanni and West, Robert},
+  booktitle = {Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)},
+  pages     = {15366--15394},
+  year      = {2024},
+  eprint    = {2402.10588},
+  archivePrefix = {arXiv},
+  url       = {https://arxiv.org/abs/2402.10588}
+}
+
+@inproceedings{joshi2020state,
+  title     = {The State and Fate of Linguistic Diversity and Inclusion in the {NLP} World},
+  author    = {Joshi, Pratik and Santy, Sebastin and Budhiraja, Amar and Bali, Kalika and Choudhury, Monojit},
+  booktitle = {Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics},
+  year      = {2020},
+  note      = {arXiv:2004.09095}
+}
+
+% VERIFY: confirm this is the Zhao et al. (2024) you intend
+@misc{zhao2024large,
+  title         = {How Do Large Language Models Handle Multilingualism?},
+  author        = {Zhao, Yiran and Zhang, Wenxuan and Chen, Guizhen and Kawaguchi, Kenji and Bing, Lidong},
+  year          = {2024},
+  eprint        = {2402.18815},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL},
+  url           = {https://arxiv.org/abs/2402.18815}
+}
+
+% ------------------------------------------------------------
+%  Scandinavian / Swedish NLP
+% ------------------------------------------------------------
+
+@misc{ohman2023nordic,
+  title         = {The {Nordic Pile}: A 1.2{TB} {Nordic} Dataset for Language Modeling},
+  author        = {{\"O}hman, Joey and Verlinden, Severine and Ekgren, Ariel and Cuba Gyllensten, Amaru and Isbister, Tim and Gogoulou, Evangelia and Carlsson, Fredrik and Sahlgren, Magnus},
+  year          = {2023},
+  eprint        = {2303.17183},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL},
+  url           = {https://arxiv.org/abs/2303.17183}
+}
+
+@inproceedings{ekgren2024gptsw3,
+  title     = {{GPT-SW3}: An Autoregressive Language Model for the {Scandinavian} Languages},
+  author    = {Ekgren, Ariel and Cuba Gyllensten, Amaru and Stollenwerk, Felix and {\"O}hman, Joey and Isbister, Tim and Gogoulou, Evangelia and Carlsson, Fredrik and Casademont, Judit and Sahlgren, Magnus},
+  booktitle = {Proceedings of the 2024 Joint International Conference on Computational Linguistics, Language Resources and Evaluation (LREC-COLING 2024)},
+  pages     = {7886--7900},
+  year      = {2024}
+}
+
+@inproceedings{holmstrom2023bridging,
+  title     = {Bridging the Resource Gap: Exploring the Efficacy of {English} and Multilingual {LLMs} for {Swedish}},
+  author    = {Holmstr{\"o}m, Oskar and Kunz, Jenny and Kuhlmann, Marco},
+  booktitle = {Proceedings of the Second Workshop on Resources and Representations for Under-Resourced Languages and Domains (RESOURCEFUL-2023)},
+  pages     = {92--110},
+  year      = {2023}
+}
+
+@inproceedings{holmstrom2023making,
+  title     = {Making Instruction Finetuning Accessible to Non-{English} Languages: A Case Study on {Swedish} Models},
+  author    = {Holmstr{\"o}m, Oskar and Doostmohammadi, Ehsan},
+  booktitle = {Proceedings of the 24th Nordic Conference on Computational Linguistics (NoDaLiDa)},
+  pages     = {634--642},
+  address   = {T{\'o}rshavn, Faroe Islands},
+  publisher = {University of Tartu Library},
+  year      = {2023},
+  url       = {https://aclanthology.org/2023.nodalida-1.62}
+}
+
+@article{moell2024swedishbenchmark,
+  title   = {Evaluating Large Language Models with Human Feedback: Establishing a {Swedish} Benchmark},
+  author  = {Mo{\"e}ll, Birger},
+  journal = {arXiv preprint arXiv:2405.14006},
+  year    = {2024}
+}
+
+@article{moell2025swedishmed,
+  title   = {Swedish Medical {LLM} Benchmark: Development and Evaluation of a Framework for Assessing Large Language Models in the {Swedish} Medical Domain},
+  author  = {Mo{\"e}ll, Birger and Farestam, Fredrik and Beskow, Jonas},
+  journal = {Frontiers in Artificial Intelligence},
+  volume  = {8},
+  pages   = {1557920},
+  year    = {2025},
+  doi     = {10.3389/frai.2025.1557920}
+}
+
+@article{moell2025language,
+  title   = {Language Complexity Measurement as a Noisy Zero-Shot Proxy for Evaluating {LLM} Performance},
+  author  = {Mo{\"e}ll, Birger and Boye, Johan},
+  journal = {arXiv preprint arXiv:2502.11578},
+  year    = {2025}
+}
+
+@article{moell2025medical,
+  title   = {Medical Reasoning in {LLMs}: An In-Depth Analysis of {DeepSeek R1}},
+  author  = {Mo{\"e}ll, Birger and Sand Aronsson, Fredrik and Akbar, Sanian},
+  journal = {Frontiers in Artificial Intelligence},
+  volume  = {8},
+  pages   = {1616145},
+  year    = {2025},
+  doi     = {10.3389/frai.2025.1616145},
+  note    = {arXiv:2504.00016}
+}
+
+@inproceedings{nielsen2023scandeval,
+  author    = {Nielsen, Dan Saattrup},
+  title     = {{ScandEval}: A Benchmark for {Scandinavian} Natural Language Processing},
+  booktitle = {Proceedings of the 24th Nordic Conference on Computational Linguistics (NoDaLiDa)},
+  year      = {2023},
+  note      = {VERIFY: pages and publisher}
+}
+
+% VERIFY: complete the author list, title and arXiv identifier/venue
+@misc{kurfali2025swesat,
+  author = {Kurfal{\i}, Murathan and others},
+  title  = {{SweSAT}-1.0: The {Swedish} University Entrance Exam as a Benchmark for Large Language Models},
+  year   = {2025},
+  note   = {VERIFY}
+}
+
+% VERIFY: fill in from the source (Sweden-related factual-knowledge benchmark)
+@misc{kunz2025,
+  author = {Kunz, VERIFY},
+  title  = {VERIFY: title of the Sweden-related factual-knowledge benchmark},
+  year   = {2025},
+  note   = {VERIFY: venue}
+}
+
+@mastersthesis{landberg2024aiwolf,
+  author  = {Landberg, Adam},
+  title   = {{AI-Wolf in Sheep's Clothing: Distinguishing between Swedish Humans and AI Wannabes}},
+  school  = {Chalmers University of Technology},
+  address = {Gothenburg, Sweden},
+  year    = {2024},
+  type    = {Master's Thesis},
+  note    = {Department of Computer Science and Engineering. Programme: Data Science and AI (MPDSC), MSc},
+  url     = {https://hdl.handle.net/20.500.12380/308198}
+}
+
+@unpublished{hintze2026aiuse,
+  author = {Hintze, Arend},
+  title  = {{AI use in Swedish University Theses: a Corpus-Level Analysis of Bachelor and Master Theses, 2020--2025}},
+  note   = {Preprint under review at Social Sciences \& Humanities Open. Available at SSRN},
+  year   = {2026},
+  doi    = {10.2139/ssrn.6906371},
+  url    = {https://ssrn.com/abstract=6906371}
+}
+
+@article{stiff2022detecting,
+  title   = {Detecting Computer-Generated Disinformation},
+  author  = {Stiff, Harald and Johansson, Fredrik},
+  journal = {International Journal of Data Science and Analytics},
+  volume  = {13},
+  number  = {4},
+  pages   = {363--383},
+  year    = {2022},
+  doi     = {10.1007/s41060-021-00299-5}
+}
+
+% ------------------------------------------------------------
+%  Feature analysis / stylometry roots
+% ------------------------------------------------------------
+
+@article{mosteller1963,
+  author    = {Mosteller, Frederick and Wallace, David L.},
+  title     = {Inference in an Authorship Problem},
+  journal   = {Journal of the American Statistical Association},
+  volume    = {58},
+  number    = {302},
+  pages     = {275--309},
+  year      = {1963},
+  issn      = {01621459, 1537274X},
+  url       = {http://www.jstor.org/stable/2283270},
+  urldate   = {2026-07-28}
+}
+
+@misc{belvisi2020forensicauthorshipanalysismicroblogging,
+  title         = {Forensic Authorship Analysis of Microblogging Texts Using N-Grams and Stylometric Features},
+  author        = {Belvisi, Nicole Mariah Sharon and Muhammad, Naveed and Alonso-Fernandez, Fernando},
+  year          = {2020},
+  eprint        = {2003.11545},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL},
+  url           = {https://arxiv.org/abs/2003.11545}
+}
+
+@inproceedings{sundararajan-woodard-2018-represents,
+  title     = {What represents ``style'' in authorship attribution?},
+  author    = {Sundararajan, Kalaivani and Woodard, Damon},
+  booktitle = {Proceedings of the 27th International Conference on Computational Linguistics},
+  month     = aug,
+  year      = {2018},
+  address   = {Santa Fe, New Mexico, USA},
+  publisher = {Association for Computational Linguistics},
+  pages     = {2814--2822},
+  url       = {https://aclanthology.org/C18-1238/}
+}
+
+@article{huang2025authorship,
+  author  = {Huang, Baixiang and Chen, Canyu and Shu, Kai},
+  title   = {Authorship Attribution in the Era of {LLM}s: Problems, Methodologies, and Challenges},
+  journal = {ACM SIGKDD Explorations Newsletter},
+  volume  = {26},
+  number  = {2},
+  year    = {2025},
+  url     = {https://arxiv.org/abs/2408.08946}
+}
+
+% ------------------------------------------------------------
+%  LLM-generated text characterisation
+% ------------------------------------------------------------
+
+@article{mahowald2024dissociating,
+  author  = {Mahowald, Kyle and Ivanova, Anna A. and Blank, Idan A. and Kanwisher, Nancy and Tenenbaum, Joshua B. and Fedorenko, Evelina},
+  title   = {Dissociating Language and Thought in Large Language Models},
+  journal = {Trends in Cognitive Sciences},
+  volume  = {28},
+  number  = {6},
+  pages   = {517--540},
+  year    = {2024},
+  doi     = {10.1016/j.tics.2024.01.011},
+  url     = {https://www.cell.com/trends/cognitive-sciences/abstract/S1364-6613(24)00027-5}
+}
+
+@article{munoz-ortiz2024contrasting,
+  author  = {Mu{\~n}oz-Ortiz, Alberto and G{\'o}mez-Rodr{\'i}guez, Carlos and Vilares, David},
+  title   = {Contrasting Linguistic Patterns in Human and {LLM}-Generated News Text},
+  journal = {Artificial Intelligence Review},
+  volume  = {57},
+  number  = {10},
+  pages   = {265},
+  year    = {2024},
+  doi     = {10.1007/s10462-024-10903-2},
+  url     = {https://arxiv.org/abs/2308.09067}
+}
+
+@article{markowitz2024linguistic,
+  title   = {Linguistic Markers of Inherently False {AI} Communication and Intentionally False Human Communication: Evidence From Hotel Reviews},
+  author  = {Markowitz, David M. and Hancock, Jeffrey T. and Bailenson, Jeremy N.},
+  journal = {Journal of Language and Social Psychology},
+  volume  = {43},
+  number  = {1},
+  pages   = {63--82},
+  year    = {2024},
+  doi     = {10.1177/0261927X231200201}
+}
+
+@inproceedings{giorgi2021characterizing,
+  title     = {Characterizing Social Spambots by their Human Traits},
+  author    = {Giorgi, Salvatore and Ungar, Lyle and Schwartz, H. Andrew},
+  booktitle = {Findings of the Association for Computational Linguistics: ACL-IJCNLP 2021},
+  pages     = {5148--5158},
+  year      = {2021}
+}
+
+@article{liao2023differentiating,
+  author  = {Liao, Wenxiong and Liu, Zhengliang and Dai, Haixing and Xu, Shaochen and Wu, Zihao and Zhang, Yiyang and Huang, Xiaoke and Zhu, Dajiang and Cai, Hongmin and Li, Quanzheng and Liu, Tianming and Li, Xiang},
+  title   = {Differentiating {ChatGPT}-Generated and Human-Written Medical Texts: Quantitative Study},
+  journal = {JMIR Medical Education},
+  volume  = {9},
+  pages   = {e48904},
+  year    = {2023},
+  doi     = {10.2196/48904},
+  url     = {https://mededu.jmir.org/2023/1/e48904}
+}
+
+@article{herbold2023large,
+  author  = {Herbold, Steffen and Hautli-Janisz, Annette and Heuer, Ute and Kikteva, Zlata and Trautsch, Alexander},
+  title   = {A Large-Scale Comparison of Human-Written versus {ChatGPT}-Generated Essays},
+  journal = {Scientific Reports},
+  volume  = {13},
+  pages   = {18617},
+  year    = {2023},
+  doi     = {10.1038/s41598-023-45644-9},
+  url     = {https://www.nature.com/articles/s41598-023-45644-9}
+}
+
+% VERIFY: arXiv 2509.10179 is a September 2025 identifier; year corrected from 2024
+@article{milicka2024benchmark,
+  title   = {Benchmark of Stylistic Variation in {LLM}-Generated Texts},
+  author  = {Mili{\v{c}}ka, Ji{\v{r}}{\'i} and Markl{\'o}v{\'a}, Anna and Cvr{\v{c}}ek, V{\'a}clav},
+  journal = {arXiv preprint arXiv:2509.10179},
+  year    = {2025}
+}
+
+@article{Reviriego_2024,
+  title     = {Playing with words: Comparing the vocabulary and lexical diversity of {ChatGPT} and humans},
+  author    = {Reviriego, Pedro and Conde, Javier and Merino-G{\'o}mez, Elena and Mart{\'i}nez, Gonzalo and Hern{\'a}ndez, Jos{\'e} Alberto},
+  journal   = {Machine Learning with Applications},
+  volume    = {18},
+  pages     = {100602},
+  year      = {2024},
+  month     = dec,
+  issn      = {2666-8270},
+  doi       = {10.1016/j.mlwa.2024.100602},
+  url       = {http://dx.doi.org/10.1016/j.mlwa.2024.100602},
+  publisher = {Elsevier BV}
+}
+
+@misc{su2024robustdetectionllmgeneratedtext,
+  title         = {Robust Detection of {LLM}-Generated Text: A Comparative Analysis},
+  author        = {Su, Yongye and Wu, Yuqing},
+  year          = {2024},
+  eprint        = {2411.06248},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL},
+  url           = {https://arxiv.org/abs/2411.06248}
+}
+
+@article{reinhart2025llms,
+  author  = {Reinhart, Alex and Markey, Ben and Laudenbach, Michael and Pantusen, Kachatad and Yurko, Ronald and Weinberg, Gordon and Brown, David West},
+  title   = {Do {LLM}s Write Like Humans? Variation in Grammatical and Rhetorical Styles},
+  journal = {arXiv preprint arXiv:2410.16107},
+  year    = {2025},
+  url     = {https://arxiv.org/abs/2410.16107}
+}
+
+@article{berbersardinha2024ai,
+  author  = {Berber Sardinha, Tony},
+  title   = {{AI}-Generated vs Human-Authored Texts: A Multidimensional Comparison},
+  journal = {Applied Corpus Linguistics},
+  volume  = {4},
+  number  = {1},
+  pages   = {100083},
+  year    = {2024},
+  doi     = {10.1016/j.acorp.2023.100083}
+}
+
+@article{zanotto2025linguistic,
+  author  = {Zanotto, Sergio and Aroyehun, Segun Taofeek},
+  title   = {Linguistic and Embedding-Based Profiling of Texts Generated by Humans and Large Language Models},
+  journal = {arXiv preprint arXiv:2507.13614},
+  year    = {2025},
+  url     = {https://arxiv.org/abs/2507.13614}
+}
+
+@article{rodrigues2026linguistic,
+  author  = {Rodrigues, Fl{\'a}via A. and Sturm, Niclas F. and Pinheiro, Fl{\'a}vio L.},
+  title   = {A Linguistic Comparison between Human- and {AI}-Generated Content},
+  journal = {iScience},
+  volume  = {29},
+  number  = {3},
+  pages   = {114976},
+  year    = {2026},
+  doi     = {10.1016/j.isci.2026.114976},
+  url     = {https://www.cell.com/iscience/fulltext/S2589-0042(26)00351-2}
+}
+
+@article{osullivan2025stylometric,
+  author  = {O'Sullivan, James},
+  title   = {Stylometric Comparisons of Human versus {AI}-Generated Creative Writing},
+  journal = {Humanities and Social Sciences Communications},
+  volume  = {12},
+  number  = {1},
+  pages   = {1708},
+  year    = {2025},
+  doi     = {10.1057/s41599-025-05986-3},
+  url     = {https://www.nature.com/articles/s41599-025-05986-3}
+}
+
+@article{przystalski2025stylometry,
+  author  = {Przystalski, Karol and Argasi{\'n}ski, Jan K. and Grabska-Gradzi{\'n}ska, Iwona and Ochab, Jeremi K.},
+  title   = {Stylometry Recognizes Human and {LLM}-Generated Texts in Short Samples},
+  journal = {Expert Systems with Applications},
+  year    = {2025},
+  doi     = {10.1016/j.eswa.2025.129541},
+  url     = {https://arxiv.org/abs/2507.00838}
+}
+
+@article{zaitsu2025stylometry,
+  author  = {Zaitsu, Wataru and Jin, Mingzhe and Ishihara, Shunichi and Tsuge, Satoru and Inaba, Mitsuyuki},
+  title   = {Stylometry Can Reveal Artificial Intelligence Authorship, but Humans Struggle: A Comparison of Human and Seven Large Language Models in {J}apanese},
+  journal = {PLOS ONE},
+  volume  = {20},
+  number  = {10},
+  pages   = {e0335369},
+  year    = {2025},
+  doi     = {10.1371/journal.pone.0335369},
+  url     = {https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0335369}
+}
+
+@article{zaitsu2023distinguishing,
+  author  = {Zaitsu, Wataru and Jin, Mingzhe},
+  title   = {Distinguishing {ChatGPT}(-3.5, -4)-Generated and Human-Written Papers through {J}apanese Stylometric Analysis},
+  journal = {PLOS ONE},
+  volume  = {18},
+  number  = {8},
+  pages   = {e0288453},
+  year    = {2023},
+  doi     = {10.1371/journal.pone.0288453},
+  url     = {https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0288453}
+}
+
+@misc{guo2023closechatgpthumanexperts,
+  title         = {How Close is {ChatGPT} to Human Experts? Comparison Corpus, Evaluation, and Detection},
+  author        = {Guo, Biyang and Zhang, Xin and Wang, Ziyuan and Jiang, Minqi and Nie, Jinran and Ding, Yuxuan and Yue, Jianwei and Wu, Yupeng},
+  year          = {2023},
+  eprint        = {2301.07597},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL},
+  url           = {https://arxiv.org/abs/2301.07597}
+}
+
+@misc{tang2023sciencedetectingllmgeneratedtexts,
+  title         = {The Science of Detecting {LLM}-Generated Texts},
+  author        = {Tang, Ruixiang and Chuang, Yu-Neng and Hu, Xia},
+  year          = {2023},
+  eprint        = {2303.07205},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL},
+  url           = {https://arxiv.org/abs/2303.07205}
+}
+
+@misc{alshaibani2025arabicaifingerprintstylometric,
+  title         = {The Arabic {AI} Fingerprint: Stylometric Analysis and Detection of Large Language Models Text},
+  author        = {Al-Shaibani, Maged S. and Ahmed, Moataz},
+  year          = {2025},
+  eprint        = {2505.23276},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL},
+  url           = {https://arxiv.org/abs/2505.23276}
+}
+
+@inproceedings{park2025katfishnet,
+  author    = {Park, Shinwoo and Kim, Shubin and Kim, Do-Kyung and Han, Yo-Sub},
+  title     = {{KatFishNet}: Detecting {LLM}-Generated {K}orean Text through Linguistic Feature Analysis},
+  booktitle = {Proceedings of the 63rd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)},
+  pages     = {21189--21222},
+  year      = {2025},
+  address   = {Vienna, Austria},
+  publisher = {Association for Computational Linguistics},
+  doi       = {10.18653/v1/2025.acl-long.1030},
+  url       = {https://aclanthology.org/2025.acl-long.1030/}
+}
+
+@article{schaaff2023classification,
+  title   = {Classification of Human- and {AI}-Generated Texts for {E}nglish, {F}rench, {G}erman, and {S}panish},
+  author  = {Schaaff, Kristina and Schlippe, Tim and Mindner, Lorenz},
+  journal = {arXiv preprint arXiv:2312.04882},
+  year    = {2023},
+  url     = {https://arxiv.org/abs/2312.04882}
+}
+
+@inbook{mindner2023classification,
+  title     = {Classification of Human- and {AI}-Generated Texts: Investigating Features for {ChatGPT}},
+  isbn      = {9789819979479},
+  issn      = {2367-4520},
+  url       = {http://dx.doi.org/10.1007/978-981-99-7947-9_12},
+  doi       = {10.1007/978-981-99-7947-9_12},
+  booktitle = {Artificial Intelligence in Education Technologies: New Development and Innovative Practices},
+  publisher = {Springer Nature Singapore},
+  author    = {Mindner, Lorenz and Schlippe, Tim and Schaaff, Kristina},
+  year      = {2023},
+  pages     = {152--170}
+}
+
+@misc{shijaku2023chatgpt,
+  author = {Shijaku, Rexhep and Canhasi, Ercan},
+  year   = {2023},
+  title  = {{ChatGPT} Generated Text Detection},
+  doi    = {10.13140/RG.2.2.21317.52960},
+  note   = {Working paper}
+}
+
+% ------------------------------------------------------------
+%  Detection: statistical / zero-shot methods
+% ------------------------------------------------------------
+
+@inproceedings{mitchell2023detectgpt,
+  title     = {{DetectGPT}: Zero-Shot Machine-Generated Text Detection using Probability Curvature},
+  author    = {Mitchell, Eric and Lee, Yoonho and Khazatsky, Alexander and Manning, Christopher D. and Finn, Chelsea},
+  booktitle = {Proceedings of the 40th International Conference on Machine Learning (ICML)},
+  series    = {Proceedings of Machine Learning Research},
+  volume    = {202},
+  pages     = {24950--24962},
+  year      = {2023},
+  publisher = {PMLR},
+  url       = {https://proceedings.mlr.press/v202/mitchell23a.html}
+}
+
+@inproceedings{bao2024fastdetectgpt,
+  title     = {Fast-{DetectGPT}: Efficient Zero-Shot Detection of Machine-Generated Text via Conditional Probability Curvature},
+  author    = {Bao, Guangsheng and Zhao, Yanbin and Teng, Zhiyang and Yang, Linyi and Zhang, Yue},
+  booktitle = {The Twelfth International Conference on Learning Representations (ICLR)},
+  year      = {2024},
+  url       = {https://arxiv.org/abs/2310.05130}
+}
+
+@inproceedings{hans2024binoculars,
+  title     = {Spotting {LLM}s With Binoculars: Zero-Shot Detection of Machine-Generated Text},
+  author    = {Hans, Abhimanyu and Schwarzschild, Avi and Cherepanova, Valeriia and Kazemi, Hamid and Saha, Aniruddha and Goldblum, Micah and Geiping, Jonas and Goldstein, Tom},
+  booktitle = {Proceedings of the 41st International Conference on Machine Learning},
+  series    = {Proceedings of Machine Learning Research},
+  volume    = {235},
+  pages     = {17519--17537},
+  year      = {2024},
+  publisher = {PMLR},
+  url       = {https://proceedings.mlr.press/v235/hans24a.html}
+}
+
+@inproceedings{gehrmann2019gltr,
+  title     = {{GLTR}: Statistical Detection and Visualization of Generated Text},
+  author    = {Gehrmann, Sebastian and Strobelt, Hendrik and Rush, Alexander M.},
+  booktitle = {Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics: System Demonstrations},
+  year      = {2019},
+  publisher = {Association for Computational Linguistics},
+  eprint    = {1906.04043},
+  eprinttype = {arXiv}
+}
+
+@inproceedings{lopezpaz2017revisiting,
+  title     = {Revisiting Classifier Two-Sample Tests},
+  author    = {Lopez-Paz, David and Oquab, Maxime},
+  booktitle = {5th International Conference on Learning Representations (ICLR)},
+  year      = {2017},
+  address   = {Toulon, France},
+  eprint    = {1610.06545},
+  archivePrefix = {arXiv},
+  primaryClass  = {stat.ML}
+}
+
+% ------------------------------------------------------------
+%  Detection: neural / fake news / cross-domain
+% ------------------------------------------------------------
+
+@misc{zellers2020defendingneuralfakenews,
+  title         = {Defending Against Neural Fake News},
+  author        = {Zellers, Rowan and Holtzman, Ari and Rashkin, Hannah and Bisk, Yonatan and Farhadi, Ali and Roesner, Franziska and Choi, Yejin},
+  year          = {2020},
+  eprint        = {1905.12616},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL},
+  url           = {https://arxiv.org/abs/1905.12616}
+}
+
+@inproceedings{pagnoni-etal-2022-threat,
+  title     = {Threat Scenarios and Best Practices to Detect Neural Fake News},
+  author    = {Pagnoni, Artidoro and Graciarena, Martin and Tsvetkov, Yulia},
+  booktitle = {Proceedings of the 29th International Conference on Computational Linguistics},
+  month     = oct,
+  year      = {2022},
+  address   = {Gyeongju, Republic of Korea},
+  publisher = {International Committee on Computational Linguistics},
+  pages     = {1233--1249},
+  url       = {https://aclanthology.org/2022.coling-1.106/}
+}
+
+@inproceedings{rodriguez-etal-2022-cross,
+  title     = {Cross-Domain Detection of {GPT}-2-Generated Technical Text},
+  author    = {Rodriguez, Juan Diego and Hay, Todd and Gros, David and Shamsi, Zain and Srinivasan, Ravi},
+  booktitle = {Proceedings of the 2022 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies},
+  month     = jul,
+  year      = {2022},
+  address   = {Seattle, United States},
+  publisher = {Association for Computational Linguistics},
+  url       = {https://aclanthology.org/2022.naacl-main.88/},
+  doi       = {10.18653/v1/2022.naacl-main.88},
+  pages     = {1213--1233}
+}
+
+@article{crothers2023machine,
+  title   = {Machine-Generated Text: A Comprehensive Survey of Threat Models and Detection Methods},
+  author  = {Crothers, Evan and Japkowicz, Nathalie and Viktor, Herna L.},
+  journal = {IEEE Access},
+  volume  = {11},
+  pages   = {70977--71002},
+  year    = {2023},
+  doi     = {10.1109/ACCESS.2023.3294090},
+  note    = {arXiv:2210.07321}
+}
+
+@article{wu2025survey,
+  title   = {A Survey on {LLM}-Generated Text Detection: Necessity, Methods, and Future Directions},
+  author  = {Wu, Junchao and Yang, Shu and Zhan, Runzhe and Yuan, Yulin and Chao, Lidia Sam and Wong, Derek Fai},
+  journal = {Computational Linguistics},
+  volume  = {51},
+  number  = {1},
+  pages   = {275--338},
+  year    = {2025},
+  doi     = {10.1162/coli_a_00549},
+  note    = {arXiv:2310.14724}
+}
+
+@misc{wu2024detectrl,
+  title         = {DetectRL: Benchmarking {LLM}-Generated Text Detection in Real-World Scenarios},
+  author        = {Wu, Junchao and Zhan, Runzhe and Yang, Shu and Yuan, Yulin and Chao, Lidia Sam and Wong, Derek Fai},
+  year          = {2024},
+  eprint        = {2410.23746},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL},
+  url           = {https://arxiv.org/abs/2410.23746},
+}
+
+@article{mitrovic2023chatgpt,
+  title   = {{ChatGPT} or Human? Detect and Explain. Explaining Decisions of Machine Learning Model for Detecting Short {ChatGPT}-Generated Text},
+  author  = {Mitrovi{\'c}, Sandra and Andreoletti, Davide and Ayoub, Omran},
+  journal = {arXiv preprint arXiv:2301.13852},
+  year    = {2023}
+}
+
+% ------------------------------------------------------------
+%  Detection: watermarking
+% ------------------------------------------------------------
+
+@inproceedings{kirchenbauer2023watermark,
+  title     = {A Watermark for Large Language Models},
+  author    = {Kirchenbauer, John and Geiping, Jonas and Wen, Yuxin and Katz, Jonathan and Miers, Ian and Goldstein, Tom},
+  booktitle = {Proceedings of the 40th International Conference on Machine Learning},
+  series    = {Proceedings of Machine Learning Research},
+  volume    = {202},
+  pages     = {17061--17084},
+  year      = {2023},
+  publisher = {PMLR},
+  url       = {https://proceedings.mlr.press/v202/kirchenbauer23a.html}
+}
+
+% ------------------------------------------------------------
+%  Detection: theory, fairness, LLM-as-judge
+% ------------------------------------------------------------
+
+@article{ghosal2023possibilities,
+  title   = {Towards Possibilities \& Impossibilities of {AI}-generated Text Detection: A Survey},
+  author  = {Ghosal, Soumya Suvra and Chakraborty, Souradip and Geiping, Jonas and Huang, Furong and Manocha, Dinesh and Bedi, Amrit Singh},
+  journal = {arXiv preprint arXiv:2310.15264},
+  year    = {2023},
+  eprint  = {2310.15264},
+  eprinttype = {arXiv}
+}
+
+@article{liang2023gptdetectors,
+  title   = {{GPT} detectors are biased against non-native {E}nglish writers},
+  author  = {Liang, Weixin and Yuksekgonul, Mert and Mao, Yining and Wu, Eric and Zou, James},
+  journal = {Patterns},
+  volume  = {4},
+  number  = {7},
+  pages   = {100779},
+  year    = {2023},
+  doi     = {10.1016/j.patter.2023.100779}
+}
+
+@inproceedings{panickssery2024llmevaluators,
+  title     = {{LLM} Evaluators Recognize and Favor Their Own Generations},
+  author    = {Panickssery, Arjun and Bowman, Samuel R. and Feng, Shi},
+  booktitle = {Advances in Neural Information Processing Systems 37 (NeurIPS 2024)},
+  year      = {2024},
+  url       = {https://proceedings.neurips.cc/paper_files/paper/2024/hash/7f1f0218e45f5414c79c0679633e47bc-Abstract-Conference.html}
+}
+
+@article{wataoka2024selfpreference,
+  title   = {Self-Preference Bias in {LLM}-as-a-Judge},
+  author  = {Wataoka, Koki and Takahashi, Tsubasa and Ri, Ryokan},
+  journal = {arXiv preprint arXiv:2410.21819},
+  year    = {2024},
+  eprint  = {2410.21819},
+  eprinttype = {arXiv}
+}
+
+@inproceedings{zheng2023judging,
+  author    = {Zheng, Lianmin and Chiang, Wei-Lin and Sheng, Ying and Zhuang, Siyuan and Wu, Zhanghao and Zhuang, Yonghao and Lin, Zi and Li, Zhuohan and Li, Dacheng and Xing, Eric P. and Zhang, Hao and Gonzalez, Joseph E. and Stoica, Ion},
+  title     = {Judging {LLM}-as-a-Judge with {MT}-Bench and Chatbot Arena},
+  booktitle = {Advances in Neural Information Processing Systems 36 (NeurIPS)},
+  year      = {2023}
+}
+
+@inproceedings{zhu-etal-2023-beat,
+  author    = {Zhu, Biru and Yuan, Lifan and Cui, Ganqu and Chen, Yangyi and Fu, Chong and He, Bingxiang and Deng, Yangdong and Liu, Zhiyuan and Sun, Maosong and Gu, Ming},
+  title     = {Beat {LLM}s at Their Own Game: Zero-Shot {LLM}-Generated Text Detection via Querying {ChatGPT}},
+  booktitle = {Proceedings of the 2023 Conference on Empirical Methods in Natural Language Processing (EMNLP)},
+  year      = {2023},
+  pages     = {7470--7483},
+  address   = {Singapore},
+  publisher = {Association for Computational Linguistics},
+  doi       = {10.18653/v1/2023.emnlp-main.463},
+  url       = {https://aclanthology.org/2023.emnlp-main.463/}
+}
+
+@article{bhattacharjee2024fighting,
+  title   = {Fighting Fire with Fire: Can {ChatGPT} Detect {AI}-generated Text?},
+  author  = {Bhattacharjee, Amrita and Liu, Huan},
+  journal = {ACM SIGKDD Explorations Newsletter},
+  volume  = {25},
+  number  = {2},
+  pages   = {14--21},
+  year    = {2024},
+  doi     = {10.1145/3655103.3655106}
+}
+
+@inproceedings{li-etal-2025-generation,
+  title     = {From Generation to Judgment: Opportunities and Challenges of {LLM}-as-a-judge},
+  author    = {Li, Dawei and Jiang, Bohan and Huang, Liangjie and Beigi, Alimohammad and Zhao, Chengshuai and Tan, Zhen and Bhattacharjee, Amrita and Jiang, Yuxuan and Chen, Canyu and Wu, Tianhao and Shu, Kai and Cheng, Lu and Liu, Huan},
+  booktitle = {Proceedings of the 2025 Conference on Empirical Methods in Natural Language Processing},
+  month     = nov,
+  year      = {2025},
+  address   = {Suzhou, China},
+  publisher = {Association for Computational Linguistics},
+  url       = {https://aclanthology.org/2025.emnlp-main.138/},
+  doi       = {10.18653/v1/2025.emnlp-main.138},
+  pages     = {2757--2791}
+}
+
+% ------------------------------------------------------------
+%  Multilingual detection benchmarks
+% ------------------------------------------------------------
+
+@inproceedings{macko2023multitude,
+  title     = {{MULTITuDE}: Large-Scale Multilingual Machine-Generated Text Detection Benchmark},
+  author    = {Macko, Dominik and Moro, Robert and Uchendu, Adaku and Lucas, Jason and Yamashita, Michiharu and Pikuliak, Mat{\'u}{\v{s}} and Srba, Ivan and Le, Thai and Lee, Dongwon and Simko, Jakub and Bielikova, Maria},
+  booktitle = {Proceedings of the 2023 Conference on Empirical Methods in Natural Language Processing (EMNLP)},
+  pages     = {9960--9987},
+  year      = {2023},
+  address   = {Singapore},
+  publisher = {Association for Computational Linguistics},
+  doi       = {10.18653/v1/2023.emnlp-main.616},
+  url       = {https://aclanthology.org/2023.emnlp-main.616/}
+}
+
+@inproceedings{macko2025multisocial,
+  title     = {{MultiSocial}: Multilingual Benchmark of Machine-Generated Text Detection of Social-Media Texts},
+  author    = {Macko, Dominik and Kop{\'a}l, Jakub and Moro, Robert and Srba, Ivan},
+  booktitle = {Proceedings of the 63rd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)},
+  pages     = {727--752},
+  month     = jul,
+  year      = {2025},
+  address   = {Vienna, Austria},
+  publisher = {Association for Computational Linguistics},
+  doi       = {10.18653/v1/2025.acl-long.36},
+  url       = {https://aclanthology.org/2025.acl-long.36/}
+}
+
+@inproceedings{macko2024obfuscation,
+  title     = {Authorship Obfuscation in Multilingual Machine-Generated Text Detection},
+  author    = {Macko, Dominik and Moro, Robert and Uchendu, Adaku and Srba, Ivan and Lucas, Jason S. and Yamashita, Michiharu and Tripto, Nafis Irtiza and Lee, Dongwon and Simko, Jakub and Bielikova, Maria},
+  booktitle = {Findings of the Association for Computational Linguistics: EMNLP 2024},
+  pages     = {6348--6368},
+  year      = {2024},
+  address   = {Miami, Florida, USA},
+  publisher = {Association for Computational Linguistics}
+}
+
+@inproceedings{wang2024m4,
+  title     = {{M4}: Multi-generator, Multi-domain, and Multi-lingual Black-Box Machine-Generated Text Detection},
+  author    = {Wang, Yuxia and Mansurov, Jonibek and Ivanov, Petar and Su, Jinyan and Shelmanov, Artem and Tsvigun, Akim and Whitehouse, Chenxi and Mohammed Afzal, Osama and Mahmoud, Tarek and Sasaki, Toru and Arnold, Thomas and Aji, Alham Fikri and Habash, Nizar and Gurevych, Iryna and Nakov, Preslav},
+  booktitle = {Proceedings of the 18th Conference of the European Chapter of the Association for Computational Linguistics (EACL)},
+  pages     = {1369--1407},
+  year      = {2024},
+  address   = {St.\ Julian's, Malta}
+}
+
+@inproceedings{wang2024semeval,
+  title     = {{S}em{E}val-2024 Task 8: Multidomain, Multimodel and Multilingual Machine-Generated Text Detection},
+  author    = {Wang, Yuxia and Mansurov, Jonibek and Ivanov, Petar and Su, Jinyan and Shelmanov, Artem and Tsvigun, Akim and Mohammed Afzal, Osama and Mahmoud, Tarek and Puccetti, Giovanni and Arnold, Thomas},
+  booktitle = {Proceedings of the 18th International Workshop on Semantic Evaluation (SemEval-2024)},
+  month     = jun,
+  year      = {2024},
+  address   = {Mexico City, Mexico},
+  publisher = {Association for Computational Linguistics},
+  pages     = {2057--2079},
+  url       = {https://aclanthology.org/2024.semeval-1.279/},
+  doi       = {10.18653/v1/2024.semeval-1.279}
+}
+
+@inproceedings{wang2024m4gt,
+  title     = {{M4GT}-Bench: Evaluation Benchmark for Black-Box Machine-Generated Text Detection},
+  author    = {Wang, Yuxia and Mansurov, Jonibek and Ivanov, Petar and Su, Jinyan and Shelmanov, Artem and Tsvigun, Akim and Mohammed Afzal, Osama and Mahmoud, Tarek and Puccetti, Giovanni and Arnold, Thomas and Aji, Alham Fikri and Habash, Nizar and Gurevych, Iryna and Nakov, Preslav},
+  booktitle = {Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)},
+  pages     = {3964--3992},
+  year      = {2024},
+  address   = {Bangkok, Thailand},
+  publisher = {Association for Computational Linguistics}
+}
+
+% ------------------------------------------------------------
+%  Evading detection / paraphrase attacks
+% ------------------------------------------------------------
+
+@misc{krishna2023paraphrasing,
+  author        = {Krishna, Kalpesh and Song, Yixiao and Karpinska, Marzena and Wieting, John and Iyyer, Mohit},
+  title         = {Paraphrasing Evades Detectors of {AI}-Generated Text, but Retrieval Is an Effective Defense},
+  year          = {2023},
+  eprint        = {2303.13408},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL},
+  url           = {https://arxiv.org/abs/2303.13408},
+  note          = {Advances in Neural Information Processing Systems 36 (NeurIPS 2023), pp.\ 27469--27500}
+}
+
+@article{lu2024sico,
+  author  = {Lu, Ning and Liu, Shengcai and He, Rui and Wang, Qi and Ong, Yew-Soon and Tang, Ke},
+  title   = {Large Language Models Can Be Guided to Evade {AI}-Generated Text Detection},
+  journal = {Transactions on Machine Learning Research},
+  year    = {2024},
+  url     = {https://arxiv.org/abs/2305.10847}
+}
+
+@misc{lu2024largelanguagemodelsguided,
+  title         = {Large Language Models can be Guided to Evade {AI}-Generated Text Detection},
+  author        = {Lu, Ning and Liu, Shengcai and He, Rui and Wang, Qi and Ong, Yew-Soon and Tang, Ke},
+  year          = {2024},
+  eprint        = {2305.10847},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL},
+  url           = {https://arxiv.org/abs/2305.10847}
+}
+
+@misc{cheng2025adversarialparaphrasinguniversalattack,
+  title         = {Adversarial Paraphrasing: A Universal Attack for Humanizing {AI}-Generated Text},
+  author        = {Cheng, Yize and Sadasivan, Vinu Sankar and Saberi, Mehrdad and Saha, Shoumik and Feizi, Soheil},
+  year          = {2025},
+  eprint        = {2506.07001},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL},
+  url           = {https://arxiv.org/abs/2506.07001}
+}
+
+@article{zhou2024humanizing,
+  author  = {Zhou, Ying and He, Ben and Sun, Le},
+  title   = {Humanizing Machine-Generated Content: Evading {AI}-Text Detection through Adversarial Attack},
+  journal = {arXiv preprint arXiv:2404.01907},
+  year    = {2024}
+}
+
+@misc{krishna2023paraphrasingevadesdetectorsaigenerated,
+  title         = {Paraphrasing evades detectors of {AI}-generated text, but retrieval is an effective defense},
+  author        = {Krishna, Kalpesh and Song, Yixiao and Karpinska, Marzena and Wieting, John and Iyyer, Mohit},
+  year          = {2023},
+  eprint        = {2303.13408},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL},
+  url           = {https://arxiv.org/abs/2303.13408}
+}
+
+@misc{sadasivan2025aigeneratedtextreliablydetected,
+  title         = {Can {AI}-Generated Text be Reliably Detected?},
+  author        = {Sadasivan, Vinu Sankar and Kumar, Aounon and Balasubramanian, Sriram and Wang, Wenxiao and Feizi, Soheil},
+  year          = {2025},
+  eprint        = {2303.11156},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL},
+  url           = {https://arxiv.org/abs/2303.11156}
+}
+
+@inproceedings{huang-etal-2025-tempparaphraser,
+  title     = {{TempParaphraser}: ``Heating Up'' Text to Evade {AI}-Text Detection through Paraphrasing},
+  author    = {Huang, Junjie and Zhang, Ruiquan and Su, Jinsong and Chen, Yidong},
+  booktitle = {Proceedings of the 2025 Conference on Empirical Methods in Natural Language Processing},
+  month     = nov,
+  year      = {2025},
+  address   = {Suzhou, China},
+  publisher = {Association for Computational Linguistics},
+  url       = {https://aclanthology.org/2025.emnlp-main.1607/},
+  doi       = {10.18653/v1/2025.emnlp-main.1607},
+  pages     = {31554--31573}
+}
+
+@inproceedings{kumarage2023reliable,
+  author    = {Kumarage, Tharindu and Sheth, Paras and Moraffah, Raha and Garland, Joshua and Liu, Huan},
+  title     = {How Reliable Are {AI}-Generated-Text Detectors? An Assessment Framework Using Evasive Soft Prompts},
+  booktitle = {Findings of the Association for Computational Linguistics: EMNLP 2023},
+  pages     = {1337--1349},
+  year      = {2023},
+  address   = {Singapore},
+  publisher = {Association for Computational Linguistics},
+  url       = {https://arxiv.org/abs/2310.05095}
+}
+
+% Detectors degrade on paraphrased/edited text (cited in Limitations)
+@misc{wolff2020attacking,
+  title         = {Attacking Neural Text Detectors},
+  author        = {Wolff, Max and Wolff, Stuart},
+  year          = {2020},
+  eprint        = {2002.11768},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL},
+  url           = {https://arxiv.org/abs/2002.11768},
+}
+
+% ------------------------------------------------------------
+%  Human detection studies
+% ------------------------------------------------------------
+
+@inproceedings{clark2021all,
+  title     = {All That's `Human' Is Not Gold: Evaluating Human Evaluation of Generated Text},
+  author    = {Clark, Elizabeth and August, Tal and Serrano, Sofia and Haduong, Nikita and Gururangan, Suchin and Smith, Noah A.},
+  booktitle = {Proceedings of the 59th Annual Meeting of the Association for Computational Linguistics},
+  year      = {2021},
+  note      = {arXiv:2107.00061}
+}
+
+@article{doruetal,
+  author   = {Doru, Berin and Maier, Christoph and Busse, Johanna Sophie and L{\"u}cke, Thomas and Sch{\"o}nhoff, Judith and Enax-Krumova, Elena and Hessler, Steffen and Berger, Maria and Tokic, Marianne},
+  title    = {Detecting Artificial Intelligence--Generated Versus Human-Written Medical Student Essays: Semirandomized Controlled Study},
+  journal  = {JMIR Medical Education},
+  year     = {2025},
+  month    = {Mar},
+  volume   = {11},
+  pages    = {e62779},
+  issn     = {2369-3762},
+  doi      = {10.2196/62779},
+  url      = {https://mededu.jmir.org/2025/1/e62779}
+}
+
+@article{milicka2025learning,
+  title     = {Learning to detect {AI} texts and learning the limits},
+  volume    = {20},
+  issn      = {1932-6203},
+  doi       = {10.1371/journal.pone.0333007},
+  url       = {http://dx.doi.org/10.1371/journal.pone.0333007},
+  number    = {10},
+  journal   = {PLOS One},
+  publisher = {Public Library of Science (PLoS)},
+  author    = {Mili{\v{c}}ka, Ji{\v{r}}{\'i} and Markl{\'o}v{\'a}, Anna and Drobil, Ond{\v{r}}ej and Pospí{\v{s}}ilová, Eva},
+  year      = {2025},
+  month     = {Oct},
+  pages     = {e0333007},
+  note      = {Preprint: arXiv:2505.01877}
+}
+
+% ------------------------------------------------------------
+%  Methods / tools / statistics
+% ------------------------------------------------------------
+
+@inproceedings{reimers-2019-sentence-bert,
+  title     = {Sentence-{BERT}: Sentence Embeddings using Siamese {BERT}-Networks},
+  author    = {Reimers, Nils and Gurevych, Iryna},
+  booktitle = {Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing},
+  month     = nov,
+  year      = {2019},
+  publisher = {Association for Computational Linguistics},
+  url       = {http://arxiv.org/abs/1908.10084}
+}
+
+@software{spacy,
+  author = {Honnibal, Matthew and Montani, Ines and Van Landeghem, Sofie and Boyd, Adriane},
+  title  = {spaCy: Industrial-strength Natural Language Processing in Python},
+  year   = {2025},
+  url    = {https://spacy.io}
+}
+
+@misc{sv_core_news_lg,
+  author       = {{Explosion AI}},
+  title        = {sv\_core\_news\_lg: Swedish pipeline for spaCy},
+  year         = {2025},
+  howpublished = {\url{https://huggingface.co/spacy/sv_core_news_lg}},
+  note         = {Version 3.8.0, licensed under CC BY-SA 4.0}
+}
+
+@article{pedregosa2011scikit,
+  title   = {Scikit-learn: Machine Learning in Python},
+  author  = {Pedregosa, Fabian and others},
+  journal = {Journal of Machine Learning Research},
+  volume  = {12},
+  pages   = {2825--2830},
+  year    = {2011}
+}
+
+@article{virtanen2020scipy,
+  title   = {SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python},
+  author  = {Virtanen, Pauli and others},
+  journal = {Nature Methods},
+  volume  = {17},
+  number  = {3},
+  pages   = {261--272},
+  year    = {2020}
+}
+
+@article{harris2020array,
+  title   = {Array programming with NumPy},
+  author  = {Harris, Charles R. and others},
+  journal = {Nature},
+  volume  = {585},
+  pages   = {357--362},
+  year    = {2020}
+}
+
+@inproceedings{mckinney2010data,
+  title     = {Data Structures for Statistical Computing in Python},
+  author    = {McKinney, Wes},
+  booktitle = {Proceedings of the 9th Python in Science Conference},
+  pages     = {51--56},
+  year      = {2010}
+}
+
+@article{covington2010cutting,
+  title   = {Cutting the Gordian Knot: The Moving-Average Type--Token Ratio (MATTR)},
+  author  = {Covington, Michael A. and McFall, Joe D.},
+  journal = {Journal of Quantitative Linguistics},
+  volume  = {17},
+  number  = {2},
+  pages   = {94--100},
+  year    = {2010}
+}
+
+@article{mccarthy2010mtld,
+  title   = {MTLD, vocd-D, and HD-D: A validation study of sophisticated approaches to lexical diversity assessment},
+  author  = {McCarthy, Philip M. and Jarvis, Scott},
+  journal = {Behavior Research Methods},
+  volume  = {42},
+  number  = {2},
+  pages   = {381--392},
+  year    = {2010}
+}
+
+@article{liu2008dependency,
+  author  = {Liu, Haitao},
+  title   = {Dependency Distance as a Metric of Language Comprehension Difficulty},
+  journal = {Journal of Cognitive Science},
+  volume  = {9},
+  number  = {2},
+  pages   = {159--191},
+  year    = {2008},
+  doi     = {10.17791/jcs.2008.9.2.159}
+}
+
+@article{wilcoxon1945,
+  title   = {Individual Comparisons by Ranking Methods},
+  author  = {Wilcoxon, Frank},
+  journal = {Biometrics Bulletin},
+  volume  = {1},
+  number  = {6},
+  pages   = {80--83},
+  year    = {1945}
+}
+
+@book{cohen1988,
+  title     = {Statistical Power Analysis for the Behavioral Sciences},
+  author    = {Cohen, Jacob},
+  edition   = {2},
+  publisher = {Lawrence Erlbaum Associates},
+  year      = {1988}
+}
+
+@article{lakens2013,
+  title   = {Calculating and Reporting Effect Sizes to Facilitate Cumulative Science},
+  author  = {Lakens, Dani{\"e}l},
+  journal = {Frontiers in Psychology},
+  volume  = {4},
+  pages   = {863},
+  year    = {2013}
+}
+
+@article{kerby2014,
+  title   = {The Simple Difference Formula: An Approach to Teaching Nonparametric Correlation},
+  author  = {Kerby, D. S.},
+  journal = {Comprehensive Psychology},
+  volume  = {3},
+  year    = {2014}
+}
+@article{dugan2024detecting,
+  title = {Detecting AI-Generated Text: Factors Influencing Detectability with Current Methods},
+  author = {Dugan, Liam and Hwang, Andrew and Trhl{\'i}k, Filip and Zhu, Andrew and Ludan, Josh Magnus and Xu, Hainiu and Ippolito, Daphne and Callison-Burch, Chris},
+  journal = {arXiv preprint arXiv:2406.15583},
+  year = {2024}
 }
 
 
-@article{Brown2020LanguageMA,
-  title={Language Models are Few-Shot Learners},
-  author={Tom B. Brown and Benjamin Mann and Nick Ryder and Melanie Subbiah and Jared Kaplan and Prafulla Dhariwal and Arvind Neelakantan and Pranav Shyam and Girish Sastry and Amanda Askell and Sandhini Agarwal and Ariel Herbert-Voss and Gretchen Krueger and Thomas Henighan and Rewon Child and Aditya Ramesh and Daniel M. Ziegler and Jeff Wu and Clemens Winter and Christopher Hesse and Mark Chen and Eric Sigler and Ma-teusz Litwin and Scott Gray and Benjamin Chess and Jack Clark and Christopher Berner and Sam McCandlish and Alec Radford and Ilya Sutskever and Dario Amodei},
-  journal={ArXiv},
-  year={2020},
-  volume={abs/2005.14165},
-  url={https://api.semanticscholar.org/CorpusID:218971783}
+@inproceedings{russell2025people,
+  title = {People Who Frequently Use ChatGPT for Writing Tasks Are Accurate and Robust Detectors of AI-Generated Text},
+  author = {Russell, Jenna and Karpinska, Marzena and Iyyer, Mohit},
+  booktitle = {Proceedings of the 63rd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)},
+  year = {2025},
+  eprint = {2501.15654},
+  archivePrefix = {arXiv},
+  primaryClass = {cs.CL}
+}
+
+@article{benjamini1995,
+  title   = {Controlling the False Discovery Rate: A Practical and Powerful Approach to Multiple Testing},
+  author  = {Benjamini, Yoav and Hochberg, Yosef},
+  journal = {Journal of the Royal Statistical Society: Series B},
+  volume  = {57},
+  number  = {1},
+  pages   = {289--300},
+  year    = {1995}
+}
+
+@misc{suc3,
+  author       = {Ejerhed, Eva and K{\"a}llgren, Gunnel},
+  title        = {Stockholm--Ume{\aa} Corpus (SUC)},
+  year         = {1997},
+  howpublished = {\url{https://spraakbanken.gu.se/resurser/suc3}}
+}
+
+@techreport{sprakbanken2020ner,
+  title       = {Anonymisering av k{\"a}nsliga uppgifter: Riktlinjer f{\"o}r namntaggning},
+  author      = {{Spr{\aa}kbanken}},
+  institution = {Spr{\aa}kbanken, Uppsala universitet},
+  number      = {SCR-01-2020},
+  year        = {2020},
+  url         = {https://sprakbanken-clarin.lingfil.uu.se/rapporter/SCR-01-2020.pdf}
 }

@@ -11,7 +11,7 @@ A short example thesis, which approximately the same contents as example palindr
 Not need for your thesis.
 
 ## pal.bib, pal.py
-Used by palthesis.tex; not needed for your thesis.
+pal.bib is the thesis bibliography (copied from Overleaf); pal.py is used by palthesis.tex and is not needed for the thesis.
 
 ## cluu.cls
 The definition of the CLUU class.
