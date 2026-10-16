@@ -181,13 +181,12 @@ The current linguistic performance of large-scale multilingual LLMs appears to d
 
 \subsection{Swedish in the LLM landscape}
 \label{sec:swedish-llm}
-Several multilingual LLMs have the ability to generate and analyse Swedish. In addition, there are Nordic language LLM resources, notably AI Sweden's LLM GPT-SW3 \parencite{ekgren2024gptsw3}. The SW3-GPT models comprise of decoder-only transformers trained on 320 billion tokens of Swedish, Norwegian, Danish, Icelandic, English and programming code  drawn from the Nordic Pile, a curated 1.2TB corpus spanning the major North Germanic languages and high-quality English data \parencite{ohman2023nordic} Alongside model development, evaluation benchmarks tailored to Swedish include ScandEval \parencite{nielsen2023scandeval}, which offers metrics for Swedish named entity
+Several multilingual LLMs have the ability to generate and analyse Swedish. In addition, there are Nordic language LLM resources, notably AI Sweden's LLM GPT-SW3 \parencite{ekgren2024gptsw3}. The GPT-SW3 models are decoder-only transformers trained on 320 billion tokens of Swedish, Norwegian, Danish, Icelandic, English and programming code drawn from the Nordic Pile, a curated 1.2TB corpus spanning the major North Germanic languages and high-quality English data \parencite{ohman2023nordic}. Alongside model development, evaluation benchmarks tailored to Swedish include ScandEval \parencite{nielsen2023scandeval}, which offers metrics for Swedish named entity
 recognition (NER), sentiment classification, and linguistic
-acceptability; a Sweden-related factual-knowledge benchmark by \textcite{kunz2025}; SweSAT \parencite{kurfali2025swesat}, derived from the Swedish
+acceptability; a manually written question-answering benchmark of 1,293 questions on Sweden-related public figures and events \parencite{kunz2025}; SweSAT \parencite{kurfali2025swesat}, derived from the Swedish
 university entrance exam (Högskoleprovet); and the Swedish Medical LLM
 Benchmark \parencite{moell2025swedishmed}, a framework for evaluating
 LLM capabilities on Swedish medical texts. However, while these benchmarks test the capabilities of LLMs in generating and analysing Swedish, there is no current benchmark for the detection and characterisation of LLM-generated Swedish text.
-% TODO(Gina): complete the VERIFY fields of kunz2025 (all fields) and kurfali2025swesat (remaining authors) in pal.bib
 
 \section{Feature-based analysis of LLM-generated text}
  Linguistic feature analysis, that is, the quantitative analysis of structural properties of text, has its roots in hand-calculated stylometric analysis \parencite{mosteller1963} before progressing to computational methods \parencite{sundararajan-woodard-2018-represents, belvisi2020forensicauthorshipanalysismicroblogging, huang2025authorship}. This thesis focuses solely on computational methods of linguistic feature analysis.
