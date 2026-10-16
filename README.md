@@ -282,11 +282,14 @@ inverted the formal comma/full-stop signal, and "do not use dashes" suppressed t
 signal (+0.86 baseline, +0.77 generic-evasive → +0.17 feature-evasive).
 
 **Experiment 2.** The two paradigms **dissociate**. For GPT-5.2 the informal feature-evasive
-condition was the *most* separable to the embedding classifier (AUC 0.935, vs. 0.886 baseline and
-0.898 generic-evasive) while being the hardest for the LLM judges — surface-level evasion fools
-the judges but not the distributional reading. Informal comments were more separable than formal
-abstracts for GPT-5.2 (0.886–0.935 vs. 0.643–0.813); across generators, Mistral Small 3.2 was
-most separable overall (0.874–0.954) and GPT-5.6 evaded the classifier most (0.728–0.823). Among
+condition was the *most* separable to the embedding classifier (source-grouped CV AUC 0.886, vs.
+0.806 baseline and 0.807 generic-evasive) while being the hardest for the LLM judges — surface-level
+evasion fools the judges but not the distributional reading. AUCs are computed on the document-matched
+100-per-class subset with folds grouped by source (`matched_auc_control.py --group-cv`; results in
+`csv_files/embedding_auc_matched_gpt56subset_grouped.csv`). Grouping raised the formal AUCs and
+lowered the informal ones, so formal abstracts are at least as separable as informal comments
+(GPT-5.2: 0.836–0.896 vs. 0.806–0.886). Mistral Small 3.2 was most separable overall (0.792–0.971);
+GPT-5.6 comments were close to chance for the baseline and generic-evasive prompts (0.580, 0.548). Among
 the judges, Claude scored highest throughout, reaching 100% in several conditions; DeepSeek-R1
 was uneven, including 0% AI recall on GPT-5.2 informal feature-evasive.
 

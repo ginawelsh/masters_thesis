@@ -610,6 +610,7 @@ For our text detection component, two AI-detection-by-AI tool methods were
 compared. We compared two methods to detect the difference between a detection method on the embedding-space level and a method that examines surface-level patterns in a similar manner to a human reader.
 
 \subsection{Classifier two-sample test}
+\label{sec:exp2-classifier}
 Our first method was a classifier two-sample test \parencite{lopezpaz2017revisiting}
 implemented as a logistic regression trained to separate human and LLM
 multilingual sentence embeddings using
@@ -617,8 +618,7 @@ multilingual sentence embeddings using
 embedding model that is explicitly multilingual and covers Swedish.
 Logistic regression was chosen over a higher-capacity classifier as the quantity
 of interest is whether the two classes are separable at all and not the maximum
-achievable separation, which would require a bigger dataset to achieve. Classifiers were scored by 5-fold cross-validated ROC AUC, with folds stratified by class. In the originally reported analysis the folds were not grouped by source: a human text and the LLM text generated from the same title or question could fall on opposite sides of a split, and in the informal register replies to the same thread could appear in both the training and the test folds. Because paired texts share a topic but carry opposite labels, such splits can make topic cues work either for or against the classifier, so the direction of any resulting bias in the AUC is not known in advance. We therefore repeated the analysis with \texttt{StratifiedGroupKFold}, keeping all texts derived from the same title (formal) or thread (informal) in the same fold.
-% TODO(Gina): run `embedding_comparison.py --dataset both --group-cv` for each generator (needs huggingface.co) and report the grouped AUCs next to the ungrouped ones in Table~\ref{tab:embedding-auc}.
+achievable separation, which would require a bigger dataset to achieve. Classifiers were scored by 5-fold cross-validated ROC AUC, with folds stratified by class. In the originally reported analysis the folds were not grouped by source: a human text and the LLM text generated from the same title or question could fall on opposite sides of a split, and in the informal register replies to the same thread could appear in both the training and the test folds. Because paired texts share a topic but carry opposite labels, such splits can make topic cues work either for or against the classifier, so the direction of any resulting bias in the AUC is not known in advance. We therefore repeated the analysis with \texttt{StratifiedGroupKFold}, keeping all texts derived from the same title (formal) or thread (informal) in the same fold, and treat these grouped estimates as primary; Table~\ref{tab:embedding-auc} reports both. To compare the generators on equal terms, all estimates are computed on the same documents: the 100 titles and questions (per class and register) for which GPT-5.6 texts were generated.
 Significance was established with permutation testing,
 where the class labels were shuffled and the cross-validation repeated to build
 an empirical null distribution.
@@ -962,7 +962,9 @@ This section reports the two detection paradigms in turn: first the embedding-ba
 
 \subsection{Embedding-based classifier}
 
-Table~\ref{tab:embedding-auc} sets out embedding classifier results for all domains and prompt conditions. Overall, the informal comments were considerably more separable from human text than the formal abstracts (informal 0.886-0.935 vs. formal 0.643-0.813). This register gap narrowed or reversed for the other two generators. For GPT-5.2, the most detectable condition was the informal feature-evasive data, at a CV ROC AUC of 0.935, a result that runs contrary to the expectation of a detector evasive prompt since evasion raised rather than lowered separability relative to the baseline (0.886) and generic-evasive (0.898) conditions. However, this pattern was specific to GPT-5.2; for Mistral, the evasive prompt was the least detectable informal condition (0.874 vs 0.917 baseline and 0.954 generic-evasive). Across generators, Mistral Small 3.2 was the most separable overall (0.874-0.954) while GPT-5.6 evaded the classifier to the greatest extent (0.728-0.823), suggesting that the later GPT version is less detectable to the embedding-based method.
+Table~\ref{tab:embedding-auc} sets out the embedding classifier results for all registers and prompt conditions, computed on the same 100 documents per class for every generator. The primary estimates use source-grouped cross-validation (Section~\ref{sec:exp2-classifier}); the original ungrouped estimates are shown for comparison. Grouping changed the AUCs substantially, and in opposite directions for the two registers. In the formal register, where each group is a human abstract and its LLM counterpart, grouping raised every AUC, by 0.03--0.20 (for GPT-5.2 from 0.643--0.813 to 0.836--0.896): when the two texts of a pair were split between training and test folds, their shared topic evidently pulled the classifier towards the wrong label. In the informal register, where the 100 comments came from 41 threads, grouping lowered every AUC, by 0.05--0.23, which indicates that the ungrouped estimates had been inflated by thread-specific cues shared between training and test folds. As a result, the ungrouped impression that informal comments were more separable than formal abstracts does not hold: with grouped folds, formal abstracts were at least as separable as informal comments for all three generators (GPT-5.2: formal 0.836--0.896 vs.\ informal 0.806--0.886).
+
+The pattern across prompt conditions was more robust. For GPT-5.2, the feature-evasive condition was the most separable in both registers (formal 0.896, informal 0.886, against 0.806--0.841 for the baseline and generic-evasive conditions), so the evasive prompt raised rather than lowered separability, contrary to its purpose. This pattern was specific to GPT-5.2: for Mistral, the feature-evasive prompt remained the least separable informal condition (0.792 vs.\ 0.848 baseline and 0.899 generic-evasive). Mistral Small 3.2 was again the most separable generator overall (0.792--0.971). GPT-5.6 comments were the hardest to separate: the baseline (0.580, $p=.039$) and generic-evasive (0.548, $p=.152$) conditions were close to chance, the latter not significantly different from it, while the feature-evasive condition remained clearly separable (0.710). In the formal register, by contrast, GPT-5.6 was not harder to separate than GPT-5.2 (0.894--0.920), so the later GPT version evaded the embedding classifier only in the informal register. Because the informal grouped estimates rest on 41 threads, their folds are coarse and their uncertainty is larger than the normal-approximation intervals suggest.
 
 % GENERATED by src/3_ai_detection_scripts/make_embedding_auc_table_matched.py
 % -- do not hand-edit. Re-run that script to refresh.
@@ -974,52 +976,59 @@ Table~\ref{tab:embedding-auc} sets out embedding classifier results for all doma
 \begin{table}[h!]
   \centering
   \small
-  \begin{tabular}{lllccc}
+  \begin{tabular}{lllcccc}
     \toprule
-    Generator & Register & Prompt & CV ROC AUC & 95\% CI & Perm.\ $p$ \\
+    & & & \multicolumn{4}{c}{CV ROC AUC} \\
+    \cmidrule(l){4-7}
+    Generator & Register & Prompt & Ungrouped & Grouped & 95\% CI & Perm.\ $p$ \\
     \midrule
     \multirow{6}{*}{GPT-5.2}
       & \multirow{3}{*}{Formal}
-        & Baseline         & \cg{14}0.643 & [0.567, 0.719] & 0.003 \\
-      & & generic-evasive  & \cg{14}0.643 & [0.567, 0.719] & 0.005 \\
-      & & feature-evasive & \cg{31}\textbf{0.813} & [0.753, 0.873] & $<$0.001 \\
-    \cmidrule(l){2-6}
+        & Baseline         & 0.643 & \cg{34}0.836 & [0.780, 0.892] & $<$0.001 \\
+      & & generic-evasive  & 0.643 & \cg{34}0.841 & [0.785, 0.896] & $<$0.001 \\
+      & & feature-evasive & 0.813 & \cg{40}\textbf{0.896} & [0.851, 0.941] & $<$0.001 \\
+    \cmidrule(l){2-7}
       & \multirow{3}{*}{Informal}
-        & Baseline         & \cg{39}0.886 & [0.839, 0.933] & $<$0.001 \\
-      & & generic-evasive  & \cg{40}0.898 & [0.853, 0.943] & $<$0.001 \\
-      & & feature-evasive & \cg{44}\textbf{0.935} & [0.899, 0.971] & $<$0.001 \\
+        & Baseline         & 0.886 & \cg{31}0.806 & [0.745, 0.867] & $<$0.001 \\
+      & & generic-evasive  & 0.898 & \cg{31}0.807 & [0.747, 0.868] & $<$0.001 \\
+      & & feature-evasive & 0.935 & \cg{39}\textbf{0.886} & [0.839, 0.933] & $<$0.001 \\
     \midrule
     \multirow{6}{*}{GPT-5.6}
       & \multirow{3}{*}{Formal}
-        & Baseline         & \cg{29}\textbf{0.792} & [0.730, 0.855] & $<$0.001 \\
-      & & generic-evasive  & \cg{23}0.728 & [0.658, 0.797] & $<$0.001 \\
-      & & feature-evasive & \cg{25}0.747 & [0.679, 0.816] & $<$0.001 \\
-    \cmidrule(l){2-6}
+        & Baseline         & 0.792 & \cg{42}\textbf{0.920} & [0.881, 0.960] & $<$0.001 \\
+      & & generic-evasive  & 0.728 & \cg{40}0.898 & [0.853, 0.943] & $<$0.001 \\
+      & & feature-evasive & 0.747 & \cg{39}0.894 & [0.848, 0.940] & $<$0.001 \\
+    \cmidrule(l){2-7}
       & \multirow{3}{*}{Informal}
-        & Baseline         & \cg{29}0.790 & [0.727, 0.852] & $<$0.001 \\
-      & & generic-evasive  & \cg{28}0.781 & [0.717, 0.845] & $<$0.001 \\
-      & & feature-evasive & \cg{32}\textbf{0.823} & [0.765, 0.881] & $<$0.001 \\
+        & Baseline         & 0.790 & \cg{8}0.580 & [0.501, 0.659] & 0.039 \\
+      & & generic-evasive  & 0.781 & \cg{5}0.548 & [0.468, 0.627] & 0.152 \\
+      & & feature-evasive & 0.823 & \cg{21}\textbf{0.710} & [0.639, 0.782] & $<$0.001 \\
     \midrule
     \multirow{6}{*}{Mistral 3.2}
       & \multirow{3}{*}{Formal}
-        & Baseline         & \cg{44}\textbf{0.935} & [0.899, 0.971] & $<$0.001 \\
-      & & generic-evasive  & \cg{43}0.925 & [0.887, 0.964] & $<$0.001 \\
-      & & feature-evasive & \cg{41}0.909 & [0.867, 0.951] & $<$0.001 \\
-    \cmidrule(l){2-6}
+        & Baseline         & 0.935 & \cg{47}0.969 & [0.944, 0.993] & $<$0.001 \\
+      & & generic-evasive  & 0.925 & \cg{47}\textbf{0.971} & [0.947, 0.995] & $<$0.001 \\
+      & & feature-evasive & 0.909 & \cg{46}0.962 & [0.934, 0.989] & $<$0.001 \\
+    \cmidrule(l){2-7}
       & \multirow{3}{*}{Informal}
-        & Baseline         & \cg{42}0.917 & [0.876, 0.957] & $<$0.001 \\
-      & & generic-evasive  & \cg{45}\textbf{0.954} & [0.923, 0.984] & $<$0.001 \\
-      & & feature-evasive & \cg{37}0.874 & [0.824, 0.924] & $<$0.001 \\
+        & Baseline         & 0.917 & \cg{35}0.848 & [0.793, 0.902] & $<$0.001 \\
+      & & generic-evasive  & 0.954 & \cg{40}\textbf{0.899} & [0.854, 0.943] & $<$0.001 \\
+      & & feature-evasive & 0.874 & \cg{29}0.792 & [0.730, 0.855] & $<$0.001 \\
     \bottomrule
   \end{tabular}
   \caption{\footnotesize Embedding-based classifier detectability for all LLM generators,
-  registers and prompt conditions. Cross-validated ROC AUC of a
+  registers and prompt conditions, computed on the same 100 documents per class for every
+  generator (98 for GPT-5.6 formal feature-evasive). Cross-validated ROC AUC of a
   logistic-regression two-sample test on multilingual sentence embeddings
-  (\texttt{paraphrase-multilingual-mpnet-base-v2}, 5-fold CV). AUC${}=0.5$ is
-  chance; higher means more separable from human text. Cell shading follows
-  Table~\ref{tab:llm-judge-detection-by-condition}: green marks values above
-  chance, with intensity proportional to the distance from 0.5. Confidence
-  intervals computed by Hanley--McNeil normal approximations.}
+  (\texttt{paraphrase-multilingual-mpnet-base-v2}, 5-fold CV). \emph{Ungrouped}: folds
+  stratified by class only, as originally reported. \emph{Grouped} (primary): folds also
+  grouped by source, so that a human abstract and its LLM counterpart (formal, 100 groups)
+  or all replies to one thread (informal, 41 groups) never fall in different folds. The
+  95\% CI (Hanley--McNeil normal approximation) and the label-permutation $p$ (1{,}000
+  permutations, labels shuffled within groups) refer to the grouped estimate. AUC${}=0.5$
+  is chance; bold marks the most separable condition per generator and register. Shading
+  follows Table~\ref{tab:llm-judge-detection-by-condition}: green marks values above
+  chance, with intensity proportional to the distance from 0.5.}
   \label{tab:embedding-auc}
 \end{table}
 
@@ -1082,7 +1091,7 @@ Table~\ref{tab:embedding-auc} sets out embedding classifier results for all doma
   \label{tab:llm-judge-detection-by-condition}
 \end{table*}
 
-\subsubsection{LLM judge differences} Table~\ref{tab:llm-judge-detection-by-condition}  outlines the LLM-as-judge results. Overall, Claude demonstrated the highest overall performance in detecting LLM-Swedish, displaying the highest accuracy, AI recall and human precision across all generator models and prompt conditions and hitting ceiling performance (100\%) in several conditions. Gemini scored comparably to Claude for the GPT-5.2 and Mistral 3.2 formal texts; however, scores were much lower for the informal domain, particularly for the feature-evasive prompt condition. DeepSeek-R1 demonstrated a mixed performance, scoring highly in some conditions (GPT-5.6 Formal, Mistral 3.2 Formal) but very low in others, especially in the informal domains; for example, it scored  0\% recall on the  GPT-5.2 informal feature-evasive condition, indicating an excessive over-labelling of texts as human-authored. Overall, the informal domain was more difficult across all LLM judges, with the feature-evasive condition the most difficult across generators and judges, indicating strong evasion. Our GPT-5.6 generated texts did not prove to be considerably harder to detect for our LLM judges than our GPT-5.2 pool, with some models actually performing better on certain GPT 5.6 conditions than their GPT 5.2 equivalents; for example, DeepSeek-R1's human precision ranged 51\%-90\% for GPT 5.2 formal texts and 90-94\% for GPT 5.6 formal. For Mistral 3.2 generated texts, the embedding classifier found both registers highly separable (formal AUC 0.909-0.935; informal 0.874-0.954), whereas the LLM judges detected the formal texts reliably but performed markedly worse on informal comments. The discrepancy in performance indicates a dissociation in the embedding-based classifier and LLM-as-judge methods, with the LLM-as-judge being fooled by surface-level patterns that the embedding classifier avoids. The underperformance of the DeepSeek-R1 reasoning model could be attributed to several factors. However, many of the possible factors, such as parameter size, training data language composition, and architecture type are unable to be confirmed due to the proprietary, closed-source nature of these models, the only exception being that DeepSeek has disclosed its R1 reasoning model to contain 671 billion parameters and prioritises English and Chinese language data in its training \parencite{Guo_2025}. The predominance of English and Chinese data could therefore be a possible factor in its underperformance on classifying LLM-Swedish data.
+\subsubsection{LLM judge differences} Table~\ref{tab:llm-judge-detection-by-condition}  outlines the LLM-as-judge results. Overall, Claude demonstrated the highest overall performance in detecting LLM-Swedish, displaying the highest accuracy, AI recall and human precision across all generator models and prompt conditions and hitting ceiling performance (100\%) in several conditions. Gemini scored comparably to Claude for the GPT-5.2 and Mistral 3.2 formal texts; however, scores were much lower for the informal domain, particularly for the feature-evasive prompt condition. DeepSeek-R1 demonstrated a mixed performance, scoring highly in some conditions (GPT-5.6 Formal, Mistral 3.2 Formal) but very low in others, especially in the informal domains; for example, it scored  0\% recall on the  GPT-5.2 informal feature-evasive condition, indicating an excessive over-labelling of texts as human-authored. Overall, the informal domain was more difficult across all LLM judges, with the feature-evasive condition the most difficult across generators and judges, indicating strong evasion. Our GPT-5.6 generated texts did not prove to be considerably harder to detect for our LLM judges than our GPT-5.2 pool, with some models actually performing better on certain GPT 5.6 conditions than their GPT 5.2 equivalents; for example, DeepSeek-R1's human precision ranged 51\%-90\% for GPT 5.2 formal texts and 90-94\% for GPT 5.6 formal. For Mistral 3.2 generated texts, the embedding classifier found both registers highly separable (grouped AUC: formal 0.962--0.971; informal 0.792--0.899), whereas the LLM judges detected the formal texts reliably but performed markedly worse on informal comments. The discrepancy in performance indicates a dissociation in the embedding-based classifier and LLM-as-judge methods, with the LLM-as-judge being fooled by surface-level patterns that the embedding classifier avoids. The underperformance of the DeepSeek-R1 reasoning model could be attributed to several factors. However, many of the possible factors, such as parameter size, training data language composition, and architecture type are unable to be confirmed due to the proprietary, closed-source nature of these models, the only exception being that DeepSeek has disclosed its R1 reasoning model to contain 671 billion parameters and prioritises English and Chinese language data in its training \parencite{Guo_2025}. The predominance of English and Chinese data could therefore be a possible factor in its underperformance on classifying LLM-Swedish data.
 
 % GENERATED by src/3_ai_detection_scripts/make_judge_cue_table.py -- do not hand-edit.
 % Supersedes the hand-authored judge_rationale_cues_table.tex (whose keyword
@@ -1730,16 +1739,6 @@ Answer with JSON in exactly this format (no other text outside the JSON block):
 % 42 features x 3 conditions.
 % If it overflows the page, wrap in longtable or switch to table*.
 % NOTE: condition(s) ['detector_aware'] present in the CSV but omitted here (house convention); pass conds= to include them.
-\documentclass{article}
-\usepackage[margin=1.5cm,top=1.2cm,bottom=1.2cm]{geometry}
-\usepackage{booktabs}
-\usepackage[table]{xcolor}
-\definecolor{hmgreen}{HTML}{2E8B57}
-\definecolor{hmred}{HTML}{C0392B}
-\newcommand{\cg}[1]{\cellcolor{hmgreen!#1}}
-\newcommand{\crd}[1]{\cellcolor{hmred!#1}}
-\pagestyle{empty}
-\begin{document}
 
 % ---- formal register, Baseline condition: all features, human vs 3 models (app:full-three-way-formal-baseline) ----
 % REQUIRES: booktabs + the \cg / \crd shading macros from the preamble.
@@ -2419,8 +2418,5 @@ Answer with JSON in exactly this format (no other text outside the JSON block):
   tracks the same feature. Source: \texttt{model\_comparison\_three\_way\_results.csv}.}
   \label{app:full-three-way-informal-detector_evasive}
 \end{table}
-
-\end{document}
-
 
 \end{document}
