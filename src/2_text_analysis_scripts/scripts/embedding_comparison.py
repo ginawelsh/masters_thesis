@@ -25,6 +25,9 @@ Tags keep the gpt52 filenames bare (`formal_baseline`) so the existing outputs a
 the tables built off them are unaffected; the other generators add a suffix
 (`formal_baseline_gpt56`, `formal_baseline_mistral_t1.0`).
 
+Pass --group-cv to keep each source (formal: title; informal: question thread) within one
+fold; outputs then carry a `_grouped` suffix next to the ungrouped files.
+
 Run: python src/2_text_analysis_scripts/scripts/embedding_comparison.py --dataset formal
      python src/2_text_analysis_scripts/scripts/embedding_comparison.py --generator gpt56 --dataset informal
      python src/2_text_analysis_scripts/scripts/embedding_comparison.py --generator mistral --temp 1.0
@@ -134,6 +137,10 @@ def main():
     ap.add_argument("--temp", type=float, default=1.0,
                     help="Mistral temperature arm to analyse (ignored for the GPT generators).")
     ap.add_argument("--permutations", type=int, default=1000)
+    ap.add_argument("--group-cv", action="store_true",
+                    help="Keep texts from the same source (title for formal, question thread for "
+                         "informal) in the same fold, so a human text and its LLM counterpart, or "
+                         "two replies to the same thread, never sit on both sides of a split.")
     add_condition_arg(ap)
     args = ap.parse_args()
 
@@ -142,7 +149,7 @@ def main():
 
     from sentence_transformers import SentenceTransformer
     from sklearn.linear_model import LogisticRegression
-    from sklearn.model_selection import StratifiedKFold, permutation_test_score
+    from sklearn.model_selection import StratifiedKFold, StratifiedGroupKFold, permutation_test_score
     model = SentenceTransformer(MODEL)
 
     for dataset in datasets:
@@ -154,6 +161,8 @@ def main():
                 print(f"  skipping condition '{cond}': column '{llm_col}' not found")
                 continue
             tag = output_tag(dataset, cond, args.generator, args.temp)
+            if args.group_cv:
+                tag += "_grouped"
             df = df_all[df_all[reg["human_col"]].notna() & df_all[llm_col].notna()].reset_index(drop=True)
             human = df[reg["human_col"]].astype(str).tolist()
             llm = df[llm_col].astype(str).tolist()
@@ -176,10 +185,20 @@ def main():
             X = np.vstack([h, l])
             y = np.array([0] * n + [1] * n)
             clf = LogisticRegression(max_iter=2000)
-            cv = StratifiedKFold(n_splits=5, shuffle=True, random_state=0)
+            if args.group_cv:
+                # a human text and its LLM counterpart share the source label, as do all
+                # replies to one thread; with groups, permutation_test_score shuffles labels
+                # within groups, so the null keeps the same source structure
+                groups = pd.factorize(pd.concat([df[reg["label_col"]]] * 2, ignore_index=True)
+                                      .astype(str))[0]
+                cv = StratifiedGroupKFold(n_splits=5, shuffle=True, random_state=0)
+                print(f"  grouped CV: {len(set(groups))} source groups")
+            else:
+                groups = None
+                cv = StratifiedKFold(n_splits=5, shuffle=True, random_state=0)
             print(f"running classifier two-sample test ({args.permutations} permutations)...")
             auc, perm_scores, p = permutation_test_score(
-                clf, X, y, scoring="roc_auc", cv=cv, n_permutations=args.permutations,
+                clf, X, y, groups=groups, scoring="roc_auc", cv=cv, n_permutations=args.permutations,
                 random_state=0, n_jobs=-1)
             print(f"  CV ROC AUC = {auc:.4f}   permutation p = {p:.4g}   "
                   f"(null mean AUC = {perm_scores.mean():.4f})")
@@ -195,6 +214,8 @@ def main():
                 dict(metric="null_mean_auc", value=round(float(perm_scores.mean()), 4)),
                 dict(metric="n_permutations", value=args.permutations),
                 dict(metric="embedding_model", value=MODEL),
+                dict(metric="cv", value="StratifiedGroupKFold(5) by source" if args.group_cv
+                     else "StratifiedKFold(5)"),
             ]
             if args.generator == "mistral":
                 rows.insert(1, dict(metric="temperature", value=args.temp))
