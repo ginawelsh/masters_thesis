@@ -37,6 +37,15 @@ all Mistral informal, so if the pointer did move, the drift would land inside a 
 generator's cells rather than being spread evenly across the design. No `--model`
 override was used at any point (a fallback to `gemini-3.6-flash` would have mixed two
 models within one run; it was deliberately avoided).
+
+**Gemini formal run (GPT-5.6, Mistral and the human pool) finished after submission.** The
+698 items of `formal_cleaned_quiz.csv` other than GPT-5.2 were scored into
+`formal_cleaned_results/detection_results_gemini.csv` by the `gemini-formal` GitHub Actions
+workflow: 79 items in the original August 2026 session, then +254 on 2026-10-16, +244 on
+2026-10-17 and the final 121 on 2026-10-18 (the 10-17/10-18 gap was a depleted
+prepayment balance, not the daily cap). Same model string, same prompt, no `--model`
+override. Because `-preview` is a moving pointer and two months separate the August items
+from the October ones, identical weights across the run cannot be guaranteed.
 | DeepSeek | `deepseek-reasoner` | **No** — rolling alias; see below. |
 
 ## DeepSeek caveat (important)
