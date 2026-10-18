@@ -56,6 +56,9 @@ jobs:
           python ai_detection_llm.py --provider gemini \
             --corpus /tmp/formal_gemini_subset.csv --out-dir formal_cleaned_results \
             | tee /tmp/gemini.log
+          # surface API failures as annotations (visible without log access)
+          grep -E "\[stop\]|\[skip\]|API error" /tmp/gemini.log | tail -3 | cut -c1-300 \
+            | sed 's/^/::warning::/' || true
           python - <<'EOF'
           import pandas as pd
           d = pd.read_csv("formal_cleaned_results/detection_results_gemini.csv")
