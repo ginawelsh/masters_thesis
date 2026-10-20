@@ -1,7 +1,7 @@
 \documentclass[thesis]{cluu}
 %DIF LATEXDIFF DIFFERENCE FILE
 %DIF DEL old.tex                                     Fri Oct 16 14:47:48 2026
-%DIF ADD /home/user/masters_thesis/thesis/main.tex   Sun Oct 18 18:59:23 2026
+%DIF ADD /home/user/masters_thesis/thesis/main.tex   Sun Oct 18 19:10:35 2026
 
 \usepackage[style=cluu]{biblatex}
 \usepackage{booktabs}
@@ -799,7 +799,7 @@ Table \ref{tab:participant-summary} summarises the participant pool for the huma
 Sessions from participants who self-reported a Swedish proficiency below intermediate level were excluded.
 %DIF >  Note: participant 1ab13775 (included) answered 4 items from a pilot thread (snus) that is not part of the 60-item set.
 The }\DIFaddend results of each user session were stored in a Google Sheet \DIFdelbegin \DIFdel{form with information
-about their usage }\DIFdelend \DIFaddbegin \DIFadd{with the }\DIFaddend time-stamp, \DIFdelbegin \DIFdel{question identification number, which questions were determined as human , }\DIFdelend \DIFaddbegin \DIFadd{item identifier, the participant's answer and the correct answer.
+about their usage }\DIFdelend \DIFaddbegin \DIFadd{with the }\DIFaddend time-stamp, \DIFdelbegin \DIFdel{question identification number, which questions were determined as human, }\DIFdelend \DIFaddbegin \DIFadd{item identifier, the participant's answer and the correct answer.
 }
 
 \paragraph{\DIFadd{Performance measures.}} \DIFadd{Because the classes were imbalanced, raw accuracy was not compared against 50\%. Instead, we report, per register, human recall (the proportion of human-written texts labelled human), AI recall (the proportion of AI-generated texts labelled AI), and their mean, the \emph{balanced accuracy}, for which an uninformed guesser (whether always answering `AI', always answering `human', or guessing at random) scores 50\%. Accuracy is reported alongside the always-`AI' baseline, }\DIFaddend and \DIFdelbegin \DIFdel{accuracy scores .
@@ -1991,7 +1991,7 @@ Answer with JSON in exactly this format (no other text outside the JSON block):
   Mistral-3.2 (mistral-small-2506), paired Wilcoxon feature comparison across
   baseline / human-like / detector-evasive conditions. GPT-5.6 is a 100-document
   quiz subset; all other cells use the full corpus (170 formal / \textasciitilde{}1{,}150
-  informal). See Table~\ref{app:three-way-formal-gpt52-vs-gpt56} et seq.\ for the
+  informal). See Table~\DIFdelbeginFL \DIFdelFL{\ref{app:three-way-formal-gpt52-vs-gpt56} }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{\ref{app:full-three-way-formal-baseline} }\DIFaddendFL et seq.\ for the
   full per-feature breakdown.}
   \label{tab:model-dependence}
 \end{table}
