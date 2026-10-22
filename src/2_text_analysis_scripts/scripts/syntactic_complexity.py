@@ -111,9 +111,6 @@ def compute_metrics(nlp, text, min_tokens=0):
         "tree_depth_max": float(max(depths)) if depths else 0.0,
         "subordinate_clause_rate": subordinate_clause_rate(doc),
         "n_sentences": len(sents),
-        # mean sentence length in words (punctuation and whitespace tokens excluded)
-        "tokens_per_sentence": (sum(1 for t in doc if not (t.is_punct or t.is_space)) / len(sents)
-                                if sents else 0.0),
     }
 
 
@@ -153,8 +150,7 @@ def main():
         print(f"[{cond or 'generated'}] Wrote {len(out_df)} rows → {out_path}")
 
         print("Means (human | llm):")
-        metrics = ["dep_distance_mean", "tree_depth_mean", "tree_depth_max", "subordinate_clause_rate",
-                   "tokens_per_sentence"]
+        metrics = ["dep_distance_mean", "tree_depth_mean", "tree_depth_max", "subordinate_clause_rate"]
         for m in metrics:
             hcol, lcol = f"human_{m}", f"llm_{m}"
             print(f"  {m:30s}  {out_df[hcol].mean():.3f}  |  {out_df[lcol].mean():.3f}")
